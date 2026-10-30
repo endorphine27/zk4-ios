@@ -577,6 +577,28 @@ internal fun TabletFloatingTopBar(
                         },
                     )
                     TabletTopPillItem(
+                        label = stringResource(Res.string.compose_nav_tv),
+                        selected = selectedTab == AppScreenTab.Tv,
+                        onClick = { onTabSelected(AppScreenTab.Tv) },
+                        labelFraction = labelFraction,
+                        pillHeight = pillHeight,
+                        expandedHorizontalPadding = expandedHorizontalPadding,
+                        collapsedHorizontalPadding = iconCollapsedPadding,
+                        textStyle = labelTextStyle,
+                        icon = {
+                            Icon(
+                                painter = painterResource(Res.drawable.sidebar_tv),
+                                contentDescription = stringResource(Res.string.compose_nav_tv),
+                                modifier = Modifier.size(navIconSize),
+                                tint = if (selectedTab == AppScreenTab.Tv) {
+                                    tokens.colors.textPrimary
+                                } else {
+                                    Color.White.copy(alpha = 0.70f)
+                                },
+                            )
+                        },
+                    )
+                    TabletTopPillItem(
                         label = stringResource(Res.string.compose_nav_library),
                         selected = selectedTab == AppScreenTab.Library,
                         onClick = { onTabSelected(AppScreenTab.Library) },

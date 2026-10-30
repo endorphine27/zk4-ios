@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -54,13 +55,16 @@ import com.nuvio.app.features.settings.ThemeSettingsRepository
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.rememberHazeState
 import nuvio.composeapp.generated.resources.Res
+import nuvio.composeapp.generated.resources.compose_nav_calendar
 import nuvio.composeapp.generated.resources.compose_nav_home
 import nuvio.composeapp.generated.resources.compose_nav_library
 import nuvio.composeapp.generated.resources.compose_nav_profile
 import nuvio.composeapp.generated.resources.compose_nav_search
 import nuvio.composeapp.generated.resources.compose_nav_settings
+import nuvio.composeapp.generated.resources.compose_nav_tv
 import nuvio.composeapp.generated.resources.sidebar_library
 import nuvio.composeapp.generated.resources.sidebar_search
+import nuvio.composeapp.generated.resources.sidebar_tv
 import org.jetbrains.compose.resources.stringResource
 @Composable
 internal fun MainTabsDestination(
@@ -155,10 +159,22 @@ internal fun MainTabsDestination(
                 label = stringResource(Res.string.compose_nav_search),
             ),
             FloatingNavigationItem(
+                selected = selectedTab == AppScreenTab.Tv,
+                onClick = { onTabSelected(AppScreenTab.Tv) },
+                drawable = Res.drawable.sidebar_tv,
+                label = stringResource(Res.string.compose_nav_tv),
+            ),
+            FloatingNavigationItem(
                 selected = selectedTab == AppScreenTab.Library,
                 onClick = { onTabSelected(AppScreenTab.Library) },
                 drawable = Res.drawable.sidebar_library,
                 label = stringResource(Res.string.compose_nav_library),
+            ),
+            FloatingNavigationItem(
+                selected = selectedTab == AppScreenTab.Calendar,
+                onClick = { onTabSelected(AppScreenTab.Calendar) },
+                icon = Icons.Filled.DateRange,
+                label = stringResource(Res.string.compose_nav_calendar),
             ),
             FloatingNavigationItem(
                 selected = selectedTab == AppScreenTab.Settings,

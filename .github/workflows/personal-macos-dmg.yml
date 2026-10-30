@@ -52,6 +52,7 @@ jobs:
             echo "NUVIO_SUPABASE_URL=https://destinyab.go.ro:8444"
             echo "NUVIO_SUPABASE_ANON_KEY=${key}"
             echo "NUVIO_SUPABASE_FALLBACK_URL="
+            echo "NUVIO_DISCORD_CLIENT_ID=1565830214301253632"
           } > local.properties
 
       # Every build gets an increasing, zero-padded version (0.1.33-alpha.0030) so the in-app updater
