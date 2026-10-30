@@ -1,0 +1,72 @@
+name: Personal iOS IPA
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ipa:
+    name: iOS (unsigned, for AltStore/Sideloadly)
+    runs-on: macos-26
+    timeout-minutes: 90
+    env:
+      GRADLE_OPTS: -Dfile.encoding=UTF-8
+      IOS_CONFIGURATION: Release
+      KOTLIN_DAEMON_JVMARGS: -Xmx2048M
+      NUVIO_GRADLE_JVMARGS: -Xmx4608M -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=768M
+      NUVIO_KOTLIN_NATIVE_JVMARGS: -Xmx4608M
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: false
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Cache Kotlin Native
+        uses: actions/cache@v5
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('gradle/libs.versions.toml') }}
+          restore-keys: |
+            konan-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Show Apple toolchain
+        run: |
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
+
+      # Own CINEBOX server; the public client key comes from its discovery document.
+      - name: Create local.properties
+        run: |
+          key="$(curl -fsS https://destinyab.go.ro:8444/.well-known/nuvio | jq -r .publishable_key)"
+          test -n "$key" && test "$key" != null
+          {
+            echo "NUVIO_SUPABASE_URL=https://destinyab.go.ro:8444"
+            echo "NUVIO_SUPABASE_ANON_KEY=${key}"
+            echo "NUVIO_SUPABASE_FALLBACK_URL="
+          } > local.properties
+
+      - name: Prepare iOS dependencies
+        run: ./scripts/prepare-ios-dependencies.sh
+
+      - name: Build unsigned IPA
+        run: ./scripts/build-ios-ipa.sh
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ipa="$(find build/ios-ipa -maxdepth 1 -name '*.ipa' -print -quit)"
+          test -n "$ipa"
+          mv "$ipa" build/ios-ipa/CINEBOX-iOS.ipa
+          tag="v0.6.5-ios.$(printf '%04d' "${GITHUB_RUN_NUMBER}")"
+          gh release create "$tag" build/ios-ipa/CINEBOX-iOS.ipa \
+            --title "iOS build ${GITHUB_RUN_NUMBER}" --prerelease \
+            --notes "Unsigned CINEBOX IPA. Install with AltStore or Sideloadly."

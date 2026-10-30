@@ -54,7 +54,7 @@ fi
     CODE_SIGN_IDENTITY= \
     build
 
-app_path="${derived_data}/Build/Products/${configuration}-iphoneos/Nuvio.app"
+app_path="${derived_data}/Build/Products/${configuration}-iphoneos/CINEBOX.app"
 if [[ ! -d "${app_path}" ]]; then
     echo "iOS build did not produce ${app_path}." >&2
     exit 1
@@ -102,7 +102,7 @@ output_directory="$(cd "${output_directory}" && pwd -P)"
 package_root="$(mktemp -d "${TMPDIR:-/tmp}/nuvio-ios-ipa.XXXXXX")"
 trap 'rm -rf "${package_root}"' EXIT
 mkdir -p "${package_root}/Payload"
-ditto "${app_path}" "${package_root}/Payload/Nuvio.app"
+ditto "${app_path}" "${package_root}/Payload/CINEBOX.app"
 
 ipa_path="${output_directory}/nuvio-${version}-full-${configuration_slug}.ipa"
 temporary_ipa="${package_root}/nuvio-${version}-full-${configuration_slug}.ipa"
