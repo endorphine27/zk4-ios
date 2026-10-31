@@ -37,13 +37,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.player_skip
-import nuvio.composeapp.generated.resources.player_skip_intro
-import nuvio.composeapp.generated.resources.player_skip_outro
-import nuvio.composeapp.generated.resources.player_skip_recap
-import nuvio.composeapp.generated.resources.player_skip_movie_credits
-import nuvio.composeapp.generated.resources.player_skip_to_post_credits
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.player_skip
+import cinebox.composeapp.generated.resources.player_skip_intro
+import cinebox.composeapp.generated.resources.player_skip_outro
+import cinebox.composeapp.generated.resources.player_skip_recap
+import cinebox.composeapp.generated.resources.player_skip_movie_credits
+import cinebox.composeapp.generated.resources.player_skip_to_post_credits
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

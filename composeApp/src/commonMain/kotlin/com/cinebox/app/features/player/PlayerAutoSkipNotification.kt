@@ -2,7 +2,7 @@ package com.cinebox.app.features.player
 
 import com.cinebox.app.features.player.skip.AutoSkipSegmentType
 import com.cinebox.app.features.player.skip.SkipInterval
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.getString
 
 internal const val AUTO_SKIP_NOTIFICATION_DURATION_MS = 1_400L

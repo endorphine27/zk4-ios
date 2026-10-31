@@ -37,9 +37,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.trakt.TraktCommentReview
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -178,7 +178,7 @@ fun CommentDetailSheet(
                     },
                     style = MaterialTheme.typography.bodyLarge.copy(lineHeight = 24.sp),
                     color = if (isSpoilerHidden) {
-                        MaterialTheme.nuvio.colors.warning
+                        MaterialTheme.cinebox.colors.warning
                     } else {
                         MaterialTheme.colorScheme.onSurface
                     },

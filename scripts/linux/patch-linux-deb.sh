@@ -28,7 +28,7 @@ if [[ ! -f "$deb" ]]; then
     exit 1
 fi
 
-work_dir="$(mktemp -d "${TMPDIR:-/tmp}/nuvio-deb.XXXXXX")"
+work_dir="$(mktemp -d "${TMPDIR:-/tmp}/cinebox-deb.XXXXXX")"
 rebuilt_deb="${deb}.rebuilt"
 cleanup() {
     rm -rf "$work_dir"
@@ -44,19 +44,19 @@ if [[ ! -f "$control" ]]; then
 fi
 
 # jpackage's postinst registers its own generated entry with xdg-desktop-menu,
-# which used to give us a second Nuvio icon after every install/upgrade.
-nuvio_linux_strip_generated_desktop_integration "$work_dir"
+# which used to give us a second Cinebox icon after every install/upgrade.
+cinebox_linux_strip_generated_desktop_integration "$work_dir"
 
 # Ensure a launcher is present for desktop integration. Some jpackage/deb
 # combinations may omit it; in that case, synthesize a minimal entry.
-if ! nuvio_linux_desktop_entry_exists "$work_dir"; then
-    nuvio_linux_write_desktop_entry "$work_dir"
+if ! cinebox_linux_desktop_entry_exists "$work_dir"; then
+    cinebox_linux_write_desktop_entry "$work_dir"
 fi
-nuvio_linux_ensure_startup_wm_class "$work_dir"
-nuvio_linux_ensure_uri_handler "$work_dir"
+cinebox_linux_ensure_startup_wm_class "$work_dir"
+cinebox_linux_ensure_uri_handler "$work_dir"
 
 depends="$(dpkg-deb -f "$deb" Depends)"
-for dependency in "${NUVIO_LINUX_DEB_RUNTIME_DEPENDENCIES[@]}"; do
+for dependency in "${CINEBOX_LINUX_DEB_RUNTIME_DEPENDENCIES[@]}"; do
     if ! deb_relationship_has_package "$depends" "$dependency"; then
         if [[ -n "$depends" ]]; then
             depends+=", "

@@ -156,7 +156,7 @@ internal object NativePlayerBridge {
                 runCatching { shutdownWebView2Warmup() }
             }
         }.apply {
-            name = "nuvio-native-player-preload"
+            name = "cinebox-native-player-preload"
             isDaemon = true
             start()
         }
@@ -165,7 +165,7 @@ internal object NativePlayerBridge {
                 Thread {
                     runCatching { shutdownWebView2Warmup() }
                 }.apply {
-                    name = "nuvio-webview2-warmup-shutdown"
+                    name = "cinebox-webview2-warmup-shutdown"
                 }
             )
         }
@@ -304,20 +304,20 @@ internal object NativePlayerBridge {
         val files = linkedMapOf(
             "controls.html" to readResourceBytes("/player-ui/controls.html"),
             "controls.css" to readTextResource("/player-ui/controls.css")
-                .replace("/* __NUVIO_PLAYER_FONT_FACES__ */", nativePlayerFontFaces())
+                .replace("/* __CINEBOX_PLAYER_FONT_FACES__ */", nativePlayerFontFaces())
                 .toByteArray(Charsets.UTF_8),
             "controls.js" to readResourceBytes("/player-ui/controls.js"),
             "party.css" to readResourceBytes("/player-ui/party.css"),
             "party.js" to readResourceBytes("/player-ui/party.js"),
             "loading-indicator.js" to readResourceBytes("/player-ui/loading-indicator.js"),
             "fonts/jetbrains_sans_regular.ttf" to readResourceBytes(
-                "/composeResources/nuvio.composeapp.generated.resources/font/jetbrains_sans_regular.ttf",
+                "/composeResources/cinebox.composeapp.generated.resources/font/jetbrains_sans_regular.ttf",
             ),
             "fonts/jetbrains_sans_semibold.ttf" to readResourceBytes(
-                "/composeResources/nuvio.composeapp.generated.resources/font/jetbrains_sans_semibold.ttf",
+                "/composeResources/cinebox.composeapp.generated.resources/font/jetbrains_sans_semibold.ttf",
             ),
             "fonts/jetbrains_sans_bold.ttf" to readResourceBytes(
-                "/composeResources/nuvio.composeapp.generated.resources/font/jetbrains_sans_bold.ttf",
+                "/composeResources/cinebox.composeapp.generated.resources/font/jetbrains_sans_bold.ttf",
             ),
         )
         val root = DesktopCache.installVersionedFiles("player-ui", files).toFile()

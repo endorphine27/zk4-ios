@@ -31,7 +31,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.Lifecycle
 import com.cinebox.app.features.streams.redactedForLogs
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.getString
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -92,8 +92,8 @@ import java.net.URI
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
 
-private const val TAG = "NuvioPlayer"
-private const val PLAYER_DIAGNOSTIC_TAG = "NuvioPlayerDiag"
+private const val TAG = "CineboxPlayer"
+private const val PLAYER_DIAGNOSTIC_TAG = "CineboxPlayerDiag"
 
 private class PlaybackDiagnostics {
     var prepareStartedAtMs: Long = 0L

@@ -29,13 +29,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.cinebox.app.core.ui.CineboxBottomSheetDivider
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
-import com.cinebox.app.core.ui.dismissNuvioBottomSheet
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.dismissCineboxBottomSheet
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.core.ui.SurfaceEdge
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_close
-import nuvio.composeapp.generated.resources.cd_selected
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_close
+import cinebox.composeapp.generated.resources.cd_selected
 import org.jetbrains.compose.resources.stringResource
 
 internal data class TrackingPickerOption<T>(
@@ -92,7 +92,7 @@ private fun <T> TrackingPickerBottomSheet(
 
     fun dismiss() {
         scope.launch {
-            dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+            dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
         }
     }
 
@@ -126,7 +126,7 @@ private fun <T> TrackingPickerDialog(
     onSelected: (T) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     BasicAlertDialog(onDismissRequest = onDismiss) {
         Surface(
             modifier = Modifier
@@ -163,7 +163,7 @@ private fun <T> TrackingPickerContent(
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val horizontalPadding = if (isTablet) tokens.spacing.dialogPadding else tokens.spacing.screenHorizontal
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -235,7 +235,7 @@ private fun <T> TrackingPickerOptionRow(
     isTablet: Boolean,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val description = listOfNotNull(
         option.description?.takeIf(String::isNotBlank),
         option.unavailableReason?.takeIf(String::isNotBlank),

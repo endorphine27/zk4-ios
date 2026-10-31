@@ -57,8 +57,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cinebox.app.core.ui.AppTheme
-import com.cinebox.app.core.ui.LocalNuvioBottomNavigationOverlayPadding
-import com.cinebox.app.core.ui.LocalNuvioNavBarScrollState
+import com.cinebox.app.core.ui.LocalCineboxBottomNavigationOverlayPadding
+import com.cinebox.app.core.ui.LocalCineboxNavBarScrollState
 import com.cinebox.app.core.ui.CineboxDesktopVerticalScrollbar
 import com.cinebox.app.core.ui.CineboxScreen
 import com.cinebox.app.core.ui.CineboxScreenHeader
@@ -100,8 +100,8 @@ import com.cinebox.app.features.tmdb.TmdbSettingsRepository
 import com.cinebox.app.features.watchprogress.ContinueWatchingPreferencesRepository
 import com.cinebox.app.features.watchprogress.ContinueWatchingPreferencesUiState
 import com.cinebox.app.features.party.PartyRepository
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_settings_page_root
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_settings_page_root
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -645,7 +645,7 @@ private fun MobileSettingsScreen(
             }
         }
 
-        val navBarScrollState = LocalNuvioNavBarScrollState.current
+        val navBarScrollState = LocalCineboxNavBarScrollState.current
         LaunchedEffect(Unit) {
             navBarScrollState?.updateScrollOffset(AppScreenTab.Settings, 0f)
         }
@@ -990,7 +990,7 @@ private fun TabletSettingsScreen(
     val statusBarPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val effectiveTopOffset = topChromePadding ?: (statusBarPadding + 24.dp)
 
-    val navBarScrollState = LocalNuvioNavBarScrollState.current
+    val navBarScrollState = LocalCineboxNavBarScrollState.current
 
     LaunchedEffect(page) {
         if (page.opensInlineOnTablet) {
@@ -1087,7 +1087,7 @@ private fun TabletSettingsScreen(
                 ScreenActivityEffect(listState) { active ->
                     if (!active) listState.stopScroll()
                 }
-                val bottomOverlayPadding = LocalNuvioBottomNavigationOverlayPadding.current
+                val bottomOverlayPadding = LocalCineboxBottomNavigationOverlayPadding.current
                 val rootSearchRevealConnection = rememberSettingsRootSearchRevealConnection(
                     page = page,
                     listState = listState,
@@ -1361,7 +1361,7 @@ private fun TabletSettingsScreen(
             if (page == SettingsPage.Root) {
                 SettingsAttribution(
                     isTablet = true,
-                    modifier = Modifier.padding(bottom = 40.dp + LocalNuvioBottomNavigationOverlayPadding.current),
+                    modifier = Modifier.padding(bottom = 40.dp + LocalCineboxBottomNavigationOverlayPadding.current),
                 )
             }
         }

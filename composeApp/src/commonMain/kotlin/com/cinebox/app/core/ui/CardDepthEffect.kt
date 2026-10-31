@@ -22,7 +22,7 @@ fun rememberCardDepthStyleUiState(): CardDepthStyleUiState {
 }
 
 @Composable
-fun Modifier.nuvioCardDepth(
+fun Modifier.cineboxCardDepth(
     shape: Shape,
     surface: CineboxCardDepthSurface,
     fallbackBorderAlpha: Float = 0f,

@@ -68,9 +68,9 @@ import com.cinebox.app.core.i18n.localizedSeasonEpisodeCode
 import com.cinebox.app.core.ui.CineboxAnimatedWatchedBadge
 import com.cinebox.app.core.ui.CineboxCardDepthSurface
 import com.cinebox.app.core.ui.CineboxProgressBar
-import com.cinebox.app.core.ui.nuvioCardDepth
-import com.cinebox.app.core.ui.nuvioDesktopDragScroll
-import com.cinebox.app.core.ui.nuvioHorizontalScrollBleed
+import com.cinebox.app.core.ui.cineboxCardDepth
+import com.cinebox.app.core.ui.cineboxDesktopDragScroll
+import com.cinebox.app.core.ui.cineboxHorizontalScrollBleed
 import com.cinebox.app.core.ui.posterCardClickable
 import com.cinebox.app.core.ui.secondaryClick
 import com.cinebox.app.features.details.MetaDetails
@@ -88,7 +88,7 @@ import com.cinebox.app.features.watchprogress.WatchProgressEntry
 import com.cinebox.app.features.watchprogress.buildPlaybackVideoId
 import com.cinebox.app.features.watching.application.WatchingState
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -516,9 +516,9 @@ private fun SeasonTextChipScrollRow(
     LazyRow(
         state = seasonListState,
         modifier = Modifier
-            .nuvioHorizontalScrollBleed(horizontalScrollPadding)
+            .cineboxHorizontalScrollBleed(horizontalScrollPadding)
             .fillMaxWidth()
-            .nuvioDesktopDragScroll(seasonListState)
+            .cineboxDesktopDragScroll(seasonListState)
             .let { if (isDesktop) it.padding(bottom = 4.dp) else it },
         contentPadding = PaddingValues(horizontal = horizontalScrollPadding),
         horizontalArrangement = Arrangement.spacedBy(sizing.seasonChipGap),
@@ -593,9 +593,9 @@ private fun SeasonPosterScrollRow(
     LazyRow(
         state = seasonListState,
         modifier = Modifier
-            .nuvioHorizontalScrollBleed(horizontalScrollPadding)
+            .cineboxHorizontalScrollBleed(horizontalScrollPadding)
             .fillMaxWidth()
-            .nuvioDesktopDragScroll(seasonListState)
+            .cineboxDesktopDragScroll(seasonListState)
             .let { if (isDesktop) it.padding(bottom = 4.dp) else it },
         contentPadding = PaddingValues(horizontal = horizontalScrollPadding),
         horizontalArrangement = Arrangement.spacedBy(sizing.seasonChipGap),
@@ -746,9 +746,9 @@ private fun EpisodeHorizontalRow(
     LazyRow(
         state = listState,
         modifier = Modifier
-            .nuvioHorizontalScrollBleed(horizontalScrollPadding)
+            .cineboxHorizontalScrollBleed(horizontalScrollPadding)
             .fillMaxWidth()
-            .nuvioDesktopDragScroll(listState),
+            .cineboxDesktopDragScroll(listState),
         contentPadding = PaddingValues(
             horizontal = horizontalScrollPadding + rowMetrics.rowHorizontalPadding,
             vertical = rowMetrics.rowVerticalPadding,
@@ -824,7 +824,7 @@ private fun EpisodeHorizontalCard(
             .height(metrics.cardHeight)
             .clip(cardShape)
             .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f))
-            .nuvioCardDepth(
+            .cineboxCardDepth(
                 shape = cardShape,
                 surface = CineboxCardDepthSurface.EpisodeCards,
                 fallbackBorderAlpha = 0.12f,

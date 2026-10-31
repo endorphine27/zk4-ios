@@ -14,7 +14,7 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 actual object ThemeSettingsStorage {
-    private const val preferencesName = "nuvio_theme_settings"
+    private const val preferencesName = "cinebox_theme_settings"
     private const val selectedThemeKey = "selected_theme"
     private const val customThemeColorsKey = "custom_theme_colors"
     private const val amoledEnabledKey = "amoled_enabled"

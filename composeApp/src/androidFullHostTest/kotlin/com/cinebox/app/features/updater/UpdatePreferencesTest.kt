@@ -17,7 +17,7 @@ class UpdatePreferencesTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        context.getSharedPreferences("nuvio_updater", Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("cinebox_updater", Context.MODE_PRIVATE).edit().clear().commit()
         AndroidAppUpdaterPlatform.initialize(context)
     }
 

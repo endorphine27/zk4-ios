@@ -36,7 +36,7 @@ fi
 
 existing_requirements="$(rpm -qp --requires "$rpm_path")"
 missing_dependencies=()
-for dependency in "${NUVIO_LINUX_RPM_RUNTIME_DEPENDENCIES[@]}"; do
+for dependency in "${CINEBOX_LINUX_RPM_RUNTIME_DEPENDENCIES[@]}"; do
     if ! rpm_requirements_has_package "$existing_requirements" "$dependency"; then
         missing_dependencies+=("$dependency")
     fi
@@ -46,7 +46,7 @@ for tool in rpm2cpio cpio rpmbuild fakeroot tar find sort awk sed; do
     require_tool "$tool"
 done
 
-work_dir="$(mktemp -d "${TMPDIR:-/tmp}/nuvio-rpm.XXXXXX")"
+work_dir="$(mktemp -d "${TMPDIR:-/tmp}/cinebox-rpm.XXXXXX")"
 rebuilt_rpm="$work_dir/rebuilt.rpm"
 cleanup() {
     rm -rf "$work_dir"
@@ -61,11 +61,11 @@ rpm2cpio "$rpm_path" | (cd "$payload_dir" && cpio -idm --quiet)
 
 # Ensure a launcher is present for desktop integration. Some jpackage/rpm
 # combinations may omit it; in that case, synthesize a minimal entry.
-if ! nuvio_linux_desktop_entry_exists "$payload_dir"; then
-    nuvio_linux_write_desktop_entry "$payload_dir"
+if ! cinebox_linux_desktop_entry_exists "$payload_dir"; then
+    cinebox_linux_write_desktop_entry "$payload_dir"
 fi
-nuvio_linux_ensure_startup_wm_class "$payload_dir"
-nuvio_linux_ensure_uri_handler "$payload_dir"
+cinebox_linux_ensure_startup_wm_class "$payload_dir"
+cinebox_linux_ensure_uri_handler "$payload_dir"
 
 name="$(rpm -qp --qf '%{NAME}\n' "$rpm_path")"
 version="$(rpm -qp --qf '%{VERSION}\n' "$rpm_path")"
@@ -81,10 +81,10 @@ if [[ "$license" == "(none)" || -z "$license" ]]; then
     license="Proprietary"
 fi
 if [[ "$vendor" == "(none)" || -z "$vendor" ]]; then
-    vendor="Nuvio Media"
+    vendor="Cinebox Media"
 fi
 if [[ "$summary" == "(none)" || -z "$summary" ]]; then
-    summary="Nuvio"
+    summary="Cinebox"
 fi
 if [[ "$url" == "(none)" ]]; then
     url=""
@@ -131,7 +131,7 @@ tar -C "$payload_dir" -czf "$payload_tar" .
     printf 'Source1: filelist.txt\n'
     printf 'AutoReqProv: yes\n'
     printf '\n'
-    for dependency in "${NUVIO_LINUX_RPM_RUNTIME_DEPENDENCIES[@]}"; do
+    for dependency in "${CINEBOX_LINUX_RPM_RUNTIME_DEPENDENCIES[@]}"; do
         printf 'Requires: %s\n' "$dependency"
     done
     printf '\n%%description\n%s\n' "$description"

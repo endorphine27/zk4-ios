@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.cinebox.app.core.ui.FloatingNavigationItem
 import com.cinebox.app.core.ui.CineboxTokens
 import com.cinebox.app.core.ui.detectJellyTabGestures
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.core.ui.visualNavIndex
 
 @Composable
@@ -43,7 +43,7 @@ internal fun JellyNavigationBar(
     surface: @Composable BoxScope.() -> Unit,
 ) {
     if (items.isEmpty()) return
-    val accentColor = MaterialTheme.nuvio.colors.accent
+    val accentColor = MaterialTheme.cinebox.colors.accent
     val selectedSurface = accentColor.copy(alpha = CineboxTokens.Opacity.selected)
     val currentItems by rememberUpdatedState(items)
     val layoutDirection = LocalLayoutDirection.current

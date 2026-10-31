@@ -21,8 +21,8 @@ import com.cinebox.app.navigation.FolderDetailRoute
 import com.cinebox.app.navigation.CineboxNavigator
 import com.cinebox.app.navigation.PartyRoute
 import com.cinebox.app.navigation.SettingsPageRoute
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.party_title
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.party_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

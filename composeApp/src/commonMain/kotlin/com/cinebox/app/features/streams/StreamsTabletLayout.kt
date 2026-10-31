@@ -52,7 +52,7 @@ import com.cinebox.app.core.ui.StandardDesktopViewportAspectRatio
 import com.cinebox.app.core.ui.StreamResultsWideArtworkAspectRatio
 import com.cinebox.app.core.ui.expandingWideArtworkWidthDp
 import com.cinebox.app.core.ui.dominantBackdropBlendColor
-import com.cinebox.app.core.ui.nuvioDesktopDragScroll
+import com.cinebox.app.core.ui.cineboxDesktopDragScroll
 import com.kmpalette.extensions.painter.rememberPainterDominantColorState
 import androidx.compose.ui.platform.LocalLayoutDirection
 import com.cinebox.app.core.ui.platformPhysicalTopInset
@@ -64,7 +64,7 @@ import dev.chrisbanes.haze.HazeInputScale
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.rememberHazeState
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -631,7 +631,7 @@ private fun ActiveScrapersStatusBlock(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .nuvioDesktopDragScroll(scrollState)
+                .cineboxDesktopDragScroll(scrollState)
                 .horizontalScroll(scrollState),
             horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {

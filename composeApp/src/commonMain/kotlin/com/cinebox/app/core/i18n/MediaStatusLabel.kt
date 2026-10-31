@@ -1,7 +1,7 @@
 package com.cinebox.app.core.i18n
 
 import androidx.compose.runtime.Composable
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

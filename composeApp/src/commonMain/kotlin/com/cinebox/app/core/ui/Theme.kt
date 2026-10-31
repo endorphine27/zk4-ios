@@ -20,10 +20,10 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Density
 import com.cinebox.app.isDesktop
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.jetbrains_sans_bold
-import nuvio.composeapp.generated.resources.jetbrains_sans_regular
-import nuvio.composeapp.generated.resources.jetbrains_sans_semibold
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.jetbrains_sans_bold
+import cinebox.composeapp.generated.resources.jetbrains_sans_regular
+import cinebox.composeapp.generated.resources.jetbrains_sans_semibold
 import org.jetbrains.compose.resources.Font
 
 val LocalAppTheme = staticCompositionLocalOf { AppTheme.WHITE }
@@ -34,7 +34,7 @@ val MaterialTheme.themePalette: ThemeColorPalette
     @ReadOnlyComposable
     get() = LocalThemePalette.current
 
-internal val LocalNuvioPlatformDensity = staticCompositionLocalOf<Density> {
+internal val LocalCineboxPlatformDensity = staticCompositionLocalOf<Density> {
     error("Platform density is unavailable outside CineboxTheme")
 }
 
@@ -226,7 +226,7 @@ fun CineboxTheme(
         ThemeColors.getColorPalette(appTheme, customThemeColors)
     }
     val colorScheme = buildColorScheme(palette, amoled = amoled)
-    val tokens = defaultNuvioThemeTokens(palette, amoled = amoled, colorScheme = colorScheme)
+    val tokens = defaultCineboxThemeTokens(palette, amoled = amoled, colorScheme = colorScheme)
 
     val density = LocalDensity.current
     val effectiveDesktopUiScale = if (isDesktop) {
@@ -235,13 +235,13 @@ fun CineboxTheme(
         CineboxDesktopMinUiScale
     }
     CompositionLocalProvider(
-        LocalNuvioPlatformDensity provides density,
+        LocalCineboxPlatformDensity provides density,
         LocalDensity provides Density(
             density = density.density * effectiveDesktopUiScale,
             fontScale = if (isDesktop) CineboxDesktopFontScale else 1f,
         ),
-        LocalNuvioThemeTokens provides tokens,
-        LocalNuvioTypeScale provides CineboxTypeTokens,
+        LocalCineboxThemeTokens provides tokens,
+        LocalCineboxTypeScale provides CineboxTypeTokens,
         LocalRippleConfiguration provides CineboxRippleConfiguration,
         LocalAppTheme provides appTheme,
         LocalThemePalette provides palette,

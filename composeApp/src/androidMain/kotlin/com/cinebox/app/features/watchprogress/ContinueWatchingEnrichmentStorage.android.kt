@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 actual object ContinueWatchingEnrichmentStorage {
-    private const val preferencesName = "nuvio_cw_enrichment"
+    private const val preferencesName = "cinebox_cw_enrichment"
 
     private var preferences: SharedPreferences? = null
 

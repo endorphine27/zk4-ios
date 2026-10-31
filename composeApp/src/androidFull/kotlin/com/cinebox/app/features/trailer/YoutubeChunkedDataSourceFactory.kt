@@ -9,8 +9,8 @@ import androidx.media3.datasource.DataSpec
 import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.datasource.TransferListener
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.player_error_unable_to_play_stream
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.player_error_unable_to_play_stream
 import org.jetbrains.compose.resources.getString
 
 /**

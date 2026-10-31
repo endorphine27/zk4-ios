@@ -29,7 +29,7 @@ import platform.UIKit.UIViewController
 import platform.UIKit.presentationController
 import platform.darwin.NSObject
 
-internal actual val usesNativeNuvioBottomSheet: Boolean = true
+internal actual val usesNativeCineboxBottomSheet: Boolean = true
 
 private var activeNativeBottomSheet: UIViewController? = null
 private var activeNativeBottomSheetDelegate: CineboxNativeBottomSheetDelegate? = null
@@ -54,8 +54,8 @@ internal actual fun CineboxNativeModalBottomSheet(
     val colorScheme = MaterialTheme.colorScheme
     val typography = MaterialTheme.typography
     val shapes = MaterialTheme.shapes
-    val themeTokens = LocalNuvioThemeTokens.current
-    val typeScale = LocalNuvioTypeScale.current
+    val themeTokens = LocalCineboxThemeTokens.current
+    val typeScale = LocalCineboxTypeScale.current
     val appTheme = LocalAppTheme.current
     val themePalette = LocalThemePalette.current
     val density = LocalDensity.current
@@ -78,8 +78,8 @@ internal actual fun CineboxNativeModalBottomSheet(
                     density = latestDensity.value.density,
                     fontScale = latestDensity.value.fontScale,
                 ),
-                LocalNuvioThemeTokens provides latestThemeTokens.value,
-                LocalNuvioTypeScale provides latestTypeScale.value,
+                LocalCineboxThemeTokens provides latestThemeTokens.value,
+                LocalCineboxTypeScale provides latestTypeScale.value,
                 LocalAppTheme provides latestAppTheme.value,
                 LocalThemePalette provides latestThemePalette.value,
                 LocalRippleConfiguration provides latestRippleConfiguration.value,
@@ -157,7 +157,7 @@ internal actual fun CineboxNativeModalBottomSheet(
     }
 }
 
-internal actual fun dismissNativeNuvioBottomSheet() {
+internal actual fun dismissNativeCineboxBottomSheet() {
     activeNativeBottomSheet?.dismissViewControllerAnimated(
         flag = true,
         completion = null,

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 actual object LibraryStorage {
-    private const val preferencesName = "nuvio_library"
+    private const val preferencesName = "cinebox_library"
     private fun payloadKey(profileId: Int) = "library_payload_$profileId"
 
     private var preferences: SharedPreferences? = null

@@ -8,16 +8,16 @@ import platform.UIKit.UIUserInterfaceIdiomPhone
 private const val liquidGlassNativeTabBarEnabledKey = "CineboxLiquidGlassNativeTabBarEnabled"
 private const val nativeTabBarVisibleKey = "CineboxNativeTabBarVisible"
 private const val nativeSelectedTabKey = "CineboxNativeSelectedTab"
-private const val nativeTabAccentColorKey = "NuvioNativeTabAccentColor"
+private const val nativeTabAccentColorKey = "CineboxNativeTabAccentColor"
 private const val nativeTabTitleHomeKey = "CineboxNativeTabTitleHome"
 private const val nativeTabTitleSearchKey = "CineboxNativeTabTitleSearch"
 private const val nativeTabTitleLibraryKey = "CineboxNativeTabTitleLibrary"
 private const val nativeTabTitleProfileKey = "CineboxNativeTabTitleProfile"
-private const val nativeProfileNameKey = "NuvioNativeProfileName"
-private const val nativeProfileAvatarColorKey = "NuvioNativeProfileAvatarColor"
-private const val nativeProfileAvatarUrlKey = "NuvioNativeProfileAvatarURL"
-private const val nativeProfileAvatarBackgroundColorKey = "NuvioNativeProfileAvatarBackgroundColor"
-private const val nativeTabChromeDidChangeNotification = "NuvioNativeTabChromeDidChange"
+private const val nativeProfileNameKey = "CineboxNativeProfileName"
+private const val nativeProfileAvatarColorKey = "CineboxNativeProfileAvatarColor"
+private const val nativeProfileAvatarUrlKey = "CineboxNativeProfileAvatarURL"
+private const val nativeProfileAvatarBackgroundColorKey = "CineboxNativeProfileAvatarBackgroundColor"
+private const val nativeTabChromeDidChangeNotification = "CineboxNativeTabChromeDidChange"
 
 internal actual fun isLiquidGlassNativeTabBarSupported(): Boolean {
     return UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone &&

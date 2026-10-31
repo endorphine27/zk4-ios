@@ -58,22 +58,22 @@ import com.cinebox.app.core.ui.DialogButton
 import com.cinebox.app.core.ui.DialogButtonStyle
 import com.cinebox.app.core.ui.CineboxScreen
 import com.cinebox.app.core.ui.CineboxScreenHeader
-import com.cinebox.app.core.ui.nuvio
-import com.cinebox.app.core.ui.nuvioPlatformExtraTopPadding
-import com.cinebox.app.core.ui.nuvioSafeBottomPadding
+import com.cinebox.app.core.ui.cinebox
+import com.cinebox.app.core.ui.cineboxPlatformExtraTopPadding
+import com.cinebox.app.core.ui.cineboxSafeBottomPadding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.party_host_hint
-import nuvio.composeapp.generated.resources.party_hosted_by
-import nuvio.composeapp.generated.resources.party_join_action
-import nuvio.composeapp.generated.resources.party_join_description
-import nuvio.composeapp.generated.resources.party_join_title
-import nuvio.composeapp.generated.resources.party_joined_title
-import nuvio.composeapp.generated.resources.party_seats
-import nuvio.composeapp.generated.resources.party_title
-import nuvio.composeapp.generated.resources.party_watch_with_party
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.party_host_hint
+import cinebox.composeapp.generated.resources.party_hosted_by
+import cinebox.composeapp.generated.resources.party_join_action
+import cinebox.composeapp.generated.resources.party_join_description
+import cinebox.composeapp.generated.resources.party_join_title
+import cinebox.composeapp.generated.resources.party_joined_title
+import cinebox.composeapp.generated.resources.party_seats
+import cinebox.composeapp.generated.resources.party_title
+import cinebox.composeapp.generated.resources.party_watch_with_party
 import org.jetbrains.compose.resources.stringResource
 
 private enum class PartyScreenMode {
@@ -189,7 +189,7 @@ private fun PartyRoom(
     onBack: () -> Unit,
     onWatch: (PartyMedia) -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val state by PartyRepository.state.collectAsStateWithLifecycle()
     val unread by PartyChat.unread.collectAsStateWithLifecycle()
     val party = state.party ?: return
@@ -218,7 +218,7 @@ private fun PartyRoom(
                     modifier = Modifier
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
-                        .padding(bottom = nuvioSafeBottomPadding(tokens.spacing.screenBottom)),
+                        .padding(bottom = cineboxSafeBottomPadding(tokens.spacing.screenBottom)),
                 ) {
                     PartyContent(party, onWatch)
                 }
@@ -232,13 +232,13 @@ internal fun PartyPage(
     onBack: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val statusBarTop = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(tokens.colors.background)
-            .padding(top = tokens.spacing.screenTop + statusBarTop + nuvioPlatformExtraTopPadding)
+            .padding(top = tokens.spacing.screenTop + statusBarTop + cineboxPlatformExtraTopPadding)
             .padding(horizontal = tokens.spacing.screenHorizontal),
     ) {
         CineboxScreenHeader(
@@ -261,7 +261,7 @@ private fun JoinContent(
     initialCode: String,
     onJoined: (ActiveParty) -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val state by PartyRepository.state.collectAsStateWithLifecycle()
     val available by PartyRepository.available.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
@@ -455,7 +455,7 @@ private fun JoinContent(
 
 @Composable
 private fun PreviewCard(preview: PartyPreview) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val media = preview.media ?: return
     val host = preview.host
     Column(
@@ -493,7 +493,7 @@ private fun PreviewCard(preview: PartyPreview) {
 
 @Composable
 private fun MediaHeader(media: PartyMedia, centered: Boolean = false) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = if (centered) Alignment.CenterHorizontally else Alignment.Start,
@@ -515,7 +515,7 @@ private fun MediaHeader(media: PartyMedia, centered: Boolean = false) {
 
 @Composable
 private fun MediaTitle(media: PartyMedia, centered: Boolean) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     var logoFailed by remember(media.logo) { mutableStateOf(false) }
     val logo = media.logo?.takeIf { it.isNotBlank() && !logoFailed }
     val textAlign = if (centered) TextAlign.Center else TextAlign.Start
@@ -560,7 +560,7 @@ private fun MediaTitle(media: PartyMedia, centered: Boolean) {
 
 @Composable
 private fun JoinedContent(party: ActiveParty) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val host = party.member(party.hostMemberId)?.displayName
     Column(
         modifier = Modifier
@@ -600,7 +600,7 @@ private fun PartyContent(
     party: ActiveParty,
     onWatch: (PartyMedia) -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(
         modifier = Modifier
             .fillMaxWidth()

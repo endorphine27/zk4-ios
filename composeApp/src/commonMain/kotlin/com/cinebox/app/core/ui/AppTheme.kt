@@ -1,19 +1,19 @@
 package com.cinebox.app.core.ui
 
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.theme_amber
-import nuvio.composeapp.generated.resources.theme_crimson
-import nuvio.composeapp.generated.resources.theme_emerald
-import nuvio.composeapp.generated.resources.theme_ocean
-import nuvio.composeapp.generated.resources.theme_rose
-import nuvio.composeapp.generated.resources.theme_violet
-import nuvio.composeapp.generated.resources.theme_white
-import nuvio.composeapp.generated.resources.theme_gold
-import nuvio.composeapp.generated.resources.theme_jade
-import nuvio.composeapp.generated.resources.theme_rose_gold
-import nuvio.composeapp.generated.resources.theme_arctic_blue
-import nuvio.composeapp.generated.resources.theme_graphite
-import nuvio.composeapp.generated.resources.theme_custom
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.theme_amber
+import cinebox.composeapp.generated.resources.theme_crimson
+import cinebox.composeapp.generated.resources.theme_emerald
+import cinebox.composeapp.generated.resources.theme_ocean
+import cinebox.composeapp.generated.resources.theme_rose
+import cinebox.composeapp.generated.resources.theme_violet
+import cinebox.composeapp.generated.resources.theme_white
+import cinebox.composeapp.generated.resources.theme_gold
+import cinebox.composeapp.generated.resources.theme_jade
+import cinebox.composeapp.generated.resources.theme_rose_gold
+import cinebox.composeapp.generated.resources.theme_arctic_blue
+import cinebox.composeapp.generated.resources.theme_graphite
+import cinebox.composeapp.generated.resources.theme_custom
 import org.jetbrains.compose.resources.StringResource
 
 enum class AppTheme {

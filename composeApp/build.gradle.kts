@@ -124,7 +124,7 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
                 |object TraktConfig {
                 |    const val CLIENT_ID = "${props.getProperty("TRAKT_CLIENT_ID", "")}" 
                 |    const val CLIENT_SECRET = "${props.getProperty("TRAKT_CLIENT_SECRET", "")}" 
-                |    const val REDIRECT_URI = "${props.getProperty("TRAKT_REDIRECT_URI", "nuvio://auth/trakt")}" 
+                |    const val REDIRECT_URI = "${props.getProperty("TRAKT_REDIRECT_URI", "cinebox://auth/trakt")}" 
                 |}
                 """.trimMargin()
             )
@@ -138,8 +138,8 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
                 |
                 |object SimklConfig {
                 |    const val CLIENT_ID = "${props.getProperty("SIMKL_CLIENT_ID", "")}"
-                |    const val REDIRECT_URI = "${props.getProperty("SIMKL_REDIRECT_URI", "nuvio://auth/simkl")}"
-                |    const val APP_NAME = "${props.getProperty("SIMKL_APP_NAME", "nuvio")}"
+                |    const val REDIRECT_URI = "${props.getProperty("SIMKL_REDIRECT_URI", "cinebox://auth/simkl")}"
+                |    const val APP_NAME = "${props.getProperty("SIMKL_APP_NAME", "cinebox")}"
                 |}
                 """.trimMargin()
             )
@@ -152,7 +152,7 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
                 |package com.cinebox.app.features.discordrpc
                 |
                 |object DiscordConfig {
-                |    const val CLIENT_ID = "${props.getProperty("NUVIO_DISCORD_CLIENT_ID", "1538974392376369212")}" 
+                |    const val CLIENT_ID = "${props.getProperty("CINEBOX_DISCORD_CLIENT_ID", "1538974392376369212")}" 
                 |}
                 """.trimMargin()
             )
@@ -278,11 +278,11 @@ abstract class NotarizeMacosDmgWithKeychainTask @Inject constructor(
     fun notarize() {
         val profile = keychainProfile.get().trim()
         require(profile.isNotEmpty()) {
-            "Set NUVIO_MACOS_NOTARY_PASSWORD=@keychain:<profile> or NUVIO_MACOS_NOTARY_KEYCHAIN_PROFILE=<profile>."
+            "Set CINEBOX_MACOS_NOTARY_PASSWORD=@keychain:<profile> or CINEBOX_MACOS_NOTARY_KEYCHAIN_PROFILE=<profile>."
         }
         val identity = signingIdentity.get().trim()
         require(identity.isNotEmpty()) {
-            "Set NUVIO_MACOS_SIGNING_IDENTITY to a Developer ID Application identity."
+            "Set CINEBOX_MACOS_SIGNING_IDENTITY to a Developer ID Application identity."
         }
 
         val dmg = ensureFinalDmg()
@@ -431,22 +431,22 @@ fun localOrEnvProperty(name: String): String? =
         ?.trim()
         ?.takeIf { it.isNotBlank() }
 
-val macosSigningIdentity = localOrEnvProperty("NUVIO_MACOS_SIGNING_IDENTITY")
-val macosNotaryAppleId = localOrEnvProperty("NUVIO_MACOS_NOTARY_APPLE_ID")
-val macosNotaryTeamId = localOrEnvProperty("NUVIO_MACOS_NOTARY_TEAM_ID")
-val macosNotaryPassword = localOrEnvProperty("NUVIO_MACOS_NOTARY_PASSWORD")
-val macosNotaryKeychainProfile = localOrEnvProperty("NUVIO_MACOS_NOTARY_KEYCHAIN_PROFILE")
+val macosSigningIdentity = localOrEnvProperty("CINEBOX_MACOS_SIGNING_IDENTITY")
+val macosNotaryAppleId = localOrEnvProperty("CINEBOX_MACOS_NOTARY_APPLE_ID")
+val macosNotaryTeamId = localOrEnvProperty("CINEBOX_MACOS_NOTARY_TEAM_ID")
+val macosNotaryPassword = localOrEnvProperty("CINEBOX_MACOS_NOTARY_PASSWORD")
+val macosNotaryKeychainProfile = localOrEnvProperty("CINEBOX_MACOS_NOTARY_KEYCHAIN_PROFILE")
     ?: macosNotaryPassword
         ?.takeIf { it.startsWith("@keychain:", ignoreCase = true) }
         ?.substringAfter(':')
         ?.trim()
         ?.takeIf { it.isNotBlank() }
-val macosNotaryKeychainPath = localOrEnvProperty("NUVIO_MACOS_NOTARY_KEYCHAIN_PATH")
+val macosNotaryKeychainPath = localOrEnvProperty("CINEBOX_MACOS_NOTARY_KEYCHAIN_PATH")
 val macosNotaryAppSpecificPassword = macosNotaryPassword
     ?.takeUnless { it.startsWith("@keychain:", ignoreCase = true) }
 
 val appVersionConfigFile = rootProject.file("iosApp/Configuration/Version.xcconfig")
-val releaseAppVersionName = providers.gradleProperty("nuvio.app.versionName").orNull
+val releaseAppVersionName = providers.gradleProperty("cinebox.app.versionName").orNull
     ?: readXcconfigValue(appVersionConfigFile, "MARKETING_VERSION")
     ?: error("MARKETING_VERSION is missing from ${appVersionConfigFile.path}")
 val releaseAppVersionCode = readXcconfigValue(appVersionConfigFile, "CURRENT_PROJECT_VERSION")
@@ -459,9 +459,9 @@ val desktopVersionProps = Properties().apply {
     }
 }
 val desktopReleaseVersionName = (
-    providers.gradleProperty("nuvio.desktop.versionName").orNull
-        ?: System.getenv("NUVIO_DESKTOP_VERSION_NAME")
-        ?: supabaseProps.getProperty("NUVIO_DESKTOP_VERSION_NAME")
+    providers.gradleProperty("cinebox.desktop.versionName").orNull
+        ?: System.getenv("CINEBOX_DESKTOP_VERSION_NAME")
+        ?: supabaseProps.getProperty("CINEBOX_DESKTOP_VERSION_NAME")
         ?: desktopVersionProps.getProperty("VERSION_NAME")
         ?: "0.1.0"
     ).trim()
@@ -469,9 +469,9 @@ require(desktopReleaseVersionName.isNotBlank()) {
     "Desktop version name must not be blank."
 }
 val desktopReleaseVersionCode = (
-    providers.gradleProperty("nuvio.desktop.versionCode").orNull
-        ?: System.getenv("NUVIO_DESKTOP_VERSION_CODE")
-        ?: supabaseProps.getProperty("NUVIO_DESKTOP_VERSION_CODE")
+    providers.gradleProperty("cinebox.desktop.versionCode").orNull
+        ?: System.getenv("CINEBOX_DESKTOP_VERSION_CODE")
+        ?: supabaseProps.getProperty("CINEBOX_DESKTOP_VERSION_CODE")
         ?: desktopVersionProps.getProperty("VERSION_CODE")
     )?.trim()
     ?.takeIf { it.isNotBlank() }
@@ -480,20 +480,20 @@ val desktopReleaseVersionCode = (
 val desktopReleasePackageVersion = jpackageCompatibleVersion(desktopReleaseVersionName)
 val windowsMsiUpgradeUuid = "395990ee-9b8a-3548-922c-e7a23a495b8d"
 val iosDistribution = (
-    providers.gradleProperty("nuvio.ios.distribution").orNull
-        ?: System.getenv("NUVIO_IOS_DISTRIBUTION")
-        ?: supabaseProps.getProperty("NUVIO_IOS_DISTRIBUTION")
+    providers.gradleProperty("cinebox.ios.distribution").orNull
+        ?: System.getenv("CINEBOX_IOS_DISTRIBUTION")
+        ?: supabaseProps.getProperty("CINEBOX_IOS_DISTRIBUTION")
         ?: "appstore"
     ).trim().lowercase()
 require(iosDistribution == "appstore" || iosDistribution == "full") {
-    "NUVIO_IOS_DISTRIBUTION must be 'appstore' or 'full'."
+    "CINEBOX_IOS_DISTRIBUTION must be 'appstore' or 'full'."
 }
 val iosDistributionSourceDir = if (iosDistribution == "full") {
     "src/iosFull/kotlin"
 } else {
     "src/iosAppStore/kotlin"
 }
-val iosFrameworkBundleId = "com.nuvio.media"
+val iosFrameworkBundleId = "com.cinebox.media"
 val nuvioEngineAppleFramework = rootProject.file("../nuvio-engine/platform/apple/NuvioEngine.xcframework")
 val fullCommonSourceDir = project.file("src/fullCommonMain/kotlin")
 val fullPluginSourceDir = fullCommonSourceDir.resolve("com/cinebox/app/features/plugins")
@@ -511,17 +511,17 @@ val requestedAndroidDistributions = requestedGradleTasks.mapNotNull { taskName -
     }
 }.toSet()
 require(requestedAndroidDistributions.size <= 1) {
-    "Build Android full and playstore distributions separately, or set -Pnuvio.android.distribution=full|playstore."
+    "Build Android full and playstore distributions separately, or set -Pcinebox.android.distribution=full|playstore."
 }
-val configuredAndroidDistribution = providers.gradleProperty("nuvio.android.distribution").orNull
-    ?: supabaseProps.getProperty("NUVIO_ANDROID_DISTRIBUTION")
+val configuredAndroidDistribution = providers.gradleProperty("cinebox.android.distribution").orNull
+    ?: supabaseProps.getProperty("CINEBOX_ANDROID_DISTRIBUTION")
 val isAmbiguousAndroidPackageTask = requestedGradleTasks.any { taskName ->
     taskName == "build" ||
         taskName.startsWith("assemble") ||
         taskName.startsWith("bundle")
 } && requestedAndroidDistributions.isEmpty()
 require(configuredAndroidDistribution != null || !isAmbiguousAndroidPackageTask) {
-    "Set -Pnuvio.android.distribution=full|playstore for aggregate Android assemble/bundle tasks."
+    "Set -Pcinebox.android.distribution=full|playstore for aggregate Android assemble/bundle tasks."
 }
 val androidDistribution = (
     configuredAndroidDistribution
@@ -529,7 +529,7 @@ val androidDistribution = (
         ?: "playstore"
     ).trim().lowercase()
 require(androidDistribution == "playstore" || androidDistribution == "full") {
-    "nuvio.android.distribution must be 'playstore' or 'full'."
+    "cinebox.android.distribution must be 'playstore' or 'full'."
 }
 val androidDistributionSourceDir = if (androidDistribution == "full") {
     "src/androidFull/kotlin"
@@ -562,9 +562,9 @@ val generateRuntimeConfigs = tasks.register<GenerateRuntimeConfigsTask>("generat
     appVersionCode.set(releaseAppVersionCode)
     desktopAppVersionName.set(desktopReleaseVersionName)
     desktopAppVersionCode.set(desktopReleaseVersionCode)
-    supabaseUrl.set(runtimeConfigValue("NUVIO_SUPABASE_URL"))
-    supabaseAnonKey.set(runtimeConfigValue("NUVIO_SUPABASE_ANON_KEY"))
-    supabaseFallbackUrl.set(runtimeConfigValue("NUVIO_SUPABASE_FALLBACK_URL"))
+    supabaseUrl.set(runtimeConfigValue("CINEBOX_SUPABASE_URL"))
+    supabaseAnonKey.set(runtimeConfigValue("CINEBOX_SUPABASE_ANON_KEY"))
+    supabaseFallbackUrl.set(runtimeConfigValue("CINEBOX_SUPABASE_FALLBACK_URL"))
     sentryDsn.set(runtimeConfigValue("SENTRY_DSN"))
     sentryDesktopDsn.set(runtimeConfigValue("SENTRY_DESKTOP_DSN"))
     tmdbApiKey.set(runtimeConfigValue("TMDB_API_KEY"))
@@ -588,8 +588,8 @@ fun normalizedMacosArch(value: String): String =
         else -> error("Unsupported macOS architecture '$value'. Use arm64 or x86_64.")
     }
 val macosHostJvmArch = normalizedMacosArch(System.getProperty("os.arch"))
-val requestedMacosArch = providers.gradleProperty("nuvio.macos.arch").orNull
-    ?: System.getenv("NUVIO_MACOS_ARCH")
+val requestedMacosArch = providers.gradleProperty("cinebox.macos.arch").orNull
+    ?: System.getenv("CINEBOX_MACOS_ARCH")
 val macosPlayerBridgeArch = requestedMacosArch?.let(::normalizedMacosArch) ?: macosHostJvmArch
 val isMacosDmgBuildRequested = requestedGradleTasks.any { taskName ->
     taskName == "packagedmg" ||
@@ -601,7 +601,7 @@ val isMacosDmgBuildRequested = requestedGradleTasks.any { taskName ->
 if (isMacHost && isMacosDmgBuildRequested && macosPlayerBridgeArch != macosHostJvmArch) {
     error(
         "macOS DMG architecture '$macosPlayerBridgeArch' must match the Gradle JVM architecture '$macosHostJvmArch'. " +
-            "Run Gradle with a $macosPlayerBridgeArch JDK/Rosetta, then pass -Pnuvio.macos.arch=$macosPlayerBridgeArch."
+            "Run Gradle with a $macosPlayerBridgeArch JDK/Rosetta, then pass -Pcinebox.macos.arch=$macosPlayerBridgeArch."
     )
 }
 val macosPlayerBridgeOutput = layout.buildDirectory.file("native/macos/$macosPlayerBridgeArch/libplayer_bridge.dylib")
@@ -733,7 +733,7 @@ val windowsPlayerRuntimeOutput = layout.buildDirectory.dir("native/windows-runti
 if (isWindowsHost) {
     windowsPlayerBridgeOutput.get().asFile.parentFile.mkdirs()
 }
-val windowsWebView2Root = providers.gradleProperty("nuvio.webview2.dir").orNull
+val windowsWebView2Root = providers.gradleProperty("cinebox.webview2.dir").orNull
     ?.takeIf { it.isNotBlank() }
     ?.let(::File)
     ?: newestDirectory(File(System.getProperty("user.home"), ".nuget/packages/microsoft.web.webview2"))
@@ -743,12 +743,12 @@ val windowsWebView2NativeDir = File(windowsWebView2Root, "build/native/$windowsP
 val windowsWebView2LoaderLib = File(windowsWebView2NativeDir, "WebView2Loader.dll.lib")
 val windowsWebView2LoaderDll = File(windowsWebView2NativeDir, "WebView2Loader.dll")
 val bundledWindowsLibmpvRuntimeDir = layout.projectDirectory.dir("src/desktopMain/native/windows/runtime").asFile
-val windowsLibmpvRuntimeDirOverride = providers.gradleProperty("nuvio.windows.libmpv.runtimeDir").orNull
+val windowsLibmpvRuntimeDirOverride = providers.gradleProperty("cinebox.windows.libmpv.runtimeDir").orNull
     ?.takeIf { it.isNotBlank() }
     ?.let(::File)
 val windowsLibmpvRuntimeDir = windowsLibmpvRuntimeDirOverride
     ?: bundledWindowsLibmpvRuntimeDir.takeIf { File(it, "libmpv-2.dll").exists() }
-val windowsLibmpvDllOverride = providers.gradleProperty("nuvio.windows.libmpv.dll").orNull
+val windowsLibmpvDllOverride = providers.gradleProperty("cinebox.windows.libmpv.dll").orNull
     ?.takeIf { it.isNotBlank() }
     ?.let(::File)
 val windowsLibmpvDll = windowsLibmpvDllOverride
@@ -780,7 +780,7 @@ val windowsVcvarsRelativePath = when (windowsPlayerBridgeArch) {
     "arm64" -> "VC\\Auxiliary\\Build\\vcvarsarm64.bat"
     else -> "VC\\Auxiliary\\Build\\vcvars64.bat"
 }
-val windowsVcvarsPath = providers.gradleProperty("nuvio.windows.vcvars.path").orNull
+val windowsVcvarsPath = providers.gradleProperty("cinebox.windows.vcvars.path").orNull
     ?.takeIf { it.isNotBlank() }
 val windowsPlayerBridgeJavaHome = providers.systemProperty("java.home").get()
 val missingWindowsPlayerBridgeInputs = listOfNotNull(
@@ -789,8 +789,8 @@ val missingWindowsPlayerBridgeInputs = listOfNotNull(
 )
 val missingWindowsPlayerBridgeMessage = """
     Windows desktop player bridge inputs are missing: ${missingWindowsPlayerBridgeInputs.joinToString()}.
-    Install the Microsoft.Web.WebView2 NuGet package or pass -Pnuvio.webview2.dir=C:/path/to/microsoft.web.webview2/version.
-    libmpv is loaded at runtime; pass -Pnuvio.windows.libmpv.runtimeDir=C:/path/to/mpv-dlls to bundle it.
+    Install the Microsoft.Web.WebView2 NuGet package or pass -Pcinebox.webview2.dir=C:/path/to/microsoft.web.webview2/version.
+    libmpv is loaded at runtime; pass -Pcinebox.windows.libmpv.runtimeDir=C:/path/to/mpv-dlls to bundle it.
 """.trimIndent()
 val windowsPlayerBridgeCommand = if (missingWindowsPlayerBridgeInputs.isNotEmpty()) {
     listOf(
@@ -848,7 +848,7 @@ val windowsPlayerBridgeCommand = if (missingWindowsPlayerBridgeInputs.isNotEmpty
           }
         }
         if ([string]::IsNullOrWhiteSpace(${'$'}vcvars) -or -not (Test-Path -LiteralPath ${'$'}vcvars)) {
-          Write-Error 'Visual Studio C++ toolchain was not found. Install MSVC or pass -Pnuvio.windows.vcvars.path=C:\path\to\vcvars64.bat.'
+          Write-Error 'Visual Studio C++ toolchain was not found. Install MSVC or pass -Pcinebox.windows.vcvars.path=C:\path\to\vcvars64.bat.'
           exit 1
         }
         ${'$'}vcvars = ([string]${'$'}vcvars).Trim()
@@ -1158,7 +1158,7 @@ kotlin {
                 implementation(libs.mpv.android.lib)
                 implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("lib-*.aar"))))
                 if (androidDistribution == "full") {
-                    implementation(files("libs/quickjs-kt-android-1.0.5-nuvio.aar"))
+                    implementation(files("libs/quickjs-kt-android-1.0.5-cinebox.aar"))
                     implementation(libs.ksoup)
                 }
             }
@@ -1262,8 +1262,8 @@ tasks.matching {
 compose.desktop {
     application {
         mainClass = "com.cinebox.app.MainKt"
-        val smokePlayerUrl = providers.gradleProperty("nuvio.desktop.smokePlayerUrl").orNull
-            ?: System.getenv("NUVIO_DESKTOP_SMOKE_PLAYER_URL")
+        val smokePlayerUrl = providers.gradleProperty("cinebox.desktop.smokePlayerUrl").orNull
+            ?: System.getenv("CINEBOX_DESKTOP_SMOKE_PLAYER_URL")
         jvmArgs += listOfNotNull(
             "-Dapple.awt.application.appearance=NSAppearanceNameDarkAqua",
             // Keep AWT from loading its own GTK (Swing L&F/file dialogs): the
@@ -1274,7 +1274,7 @@ compose.desktop {
             "--add-opens=java.desktop/sun.lwawt.macosx=ALL-UNNAMED",
             "--add-opens=java.desktop/sun.awt.windows=ALL-UNNAMED",
             "--add-opens=java.desktop/sun.awt.X11=ALL-UNNAMED",
-            smokePlayerUrl?.takeIf { it.isNotBlank() }?.let { "-Dnuvio.desktop.smokePlayerUrl=$it" },
+            smokePlayerUrl?.takeIf { it.isNotBlank() }?.let { "-Dcinebox.desktop.smokePlayerUrl=$it" },
         )
 
         nativeDistributions {
@@ -1302,11 +1302,10 @@ compose.desktop {
                         <array>
                             <dict>
                                 <key>CFBundleURLName</key>
-                                <string>com.nuvio.media.desktop</string>
+                                <string>com.cinebox.media.desktop</string>
                                 <key>CFBundleURLSchemes</key>
                                 <array>
                                     <string>cinebox</string>
-                                    <string>nuvio</string>
                                     <string>stremio</string>
                                 </array>
                             </dict>
@@ -1533,7 +1532,7 @@ if (isLinuxHost) {
         val appRoot = appRootCandidates.firstOrNull(File::isDirectory)
             ?: error("Expected Linux app-image directory in ${outputDir.absolutePath} for ${task.name}.")
 
-        val appImageTool = providers.gradleProperty("nuvio.appimagetool.path").orNull
+        val appImageTool = providers.gradleProperty("cinebox.appimagetool.path").orNull
             ?.takeIf { it.isNotBlank() }
             ?.let(::File)
             ?: System.getenv("APPIMAGETOOL")
@@ -1542,14 +1541,14 @@ if (isLinuxHost) {
             ?: findExecutableOnPath("appimagetool")
             ?: error(
                 "AppImage packaging requires appimagetool. Install it on PATH, set APPIMAGETOOL, " +
-                    "or pass -Pnuvio.appimagetool.path=/path/to/appimagetool."
+                    "or pass -Pcinebox.appimagetool.path=/path/to/appimagetool."
             )
 
-        val updateInformation = providers.gradleProperty("nuvio.appimage.updateInformation").orNull
+        val updateInformation = providers.gradleProperty("cinebox.appimage.updateInformation").orNull
             ?.takeIf { it.isNotBlank() }
             ?: System.getenv("APPIMAGE_UPDATE_INFORMATION")?.takeIf { it.isNotBlank() }
             ?: System.getenv("UPDATE_INFORMATION")?.takeIf { it.isNotBlank() }
-        val websiteUrl = providers.gradleProperty("nuvio.appimage.websiteUrl").orNull
+        val websiteUrl = providers.gradleProperty("cinebox.appimage.websiteUrl").orNull
             ?.takeIf { it.isNotBlank() }
             ?: System.getenv("APPIMAGE_WEBSITE_URL")?.takeIf { it.isNotBlank() }
 

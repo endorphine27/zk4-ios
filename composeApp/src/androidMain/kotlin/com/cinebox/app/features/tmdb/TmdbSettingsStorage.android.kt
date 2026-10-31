@@ -12,7 +12,7 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 actual object TmdbSettingsStorage {
-    private const val preferencesName = "nuvio_tmdb_settings"
+    private const val preferencesName = "cinebox_tmdb_settings"
     private const val enabledKey = "tmdb_enabled"
     private const val apiKeyKey = "tmdb_api_key"
     private const val languageKey = "tmdb_language"

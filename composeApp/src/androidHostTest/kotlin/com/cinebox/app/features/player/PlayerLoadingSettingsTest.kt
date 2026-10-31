@@ -26,7 +26,7 @@ class PlayerLoadingSettingsTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        context.getSharedPreferences("nuvio_player_settings", Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("cinebox_player_settings", Context.MODE_PRIVATE).edit().clear().commit()
         PlayerSettingsStorage.initialize(context)
         PlayerSettingsRepository.clearLocalState()
     }
@@ -57,7 +57,7 @@ class PlayerLoadingSettingsTest {
     @Test
     fun olderSyncedSettingsRestoreTheDefaultOnlyForTheActiveProfile() {
         val preferences = RuntimeEnvironment.getApplication()
-            .getSharedPreferences("nuvio_player_settings", Context.MODE_PRIVATE)
+            .getSharedPreferences("cinebox_player_settings", Context.MODE_PRIVATE)
         val otherKey = ProfileScopedKey.of("show_player_loading_status", 99)
         preferences.edit().putBoolean(otherKey, false).commit()
         PlayerSettingsStorage.saveShowPlayerLoadingStatus(false)

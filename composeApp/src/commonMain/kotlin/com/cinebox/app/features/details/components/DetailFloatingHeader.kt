@@ -45,7 +45,7 @@ import com.cinebox.app.core.ui.fullscreenActionHorizontalInsetForWidth
 import com.cinebox.app.core.ui.isFullscreenActionSupported
 import com.cinebox.app.features.details.MetaDetails
 import com.cinebox.app.isIos
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

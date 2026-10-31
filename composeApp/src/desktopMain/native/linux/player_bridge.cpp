@@ -35,16 +35,16 @@
 #include <thread>
 #include <vector>
 
-// Diagnostic logging is opt-in via NUVIO_BRIDGE_DEBUG=1 so a normal run is quiet;
-// genuine errors always log via NUVIO_ERR.
-static bool nuvioDebug() {
-    static const bool on = std::getenv("NUVIO_BRIDGE_DEBUG") != nullptr;
+// Diagnostic logging is opt-in via CINEBOX_BRIDGE_DEBUG=1 so a normal run is quiet;
+// genuine errors always log via CINEBOX_ERR.
+static bool cineboxDebug() {
+    static const bool on = std::getenv("CINEBOX_BRIDGE_DEBUG") != nullptr;
     return on;
 }
 // Millisecond monotonic timestamp in every line: cold-start and stall
 // investigations need real deltas, and g_get_monotonic_time is cheap.
-#define NUVIO_ERR(...) do { fprintf(stderr, "[nuvio-bridge %8ld] ", (long)(g_get_monotonic_time() / 1000)); fprintf(stderr, __VA_ARGS__); fputc('\n', stderr); fflush(stderr); } while (0)
-#define NUVIO_LOG(...) do { if (nuvioDebug()) { NUVIO_ERR(__VA_ARGS__); } } while (0)
+#define CINEBOX_ERR(...) do { fprintf(stderr, "[cinebox-bridge %8ld] ", (long)(g_get_monotonic_time() / 1000)); fprintf(stderr, __VA_ARGS__); fputc('\n', stderr); fflush(stderr); } while (0)
+#define CINEBOX_LOG(...) do { if (cineboxDebug()) { CINEBOX_ERR(__VA_ARGS__); } } while (0)
 
 namespace {
 
@@ -234,7 +234,7 @@ std::string jstringToUtf8(JNIEnv *env, jstring value) {
                                   len, nullptr, &written, nullptr);
     env->ReleaseStringChars(value, chars);
     if (!utf8) {
-        NUVIO_ERR("jstringToUtf8: UTF-16 -> UTF-8 conversion failed (len=%d)", (int)len);
+        CINEBOX_ERR("jstringToUtf8: UTF-16 -> UTF-8 conversion failed (len=%d)", (int)len);
         return {};
     }
     std::string result(utf8, (size_t)written);
@@ -339,7 +339,7 @@ void onControlsEval(GObject *src, GAsyncResult *res, gpointer data) {
         // 'missing' successfully). E.g. an invalid script would land here —
         // never swallow it, this is the difference between a diagnosable log
         // line and a session-long silent default theme.
-        NUVIO_ERR("controls eval failed: %s", err->message);
+        CINEBOX_ERR("controls eval failed: %s", err->message);
         g_error_free(err);
     }
     if (!playerAlive(player)) {
@@ -352,7 +352,7 @@ void onControlsEval(GObject *src, GAsyncResult *res, gpointer data) {
     // copy is the only source for a re-push after a web-process crash/reload
     // (the page's full-state merge makes re-delivery idempotent).
     if (!(s && strcmp(s, "ok") == 0)) {
-        NUVIO_LOG("controls payload deferred: page not ready yet");
+        CINEBOX_LOG("controls payload deferred: page not ready yet");
     }
     if (s) g_free(s);
     if (v) g_object_unref(v);
@@ -393,7 +393,7 @@ void setOverlayCursorHidden(Player *player, bool hidden) {
     if (wvw && wvw != gw) gdk_window_set_cursor(wvw, cur);
     if (gw) gdk_display_flush(gdk_window_get_display(gw));
     player->cursorIsHidden = hidden;
-    NUVIO_LOG("overlay cursor %s", hidden ? "hidden" : "shown");
+    CINEBOX_LOG("overlay cursor %s", hidden ? "hidden" : "shown");
 }
 
 // Give the overlay window real X input focus so the page's keydown handlers
@@ -424,9 +424,9 @@ void focusOverlay(Player *player) {
     XSetInputFocus(dpy, player->overlayXid, RevertToParent, CurrentTime);
     XFlush(dpy);
     if (gdk_x11_display_error_trap_pop(gdpy)) {
-        NUVIO_ERR("XSetInputFocus overlay 0x%lx failed", player->overlayXid);
+        CINEBOX_ERR("XSetInputFocus overlay 0x%lx failed", player->overlayXid);
     } else {
-        NUVIO_LOG("input focus -> overlay 0x%lx", player->overlayXid);
+        CINEBOX_LOG("input focus -> overlay 0x%lx", player->overlayXid);
     }
 }
 
@@ -503,7 +503,7 @@ void onPlayerMessage(WebKitUserContentManager *, WebKitJavascriptResult *js, gpo
 // fields is null-guarded).
 void onOverlayDestroyed(GtkWidget *, gpointer data) {
     auto *player = static_cast<Player *>(data);
-    NUVIO_LOG("overlay toplevel destroyed (host teardown or dispose)");
+    CINEBOX_LOG("overlay toplevel destroyed (host teardown or dispose)");
     player->gtkWindow = nullptr;
     player->webview = nullptr;
     player->overlayXid = 0;
@@ -545,7 +545,7 @@ void onOverlaySnapshot(GObject *src, GAsyncResult *res, gpointer data) {
         // cancellation). Touch nothing: clearing snapInFlight here would let
         // requests pile up concurrently, and pushing the (older) pixels would
         // rewind the overlay and rotate a surface mpv may still be sampling.
-        NUVIO_LOG("stale snapshot (gen %d != %d) dropped", gen, player->snapGen);
+        CINEBOX_LOG("stale snapshot (gen %d != %d) dropped", gen, player->snapGen);
         if (surf) cairo_surface_destroy(surf);
         return;
     }
@@ -694,7 +694,7 @@ void compositeOverlay(Player *player) {
         // forever. Cancel it, invalidate its callback via the generation stamp
         // (a late arrival must not race the replacement request), and retry
         // after a short backoff.
-        NUVIO_ERR("snapshot stuck in flight >30 ticks, resetting (watchdog)");
+        CINEBOX_ERR("snapshot stuck in flight >30 ticks, resetting (watchdog)");
         player->snapGen++;
         if (player->snapCancel) {
             g_cancellable_cancel(player->snapCancel);
@@ -930,9 +930,9 @@ void notifyWarmupDone(bool ok) {
 WebKitWebContext *sharedControlsContext() {
     static WebKitWebContext *ctx = nullptr;
     if (!ctx) {
-        gchar *cacheDir = g_build_filename(g_get_user_cache_dir(), "nuvio",
+        gchar *cacheDir = g_build_filename(g_get_user_cache_dir(), "cinebox",
                                            "webkit-cache", nullptr);
-        gchar *dataDir = g_build_filename(g_get_user_cache_dir(), "nuvio",
+        gchar *dataDir = g_build_filename(g_get_user_cache_dir(), "cinebox",
                                           "webkit-data", nullptr);
         WebKitWebsiteDataManager *dm = webkit_website_data_manager_new(
             "base-cache-directory", cacheDir,
@@ -956,7 +956,7 @@ void onLoadChanged(WebKitWebView * /*wv*/, WebKitLoadEvent event, gpointer data)
                      : event == WEBKIT_LOAD_COMMITTED ? "committed"
                      : event == WEBKIT_LOAD_FINISHED ? "finished"
                      : "unknown";
-    NUVIO_LOG("webview load-changed: %s", name);
+    CINEBOX_LOG("webview load-changed: %s", name);
     // Belt-and-braces alongside the controlsReady message: retry the pending
     // controls payload once the page finishes loading (the probe re-defers it
     // if scripts haven't defined window.playerControls yet).
@@ -966,7 +966,7 @@ void onLoadChanged(WebKitWebView * /*wv*/, WebKitLoadEvent event, gpointer data)
 
 gboolean onLoadFailed(WebKitWebView * /*wv*/, WebKitLoadEvent /*event*/,
                       gchar *uri, GError *error, gpointer /*data*/) {
-    NUVIO_ERR("webview load-FAILED uri=%s error=%s", uri ? uri : "(null)",
+    CINEBOX_ERR("webview load-FAILED uri=%s error=%s", uri ? uri : "(null)",
               error ? error->message : "(null)");
     return FALSE;
 }
@@ -1003,7 +1003,7 @@ gboolean createWebviewOnGtk(gpointer data) {
         gWarmupView = nullptr;
         gWarmupUcm = nullptr;
         adopted = true;
-        NUVIO_LOG("adopted warm webview");
+        CINEBOX_LOG("adopted warm webview");
     } else {
         win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
         gtk_window_set_decorated(GTK_WINDOW(win), FALSE);
@@ -1066,7 +1066,7 @@ gboolean createWebviewOnGtk(gpointer data) {
                                     WebKitWebProcessTerminationReason reason,
                                     gpointer data) {
                          auto *p = static_cast<Player *>(data);
-                         NUVIO_ERR("controls web process terminated (reason=%d); reloading",
+                         CINEBOX_ERR("controls web process terminated (reason=%d); reloading",
                                    (int)reason);
                          if (!playerAlive(p)) return;
                          p->snapGen++;
@@ -1116,7 +1116,7 @@ gboolean createWebviewOnGtk(gpointer data) {
                                                  jtype, (jdouble)0.0);
                              env->DeleteLocalRef(jtype);
                          }
-                         NUVIO_LOG("thumb button %u -> %s", ev->button, action);
+                         CINEBOX_LOG("thumb button %u -> %s", ev->button, action);
                          return TRUE;
                      }),
                      player);
@@ -1169,7 +1169,7 @@ gboolean createWebviewOnGtk(gpointer data) {
     if (hostGdk) {
         gdk_window_reparent(gdkWin, hostGdk, 0, 0);
     } else {
-        NUVIO_ERR("foreign host GdkWindow wrap failed; falling back to XReparentWindow");
+        CINEBOX_ERR("foreign host GdkWindow wrap failed; falling back to XReparentWindow");
         XReparentWindow(dpy, gtkXid, s->hostXid, 0, 0);
     }
     gtk_widget_show_all(win);
@@ -1185,10 +1185,10 @@ gboolean createWebviewOnGtk(gpointer data) {
         XCompositeQueryVersion(dpy, &major, &minor);
         XCompositeRedirectWindow(dpy, gtkXid, CompositeRedirectManual);
         player->overlayXid = gtkXid;
-        NUVIO_LOG("XComposite %d.%d present; redirected overlay 0x%lx (manual)",
+        CINEBOX_LOG("XComposite %d.%d present; redirected overlay 0x%lx (manual)",
                   major, minor, gtkXid);
     } else {
-        NUVIO_ERR("XComposite NOT available");
+        CINEBOX_ERR("XComposite NOT available");
     }
     // Motion events are compressed by default: GDK defers them to the frame
     // clock's flush phase. mutter implements X frame-sync, and this redirected
@@ -1239,7 +1239,7 @@ gboolean createWebviewOnGtk(gpointer data) {
         warmupOnGtk(new std::string(gWarmupUrl));
     }
 
-    NUVIO_LOG("webview created + reparented into host 0x%lx", s->hostXid);
+    CINEBOX_LOG("webview created + reparented into host 0x%lx", s->hostXid);
     delete s;
     return G_SOURCE_REMOVE;
 }
@@ -1358,7 +1358,7 @@ gboolean destroyWebviewOnGtk(gpointer data) {
                     XFlush(dpy);
                     gdk_x11_display_error_trap_pop_ignored(gdpy);
                 }
-                NUVIO_LOG("input focus restored to 0x%lx", target);
+                CINEBOX_LOG("input focus restored to 0x%lx", target);
             }
         }
         player->savedFocusXid = 0;
@@ -1466,7 +1466,7 @@ gboolean warmupOnGtk(gpointer data) {
     gWarmupView = wv;
     gWarmupUcm = ucm;
     gWarmupUrl = *url;
-    NUVIO_LOG("warm webview spawned (unmapped, loading %s)", url->c_str());
+    CINEBOX_LOG("warm webview spawned (unmapped, loading %s)", url->c_str());
     delete url;
     return G_SOURCE_REMOVE;
 }
@@ -1479,7 +1479,7 @@ void runEventLoop(Player *player) {
         switch (event->event_id) {
             case MPV_EVENT_LOG_MESSAGE: {
                 auto *msg = static_cast<mpv_event_log_message *>(event->data);
-                if (msg) NUVIO_LOG("mpv[%s] %s: %s", msg->level, msg->prefix, msg->text);
+                if (msg) CINEBOX_LOG("mpv[%s] %s: %s", msg->level, msg->prefix, msg->text);
                 break;
             }
             case MPV_EVENT_END_FILE: {
@@ -1533,10 +1533,10 @@ JNIEXPORT jboolean JNICALL NP(initGtkEarly)(JNIEnv *, jobject) {
     gdk_set_allowed_backends("x11");
     int argc = 0;
     if (!gtk_init_check(&argc, nullptr)) {
-        NUVIO_ERR("initGtkEarly: gtk_init_check failed");
+        CINEBOX_ERR("initGtkEarly: gtk_init_check failed");
         return JNI_FALSE;
     }
-    NUVIO_LOG("initGtkEarly: GTK initialized before AWT/Skia");
+    CINEBOX_LOG("initGtkEarly: GTK initialized before AWT/Skia");
     return JNI_TRUE;
 }
 
@@ -1554,7 +1554,7 @@ JNIEXPORT jlong JNICALL NP(create)(
     auto *player = new Player();
     player->mpv = mpv_create();
     if (!player->mpv) {
-        NUVIO_ERR("mpv_create() returned NULL");
+        CINEBOX_ERR("mpv_create() returned NULL");
         delete player;
         return 0;
     }
@@ -1562,9 +1562,9 @@ JNIEXPORT jlong JNICALL NP(create)(
     std::string wid;
     if (hostViewPtr != 0) {
         wid = std::to_string(static_cast<int64_t>(hostViewPtr));
-        NUVIO_LOG("embedding into X11 wid=%s", wid.c_str());
+        CINEBOX_LOG("embedding into X11 wid=%s", wid.c_str());
     } else {
-        NUVIO_ERR("hostViewPtr is 0 — no window to embed into");
+        CINEBOX_ERR("hostViewPtr is 0 — no window to embed into");
     }
 
     // Forward addon/debrid HTTP headers verbatim.
@@ -1583,7 +1583,7 @@ JNIEXPORT jlong JNICALL NP(create)(
 
     auto configure = [&](mpv_handle *m, const char *gpuCtx, const char *hwdec) {
         // Surface mpv's own diagnostics (drained by the event thread).
-        mpv_request_log_messages(m, nuvioDebug() ? "v" : "no");
+        mpv_request_log_messages(m, cineboxDebug() ? "v" : "no");
         // Embed into the host AWT Canvas's X11 window.
         if (!wid.empty()) mpv_set_option_string(m, "wid", wid.c_str());
 
@@ -1616,11 +1616,11 @@ JNIEXPORT jlong JNICALL NP(create)(
         // gpu-hwdec-interop=auto + decoderPriority handling). gpu-hwdec-interop=auto
         // lets vo=gpu use direct hardware decode instead of the slow copy-back path.
         mpv_set_option_string(m, "audio-channels", "auto");
-        // NUVIO_MPV_AUDIO_DEVICE pins mpv's audio output device (names from
+        // CINEBOX_MPV_AUDIO_DEVICE pins mpv's audio output device (names from
         // `mpv --audio-device=help`) for HDMI/passthrough testing — same role
         // as the GPU_CONTEXT/HWDEC overrides below. Unset = mpv's default
         // routing (the system default sink).
-        const char *audioDevEnv = getenv("NUVIO_MPV_AUDIO_DEVICE");
+        const char *audioDevEnv = getenv("CINEBOX_MPV_AUDIO_DEVICE");
         if (audioDevEnv && *audioDevEnv) {
             mpv_set_option_string(m, "audio-device", audioDevEnv);
         }
@@ -1655,10 +1655,10 @@ JNIEXPORT jlong JNICALL NP(create)(
     // AWT window (mpv_initialize fails via force-window=immediate), while Vulkan
     // embeds fine there; its native hwdec interop corrupts frames on NVIDIA, so
     // the retry pairs it with copy-back NVDEC (harmless elsewhere: unavailable
-    // hwdec just falls back to software). NUVIO_MPV_GPU_CONTEXT / NUVIO_MPV_HWDEC
+    // hwdec just falls back to software). CINEBOX_MPV_GPU_CONTEXT / CINEBOX_MPV_HWDEC
     // env overrides pin a single attempt for testing.
-    const char *gpuCtxEnv = getenv("NUVIO_MPV_GPU_CONTEXT");
-    const char *hwdecEnv = getenv("NUVIO_MPV_HWDEC");
+    const char *gpuCtxEnv = getenv("CINEBOX_MPV_GPU_CONTEXT");
+    const char *hwdecEnv = getenv("CINEBOX_MPV_HWDEC");
     bool ctxPinned = gpuCtxEnv && *gpuCtxEnv;
     struct Attempt { const char *ctx; const char *hwdec; };
     Attempt attempts[2] = {
@@ -1670,19 +1670,19 @@ JNIEXPORT jlong JNICALL NP(create)(
     for (int a = 0; a < nAttempts; ++a) {
         if (!player->mpv) player->mpv = mpv_create();
         if (!player->mpv) {
-            NUVIO_ERR("mpv_create() returned NULL on retry");
+            CINEBOX_ERR("mpv_create() returned NULL on retry");
             break;
         }
         configure(player->mpv, attempts[a].ctx, attempts[a].hwdec);
         initResult = mpv_initialize(player->mpv);
         if (initResult >= 0) {
             if (a > 0) {
-                NUVIO_ERR("gpu-context %s failed to initialize; using %s instead",
+                CINEBOX_ERR("gpu-context %s failed to initialize; using %s instead",
                           attempts[0].ctx, attempts[a].ctx);
             }
             break;
         }
-        NUVIO_ERR("mpv_initialize failed (gpu-context=%s): %s", attempts[a].ctx,
+        CINEBOX_ERR("mpv_initialize failed (gpu-context=%s): %s", attempts[a].ctx,
                   mpv_error_string(initResult));
         // Drain any queued log messages explaining the failure.
         for (int i = 0; i < 50; ++i) {
@@ -1690,7 +1690,7 @@ JNIEXPORT jlong JNICALL NP(create)(
             if (!ev || ev->event_id == MPV_EVENT_NONE) break;
             if (ev->event_id == MPV_EVENT_LOG_MESSAGE) {
                 auto *m = static_cast<mpv_event_log_message *>(ev->data);
-                if (m) NUVIO_LOG("mpv[%s] %s: %s", m->level, m->prefix, m->text);
+                if (m) CINEBOX_LOG("mpv[%s] %s: %s", m->level, m->prefix, m->text);
             }
         }
         mpv_destroy(player->mpv);
@@ -1700,7 +1700,7 @@ JNIEXPORT jlong JNICALL NP(create)(
         delete player;
         return 0;
     }
-    NUVIO_LOG("mpv initialized OK");
+    CINEBOX_LOG("mpv initialized OK");
 
     if (eventSink != nullptr) {
         player->eventSink = env->NewGlobalRef(eventSink);
@@ -2021,7 +2021,7 @@ JNIEXPORT jboolean JNICALL NP(warmupWebView2)(JNIEnv *env, jobject, jstring cont
     std::unique_lock<std::mutex> lock(gWarmupMutex);
     bool completed = gWarmupCv.wait_for(lock, std::chrono::seconds(5),
                                         [] { return gWarmupDone; });
-    NUVIO_LOG("webview warmup %s",
+    CINEBOX_LOG("webview warmup %s",
               !completed ? "timed out" : gWarmupSucceeded ? "ready" : "failed");
     return (completed && gWarmupSucceeded) ? JNI_TRUE : JNI_FALSE;
 }

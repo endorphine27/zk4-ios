@@ -19,19 +19,19 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.servers.ServerConnection
 import com.cinebox.app.features.servers.ServerFailure
 import com.cinebox.app.features.servers.ServerProvider
 import com.cinebox.app.features.servers.ServerProviders
 import com.cinebox.app.features.servers.ServerRepository
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.emby_logo
-import nuvio.composeapp.generated.resources.jellyfin_logo
-import nuvio.composeapp.generated.resources.servers_add_description
-import nuvio.composeapp.generated.resources.servers_empty
-import nuvio.composeapp.generated.resources.servers_section_add
-import nuvio.composeapp.generated.resources.servers_section_connected
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.emby_logo
+import cinebox.composeapp.generated.resources.jellyfin_logo
+import cinebox.composeapp.generated.resources.servers_add_description
+import cinebox.composeapp.generated.resources.servers_empty
+import cinebox.composeapp.generated.resources.servers_section_add
+import cinebox.composeapp.generated.resources.servers_section_connected
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -59,7 +59,7 @@ internal fun LazyListScope.mediaServersSettingsContent(
                     Text(
                         text = stringResource(Res.string.servers_empty),
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.nuvio.colors.textMuted,
+                        color = MaterialTheme.cinebox.colors.textMuted,
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 14.dp),
                     )
                 }

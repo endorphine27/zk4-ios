@@ -26,10 +26,10 @@ import com.cinebox.app.core.i18n.localizedByteUnit
 import com.cinebox.app.core.ui.CineboxDesktopAnimation
 import com.cinebox.app.core.ui.CineboxAsyncImage
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import kotlin.math.round
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.streams_size
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.streams_size
 import org.jetbrains.compose.resources.stringResource
 
 private const val STREAM_SIZE_PLACEHOLDER = "\uE000"
@@ -150,7 +150,7 @@ internal fun StreamBadgeImage(
 
 @Composable
 internal fun StreamFileSizeBadge(stream: StreamItem) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val bytes = stream.behaviorHints.videoSize ?: return
     val gib = bytes.toDouble() / (1024.0 * 1024.0 * 1024.0)
     val sizeLabel = if (gib >= 1.0) {

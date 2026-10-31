@@ -23,13 +23,13 @@ class WatchProgressIdentityTest {
             source = WatchProgressSource.SIMKL,
             entries = listOf(entry),
             providerSnapshot = TrackingProgressSnapshot(),
-            hasLoadedNuvioRemoteProgress = false,
+            hasLoadedCineboxRemoteProgress = false,
         )
         val hidden = projectWatchProgressUiState(
             source = WatchProgressSource.SIMKL,
             entries = listOf(entry),
             providerSnapshot = TrackingProgressSnapshot(hiddenContentIds = setOf("show")),
-            hasLoadedNuvioRemoteProgress = false,
+            hasLoadedCineboxRemoteProgress = false,
         )
 
         assertEquals(visible.entries, hidden.entries)

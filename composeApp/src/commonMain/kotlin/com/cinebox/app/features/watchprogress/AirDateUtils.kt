@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import com.cinebox.app.core.format.formatReleaseDateWithoutYear
 import com.cinebox.app.core.time.daysUntilEpisodeRelease
 import com.cinebox.app.core.time.parseEpisodeReleaseEpochMs
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 

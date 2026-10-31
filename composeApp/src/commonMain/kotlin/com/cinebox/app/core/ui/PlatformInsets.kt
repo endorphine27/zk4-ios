@@ -7,11 +7,11 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-internal expect val nuvioPlatformExtraTopPadding: Dp
-internal expect val nuvioPlatformExtraBottomPadding: Dp
-internal expect val nuvioBottomNavigationExtraVerticalPadding: Dp
+internal expect val cineboxPlatformExtraTopPadding: Dp
+internal expect val cineboxPlatformExtraBottomPadding: Dp
+internal expect val cineboxBottomNavigationExtraVerticalPadding: Dp
 @Composable
-internal expect fun nuvioBottomNavigationBarInsets(): WindowInsets
+internal expect fun cineboxBottomNavigationBarInsets(): WindowInsets
 
 /** Physical display-safe top inset, excluding any enclosing native toolbar. */
 @Composable
@@ -20,20 +20,20 @@ internal expect fun platformPhysicalTopInset(): Dp
 @Composable
 internal expect fun ResizeForKeyboard()
 
-internal val LocalNuvioBottomNavigationOverlayPadding = staticCompositionLocalOf { 0.dp }
+internal val LocalCineboxBottomNavigationOverlayPadding = staticCompositionLocalOf { 0.dp }
 
 internal val LocalBottomInsetsConsumed = staticCompositionLocalOf { false }
 
 /** CompositionLocal providing the shared [CineboxNavBarScrollState] so child screens can attach the nestedScrollConnection. */
-val LocalNuvioNavBarScrollState = staticCompositionLocalOf<CineboxNavBarScrollState?> { null }
+val LocalCineboxNavBarScrollState = staticCompositionLocalOf<CineboxNavBarScrollState?> { null }
 
 @Composable
-internal fun nuvioSafeBottomPadding(extra: Dp = 0.dp): Dp {
+internal fun cineboxSafeBottomPadding(extra: Dp = 0.dp): Dp {
 	if (LocalBottomInsetsConsumed.current) return extra
-	val navigationBarBottom = nuvioBottomNavigationBarInsets()
+	val navigationBarBottom = cineboxBottomNavigationBarInsets()
 		.asPaddingValues()
 		.calculateBottomPadding()
-	return navigationBarBottom.coerceAtLeast(nuvioPlatformExtraBottomPadding) +
-		LocalNuvioBottomNavigationOverlayPadding.current +
+	return navigationBarBottom.coerceAtLeast(cineboxPlatformExtraBottomPadding) +
+		LocalCineboxBottomNavigationOverlayPadding.current +
 		extra
 }

@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 internal actual object TraktSettingsStorage {
-    private const val preferencesName = "nuvio_trakt_settings"
+    private const val preferencesName = "cinebox_trakt_settings"
     private const val payloadKey = "trakt_settings_payload"
     private const val pendingWatchProgressSourceKey = "pending_watch_progress_source"
 

@@ -90,7 +90,7 @@ internal object WindowsAppShortcutIconUpdater {
                 "    ${dollar}shortcut.Save()",
                 "}",
             ).joinToString("\n")
-            val scriptFile = Files.createTempFile("nuvio-icon-update-", ".ps1")
+            val scriptFile = Files.createTempFile("cinebox-icon-update-", ".ps1")
             Files.writeString(scriptFile, script)
             val escapedScriptPath = scriptFile.toString().replace("'", "''")
             val launcher = "Start-Process powershell.exe -Verb RunAs -WindowStyle Hidden -Wait -ArgumentList " +

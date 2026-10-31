@@ -49,11 +49,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.cinebox.app.core.ui.CineboxBackButton
-import com.cinebox.app.core.ui.nuvioTypeScale
+import com.cinebox.app.core.ui.cineboxTypeScale
 import com.cinebox.app.core.ui.LocalVerticalBarPadding
 import com.cinebox.app.core.ui.centeredVerticalBarPadding
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_player_close
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_player_close
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -189,7 +189,7 @@ internal fun OpeningOverlay(
                             color = Color.White,
                             textAlign = TextAlign.Center,
                             maxLines = 2,
-                            style = MaterialTheme.nuvioTypeScale.displayMd.copy(
+                            style = MaterialTheme.cineboxTypeScale.displayMd.copy(
                                 fontSize = titleFontSize,
                                 fontWeight = FontWeight.ExtraBold,
                             ),

@@ -42,10 +42,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.cinebox.app.core.ui.nuvioDesktopDragScroll
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.collections_tab_all
-import nuvio.composeapp.generated.resources.streams_refresh
+import com.cinebox.app.core.ui.cineboxDesktopDragScroll
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.collections_tab_all
+import cinebox.composeapp.generated.resources.streams_refresh
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.stringResource
 
@@ -82,7 +82,7 @@ internal fun ProviderFilterRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .nuvioDesktopDragScroll(scrollState)
+            .cineboxDesktopDragScroll(scrollState)
             .horizontalScroll(scrollState)
             .padding(contentPadding),
         horizontalArrangement = Arrangement.spacedBy(spacing),

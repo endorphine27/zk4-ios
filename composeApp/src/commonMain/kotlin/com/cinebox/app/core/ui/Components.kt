@@ -64,9 +64,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_back
-import nuvio.composeapp.generated.resources.action_ok
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_back
+import cinebox.composeapp.generated.resources.action_ok
 import org.jetbrains.compose.resources.stringResource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -78,12 +78,12 @@ import com.cinebox.app.navigation.LocalUseNativeNavigation
 @Composable
 fun CineboxScreen(
     modifier: Modifier = Modifier,
-    horizontalPadding: Dp = MaterialTheme.nuvio.spacing.screenHorizontal,
+    horizontalPadding: Dp = MaterialTheme.cinebox.spacing.screenHorizontal,
     topPadding: Dp? = null,
     listState: LazyListState = rememberLazyListState(),
     content: LazyListScope.() -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val statusBarTop = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     Box(
         modifier = modifier
@@ -95,9 +95,9 @@ fun CineboxScreen(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(
                 start = horizontalPadding,
-                top = topPadding ?: tokens.spacing.screenTop + statusBarTop + nuvioPlatformExtraTopPadding,
+                top = topPadding ?: tokens.spacing.screenTop + statusBarTop + cineboxPlatformExtraTopPadding,
                 end = horizontalPadding,
-                bottom = nuvioSafeBottomPadding(tokens.spacing.screenBottom),
+                bottom = cineboxSafeBottomPadding(tokens.spacing.screenBottom),
             ).withVerticalBar(),
             verticalArrangement = Arrangement.spacedBy(tokens.spacing.listGap),
             content = content,
@@ -112,7 +112,7 @@ fun CineboxScreen(
     }
 }
 
-internal fun Modifier.nuvioConsumePointerEvents(): Modifier =
+internal fun Modifier.cineboxConsumePointerEvents(): Modifier =
     pointerInput(Unit) {
         awaitPointerEventScope {
             while (true) {
@@ -129,7 +129,7 @@ fun CineboxSurfaceCard(
     tonalElevation: Int = 0,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Surface(
         modifier = modifier.fillMaxWidth(),
         color = tokens.colors.surface,
@@ -148,13 +148,13 @@ fun CineboxSurfaceCard(
 fun CineboxScreenHeader(
     title: String,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.nuvio.colors.background,
+    backgroundColor: Color = MaterialTheme.cinebox.colors.background,
     includeStatusBarPadding: Boolean = true,
     topPadding: Dp? = null,
     onBack: (() -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val statusBarTop = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val nativeDetailNavigation = LocalUseNativeNavigation.current &&
         !LocalNativeNavigationBarHidden.current &&
@@ -178,7 +178,7 @@ fun CineboxScreenHeader(
             modifier = Modifier
                 .matchParentSize()
                 .background(backgroundColor)
-                .nuvioConsumePointerEvents(),
+                .cineboxConsumePointerEvents(),
         ) {}
         Row(
             modifier = Modifier
@@ -236,7 +236,7 @@ fun CineboxSectionLabel(
         text = text,
         modifier = modifier,
         style = MaterialTheme.typography.labelMedium,
-        color = MaterialTheme.nuvio.colors.textMuted,
+        color = MaterialTheme.cinebox.colors.textMuted,
         fontWeight = FontWeight.Bold,
     )
 }
@@ -257,7 +257,7 @@ fun CineboxActionLabel(
             }
         ),
         style = MaterialTheme.typography.titleMedium,
-        color = MaterialTheme.nuvio.colors.accent,
+        color = MaterialTheme.cinebox.colors.accent,
     )
 }
 
@@ -266,10 +266,10 @@ fun CineboxIconActionButton(
     icon: ImageVector,
     contentDescription: String,
     modifier: Modifier = Modifier,
-    tint: Color = MaterialTheme.nuvio.colors.textPrimary,
+    tint: Color = MaterialTheme.cinebox.colors.textPrimary,
     onClick: () -> Unit = {},
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     IconButton(
         modifier = modifier
             .background(
@@ -290,10 +290,10 @@ fun CineboxIconActionButton(
 fun CineboxBackButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    shape: Shape = MaterialTheme.nuvio.shapes.avatar,
-    containerColor: Color = MaterialTheme.nuvio.colors.surface,
+    shape: Shape = MaterialTheme.cinebox.shapes.avatar,
+    containerColor: Color = MaterialTheme.cinebox.colors.surface,
     showContainerOnDesktop: Boolean = false,
-    contentColor: Color = MaterialTheme.nuvio.colors.textPrimary,
+    contentColor: Color = MaterialTheme.cinebox.colors.textPrimary,
     buttonSize: Dp = CineboxTokens.Space.s40,
     iconSize: Dp = CineboxTokens.Icon.md,
     contentDescription: String = stringResource(Res.string.action_back),
@@ -325,7 +325,7 @@ fun CineboxPrimaryButton(
     enabled: Boolean = true,
     onClick: () -> Unit = {},
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Button(
         onClick = onClick,
         modifier = modifier
@@ -362,7 +362,7 @@ fun CineboxInputField(
     modifier: Modifier = Modifier,
     trailingContent: (@Composable (() -> Unit))? = null,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
@@ -393,7 +393,7 @@ fun CineboxInfoBadge(
     text: String,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Box(
         modifier = modifier
             .background(
@@ -425,13 +425,13 @@ fun CineboxInlineMetadata(
         Text(
             text = title,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.nuvio.colors.textMuted,
+            color = MaterialTheme.cinebox.colors.textMuted,
         )
         Spacer(modifier = Modifier.width(CineboxTokens.Space.s6))
         Text(
             text = value,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.nuvio.colors.textPrimary,
+            color = MaterialTheme.cinebox.colors.textPrimary,
         )
     }
 }
@@ -479,7 +479,7 @@ fun CineboxStatusModal(
 fun CineboxToastHost(
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val toast by CineboxToastController.currentToast.collectAsState()
     val statusBarTop = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val visibilityState = remember { MutableTransitionState(false) }

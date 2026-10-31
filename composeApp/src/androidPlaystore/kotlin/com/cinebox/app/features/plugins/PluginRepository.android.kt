@@ -3,8 +3,8 @@ package com.cinebox.app.features.plugins
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.plugins_error_unavailable_build
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.plugins_error_unavailable_build
 import org.jetbrains.compose.resources.getString
 
 actual object PluginRepository {

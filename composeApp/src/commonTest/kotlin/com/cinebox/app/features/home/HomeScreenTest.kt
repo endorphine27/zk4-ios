@@ -528,7 +528,7 @@ class HomeScreenTest {
     }
 
     @Test
-    fun `home next up seed uses completed progress when watched item lags on Nuvio Sync`() {
+    fun `home next up seed uses completed progress when watched item lags on Cinebox Sync`() {
         val completedProgress = progressEntry(
             videoId = "show:4:14",
             title = "Show",

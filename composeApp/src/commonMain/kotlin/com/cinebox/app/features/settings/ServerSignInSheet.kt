@@ -37,8 +37,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.dismissNuvioBottomSheet
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.dismissCineboxBottomSheet
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.servers.ServerConnection
 import com.cinebox.app.features.servers.ServerException
 import com.cinebox.app.features.servers.ServerFailure
@@ -46,21 +46,21 @@ import com.cinebox.app.features.servers.ServerProvider
 import com.cinebox.app.features.servers.ServerRepository
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.servers_address
-import nuvio.composeapp.generated.resources.servers_address_hint
-import nuvio.composeapp.generated.resources.servers_connect
-import nuvio.composeapp.generated.resources.servers_connecting
-import nuvio.composeapp.generated.resources.servers_error_address
-import nuvio.composeapp.generated.resources.servers_error_auth
-import nuvio.composeapp.generated.resources.servers_error_failed
-import nuvio.composeapp.generated.resources.servers_error_forbidden
-import nuvio.composeapp.generated.resources.servers_error_unreachable
-import nuvio.composeapp.generated.resources.servers_error_unsupported
-import nuvio.composeapp.generated.resources.servers_password
-import nuvio.composeapp.generated.resources.servers_sign_in_subtitle
-import nuvio.composeapp.generated.resources.servers_sign_in_title
-import nuvio.composeapp.generated.resources.servers_username
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.servers_address
+import cinebox.composeapp.generated.resources.servers_address_hint
+import cinebox.composeapp.generated.resources.servers_connect
+import cinebox.composeapp.generated.resources.servers_connecting
+import cinebox.composeapp.generated.resources.servers_error_address
+import cinebox.composeapp.generated.resources.servers_error_auth
+import cinebox.composeapp.generated.resources.servers_error_failed
+import cinebox.composeapp.generated.resources.servers_error_forbidden
+import cinebox.composeapp.generated.resources.servers_error_unreachable
+import cinebox.composeapp.generated.resources.servers_error_unsupported
+import cinebox.composeapp.generated.resources.servers_password
+import cinebox.composeapp.generated.resources.servers_sign_in_subtitle
+import cinebox.composeapp.generated.resources.servers_sign_in_title
+import cinebox.composeapp.generated.resources.servers_username
 import org.jetbrains.compose.resources.stringResource
 
 internal data class ServerSignInRequest(
@@ -76,7 +76,7 @@ internal fun ServerSignInSheet(
     onConnected: (ServerConnection) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var address by rememberSaveable { mutableStateOf(request.address) }
@@ -94,7 +94,7 @@ internal fun ServerSignInSheet(
             try {
                 val connection = ServerRepository.connect(request.provider, address, username.trim(), password)
                 password = ""
-                dismissNuvioBottomSheet(sheetState) { onConnected(connection) }
+                dismissCineboxBottomSheet(sheetState) { onConnected(connection) }
             } catch (cancelled: CancellationException) {
                 throw cancelled
             } catch (failure: ServerException) {
@@ -222,7 +222,7 @@ internal fun ServerSignInSheet(
 
 @Composable
 private fun SheetHeader(title: String, subtitle: String) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Text(
         text = title,
         style = MaterialTheme.typography.titleLarge,
@@ -241,7 +241,7 @@ private fun SheetHeader(title: String, subtitle: String) {
 
 @Composable
 private fun sheetFieldColors(): TextFieldColors {
-    val colors = MaterialTheme.nuvio.colors
+    val colors = MaterialTheme.cinebox.colors
     return OutlinedTextFieldDefaults.colors(
         focusedBorderColor = colors.borderFocus,
         unfocusedBorderColor = colors.borderDefault,

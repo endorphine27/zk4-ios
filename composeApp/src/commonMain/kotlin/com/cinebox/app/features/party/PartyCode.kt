@@ -51,7 +51,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 
 @Composable
 internal fun CodeField(
@@ -127,7 +127,7 @@ private fun CodeSlot(
     textStyle: TextStyle,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val lineColor by animateColorAsState(
         targetValue = when {
             active -> tokens.colors.accent
@@ -178,7 +178,7 @@ private fun CodeSlot(
 
 @Composable
 private fun Caret() {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val transition = rememberInfiniteTransition()
     val alpha by transition.animateFloat(
         initialValue = 1f,

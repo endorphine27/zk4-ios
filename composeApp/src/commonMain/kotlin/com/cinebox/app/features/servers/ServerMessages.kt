@@ -1,17 +1,17 @@
 package com.cinebox.app.features.servers
 
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.servers_error_failed
-import nuvio.composeapp.generated.resources.servers_error_forbidden
-import nuvio.composeapp.generated.resources.servers_failure_auth
-import nuvio.composeapp.generated.resources.servers_failure_incomplete
-import nuvio.composeapp.generated.resources.servers_failure_not_found
-import nuvio.composeapp.generated.resources.servers_failure_unreachable
-import nuvio.composeapp.generated.resources.servers_failure_unsupported
-import nuvio.composeapp.generated.resources.servers_play_method_direct_play
-import nuvio.composeapp.generated.resources.servers_play_method_direct_stream
-import nuvio.composeapp.generated.resources.servers_play_method_transcode
-import nuvio.composeapp.generated.resources.servers_playback_failed
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.servers_error_failed
+import cinebox.composeapp.generated.resources.servers_error_forbidden
+import cinebox.composeapp.generated.resources.servers_failure_auth
+import cinebox.composeapp.generated.resources.servers_failure_incomplete
+import cinebox.composeapp.generated.resources.servers_failure_not_found
+import cinebox.composeapp.generated.resources.servers_failure_unreachable
+import cinebox.composeapp.generated.resources.servers_failure_unsupported
+import cinebox.composeapp.generated.resources.servers_play_method_direct_play
+import cinebox.composeapp.generated.resources.servers_play_method_direct_stream
+import cinebox.composeapp.generated.resources.servers_play_method_transcode
+import cinebox.composeapp.generated.resources.servers_playback_failed
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
 

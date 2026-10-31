@@ -13,12 +13,12 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
 
 internal actual object ServerStorage {
-    private const val keyAlias = "com.nuvio.media.servers.credentials.v1"
+    private const val keyAlias = "com.cinebox.media.servers.credentials.v1"
     private lateinit var preferences: SharedPreferences
     private val lock = Any()
 
     fun initialize(context: Context) {
-        preferences = context.applicationContext.getSharedPreferences("nuvio_servers", Context.MODE_PRIVATE)
+        preferences = context.applicationContext.getSharedPreferences("cinebox_servers", Context.MODE_PRIVATE)
     }
 
     actual fun read(key: String): String? = synchronized(lock) {

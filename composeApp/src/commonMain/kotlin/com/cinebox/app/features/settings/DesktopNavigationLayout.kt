@@ -1,8 +1,8 @@
 package com.cinebox.app.features.settings
 
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.settings_appearance_desktop_navigation_sidebar
-import nuvio.composeapp.generated.resources.settings_appearance_desktop_navigation_top_bar
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.settings_appearance_desktop_navigation_sidebar
+import cinebox.composeapp.generated.resources.settings_appearance_desktop_navigation_top_bar
 import org.jetbrains.compose.resources.StringResource
 
 enum class DesktopNavigationLayout(

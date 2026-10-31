@@ -43,8 +43,8 @@ import com.cinebox.app.core.i18n.localizedSeasonEpisodeCode
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
 import com.cinebox.app.core.ui.CineboxPrimaryButton
 import com.cinebox.app.core.ui.CineboxToastController
-import com.cinebox.app.core.ui.dismissNuvioBottomSheet
-import com.cinebox.app.core.ui.nuvioSafeBottomPadding
+import com.cinebox.app.core.ui.dismissCineboxBottomSheet
+import com.cinebox.app.core.ui.cineboxSafeBottomPadding
 import com.cinebox.app.features.details.MetaDetails
 import com.cinebox.app.features.details.MetaVideo
 import com.cinebox.app.features.streams.rememberPlaybackAvailability
@@ -52,7 +52,7 @@ import com.cinebox.app.features.watchprogress.WatchProgressEntry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -91,7 +91,7 @@ internal fun EpisodeShuffleSheet(
 
     fun dismiss(after: () -> Unit = {}) {
         scope.launch {
-            dismissNuvioBottomSheet(sheetState) { onDismiss(); after() }
+            dismissCineboxBottomSheet(sheetState) { onDismiss(); after() }
         }
     }
 
@@ -109,7 +109,7 @@ internal fun EpisodeShuffleSheet(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState())
-                .padding(horizontal = 20.dp).padding(bottom = nuvioSafeBottomPadding(20.dp)),
+                .padding(horizontal = 20.dp).padding(bottom = cineboxSafeBottomPadding(20.dp)),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {

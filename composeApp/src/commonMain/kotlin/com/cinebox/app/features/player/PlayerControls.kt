@@ -77,9 +77,9 @@ import com.cinebox.app.core.ui.themePalette
 import com.cinebox.app.core.ui.accentBrush
 import com.cinebox.app.core.ui.appIconPainter
 import com.cinebox.app.core.ui.gradientMask
-import com.cinebox.app.core.ui.nuvioTypeScale
+import com.cinebox.app.core.ui.cineboxTypeScale
 import com.cinebox.app.features.streams.StreamBadge
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 import com.cinebox.app.core.i18n.localizedEpisodeTitle
 
@@ -408,7 +408,7 @@ private fun PlayerHeader(
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val typeScale = MaterialTheme.nuvioTypeScale
+    val typeScale = MaterialTheme.cineboxTypeScale
     val metadataAlpha by animateFloatAsState(
         targetValue = if (!showParentalGuide && showActions) 1f else 0f,
         animationSpec = tween(durationMillis = if (!showParentalGuide && showActions) 260 else 160),
@@ -931,7 +931,7 @@ internal fun LockedPlayerOverlay(
             Spacer(modifier = Modifier.height(12.dp))
             Text(
                 text = stringResource(Res.string.compose_player_tap_to_unlock),
-                style = MaterialTheme.nuvioTypeScale.bodyMd.copy(fontWeight = FontWeight.SemiBold),
+                style = MaterialTheme.cineboxTypeScale.bodyMd.copy(fontWeight = FontWeight.SemiBold),
                 color = Color.White.copy(alpha = 0.92f),
             )
         }
@@ -977,7 +977,7 @@ internal fun LockedPlayerOverlay(
                 )
                 Text(
                     text = formatPlaybackRuntime(displayedPositionMs, playbackSnapshot.durationMs, showRemainingTime),
-                    style = MaterialTheme.nuvioTypeScale.bodyMd.copy(fontSize = (metrics.timeSize.value + 2).sp),
+                    style = MaterialTheme.cineboxTypeScale.bodyMd.copy(fontSize = (metrics.timeSize.value + 2).sp),
                     color = Color.White.copy(alpha = 0.9f),
                     modifier = Modifier.align(Alignment.End),
                 )
@@ -1000,7 +1000,7 @@ private fun TimePill(
     ) {
         Text(
             text = text,
-            style = MaterialTheme.nuvioTypeScale.labelSm.copy(
+            style = MaterialTheme.cineboxTypeScale.labelSm.copy(
                 fontSize = fontSize,
                 lineHeight = fontSize * 1.25f,
                 fontWeight = FontWeight.Medium,
@@ -1042,7 +1042,7 @@ private fun PlayerActionPillButton(
         }
         Text(
             text = label,
-            style = MaterialTheme.nuvioTypeScale.labelSm,
+            style = MaterialTheme.cineboxTypeScale.labelSm,
             color = Color.White,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,

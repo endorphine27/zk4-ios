@@ -18,12 +18,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.autosync_label_synced
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.autosync_label_synced
 import org.jetbrains.compose.resources.stringResource
 
 /**
@@ -49,7 +49,7 @@ internal fun AutoSyncedChip(subtitleUrl: String, selected: Boolean) {
     val syncedUrl by AutoSyncSyncedSubtitle.url.collectAsState()
     if (!selected || syncedUrl != subtitleUrl) return
 
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val contentColor = tokens.colors.onAccent.copy(alpha = 0.9f)
     val shape = RoundedCornerShape(999.dp)
     Row(

@@ -37,7 +37,7 @@ import com.cinebox.app.core.ui.NativeTabBridge
 import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.core.ui.CineboxTokens
 import com.cinebox.app.core.ui.PlatformBackHandler
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.addons.AddonRepository
 import com.cinebox.app.features.addons.enabledAddons
 import com.cinebox.app.features.auth.AuthScreen
@@ -482,7 +482,7 @@ internal fun AppGate(
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(MaterialTheme.nuvio.colors.background),
+                            .background(MaterialTheme.cinebox.colors.background),
                         contentAlignment = Alignment.Center,
                     ) {
                         CineboxLoadingIndicator()
@@ -492,7 +492,7 @@ internal fun AppGate(
                     AuthScreen(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(MaterialTheme.nuvio.colors.background)
+                            .background(MaterialTheme.cinebox.colors.background)
                             .padding(LocalVerticalBarPadding.current),
                     )
                 }
@@ -500,7 +500,7 @@ internal fun AppGate(
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(MaterialTheme.nuvio.colors.background),
+                            .background(MaterialTheme.cinebox.colors.background),
                     )
                 }
                 AppGateScreen.ProfileEdit.name -> {

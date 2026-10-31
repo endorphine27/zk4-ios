@@ -1,16 +1,16 @@
 package com.cinebox.app.features.player
 
 import androidx.compose.runtime.Composable
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.player_ios_hardware_decoder_off
-import nuvio.composeapp.generated.resources.player_ios_preset_compatibility_desc
-import nuvio.composeapp.generated.resources.player_ios_preset_compatibility_label
-import nuvio.composeapp.generated.resources.player_ios_preset_custom_desc
-import nuvio.composeapp.generated.resources.player_ios_preset_custom_label
-import nuvio.composeapp.generated.resources.player_ios_preset_native_edr_desc
-import nuvio.composeapp.generated.resources.player_ios_preset_native_edr_label
-import nuvio.composeapp.generated.resources.player_ios_preset_sdr_tone_mapped_desc
-import nuvio.composeapp.generated.resources.player_ios_preset_sdr_tone_mapped_label
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.player_ios_hardware_decoder_off
+import cinebox.composeapp.generated.resources.player_ios_preset_compatibility_desc
+import cinebox.composeapp.generated.resources.player_ios_preset_compatibility_label
+import cinebox.composeapp.generated.resources.player_ios_preset_custom_desc
+import cinebox.composeapp.generated.resources.player_ios_preset_custom_label
+import cinebox.composeapp.generated.resources.player_ios_preset_native_edr_desc
+import cinebox.composeapp.generated.resources.player_ios_preset_native_edr_label
+import cinebox.composeapp.generated.resources.player_ios_preset_sdr_tone_mapped_desc
+import cinebox.composeapp.generated.resources.player_ios_preset_sdr_tone_mapped_label
 import org.jetbrains.compose.resources.stringResource
 
 data class PlayerLaunch(

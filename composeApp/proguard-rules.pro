@@ -39,7 +39,7 @@
 -keep class com.dokar.quickjs.** { *; }
 -keep class com.cinebox.app.features.plugins.** { *; }
 
-# P2P runtime and Nuvio Engine JNI bridge. Native libraries are not processed
+# P2P runtime and Cinebox Engine JNI bridge. Native libraries are not processed
 # by R8, but their Kotlin/JNI wrapper classes and method names must stay stable.
 -keep class com.cinebox.app.features.p2p.** { *; }
 -keep class com.nuvio.engine.** { *; }

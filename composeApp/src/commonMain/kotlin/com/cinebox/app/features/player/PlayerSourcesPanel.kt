@@ -11,14 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.streams.StreamItem
 import com.cinebox.app.features.streams.StreamsUiState
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_close
-import nuvio.composeapp.generated.resources.compose_player_episode_code_full
-import nuvio.composeapp.generated.resources.compose_player_panel_sources
-import nuvio.composeapp.generated.resources.compose_player_playing
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_close
+import cinebox.composeapp.generated.resources.compose_player_episode_code_full
+import cinebox.composeapp.generated.resources.compose_player_panel_sources
+import cinebox.composeapp.generated.resources.compose_player_playing
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -37,7 +37,7 @@ fun PlayerSourcesPanel(
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val contentLabel = if (currentSeason != null && currentEpisode != null) {
         buildString {
             append(stringResource(Res.string.compose_player_episode_code_full, currentSeason, currentEpisode))

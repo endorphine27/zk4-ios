@@ -30,11 +30,11 @@ import com.cinebox.app.features.cloud.CloudLibraryContentType
 import com.cinebox.app.features.cloud.cloudLibraryDisplayArtworkUrl
 import com.cinebox.app.features.watchprogress.ContinueWatchingItem
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.cw_action_go_to_details
-import nuvio.composeapp.generated.resources.cw_action_remove
-import nuvio.composeapp.generated.resources.cw_action_start_from_beginning
-import nuvio.composeapp.generated.resources.play_manually
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.cw_action_go_to_details
+import cinebox.composeapp.generated.resources.cw_action_remove
+import cinebox.composeapp.generated.resources.cw_action_start_from_beginning
+import cinebox.composeapp.generated.resources.play_manually
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,21 +50,21 @@ fun CineboxContinueWatchingActionSheet(
     onRemove: () -> Unit,
 ) {
     if (item == null) return
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val coroutineScope = rememberCoroutineScope()
 
     fun dismissAfter(action: () -> Unit) {
         action()
         coroutineScope.launch {
-            dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+            dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
         }
     }
 
     CineboxModalBottomSheet(
         onDismissRequest = {
             coroutineScope.launch {
-                dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
             }
         },
         sheetState = sheetState,
@@ -72,7 +72,7 @@ fun CineboxContinueWatchingActionSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = nuvioSafeBottomPadding(tokens.spacing.screenHorizontal)),
+                .padding(bottom = cineboxSafeBottomPadding(tokens.spacing.screenHorizontal)),
         ) {
             ContinueWatchingSheetHeader(item = item)
             CineboxBottomSheetDivider()
@@ -111,7 +111,7 @@ private fun ContinueWatchingSheetHeader(
     item: ContinueWatchingItem,
 ) {
     val posterCardStyle = rememberPosterCardStyleUiState()
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
 
     Row(
         modifier = Modifier

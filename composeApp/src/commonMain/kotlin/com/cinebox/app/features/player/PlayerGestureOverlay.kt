@@ -45,11 +45,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.cinebox.app.core.ui.accentBrush
-import com.cinebox.app.core.ui.nuvioTypeScale
+import com.cinebox.app.core.ui.cineboxTypeScale
 import com.cinebox.app.core.ui.themePalette
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_player_brightness
-import nuvio.composeapp.generated.resources.compose_player_volume
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_player_brightness
+import cinebox.composeapp.generated.resources.compose_player_volume
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.roundToInt
 
@@ -121,7 +121,7 @@ private fun PlayerGestureFeedback(
                         Text(
                             text = percent.toString(),
                             color = Color.White,
-                            style = MaterialTheme.nuvioTypeScale.bodySm.copy(
+                            style = MaterialTheme.cineboxTypeScale.bodySm.copy(
                                 fontWeight = FontWeight.SemiBold,
                                 shadow = Shadow(Color.Black.copy(alpha = 0.8f), blurRadius = 8f),
                             ),
@@ -170,7 +170,7 @@ private fun PlayerGestureFeedback(
                         Text(
                             text = message,
                             color = Color.White,
-                            style = MaterialTheme.nuvioTypeScale.bodyLg.copy(
+                            style = MaterialTheme.cineboxTypeScale.bodyLg.copy(
                                 fontWeight = FontWeight.SemiBold,
                                 shadow = shadow,
                             ),
@@ -179,7 +179,7 @@ private fun PlayerGestureFeedback(
                             Text(
                                 text = it,
                                 color = feedback.secondaryMessageColor ?: Color.White,
-                                style = MaterialTheme.nuvioTypeScale.bodyMd.copy(
+                                style = MaterialTheme.cineboxTypeScale.bodyMd.copy(
                                     fontWeight = FontWeight.SemiBold,
                                     shadow = shadow,
                                 ),

@@ -78,7 +78,7 @@ import com.cinebox.app.features.tmdb.TmdbMetadataService
 import com.cinebox.app.core.poster.withCustomPosterUrls
 import com.cinebox.app.features.watched.WatchedRepository
 import com.cinebox.app.features.watchprogress.CurrentDateProvider
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import com.cinebox.app.navigation.LocalUseNativeNavigation

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 actual object WatchProgressStorage {
-    private const val preferencesName = "nuvio_watch_progress"
+    private const val preferencesName = "cinebox_watch_progress"
     private const val payloadKey = "watch_progress_payload"
 
     private var preferences: SharedPreferences? = null

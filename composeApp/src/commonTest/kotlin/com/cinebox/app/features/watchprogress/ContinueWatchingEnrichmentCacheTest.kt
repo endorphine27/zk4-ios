@@ -15,14 +15,14 @@ class ContinueWatchingEnrichmentCacheTest {
             profileId = 2,
             source = WatchProgressSource.TRAKT,
         )
-        val nuvioKey = ContinueWatchingEnrichmentCache.continueWatchingEnrichmentStorageKey(
+        val cineboxKey = ContinueWatchingEnrichmentCache.continueWatchingEnrichmentStorageKey(
             profileId = 2,
-            source = WatchProgressSource.NUVIO_SYNC,
+            source = WatchProgressSource.CINEBOX_SYNC,
         )
 
         assertEquals("cw_enrichment_cache_trakt_2", traktKey)
-        assertEquals("cw_enrichment_cache_nuvio_sync_2", nuvioKey)
-        assertNotEquals(traktKey, nuvioKey)
+        assertEquals("cw_enrichment_cache_cinebox_sync_2", cineboxKey)
+        assertNotEquals(traktKey, cineboxKey)
         assertEquals("cw_enrichment_cache_2", ContinueWatchingEnrichmentCache.legacyStorageKey(profileId = 2))
     }
 
@@ -67,7 +67,7 @@ class ContinueWatchingEnrichmentCacheTest {
         assertFalse(
             ContinueWatchingEnrichmentCache.saveSnapshots(
                 profileId = 1,
-                source = WatchProgressSource.NUVIO_SYNC,
+                source = WatchProgressSource.CINEBOX_SYNC,
                 generation = staleGeneration,
                 nextUp = emptyList(),
                 inProgress = emptyList(),

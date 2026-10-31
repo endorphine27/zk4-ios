@@ -131,7 +131,7 @@ private class DesktopKeepAwakeController : AutoCloseable {
     // Subprocess calls below block, so route them off the Compose thread.
     private fun linuxExecutor(): ExecutorService =
         linuxInhibitExecutor ?: Executors.newSingleThreadExecutor { runnable ->
-            Thread(runnable, "nuvio-linux-screensaver-inhibit").apply { isDaemon = true }
+            Thread(runnable, "cinebox-linux-screensaver-inhibit").apply { isDaemon = true }
         }.also { linuxInhibitExecutor = it }
 
     // Held together, not as an either/or fallback: testing on KDE Plasma showed a successful

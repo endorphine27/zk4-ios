@@ -84,17 +84,17 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cinebox.app.core.format.formatLocalTime
 import com.cinebox.app.core.ui.ResizeForKeyboard
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.party_chat_empty_message
-import nuvio.composeapp.generated.resources.party_chat_empty_title
-import nuvio.composeapp.generated.resources.party_chat_new_messages
-import nuvio.composeapp.generated.resources.party_chat_not_sent
-import nuvio.composeapp.generated.resources.party_chat_placeholder
-import nuvio.composeapp.generated.resources.party_chat_send
-import nuvio.composeapp.generated.resources.party_tab_chat
-import nuvio.composeapp.generated.resources.party_tab_party
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.party_chat_empty_message
+import cinebox.composeapp.generated.resources.party_chat_empty_title
+import cinebox.composeapp.generated.resources.party_chat_new_messages
+import cinebox.composeapp.generated.resources.party_chat_not_sent
+import cinebox.composeapp.generated.resources.party_chat_placeholder
+import cinebox.composeapp.generated.resources.party_chat_send
+import cinebox.composeapp.generated.resources.party_tab_chat
+import cinebox.composeapp.generated.resources.party_tab_party
 import org.jetbrains.compose.resources.stringResource
 
 internal data class PartyChatRow(
@@ -220,7 +220,7 @@ private fun MessageRow(
     bubbleWidth: Dp,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val message = row.message
     val member = members.firstOrNull { it.id == message.memberId }
         ?: PartyMember(id = message.memberId, displayName = message.name, avatarUrl = message.avatarUrl, avatarColor = message.avatarColor)
@@ -284,7 +284,7 @@ private fun Bubble(
     row: PartyChatRow,
     maxWidth: Dp,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val message = row.message
     val alpha by animateFloatAsState(if (message.status == PartyChatStatus.Sent) 1f else 0.55f)
     val joinedTop = if (row.startsGroup) BUBBLE_RADIUS else BUBBLE_JOIN_RADIUS
@@ -314,7 +314,7 @@ private fun NewMessagesButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     AnimatedVisibility(
         visible = visible && listState.firstVisibleItemIndex > 0,
         enter = fadeIn() + slideInVertically { it },
@@ -348,7 +348,7 @@ private fun NewMessagesButton(
 
 @Composable
 private fun Composer() {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val haptic = LocalHapticFeedback.current
     var text by remember { mutableStateOf(PartyChat.draft.value) }
     val keyboardOpen = WindowInsets.ime.getBottom(LocalDensity.current) > 0
@@ -417,7 +417,7 @@ private fun SendButton(
     enabled: Boolean,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val background by animateColorAsState(if (enabled) tokens.colors.accent else tokens.colors.surfaceCard)
     val tint by animateColorAsState(if (enabled) tokens.colors.onAccent else tokens.colors.textMuted)
     Box(
@@ -442,7 +442,7 @@ private fun EmptyChat(
     compact: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(
         modifier = modifier.padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -483,7 +483,7 @@ internal fun PartyTabs(
     onSelect: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth()
@@ -529,7 +529,7 @@ private fun RowScope.PartyTab(
     badge: Int,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val color by animateColorAsState(if (selected) tokens.colors.textPrimary else tokens.colors.textSecondary)
     Row(
         modifier = Modifier
@@ -559,7 +559,7 @@ internal fun UnreadBadge(
     modifier: Modifier = Modifier,
     icon: Boolean = false,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     var shown by remember { mutableStateOf(count) }
     if (count > 0) shown = count
     AnimatedVisibility(

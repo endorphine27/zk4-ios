@@ -75,8 +75,8 @@ fun main(args: Array<String>) {
     application {
         val appIconState by AppIconRepository.state.collectAsState()
         val smokePlayerUrl = (
-            System.getProperty("nuvio.desktop.smokePlayerUrl")
-                ?: System.getenv("NUVIO_DESKTOP_SMOKE_PLAYER_URL")
+            System.getProperty("cinebox.desktop.smokePlayerUrl")
+                ?: System.getenv("CINEBOX_DESKTOP_SMOKE_PLAYER_URL")
             )
             ?.takeIf { it.isNotBlank() }
         val wasFullscreenOnLastExit = remember { DesktopWindowModeStorage.loadWasFullscreen() }
@@ -220,7 +220,7 @@ fun main(args: Array<String>) {
                     MiddleClickAutoscroll { App() }
                 }
             } else {
-                // The player surface reads LocalNuvioPlatformDensity, which only
+                // The player surface reads LocalCineboxPlatformDensity, which only
                 // CineboxTheme provides — the bare smoke harness must supply it too.
                 CineboxTheme {
                     PlatformPlayerSurface(
@@ -283,6 +283,5 @@ private fun handleDesktopLaunchArgs(args: Array<String>) {
 }
 
 private fun isDesktopAppUrl(value: String): Boolean =
-    value.startsWith("nuvio://", ignoreCase = true) ||
-        value.startsWith("cinebox://", ignoreCase = true) ||
+    value.startsWith("cinebox://", ignoreCase = true) ||
         value.startsWith("stremio://", ignoreCase = true)

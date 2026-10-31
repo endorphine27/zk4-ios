@@ -64,7 +64,7 @@ object SentryInitializer {
         if (!initialized) return
 
         Sentry.configureScope { sentryScope ->
-            sentryScope.setTag("app.package_name", "com.nuvio.media.desktop")
+            sentryScope.setTag("app.package_name", "com.cinebox.media.desktop")
             sentryScope.setTag("app.version_name", AppVersionConfig.DESKTOP_VERSION_NAME)
             sentryScope.setTag("app.version_code", AppVersionConfig.DESKTOP_VERSION_CODE.toString())
             sentryScope.setTag("desktop.platform", metadata.platform)

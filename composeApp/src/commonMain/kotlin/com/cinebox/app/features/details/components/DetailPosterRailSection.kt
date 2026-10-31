@@ -20,9 +20,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.cinebox.app.isDesktop
-import com.cinebox.app.core.ui.nuvioHorizontalScrollBleed
+import com.cinebox.app.core.ui.cineboxHorizontalScrollBleed
 import com.cinebox.app.core.ui.CineboxShelfSection
-import com.cinebox.app.core.ui.nuvioShelfHoverOverdraw
+import com.cinebox.app.core.ui.cineboxShelfHoverOverdraw
 import com.cinebox.app.core.ui.PosterLandscapeAspectRatio
 import com.cinebox.app.core.ui.SkeletonPoster
 import com.cinebox.app.core.ui.landscapePosterWidth
@@ -64,8 +64,8 @@ fun DetailPosterRailSection(
             title = if (showHeader) title else "",
             entries = items,
             rowModifier = Modifier
-                .nuvioHorizontalScrollBleed(horizontalScrollPadding)
-                .nuvioShelfHoverOverdraw(rowHoverInset),
+                .cineboxHorizontalScrollBleed(horizontalScrollPadding)
+                .cineboxShelfHoverOverdraw(rowHoverInset),
             headerHorizontalPadding = headerHorizontalPadding,
             rowContentPadding = PaddingValues(
                 start = rowEdgePadding,

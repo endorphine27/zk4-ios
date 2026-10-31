@@ -9,8 +9,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cinebox.app.core.ui.CineboxToastController
 import com.cinebox.app.core.ui.ScreenActivityEffect
 import com.cinebox.app.features.profiles.ProfileRepository
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.library_error_sort_failed
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.library_error_sort_failed
 import org.jetbrains.compose.resources.getString
 
 @Composable

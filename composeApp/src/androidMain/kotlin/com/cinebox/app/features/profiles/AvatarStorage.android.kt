@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 actual object AvatarStorage {
-    private const val preferencesName = "nuvio_avatar_cache"
+    private const val preferencesName = "cinebox_avatar_cache"
     private const val payloadKey = "avatar_catalog_payload"
 
     private var preferences: SharedPreferences? = null

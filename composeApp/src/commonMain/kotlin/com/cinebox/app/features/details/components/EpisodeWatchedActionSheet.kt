@@ -22,12 +22,12 @@ import androidx.compose.ui.unit.dp
 import com.cinebox.app.core.ui.CineboxBottomSheetActionRow
 import com.cinebox.app.core.ui.CineboxBottomSheetDivider
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
-import com.cinebox.app.core.ui.dismissNuvioBottomSheet
-import com.cinebox.app.core.ui.nuvioSafeBottomPadding
+import com.cinebox.app.core.ui.dismissCineboxBottomSheet
+import com.cinebox.app.core.ui.cineboxSafeBottomPadding
 import com.cinebox.app.core.i18n.localizedSeasonEpisodeCode
 import com.cinebox.app.features.details.MetaVideo
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,7 +52,7 @@ fun EpisodeWatchedActionSheet(
     CineboxModalBottomSheet(
         onDismissRequest = {
             coroutineScope.launch {
-                dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
             }
         },
         sheetState = sheetState,
@@ -60,7 +60,7 @@ fun EpisodeWatchedActionSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = nuvioSafeBottomPadding(16.dp)),
+                .padding(bottom = cineboxSafeBottomPadding(16.dp)),
         ) {
             EpisodeActionSheetHeader(
                 episode = episode,
@@ -77,7 +77,7 @@ fun EpisodeWatchedActionSheet(
                 onClick = {
                     onToggleWatched()
                     coroutineScope.launch {
-                        dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                        dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
                     }
                 },
             )
@@ -92,7 +92,7 @@ fun EpisodeWatchedActionSheet(
                     onClick = {
                         onTogglePreviousWatched()
                         coroutineScope.launch {
-                            dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                            dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
                         }
                     },
                 )
@@ -107,7 +107,7 @@ fun EpisodeWatchedActionSheet(
                 onClick = {
                     onToggleSeasonWatched()
                     coroutineScope.launch {
-                        dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                        dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
                     }
                 },
             )
@@ -118,7 +118,7 @@ fun EpisodeWatchedActionSheet(
                     onClick = {
                         onPlayManually()
                         coroutineScope.launch {
-                            dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                            dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
                         }
                     },
                 )
@@ -143,7 +143,7 @@ fun SeasonWatchedActionSheet(
     CineboxModalBottomSheet(
         onDismissRequest = {
             coroutineScope.launch {
-                dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
             }
         },
         sheetState = sheetState,
@@ -151,7 +151,7 @@ fun SeasonWatchedActionSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = nuvioSafeBottomPadding(16.dp)),
+                .padding(bottom = cineboxSafeBottomPadding(16.dp)),
         ) {
             Text(
                 text = seasonLabel,
@@ -173,7 +173,7 @@ fun SeasonWatchedActionSheet(
                 onClick = {
                     onToggleSeasonWatched()
                     coroutineScope.launch {
-                        dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                        dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
                     }
                 },
             )
@@ -184,7 +184,7 @@ fun SeasonWatchedActionSheet(
                     onClick = {
                         onMarkPreviousSeasonsWatched()
                         coroutineScope.launch {
-                            dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                            dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
                         }
                     },
                 )

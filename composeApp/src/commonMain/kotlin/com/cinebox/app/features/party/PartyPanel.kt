@@ -43,29 +43,29 @@ import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cinebox.app.core.ui.DialogButton
 import com.cinebox.app.core.ui.DialogButtonStyle
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.player.PlayerDialogButton
 import com.cinebox.app.features.player.PlayerPanelHeader
 import com.cinebox.app.features.player.PlayerSidePanel
 import com.cinebox.app.features.player.formatPlaybackTime
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_close
-import nuvio.composeapp.generated.resources.party_behind_title
-import nuvio.composeapp.generated.resources.party_catch_up
-import nuvio.composeapp.generated.resources.party_experimental
-import nuvio.composeapp.generated.resources.party_now_watching
-import nuvio.composeapp.generated.resources.party_share_unavailable
-import nuvio.composeapp.generated.resources.party_sign_in_required
-import nuvio.composeapp.generated.resources.party_start_action
-import nuvio.composeapp.generated.resources.party_start_description
-import nuvio.composeapp.generated.resources.party_start_title
-import nuvio.composeapp.generated.resources.party_switch
-import nuvio.composeapp.generated.resources.party_switch_confirm
-import nuvio.composeapp.generated.resources.party_switch_message
-import nuvio.composeapp.generated.resources.party_switch_title
-import nuvio.composeapp.generated.resources.party_title
-import nuvio.composeapp.generated.resources.party_unavailable
-import nuvio.composeapp.generated.resources.party_watch_with_party
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_close
+import cinebox.composeapp.generated.resources.party_behind_title
+import cinebox.composeapp.generated.resources.party_catch_up
+import cinebox.composeapp.generated.resources.party_experimental
+import cinebox.composeapp.generated.resources.party_now_watching
+import cinebox.composeapp.generated.resources.party_share_unavailable
+import cinebox.composeapp.generated.resources.party_sign_in_required
+import cinebox.composeapp.generated.resources.party_start_action
+import cinebox.composeapp.generated.resources.party_start_description
+import cinebox.composeapp.generated.resources.party_start_title
+import cinebox.composeapp.generated.resources.party_switch
+import cinebox.composeapp.generated.resources.party_switch_confirm
+import cinebox.composeapp.generated.resources.party_switch_message
+import cinebox.composeapp.generated.resources.party_switch_title
+import cinebox.composeapp.generated.resources.party_title
+import cinebox.composeapp.generated.resources.party_unavailable
+import cinebox.composeapp.generated.resources.party_watch_with_party
 import org.jetbrains.compose.resources.stringResource
 
 private enum class PanelPage {
@@ -197,7 +197,7 @@ private fun StartContent(
     canStart: Boolean,
     onStart: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -253,7 +253,7 @@ private fun PartyContent(
     canShareStream: Boolean,
     onSharingChange: (Boolean) -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     var confirmSwitch by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
@@ -376,7 +376,7 @@ internal fun SeatsHero(
 
 @Composable
 internal fun PartyNote(text: String) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Text(
         text = text,
         style = MaterialTheme.typography.bodyMedium,
@@ -386,7 +386,7 @@ internal fun PartyNote(text: String) {
 
 @Composable
 internal fun ExperimentalNote(textAlign: TextAlign = TextAlign.Start) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Text(
         text = stringResource(Res.string.party_experimental),
         style = MaterialTheme.typography.bodySmall,

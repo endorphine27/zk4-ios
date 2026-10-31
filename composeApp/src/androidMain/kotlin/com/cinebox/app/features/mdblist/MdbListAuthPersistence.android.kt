@@ -12,11 +12,11 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
 
 internal actual object PlatformMdbListAuthPersistence : MdbListAuthPersistence {
-    private const val keyAlias = "com.nuvio.media.mdblist.credentials.v1"
+    private const val keyAlias = "com.cinebox.media.mdblist.credentials.v1"
     private lateinit var preferences: android.content.SharedPreferences
 
     fun initialize(context: Context) {
-        preferences = context.applicationContext.getSharedPreferences("nuvio_mdblist_auth", Context.MODE_PRIVATE)
+        preferences = context.applicationContext.getSharedPreferences("cinebox_mdblist_auth", Context.MODE_PRIVATE)
     }
 
     private val lock = Any()

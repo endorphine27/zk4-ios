@@ -16,7 +16,7 @@ import com.cinebox.app.features.tracking.TrackingProviderId
 import com.cinebox.app.features.tracking.TrackingRefreshIntent
 import com.cinebox.app.features.watchprogress.WatchProgressSourceCoordinator
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

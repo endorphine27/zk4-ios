@@ -94,7 +94,7 @@ import com.cinebox.app.isDesktop
 import com.cinebox.app.isIos
 import com.cinebox.app.isWindows
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource

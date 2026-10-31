@@ -61,8 +61,8 @@ typedef struct mpv_event {
 namespace {
 
 HMODULE gModule = nullptr;
-constexpr UINT WM_NUVIO_TASK = WM_APP + 0x4E50;
-constexpr UINT_PTR NUVIO_TIMER_ID = 0x4E50;
+constexpr UINT WM_CINEBOX_TASK = WM_APP + 0x4E50;
+constexpr UINT_PTR CINEBOX_TIMER_ID = 0x4E50;
 
 // Caps on waiting for the player's own UI thread during teardown. Exceeding these means that
 // thread is wedged; shutdown gives up rather than blocking the caller forever.
@@ -70,8 +70,8 @@ constexpr UINT kUiTaskTimeoutMs = 2000;
 constexpr UINT kShutdownJoinTimeoutMs = 3000;
 constexpr double kMaxVolumePercent = 200.0;
 
-const wchar_t *kMessageWindowClass = L"NuvioPlayerBridgeMessageWindow";
-const wchar_t *kContainerWindowClass = L"NuvioPlayerBridgeContainerWindow";
+const wchar_t *kMessageWindowClass = L"CineboxPlayerBridgeMessageWindow";
+const wchar_t *kContainerWindowClass = L"CineboxPlayerBridgeContainerWindow";
 constexpr DWORD kDwmwaUseImmersiveDarkMode = 20;
 constexpr DWORD kDwmwaUseImmersiveDarkModeLegacy = 19;
 constexpr DWORD kDwmwaWindowCornerPreference = 33;
@@ -564,7 +564,7 @@ struct MpvApi {
 
         wchar_t envPath[32768] = {};
         DWORD envCapacity = (DWORD)(sizeof(envPath) / sizeof(envPath[0]));
-        DWORD envLength = GetEnvironmentVariableW(L"NUVIO_LIBMPV_PATH", envPath, envCapacity);
+        DWORD envLength = GetEnvironmentVariableW(L"CINEBOX_LIBMPV_PATH", envPath, envCapacity);
         if (envLength > 0 && envLength < envCapacity) {
             candidates.emplace_back(envPath, envPath + envLength);
         }
@@ -587,7 +587,7 @@ struct MpvApi {
         }
 
         if (!library) {
-            loadFailure = "Unable to load libmpv-2.dll. Bundle it under native/windows or set NUVIO_LIBMPV_PATH.";
+            loadFailure = "Unable to load libmpv-2.dll. Bundle it under native/windows or set CINEBOX_LIBMPV_PATH.";
             return;
         }
 
@@ -1046,7 +1046,7 @@ public:
         postUiTask([self = shared_from_this()]() {
             if (self->shuttingDown.load() || !self->webView) return;
             self->webView->ExecuteScript(
-                L"window.nuvioNativeViewportChanged ? window.nuvioNativeViewportChanged() : document.getElementById('playerRoot')?.classList.add('native-resizing');",
+                L"window.cineboxNativeViewportChanged ? window.cineboxNativeViewportChanged() : document.getElementById('playerRoot')?.classList.add('native-resizing');",
                 nullptr
             );
         });
@@ -1056,7 +1056,7 @@ public:
         postUiTask([self = shared_from_this()]() {
             if (self->shuttingDown.load() || !self->webView) return;
             self->webView->ExecuteScript(
-                L"window.nuvioNativeResizeEnded ? window.nuvioNativeResizeEnded() : document.getElementById('playerRoot')?.classList.remove('native-resizing');",
+                L"window.cineboxNativeResizeEnded ? window.cineboxNativeResizeEnded() : document.getElementById('playerRoot')?.classList.remove('native-resizing');",
                 nullptr
             );
         });
@@ -1517,14 +1517,14 @@ private:
         startWebView(controlsUrl);
         startMpv(sourceUrl, headerLines, playWhenReady, initialPositionMs, decoderPriority, nvidiaRtxSuperResolutionEnabled);
         layoutNativeSubviews();
-        if (!SetTimer(messageHwnd, NUVIO_TIMER_ID, 500, nullptr)) {
+        if (!SetTimer(messageHwnd, CINEBOX_TIMER_ID, 500, nullptr)) {
             throw std::runtime_error("Unable to start native player timer.");
         }
     }
 
     void cleanupUiResources() {
         if (messageHwnd) {
-            KillTimer(messageHwnd, NUVIO_TIMER_ID);
+            KillTimer(messageHwnd, CINEBOX_TIMER_ID);
         }
         if (webView && messageToken.value != 0) {
             webView->remove_WebMessageReceived(messageToken);
@@ -1563,7 +1563,7 @@ private:
         }
         HWND target = messageHwnd;
         if (target) {
-            PostMessageW(target, WM_NUVIO_TASK, 0, 0);
+            PostMessageW(target, WM_CINEBOX_TASK, 0, 0);
         }
     }
 
@@ -1593,7 +1593,7 @@ private:
         // playing. Bound both: a stalled UI thread now costs a short delay, not a permanent hang.
         DWORD_PTR sendResult = 0;
         SendMessageTimeoutW(
-            messageHwnd, WM_NUVIO_TASK, 0, 0,
+            messageHwnd, WM_CINEBOX_TASK, 0, 0,
             SMTO_ABORTIFHUNG | SMTO_NORMAL, kUiTaskTimeoutMs, &sendResult
         );
 
@@ -1827,7 +1827,7 @@ private:
         }
         RECT bounds = {};
         HWND rootWindow = GetAncestor(hostHwnd, GA_ROOT);
-        if (rootWindow && IsWindow(rootWindow) && GetPropW(rootWindow, L"NuvioPipOldProc")) {
+        if (rootWindow && IsWindow(rootWindow) && GetPropW(rootWindow, L"CineboxPipOldProc")) {
             GetClientRect(rootWindow, &bounds);
             LONG rw = std::max<LONG>(1, bounds.right - bounds.left);
             LONG rh = std::max<LONG>(1, bounds.bottom - bounds.top);
@@ -2306,11 +2306,11 @@ LRESULT CALLBACK messageWindowProc(HWND hwnd, UINT message, WPARAM wParam, LPARA
     }
     auto *player = reinterpret_cast<WindowsMpvWebPlayer *>(GetWindowLongPtrW(hwnd, GWLP_USERDATA));
     switch (message) {
-        case WM_NUVIO_TASK:
+        case WM_CINEBOX_TASK:
             if (player) player->processUiTasks();
             return 0;
         case WM_TIMER:
-            if (player && wParam == NUVIO_TIMER_ID) player->onTimer();
+            if (player && wParam == CINEBOX_TIMER_ID) player->onTimer();
             return 0;
         case WM_NCDESTROY:
             SetWindowLongPtrW(hwnd, GWLP_USERDATA, 0);
@@ -2483,7 +2483,7 @@ Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_beginWindowDrag(
 }
 
 static LRESULT CALLBACK pipWindowSubclassProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    WNDPROC oldProc = reinterpret_cast<WNDPROC>(GetPropW(hwnd, L"NuvioPipOldProc"));
+    WNDPROC oldProc = reinterpret_cast<WNDPROC>(GetPropW(hwnd, L"CineboxPipOldProc"));
 
     if (message == WM_NCCALCSIZE) {
         return 0;
@@ -2513,7 +2513,7 @@ static LRESULT CALLBACK pipWindowSubclassProc(HWND hwnd, UINT message, WPARAM wP
     if (message == WM_SIZING) {
         PRECT rc = reinterpret_cast<PRECT>(lParam);
         float ratio = 16.0f / 9.0f;
-        HANDLE prop = GetPropW(hwnd, L"NuvioPipRatio");
+        HANDLE prop = GetPropW(hwnd, L"CineboxPipRatio");
         if (prop) {
             float r = static_cast<float>(reinterpret_cast<uintptr_t>(prop)) / 10000.0f;
             if (r > 0.05f) ratio = r;
@@ -2627,7 +2627,7 @@ static LRESULT CALLBACK pipWindowSubclassProc(HWND hwnd, UINT message, WPARAM wP
     }
 
     if (message == WM_ENTERSIZEMOVE) {
-        HANDLE playerProp = GetPropW(hwnd, L"NuvioPipPlayer");
+        HANDLE playerProp = GetPropW(hwnd, L"CineboxPipPlayer");
         if (playerProp) {
             jlong playerHandle = static_cast<jlong>(reinterpret_cast<intptr_t>(playerProp));
             auto player = playerFromHandle(playerHandle);
@@ -2647,7 +2647,7 @@ static LRESULT CALLBACK pipWindowSubclassProc(HWND hwnd, UINT message, WPARAM wP
             int w = clientRect.right - clientRect.left;
             int h = clientRect.bottom - clientRect.top;
             if (w > 0 && h > 0) {
-                HANDLE playerProp = GetPropW(hwnd, L"NuvioPipPlayer");
+                HANDLE playerProp = GetPropW(hwnd, L"CineboxPipPlayer");
                 if (playerProp) {
                     jlong playerHandle = static_cast<jlong>(reinterpret_cast<intptr_t>(playerProp));
                     auto player = playerFromHandle(playerHandle);
@@ -2663,7 +2663,7 @@ static LRESULT CALLBACK pipWindowSubclassProc(HWND hwnd, UINT message, WPARAM wP
     if (message == WM_EXITSIZEMOVE) {
         LRESULT res = oldProc ? CallWindowProcW(oldProc, hwnd, message, wParam, lParam)
                               : DefWindowProcW(hwnd, message, wParam, lParam);
-        HANDLE playerProp = GetPropW(hwnd, L"NuvioPipPlayer");
+        HANDLE playerProp = GetPropW(hwnd, L"CineboxPipPlayer");
         if (playerProp) {
             jlong playerHandle = static_cast<jlong>(reinterpret_cast<intptr_t>(playerProp));
             auto player = playerFromHandle(playerHandle);
@@ -2683,9 +2683,9 @@ static LRESULT CALLBACK pipWindowSubclassProc(HWND hwnd, UINT message, WPARAM wP
     }
 
     if (message == WM_NCDESTROY) {
-        RemovePropW(hwnd, L"NuvioPipRatio");
-        RemovePropW(hwnd, L"NuvioPipPlayer");
-        RemovePropW(hwnd, L"NuvioPipOldProc");
+        RemovePropW(hwnd, L"CineboxPipRatio");
+        RemovePropW(hwnd, L"CineboxPipPlayer");
+        RemovePropW(hwnd, L"CineboxPipOldProc");
         if (oldProc) {
             SetWindowLongPtrW(hwnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(oldProc));
             return CallWindowProcW(oldProc, hwnd, message, wParam, lParam);
@@ -2709,12 +2709,12 @@ Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setWindowResizab
     if (enabled == JNI_TRUE) {
         style |= (WS_THICKFRAME | WS_CLIPCHILDREN);
         style &= ~(WS_CAPTION | WS_SYSMENU | WS_MAXIMIZEBOX | WS_MINIMIZEBOX);
-        if (!GetPropW(window, L"NuvioPipOldProc")) {
+        if (!GetPropW(window, L"CineboxPipOldProc")) {
             WNDPROC oldProc = reinterpret_cast<WNDPROC>(
                 SetWindowLongPtrW(window, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(pipWindowSubclassProc))
             );
             if (oldProc) {
-                SetPropW(window, L"NuvioPipOldProc", reinterpret_cast<HANDLE>(oldProc));
+                SetPropW(window, L"CineboxPipOldProc", reinterpret_cast<HANDLE>(oldProc));
             }
         }
         MARGINS margins = { 1, 1, 1, 1 };
@@ -2727,13 +2727,13 @@ Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setWindowResizab
         setDwmWindowAttribute(window, kDwmwaCaptionColor, &captionColor, sizeof(captionColor));
     } else {
         style &= ~(WS_THICKFRAME | WS_MAXIMIZEBOX | WS_MINIMIZEBOX);
-        WNDPROC oldProc = reinterpret_cast<WNDPROC>(GetPropW(window, L"NuvioPipOldProc"));
+        WNDPROC oldProc = reinterpret_cast<WNDPROC>(GetPropW(window, L"CineboxPipOldProc"));
         if (oldProc) {
             SetWindowLongPtrW(window, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(oldProc));
-            RemovePropW(window, L"NuvioPipOldProc");
+            RemovePropW(window, L"CineboxPipOldProc");
         }
-        RemovePropW(window, L"NuvioPipPlayer");
-        RemovePropW(window, L"NuvioPipRatio");
+        RemovePropW(window, L"CineboxPipPlayer");
+        RemovePropW(window, L"CineboxPipRatio");
     }
     SetWindowLongPtrW(window, GWL_STYLE, style);
     SetWindowPos(window, nullptr, 0, 0, 0, 0,
@@ -2748,7 +2748,7 @@ Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setWindowAspectR
     if (!window || !IsWindow(window)) return;
     if (ratio <= 0.05f) return;
     uintptr_t ratioInt = static_cast<uintptr_t>(std::round(ratio * 10000.0f));
-    SetPropW(window, L"NuvioPipRatio", reinterpret_cast<HANDLE>(ratioInt));
+    SetPropW(window, L"CineboxPipRatio", reinterpret_cast<HANDLE>(ratioInt));
 }
 
 extern "C" JNIEXPORT void JNICALL
@@ -2768,8 +2768,8 @@ Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_reparentSurfaceN
         HWND host = (HWND)(intptr_t)hostViewPtr;
         if (host && IsWindow(host)) {
             HWND rootWindow = GetAncestor(host, GA_ROOT);
-            if (rootWindow && IsWindow(rootWindow) && GetPropW(rootWindow, L"NuvioPipOldProc")) {
-                SetPropW(rootWindow, L"NuvioPipPlayer", reinterpret_cast<HANDLE>(static_cast<intptr_t>(handle)));
+            if (rootWindow && IsWindow(rootWindow) && GetPropW(rootWindow, L"CineboxPipOldProc")) {
+                SetPropW(rootWindow, L"CineboxPipPlayer", reinterpret_cast<HANDLE>(static_cast<intptr_t>(handle)));
             }
         }
         player->reparentSurface(host);

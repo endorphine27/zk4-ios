@@ -83,7 +83,7 @@ import com.cinebox.app.core.ui.CineboxBottomSheetDivider
 import com.cinebox.app.core.ui.CineboxDesktopVerticalScrollbar
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
 import com.cinebox.app.core.ui.CineboxToastController
-import com.cinebox.app.core.ui.dismissNuvioBottomSheet
+import com.cinebox.app.core.ui.dismissCineboxBottomSheet
 import com.cinebox.app.core.ui.withDuplicateSafeLazyKeys
 import com.cinebox.app.features.downloads.DownloadsRepository
 import com.cinebox.app.features.details.MetaScreenSettingsRepository
@@ -91,7 +91,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberModalBottomSheetState
 import com.cinebox.app.core.ui.CineboxAsyncImage as AsyncImage
-import com.cinebox.app.core.ui.nuvioSafeBottomPadding
+import com.cinebox.app.core.ui.cineboxSafeBottomPadding
 import com.cinebox.app.core.ui.shimmer
 import com.cinebox.app.core.ui.LocalVerticalBarPadding
 import com.cinebox.app.core.ui.centeredVerticalBarPadding
@@ -109,7 +109,7 @@ import com.cinebox.app.isDesktop
 import com.cinebox.app.navigation.LocalUseNativeNavigation
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 // ---------------------------------------------------------------------------
@@ -914,7 +914,7 @@ internal fun StreamList(
                         key = "streams_bottom_spacer",
                         contentType = STREAM_CONTENT_TYPE_BOTTOM_SPACER,
                     ) {
-                        Spacer(modifier = Modifier.height(nuvioSafeBottomPadding(80.dp)))
+                        Spacer(modifier = Modifier.height(cineboxSafeBottomPadding(80.dp)))
                     }
                 }
             }
@@ -1390,7 +1390,7 @@ private fun StreamActionsSheet(
     CineboxModalBottomSheet(
         onDismissRequest = {
             coroutineScope.launch {
-                dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
             }
         },
         sheetState = sheetState,
@@ -1398,7 +1398,7 @@ private fun StreamActionsSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = nuvioSafeBottomPadding(16.dp)),
+                .padding(bottom = cineboxSafeBottomPadding(16.dp)),
         ) {
             Column(
                 modifier = Modifier
@@ -1434,7 +1434,7 @@ private fun StreamActionsSheet(
                 onClick = {
                     onCopyLink(stream)
                     coroutineScope.launch {
-                        dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                        dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
                     }
                 },
             )
@@ -1451,7 +1451,7 @@ private fun StreamActionsSheet(
                     onClick = {
                         onOpen(stream, !externalPlayerEnabled)
                         coroutineScope.launch {
-                            dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                            dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
                         }
                     },
                 )
@@ -1463,7 +1463,7 @@ private fun StreamActionsSheet(
                     onClick = {
                         onDownload(stream)
                         coroutineScope.launch {
-                            dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                            dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
                         }
                     },
                 )

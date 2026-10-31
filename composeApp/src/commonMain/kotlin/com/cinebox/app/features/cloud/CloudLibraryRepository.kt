@@ -12,9 +12,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.cloud_library_playback_disabled
-import nuvio.composeapp.generated.resources.cloud_library_provider_unavailable
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.cloud_library_playback_disabled
+import cinebox.composeapp.generated.resources.cloud_library_provider_unavailable
 import org.jetbrains.compose.resources.getString
 
 internal class CloudLibraryStore(

@@ -15,7 +15,7 @@ class DesktopSentryMetadataTest {
 
         assertEquals("macos", metadata.platform)
         assertEquals("arm64", metadata.architecture)
-        assertEquals("com.nuvio.media.desktop@1.4.2+31", metadata.release)
+        assertEquals("com.cinebox.media.desktop@1.4.2+31", metadata.release)
         assertEquals("31-macos-arm64", metadata.distribution)
     }
 
@@ -30,7 +30,7 @@ class DesktopSentryMetadataTest {
 
         assertEquals("windows", metadata.platform)
         assertEquals("x86_64", metadata.architecture)
-        assertEquals("com.nuvio.media.desktop@2.0.0+45", metadata.release)
+        assertEquals("com.cinebox.media.desktop@2.0.0+45", metadata.release)
         assertEquals("45-windows-x86_64", metadata.distribution)
     }
 

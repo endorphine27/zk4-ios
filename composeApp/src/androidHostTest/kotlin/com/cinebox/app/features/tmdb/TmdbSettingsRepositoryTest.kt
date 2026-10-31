@@ -24,7 +24,7 @@ class TmdbSettingsRepositoryTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        context.getSharedPreferences("nuvio_tmdb_settings", Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("cinebox_tmdb_settings", Context.MODE_PRIVATE).edit().clear().commit()
         TmdbSettingsStorage.initialize(context)
         TmdbSettingsRepository.onProfileChanged()
     }
@@ -74,7 +74,7 @@ class TmdbSettingsRepositoryTest {
     @Test
     fun legacyPersonalKeysAreRestoredAndExcludedFromSync() {
         RuntimeEnvironment.getApplication()
-            .getSharedPreferences("nuvio_tmdb_settings", Context.MODE_PRIVATE)
+            .getSharedPreferences("cinebox_tmdb_settings", Context.MODE_PRIVATE)
             .edit()
             .putString(ProfileScopedKey.of("tmdb_api_key"), "legacy-personal-key")
             .commit()

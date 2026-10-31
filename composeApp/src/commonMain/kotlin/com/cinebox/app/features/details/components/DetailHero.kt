@@ -57,7 +57,7 @@ import com.cinebox.app.core.ui.heroStretchZoom
 import com.cinebox.app.features.details.MetaDetails
 import com.cinebox.app.features.tmdb.originalTmdbImageUrl
 import com.cinebox.app.isDesktop
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 import com.cinebox.app.core.ui.LocalVerticalBarPadding
 import com.cinebox.app.core.ui.verticalBarWidth

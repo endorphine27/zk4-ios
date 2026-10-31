@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.core.ui.CineboxToastController
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.debrid.DirectDebridPlayableResult
 import com.cinebox.app.features.debrid.DirectDebridPlaybackResolver
 import com.cinebox.app.features.debrid.toastMessage
@@ -47,7 +47,7 @@ import com.cinebox.app.features.watchprogress.WatchProgressRepository
 import com.cinebox.app.navigation.*
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.getString
 import androidx.compose.runtime.CompositionLocalProvider

@@ -29,12 +29,12 @@ internal actual object SimklPkceCrypto {
 }
 
 internal actual object SimklAuthStorage {
-    private const val PREFERENCES_NAME = "nuvio_simkl_auth"
+    private const val PREFERENCES_NAME = "cinebox_simkl_auth"
     private const val METADATA_KEY = "simkl_auth_metadata"
     private const val ACCESS_TOKEN_KEY = "simkl_access_token"
     private const val CODE_VERIFIER_KEY = "simkl_code_verifier"
     private const val KEYSTORE_PROVIDER = "AndroidKeyStore"
-    private const val KEY_ALIAS = "nuvio.simkl.credentials.v1"
+    private const val KEY_ALIAS = "cinebox.simkl.credentials.v1"
     private const val TRANSFORMATION = "AES/GCM/NoPadding"
     private const val GCM_TAG_BITS = 128
 

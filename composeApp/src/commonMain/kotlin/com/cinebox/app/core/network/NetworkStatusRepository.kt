@@ -12,13 +12,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.details_check_connection
-import nuvio.composeapp.generated.resources.details_servers_unreachable
-import nuvio.composeapp.generated.resources.network_cannot_reach_servers
-import nuvio.composeapp.generated.resources.network_connection_issue
-import nuvio.composeapp.generated.resources.network_no_internet_connection
-import nuvio.composeapp.generated.resources.network_please_check_connection
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.details_check_connection
+import cinebox.composeapp.generated.resources.details_servers_unreachable
+import cinebox.composeapp.generated.resources.network_cannot_reach_servers
+import cinebox.composeapp.generated.resources.network_connection_issue
+import cinebox.composeapp.generated.resources.network_no_internet_connection
+import cinebox.composeapp.generated.resources.network_please_check_connection
 import org.jetbrains.compose.resources.stringResource
 
 enum class NetworkCondition {

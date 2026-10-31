@@ -22,7 +22,7 @@ Usage:
   ./scripts/set-version.sh --show
 
 Options:
-  --base VERSION          Set the upstream/mobile Nuvio version.
+  --base VERSION          Set the upstream/mobile Cinebox version.
   --base-code CODE        Set the upstream/mobile build code.
   --desktop VERSION       Set the desktop app release version.
   --desktop-code CODE     Set the desktop app build code.
@@ -82,7 +82,7 @@ write_key() {
 
   mkdir -p "$(dirname "$file")"
   local tmp
-  tmp="$(mktemp "${TMPDIR:-/tmp}/nuvio-version.XXXXXX")"
+  tmp="$(mktemp "${TMPDIR:-/tmp}/cinebox-version.XXXXXX")"
 
   if [[ -f "$file" ]]; then
     awk -v key="$key" -v value="$value" '

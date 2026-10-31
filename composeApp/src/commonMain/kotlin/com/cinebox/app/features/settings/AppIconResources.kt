@@ -1,7 +1,7 @@
 package com.cinebox.app.features.settings
 
 import com.cinebox.app.core.ui.AppTheme
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 

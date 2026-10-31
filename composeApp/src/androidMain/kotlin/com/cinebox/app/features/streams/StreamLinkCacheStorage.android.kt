@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 actual object StreamLinkCacheStorage {
-    private const val preferencesName = "nuvio_stream_link_cache"
+    private const val preferencesName = "cinebox_stream_link_cache"
 
     private var preferences: SharedPreferences? = null
 

@@ -14,11 +14,11 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-internal actual val nuvioPlatformExtraTopPadding: Dp = 0.dp
-internal actual val nuvioPlatformExtraBottomPadding: Dp = 0.dp
-internal actual val nuvioBottomNavigationExtraVerticalPadding: Dp = 6.dp
+internal actual val cineboxPlatformExtraTopPadding: Dp = 0.dp
+internal actual val cineboxPlatformExtraBottomPadding: Dp = 0.dp
+internal actual val cineboxBottomNavigationExtraVerticalPadding: Dp = 6.dp
 @Composable
-internal actual fun nuvioBottomNavigationBarInsets(): WindowInsets = WindowInsets.navigationBars
+internal actual fun cineboxBottomNavigationBarInsets(): WindowInsets = WindowInsets.navigationBars
 
 @Composable
 internal actual fun platformPhysicalTopInset(): Dp =

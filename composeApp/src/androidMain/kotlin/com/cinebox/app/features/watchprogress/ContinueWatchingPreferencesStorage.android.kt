@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 actual object ContinueWatchingPreferencesStorage {
-    private const val preferencesName = "nuvio_continue_watching_preferences"
+    private const val preferencesName = "cinebox_continue_watching_preferences"
     private const val payloadKey = "continue_watching_preferences_payload"
 
     private var preferences: SharedPreferences? = null

@@ -39,7 +39,7 @@ class TrackingSettingsPresentationTest {
 
     @Test
     fun `remote brands are available only while their provider is connected`() {
-        assertTrue(isTrackingBrandAvailable(TrackingBrand.NUVIO, false, false))
+        assertTrue(isTrackingBrandAvailable(TrackingBrand.CINEBOX, false, false))
         assertTrue(isTrackingBrandAvailable(TrackingBrand.TMDB, false, false))
         assertFalse(isTrackingBrandAvailable(TrackingBrand.TRAKT, false, true))
         assertTrue(isTrackingBrandAvailable(TrackingBrand.TRAKT, true, false))

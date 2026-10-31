@@ -13,12 +13,12 @@ import androidx.compose.ui.unit.dp
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.useContents
 
-internal actual val nuvioPlatformExtraTopPadding: Dp = 0.dp
-internal actual val nuvioPlatformExtraBottomPadding: Dp = 0.dp
-internal actual val nuvioBottomNavigationExtraVerticalPadding: Dp = 0.dp
+internal actual val cineboxPlatformExtraTopPadding: Dp = 0.dp
+internal actual val cineboxPlatformExtraBottomPadding: Dp = 0.dp
+internal actual val cineboxBottomNavigationExtraVerticalPadding: Dp = 0.dp
 
 @Composable
-internal actual fun nuvioBottomNavigationBarInsets(): WindowInsets =
+internal actual fun cineboxBottomNavigationBarInsets(): WindowInsets =
 	WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom)
 
 @OptIn(ExperimentalForeignApi::class)

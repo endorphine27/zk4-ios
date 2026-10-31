@@ -39,7 +39,7 @@ fun Menu(
     offset: DpOffset = DpOffset(CineboxTokens.Space.none, CineboxTokens.Space.s6),
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     DropdownMenu(
         expanded = expanded,
         onDismissRequest = onDismissRequest,
@@ -62,7 +62,7 @@ fun MenuItem(
     selected: Boolean = false,
     enabled: Boolean = true,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Row(
         modifier = modifier
             .fillMaxWidth()

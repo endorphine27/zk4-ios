@@ -42,7 +42,7 @@ import com.cinebox.app.core.ui.CineboxScreen
 import com.cinebox.app.core.ui.CineboxScreenHeader
 import com.cinebox.app.core.ui.CineboxStatusModal
 import com.cinebox.app.core.ui.CineboxToastController
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

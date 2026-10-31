@@ -37,7 +37,7 @@ class StreamBackgroundSettingsTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        context.getSharedPreferences("nuvio_stream_badge_settings", Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("cinebox_stream_badge_settings", Context.MODE_PRIVATE).edit().clear().commit()
         StreamBadgeSettingsStorage.initialize(context)
         StreamBadgeSettingsRepository.clearLocalState()
     }
@@ -71,7 +71,7 @@ class StreamBackgroundSettingsTest {
     @Test
     fun olderSettingsRestoreTheDefaultWithoutChangingOtherProfiles() {
         val preferences = RuntimeEnvironment.getApplication()
-            .getSharedPreferences("nuvio_stream_badge_settings", Context.MODE_PRIVATE)
+            .getSharedPreferences("cinebox_stream_badge_settings", Context.MODE_PRIVATE)
         val otherProfileKey = ProfileScopedKey.of("stream_background_mode", 99)
         preferences.edit().putString(otherProfileKey, "normal").commit()
         StreamBadgeSettingsRepository.setBackgroundMode(StreamBackgroundMode.Cinematic)

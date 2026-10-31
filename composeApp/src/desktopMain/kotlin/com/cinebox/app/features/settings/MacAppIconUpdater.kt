@@ -21,7 +21,7 @@ internal object MacAppIconUpdater {
         if (DesktopHostOs.current != DesktopHostOs.MACOS) return
         runCatching {
             val appBundle = applicationBundle() ?: return@runCatching
-            val destination = appBundle.resolve("Contents/Resources/nuvio-app-icon.icns")
+            val destination = appBundle.resolve("Contents/Resources/cinebox-app-icon.icns")
             val resource = "icons/app-icon-${icon.key}-transparent.icns"
             Thread.currentThread().contextClassLoader.getResourceAsStream(resource)?.use { input ->
                 Files.copy(input, destination, StandardCopyOption.REPLACE_EXISTING)

@@ -60,12 +60,12 @@ import com.cinebox.app.core.ui.desktopPageHorizontalPaddingForWidth
 import com.cinebox.app.core.ui.landscapePosterWidth
 import com.cinebox.app.core.ui.rememberPosterCardStyleUiState
 import com.cinebox.app.core.ui.desktopPosterHoverScale
-import com.cinebox.app.core.ui.nuvioCardDepth
+import com.cinebox.app.core.ui.cineboxCardDepth
 import com.cinebox.app.core.ui.posterCardClickable
 import com.cinebox.app.core.ui.posterGridColumnCountForViewport
 import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.core.ui.SkeletonPoster
-import com.cinebox.app.core.ui.nuvioSafeBottomPadding
+import com.cinebox.app.core.ui.cineboxSafeBottomPadding
 import com.cinebox.app.core.ui.posterCardClickable
 import com.cinebox.app.core.ui.rememberPosterCardStyleUiState
 import com.cinebox.app.core.ui.withDuplicateSafeLazyKeys
@@ -83,7 +83,7 @@ import com.cinebox.app.navigation.LocalUseNativeNavigation
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -213,7 +213,7 @@ fun CatalogScreen(
                     start = pageHorizontalPadding,
                     top = with(androidx.compose.ui.platform.LocalDensity.current) { headerHeightPx.toDp() } + 12.dp,
                     end = pageHorizontalPadding,
-                    bottom = nuvioSafeBottomPadding(28.dp),
+                    bottom = cineboxSafeBottomPadding(28.dp),
                 ),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalArrangement = Arrangement.spacedBy(18.dp),
@@ -390,7 +390,7 @@ private fun CatalogPosterTile(
                     .aspectRatio(item.posterShape.catalogAspectRatio())
                     .clip(RoundedCornerShape(cornerRadiusDp.dp))
                     .background(MaterialTheme.colorScheme.surface)
-                    .nuvioCardDepth(
+                    .cineboxCardDepth(
                         shape = RoundedCornerShape(cornerRadiusDp.dp),
                         surface = CineboxCardDepthSurface.Posters,
                     )

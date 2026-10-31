@@ -14,14 +14,14 @@ import com.cinebox.app.features.tracking.TrackingProviderId
 import com.cinebox.app.features.tracking.TrackingProviderRegistry
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_cancel
-import nuvio.composeapp.generated.resources.action_remove_anyway
-import nuvio.composeapp.generated.resources.tracking_remove_confirmation_message
-import nuvio.composeapp.generated.resources.tracking_remove_confirmation_title
-import nuvio.composeapp.generated.resources.tracking_removal_impact_history
-import nuvio.composeapp.generated.resources.tracking_removal_impact_history_and_rating
-import nuvio.composeapp.generated.resources.tracking_removal_impact_rating
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_cancel
+import cinebox.composeapp.generated.resources.action_remove_anyway
+import cinebox.composeapp.generated.resources.tracking_remove_confirmation_message
+import cinebox.composeapp.generated.resources.tracking_remove_confirmation_title
+import cinebox.composeapp.generated.resources.tracking_removal_impact_history
+import cinebox.composeapp.generated.resources.tracking_removal_impact_history_and_rating
+import cinebox.composeapp.generated.resources.tracking_removal_impact_rating
 import org.jetbrains.compose.resources.stringResource
 
 class PendingTrackingMembershipRemoval(

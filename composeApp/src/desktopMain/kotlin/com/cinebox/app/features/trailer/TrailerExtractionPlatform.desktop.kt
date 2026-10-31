@@ -15,7 +15,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.util.concurrent.TimeUnit
 
 internal object TrailerExtractionPlatform {
-    val diagnosticsEnabled: Boolean = System.getenv("NUVIO_TRAILER_DEBUG")
+    val diagnosticsEnabled: Boolean = System.getenv("CINEBOX_TRAILER_DEBUG")
         ?.trim()
         ?.lowercase()
         .let { it == "1" || it == "true" || it == "yes" || it == "on" }

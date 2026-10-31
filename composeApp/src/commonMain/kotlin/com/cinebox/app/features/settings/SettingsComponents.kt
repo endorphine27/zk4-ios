@@ -53,19 +53,19 @@ import com.cinebox.app.core.ui.CineboxTokens
 import com.cinebox.app.core.ui.CineboxActionLabel
 import com.cinebox.app.core.ui.CineboxBackButton
 import com.cinebox.app.core.ui.CineboxSectionLabel
-import com.cinebox.app.core.ui.nuvio
-import com.cinebox.app.core.ui.nuvioConsumePointerEvents
+import com.cinebox.app.core.ui.cinebox
+import com.cinebox.app.core.ui.cineboxConsumePointerEvents
 import com.cinebox.app.features.home.HomeCatalogSettingsItem
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.settings_homescreen_collection_with_addon
-import nuvio.composeapp.generated.resources.settings_homescreen_display_name
-import nuvio.composeapp.generated.resources.settings_homescreen_hero_source
-import nuvio.composeapp.generated.resources.settings_homescreen_hidden
-import nuvio.composeapp.generated.resources.settings_homescreen_not_in_hero
-import nuvio.composeapp.generated.resources.settings_homescreen_pinned
-import nuvio.composeapp.generated.resources.settings_homescreen_pinned_to_top
-import nuvio.composeapp.generated.resources.settings_homescreen_reorder
-import nuvio.composeapp.generated.resources.settings_homescreen_visible
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.settings_homescreen_collection_with_addon
+import cinebox.composeapp.generated.resources.settings_homescreen_display_name
+import cinebox.composeapp.generated.resources.settings_homescreen_hero_source
+import cinebox.composeapp.generated.resources.settings_homescreen_hidden
+import cinebox.composeapp.generated.resources.settings_homescreen_not_in_hero
+import cinebox.composeapp.generated.resources.settings_homescreen_pinned
+import cinebox.composeapp.generated.resources.settings_homescreen_pinned_to_top
+import cinebox.composeapp.generated.resources.settings_homescreen_reorder
+import cinebox.composeapp.generated.resources.settings_homescreen_visible
 import org.jetbrains.compose.resources.stringResource
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 
@@ -75,7 +75,7 @@ private fun SettingsCard(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Surface(
         modifier = modifier.fillMaxWidth(),
         color = tokens.colors.surface,
@@ -105,7 +105,7 @@ internal fun SettingsGroup(
 
 @Composable
 internal fun SettingsGroupDivider(isTablet: Boolean) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     HorizontalDivider(
         modifier = Modifier.padding(start = if (isTablet) CineboxTokens.Space.s80 - CineboxTokens.Space.s2 else CineboxTokens.Space.s64 + CineboxTokens.Space.s2),
         thickness = tokens.borders.hairline,
@@ -119,14 +119,14 @@ internal fun TabletPageHeader(
     showBack: Boolean,
     onBack: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Box(
         modifier = Modifier.fillMaxWidth(),
     ) {
         Box(
             modifier = Modifier
                 .matchParentSize()
-                .nuvioConsumePointerEvents(),
+                .cineboxConsumePointerEvents(),
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -162,7 +162,7 @@ internal fun SettingsSidebarItem(
     selected: Boolean,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val primary = tokens.colors.accent
     val background = if (selected) primary.copy(alpha = tokens.opacity.hover) else Color.Transparent
     val iconChip = if (selected) primary.copy(alpha = tokens.opacity.selected) else Color.Transparent
@@ -211,7 +211,7 @@ internal fun SettingsSection(
     actions: @Composable RowScope.() -> Unit = {},
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -241,7 +241,7 @@ internal fun SettingsNavigationRow(
     trailingContent: (@Composable RowScope.() -> Unit)? = null,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val iconSize = if (isTablet) 42.dp else 36.dp
     val verticalPadding = if (isTablet) 16.dp else 14.dp
     val horizontalPadding = if (isTablet) 20.dp else 16.dp
@@ -323,7 +323,7 @@ internal fun SettingsSwitchRow(
     horizontalPadding: Dp = if (isTablet) 20.dp else 16.dp,
     onCheckedChange: (Boolean) -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val verticalPadding = if (isTablet) 16.dp else 14.dp
 
     Row(
@@ -380,7 +380,7 @@ internal fun SettingsChipRow(
     footer: String? = null,
     chips: @Composable FlowRowScope.() -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -429,7 +429,7 @@ internal fun HomescreenCatalogRow(
     dragHandleScope: ReorderableCollectionItemScope,
     onPinnedDragAttempt: () -> Unit = {},
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val horizontalPadding = if (isTablet) 20.dp else 16.dp
     val verticalPadding = if (isTablet) 18.dp else 16.dp
     val hapticFeedback = LocalHapticFeedback.current

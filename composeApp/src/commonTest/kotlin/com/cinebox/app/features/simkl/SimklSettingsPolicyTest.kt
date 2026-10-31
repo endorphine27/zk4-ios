@@ -45,7 +45,7 @@ class SimklSettingsPolicyTest {
         assertEquals(
             SimklSettingsRefreshAction.FETCH,
             simklSettingsRefreshAction(
-                state = SimklStoredAuthState(username = "Nuvio User"),
+                state = SimklStoredAuthState(username = "Cinebox User"),
                 activityWatermark = "2026-07-22T08:48:07Z",
             ),
         )

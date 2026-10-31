@@ -30,14 +30,14 @@ if [[ ! -f "$rpm_path" ]]; then
 fi
 
 vendor="$(rpm -qp --qf '%{VENDOR}\n' "$rpm_path")"
-if [[ "$vendor" != "Nuvio Media" ]]; then
+if [[ "$vendor" != "Cinebox Media" ]]; then
     echo "Unexpected Vendor: '$vendor'" >&2
-    echo "Expected: 'Nuvio Media'" >&2
+    echo "Expected: 'Cinebox Media'" >&2
     exit 1
 fi
 
 requirements="$(rpm -qp --requires "$rpm_path")"
-for dependency in "${NUVIO_LINUX_RPM_RUNTIME_DEPENDENCIES[@]}"; do
+for dependency in "${CINEBOX_LINUX_RPM_RUNTIME_DEPENDENCIES[@]}"; do
     if ! rpm_requirements_has_package "$requirements" "$dependency"; then
         echo "Missing runtime dependency: $dependency" >&2
         echo "Requires:" >&2

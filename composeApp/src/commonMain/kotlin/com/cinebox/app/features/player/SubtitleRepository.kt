@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_player_no_subtitles_found
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_player_no_subtitles_found
 import org.jetbrains.compose.resources.getString
 
 object SubtitleRepository {

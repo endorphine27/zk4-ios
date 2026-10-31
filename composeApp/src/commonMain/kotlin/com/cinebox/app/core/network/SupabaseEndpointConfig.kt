@@ -19,7 +19,7 @@ internal object SupabaseEndpointConfig {
             base.startsWith("http://", ignoreCase = true) -> "ws://" + base.substring("http://".length)
             else -> base
         }
-        return "$socketBase/realtime/v1?nuvio_realtime=1"
+        return "$socketBase/realtime/v1?cinebox_realtime=1"
     }
 
     fun fallbackUrlFor(requestUrl: String): String? {

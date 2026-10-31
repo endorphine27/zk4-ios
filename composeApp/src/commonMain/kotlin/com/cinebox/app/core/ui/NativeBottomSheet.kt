@@ -18,6 +18,6 @@ internal expect fun CineboxNativeModalBottomSheet(
     content: @Composable ColumnScope.() -> Unit,
 )
 
-internal expect val usesNativeNuvioBottomSheet: Boolean
+internal expect val usesNativeCineboxBottomSheet: Boolean
 
-internal expect fun dismissNativeNuvioBottomSheet()
+internal expect fun dismissNativeCineboxBottomSheet()

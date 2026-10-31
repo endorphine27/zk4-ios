@@ -45,7 +45,7 @@ actual object P2pStreamingEngine {
     )
 
     private val log = Logger.withTag("P2pStreamingEngine")
-    private val diagnostics = Logger.withTag("NuvioP2PDiag")
+    private val diagnostics = Logger.withTag("CineboxP2PDiag")
     private val _state = MutableStateFlow<P2pStreamingState>(P2pStreamingState.Idle)
     actual val state: StateFlow<P2pStreamingState> = _state.asStateFlow()
     private val _cacheState = MutableStateFlow(P2pCacheUiState())

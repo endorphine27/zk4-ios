@@ -53,7 +53,7 @@ fun DialogSurface(
     properties: DialogProperties = DialogProperties(),
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     BasicAlertDialog(onDismissRequest = onDismissRequest, properties = properties) {
         Surface(
             modifier = modifier
@@ -132,7 +132,7 @@ fun DialogButton(
     enabled: Boolean = true,
     loading: Boolean = false,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val containerColor = when (style) {
         DialogButtonStyle.Primary -> tokens.colors.accent
         DialogButtonStyle.Secondary -> tokens.colors.textPrimary.copy(alpha = tokens.opacity.hover)
@@ -182,7 +182,7 @@ fun DialogOption(
     role: Role = Role.RadioButton,
     leading: (@Composable () -> Unit)? = null,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Row(
         modifier = modifier
             .fillMaxWidth()

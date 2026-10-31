@@ -23,7 +23,7 @@ import com.cinebox.app.core.format.formatReleaseDateForDisplay
 import com.cinebox.app.core.i18n.localizedByteUnit
 import com.cinebox.app.core.ui.AppPresenceState
 import com.cinebox.app.core.ui.PresenceSnapshot
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.core.ui.themePalette
 import com.cinebox.app.features.debrid.DebridSettingsRepository
 import com.cinebox.app.features.debrid.DirectDebridPlaybackResolver
@@ -56,7 +56,7 @@ import com.cinebox.app.isIos
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.roundToInt
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 private val playerControlsLog = Logger.withTag("PlayerControls")
@@ -101,7 +101,7 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
     val p2pStats = p2pStreamingState as? P2pStreamingState.Streaming
     val p2pPeerInfo = p2pStats?.let { stats ->
         org.jetbrains.compose.resources.stringResource(
-            nuvio.composeapp.generated.resources.Res.string.player_torrent_peer_info,
+            cinebox.composeapp.generated.resources.Res.string.player_torrent_peer_info,
             stats.seeds,
             stats.peers,
         )
@@ -110,7 +110,7 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
     val p2pLoadingBytes = p2pStats?.let { maxOf(it.downloadedBytes, it.deliveredBytes) } ?: 0L
     val connectingPeerInfo = p2pConnecting?.let { state ->
         org.jetbrains.compose.resources.stringResource(
-            nuvio.composeapp.generated.resources.Res.string.player_torrent_peer_info,
+            cinebox.composeapp.generated.resources.Res.string.player_torrent_peer_info,
             state.seeds,
             state.peers,
         )
@@ -122,7 +122,7 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
                 p2pConnectingPhaseLabel(p2pConnecting.phase)
             } else {
                 org.jetbrains.compose.resources.stringResource(
-                    nuvio.composeapp.generated.resources.Res.string.player_torrent_connecting_status,
+                    cinebox.composeapp.generated.resources.Res.string.player_torrent_connecting_status,
                     p2pConnectingPhaseLabel(p2pConnecting.phase),
                     connectingPeerInfo.orEmpty(),
                     formatP2pSpeed(p2pConnecting.downloadSpeed),
@@ -134,7 +134,7 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
                 null
             } else {
                 org.jetbrains.compose.resources.stringResource(
-                    nuvio.composeapp.generated.resources.Res.string.player_torrent_loading_status,
+                    cinebox.composeapp.generated.resources.Res.string.player_torrent_loading_status,
                     formatP2pMegabytes(p2pLoadingBytes),
                     p2pPeerInfo.orEmpty(),
                     p2pDownloadSpeed.orEmpty(),
@@ -142,7 +142,7 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
             }
         }
         else -> org.jetbrains.compose.resources.stringResource(
-            nuvio.composeapp.generated.resources.Res.string.player_torrent_starting_engine,
+            cinebox.composeapp.generated.resources.Res.string.player_torrent_starting_engine,
         )
     }
     val bufferedAheadMs = (playbackSnapshot.bufferedPositionMs - playbackSnapshot.positionMs)
@@ -226,7 +226,7 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
     val playerControlAddonSubtitles = buildPlayerControlAddonSubtitleItems()
     val playerControlSubtitleSelection = buildPlayerControlSubtitleSelection()
     val playerControlAutoSyncCues = buildPlayerControlSubtitleCueItems()
-    val themeColors = MaterialTheme.nuvio.colors
+    val themeColors = MaterialTheme.cinebox.colors
     val selectedEpisodeLabel = episodeStreamsPanelState.selectedEpisode?.let { selected ->
         val selectedCode = selected.playerControlsEpisodeCode()
         buildString {
@@ -669,13 +669,13 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
 @Composable
 private fun p2pConnectingPhaseLabel(phase: String): String = when (phase) {
     "add_magnet" -> org.jetbrains.compose.resources.stringResource(
-        nuvio.composeapp.generated.resources.Res.string.player_torrent_fetching_metadata,
+        cinebox.composeapp.generated.resources.Res.string.player_torrent_fetching_metadata,
     )
     "prepare_stream", "attach_route" -> org.jetbrains.compose.resources.stringResource(
-        nuvio.composeapp.generated.resources.Res.string.player_torrent_preparing_stream,
+        cinebox.composeapp.generated.resources.Res.string.player_torrent_preparing_stream,
     )
     else -> org.jetbrains.compose.resources.stringResource(
-        nuvio.composeapp.generated.resources.Res.string.player_torrent_starting_engine,
+        cinebox.composeapp.generated.resources.Res.string.player_torrent_starting_engine,
     )
 }
 

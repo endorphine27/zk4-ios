@@ -2,7 +2,7 @@
 
 # Shared Linux DEB dependency definitions and relationship parsing.
 
-readonly -a NUVIO_LINUX_DEB_RUNTIME_DEPENDENCIES=(
+readonly -a CINEBOX_LINUX_DEB_RUNTIME_DEPENDENCIES=(
     libmpv2
     libwebkit2gtk-4.1-0
     libxcomposite1

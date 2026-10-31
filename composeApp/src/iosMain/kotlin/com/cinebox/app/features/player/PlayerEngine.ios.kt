@@ -31,9 +31,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_play
-import nuvio.composeapp.generated.resources.player_error_mpv_unavailable
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_play
+import cinebox.composeapp.generated.resources.player_error_mpv_unavailable
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 
@@ -77,7 +77,7 @@ actual fun PlatformPlayerSurface(
     val latestPlayerSettings = rememberUpdatedState(playerSettings)
 
     val bridge = remember {
-        NuvioPlayerBridgeFactory.create()
+        CineboxPlayerBridgeFactory.create()
     }
 
     if (bridge == null) {
@@ -424,7 +424,7 @@ actual fun PlatformPlayerSurface(
     }
 }
 
-private fun NuvioPlayerBridge.applyIosVideoOutputSettings(settings: PlayerSettingsUiState) {
+private fun CineboxPlayerBridge.applyIosVideoOutputSettings(settings: PlayerSettingsUiState) {
     configureAudioOutput(audioOutput = settings.iosAudioOutputMode.mpvValue)
     configureVideoOutput(
         hardwareDecoder = settings.iosHardwareDecoderMode.mpvValue,

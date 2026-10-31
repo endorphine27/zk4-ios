@@ -1,8 +1,8 @@
 package com.cinebox.app.features.profiles
 
 import com.cinebox.app.core.ui.CineboxToastController
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.profile_already_active
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.profile_already_active
 import org.jetbrains.compose.resources.getString
 
 internal fun routeProfileSelection(

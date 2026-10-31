@@ -19,7 +19,7 @@ class MdbListSettingsRepositoryTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        context.getSharedPreferences("nuvio_mdblist_settings", Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("cinebox_mdblist_settings", Context.MODE_PRIVATE).edit().clear().commit()
         MdbListSettingsStorage.initialize(context)
         MdbListSettingsRepository.onProfileChanged()
     }

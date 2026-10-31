@@ -9,14 +9,14 @@ class TrackingSourcesTest {
     @Test
     fun `stored legacy source names retain their meaning`() {
         assertEquals(WatchProgressSource.TRAKT, WatchProgressSource.fromStorage("TRAKT"))
-        assertEquals(WatchProgressSource.NUVIO_SYNC, WatchProgressSource.fromStorage("NUVIO_SYNC"))
+        assertEquals(WatchProgressSource.CINEBOX_SYNC, WatchProgressSource.fromStorage("CINEBOX_SYNC"))
         assertEquals(LibrarySourceMode.TRAKT, librarySourceModeFromStorage("TRAKT"))
     }
 
     @Test
     fun `remote watch source falls back when its provider is disconnected`() {
         assertEquals(
-            WatchProgressSource.NUVIO_SYNC,
+            WatchProgressSource.CINEBOX_SYNC,
             effectiveWatchProgressSource(WatchProgressSource.SIMKL) { false },
         )
         assertEquals(
@@ -39,7 +39,7 @@ class TrackingSourcesTest {
 
     @Test
     fun `local sources have no remote provider`() {
-        assertNull(WatchProgressSource.NUVIO_SYNC.providerId)
+        assertNull(WatchProgressSource.CINEBOX_SYNC.providerId)
         assertNull(LibrarySourceMode.LOCAL.providerId)
     }
 }

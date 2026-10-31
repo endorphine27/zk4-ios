@@ -63,34 +63,34 @@ import com.cinebox.app.core.ui.DialogButtons
 import com.cinebox.app.core.ui.DialogSurface
 import com.cinebox.app.core.ui.CineboxIconActionButton
 import com.cinebox.app.core.ui.CineboxToastController
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.player.formatPlaybackTime
 import com.cinebox.app.features.settings.SettingsSwitchRow
 import kotlinx.coroutines.delay
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_cancel
-import nuvio.composeapp.generated.resources.action_remove
-import nuvio.composeapp.generated.resources.party_behind
-import nuvio.composeapp.generated.resources.party_code_label
-import nuvio.composeapp.generated.resources.party_copy_invite
-import nuvio.composeapp.generated.resources.party_end
-import nuvio.composeapp.generated.resources.party_end_message
-import nuvio.composeapp.generated.resources.party_end_title
-import nuvio.composeapp.generated.resources.party_host
-import nuvio.composeapp.generated.resources.party_host_only_description
-import nuvio.composeapp.generated.resources.party_host_only_note
-import nuvio.composeapp.generated.resources.party_host_only_title
-import nuvio.composeapp.generated.resources.party_invite_copied
-import nuvio.composeapp.generated.resources.party_invite_message
-import nuvio.composeapp.generated.resources.party_leave
-import nuvio.composeapp.generated.resources.party_open_seat
-import nuvio.composeapp.generated.resources.party_reconnecting
-import nuvio.composeapp.generated.resources.party_remove_message
-import nuvio.composeapp.generated.resources.party_remove_title
-import nuvio.composeapp.generated.resources.party_seats
-import nuvio.composeapp.generated.resources.party_share_description
-import nuvio.composeapp.generated.resources.party_share_title
-import nuvio.composeapp.generated.resources.party_you
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_cancel
+import cinebox.composeapp.generated.resources.action_remove
+import cinebox.composeapp.generated.resources.party_behind
+import cinebox.composeapp.generated.resources.party_code_label
+import cinebox.composeapp.generated.resources.party_copy_invite
+import cinebox.composeapp.generated.resources.party_end
+import cinebox.composeapp.generated.resources.party_end_message
+import cinebox.composeapp.generated.resources.party_end_title
+import cinebox.composeapp.generated.resources.party_host
+import cinebox.composeapp.generated.resources.party_host_only_description
+import cinebox.composeapp.generated.resources.party_host_only_note
+import cinebox.composeapp.generated.resources.party_host_only_title
+import cinebox.composeapp.generated.resources.party_invite_copied
+import cinebox.composeapp.generated.resources.party_invite_message
+import cinebox.composeapp.generated.resources.party_leave
+import cinebox.composeapp.generated.resources.party_open_seat
+import cinebox.composeapp.generated.resources.party_reconnecting
+import cinebox.composeapp.generated.resources.party_remove_message
+import cinebox.composeapp.generated.resources.party_remove_title
+import cinebox.composeapp.generated.resources.party_seats
+import cinebox.composeapp.generated.resources.party_share_description
+import cinebox.composeapp.generated.resources.party_share_title
+import cinebox.composeapp.generated.resources.party_you
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -156,7 +156,7 @@ private fun CodeSection(
     copied: Boolean,
     onCopy: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             AnimatedContent(
@@ -211,7 +211,7 @@ private fun MembersSection(
     onInvite: () -> Unit,
     selfBehindMs: Long?,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val initialIds = remember { party.members.map { it.id }.toSet() }
     Column {
         Row(
@@ -263,7 +263,7 @@ private fun MemberRow(
     onRemove: (() -> Unit)?,
     selfBehindMs: Long?,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val isSelf = member.id == party.memberId
     val behindMs = if (isSelf) selfBehindMs else party.behindMs(member)
     val status = if (behindMs != null) {
@@ -338,7 +338,7 @@ private fun MemberRow(
 
 @Composable
 private fun OpenSeatRow(onInvite: () -> Unit) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -359,7 +359,7 @@ private fun OpenSeatRow(onInvite: () -> Unit) {
 
 @Composable
 private fun SeatDots(filled: Int, total: Int) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
         repeat(total) { index ->
             val color by animateColorAsState(
@@ -378,7 +378,7 @@ private fun SeatDots(filled: Int, total: Int) {
 
 @Composable
 private fun PulsingDot() {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val transition = rememberInfiniteTransition()
     val alpha by transition.animateFloat(
         initialValue = 1f,
@@ -441,7 +441,7 @@ private fun PartySwitch(
 
 @Composable
 internal fun HostOnlyNote() {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Row(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically,

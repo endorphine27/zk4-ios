@@ -48,49 +48,49 @@ import com.cinebox.app.core.ui.MenuItem
 import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_cancel
-import nuvio.composeapp.generated.resources.server_connect_action
-import nuvio.composeapp.generated.resources.server_connect_checking
-import nuvio.composeapp.generated.resources.server_connect_subtitle
-import nuvio.composeapp.generated.resources.server_connect_title
-import nuvio.composeapp.generated.resources.server_connect_url_placeholder
-import nuvio.composeapp.generated.resources.server_error_auth
-import nuvio.composeapp.generated.resources.server_error_connection
-import nuvio.composeapp.generated.resources.server_error_http
-import nuvio.composeapp.generated.resources.server_error_invalid_document
-import nuvio.composeapp.generated.resources.server_error_invalid_url
-import nuvio.composeapp.generated.resources.server_error_missing_configuration
-import nuvio.composeapp.generated.resources.server_error_not_self_hosted
-import nuvio.composeapp.generated.resources.server_error_official_active
-import nuvio.composeapp.generated.resources.server_error_official_available
-import nuvio.composeapp.generated.resources.server_error_response_too_large
-import nuvio.composeapp.generated.resources.server_error_restart
-import nuvio.composeapp.generated.resources.server_error_save
-import nuvio.composeapp.generated.resources.server_error_session_clear
-import nuvio.composeapp.generated.resources.server_error_service
-import nuvio.composeapp.generated.resources.server_error_version
-import nuvio.composeapp.generated.resources.server_menu_change_custom
-import nuvio.composeapp.generated.resources.server_menu_content_description
-import nuvio.composeapp.generated.resources.server_menu_custom
-import nuvio.composeapp.generated.resources.server_menu_official
-import nuvio.composeapp.generated.resources.server_official_action
-import nuvio.composeapp.generated.resources.server_official_body
-import nuvio.composeapp.generated.resources.server_official_title
-import nuvio.composeapp.generated.resources.server_review_description
-import nuvio.composeapp.generated.resources.server_review_key_discovered
-import nuvio.composeapp.generated.resources.server_review_key_label
-import nuvio.composeapp.generated.resources.server_review_title
-import nuvio.composeapp.generated.resources.server_review_trust
-import nuvio.composeapp.generated.resources.server_review_verified_label
-import nuvio.composeapp.generated.resources.server_switching
-import nuvio.composeapp.generated.resources.server_warning_credentials
-import nuvio.composeapp.generated.resources.server_warning_http
-import nuvio.composeapp.generated.resources.server_warning_private
-import nuvio.composeapp.generated.resources.server_warning_public
-import nuvio.composeapp.generated.resources.server_warning_public_http
-import nuvio.composeapp.generated.resources.server_warning_title
+import com.cinebox.app.core.ui.cinebox
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_cancel
+import cinebox.composeapp.generated.resources.server_connect_action
+import cinebox.composeapp.generated.resources.server_connect_checking
+import cinebox.composeapp.generated.resources.server_connect_subtitle
+import cinebox.composeapp.generated.resources.server_connect_title
+import cinebox.composeapp.generated.resources.server_connect_url_placeholder
+import cinebox.composeapp.generated.resources.server_error_auth
+import cinebox.composeapp.generated.resources.server_error_connection
+import cinebox.composeapp.generated.resources.server_error_http
+import cinebox.composeapp.generated.resources.server_error_invalid_document
+import cinebox.composeapp.generated.resources.server_error_invalid_url
+import cinebox.composeapp.generated.resources.server_error_missing_configuration
+import cinebox.composeapp.generated.resources.server_error_not_self_hosted
+import cinebox.composeapp.generated.resources.server_error_official_active
+import cinebox.composeapp.generated.resources.server_error_official_available
+import cinebox.composeapp.generated.resources.server_error_response_too_large
+import cinebox.composeapp.generated.resources.server_error_restart
+import cinebox.composeapp.generated.resources.server_error_save
+import cinebox.composeapp.generated.resources.server_error_session_clear
+import cinebox.composeapp.generated.resources.server_error_service
+import cinebox.composeapp.generated.resources.server_error_version
+import cinebox.composeapp.generated.resources.server_menu_change_custom
+import cinebox.composeapp.generated.resources.server_menu_content_description
+import cinebox.composeapp.generated.resources.server_menu_custom
+import cinebox.composeapp.generated.resources.server_menu_official
+import cinebox.composeapp.generated.resources.server_official_action
+import cinebox.composeapp.generated.resources.server_official_body
+import cinebox.composeapp.generated.resources.server_official_title
+import cinebox.composeapp.generated.resources.server_review_description
+import cinebox.composeapp.generated.resources.server_review_key_discovered
+import cinebox.composeapp.generated.resources.server_review_key_label
+import cinebox.composeapp.generated.resources.server_review_title
+import cinebox.composeapp.generated.resources.server_review_trust
+import cinebox.composeapp.generated.resources.server_review_verified_label
+import cinebox.composeapp.generated.resources.server_switching
+import cinebox.composeapp.generated.resources.server_warning_credentials
+import cinebox.composeapp.generated.resources.server_warning_http
+import cinebox.composeapp.generated.resources.server_warning_private
+import cinebox.composeapp.generated.resources.server_warning_public
+import cinebox.composeapp.generated.resources.server_warning_public_http
+import cinebox.composeapp.generated.resources.server_warning_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -106,7 +106,7 @@ internal fun ServerConnectionMenu(
             Icon(
                 imageVector = Icons.Rounded.MoreVert,
                 contentDescription = stringResource(Res.string.server_menu_content_description),
-                tint = MaterialTheme.nuvio.colors.textPrimary,
+                tint = MaterialTheme.cinebox.colors.textPrimary,
             )
         }
         Menu(
@@ -145,7 +145,7 @@ internal fun ServerConnectionSheet(
     onDiscover: (String) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var url by rememberSaveable { mutableStateOf("") }
     val error = serverDiscoveryError(state)
@@ -252,7 +252,7 @@ internal fun ServerTrustDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     DialogSurface(
         onDismissRequest = { if (!isSwitching) onDismiss() },
         title = stringResource(Res.string.server_review_title),
@@ -328,7 +328,7 @@ internal fun OfficialServerDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     DialogSurface(
         onDismissRequest = { if (!isSwitching) onDismiss() },
         title = stringResource(Res.string.server_official_title),
@@ -359,7 +359,7 @@ private fun ServerDetail(
     label: String,
     value: String,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(
         modifier = Modifier
             .fillMaxWidth()

@@ -33,8 +33,8 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.intOrNull
 import kotlinx.serialization.json.jsonPrimitive
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.generic_unknown
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.generic_unknown
 import org.jetbrains.compose.resources.getString
 
 internal const val MAX_CONCURRENT_PLUGINS = 10

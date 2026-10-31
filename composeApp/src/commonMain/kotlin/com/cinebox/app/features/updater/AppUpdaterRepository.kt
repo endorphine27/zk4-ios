@@ -6,8 +6,8 @@ import kotlinx.coroutines.ensureActive
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.updates_github_api_error
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.updates_github_api_error
 import org.jetbrains.compose.resources.getString
 
 @Serializable

@@ -52,8 +52,8 @@ import androidx.compose.ui.unit.dp
 import com.cinebox.app.isDesktop
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.floating_prompt_continue_where_left_off
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.floating_prompt_continue_where_left_off
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.roundToInt
 
@@ -73,7 +73,7 @@ fun CineboxFloatingPrompt(
     modifier: Modifier = Modifier,
     autoDismissMs: Long = AutoDismissDelayMs,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val visibilityState = remember { MutableTransitionState(false) }
     val coroutineScope = rememberCoroutineScope()
     val density = LocalDensity.current
@@ -110,7 +110,7 @@ fun CineboxFloatingPrompt(
         }
     }
 
-    val navBarBottom = nuvioBottomNavigationBarInsets()
+    val navBarBottom = cineboxBottomNavigationBarInsets()
         .asPaddingValues()
         .calculateBottomPadding()
 

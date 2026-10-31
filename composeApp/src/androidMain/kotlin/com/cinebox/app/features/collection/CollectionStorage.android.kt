@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 actual object CollectionStorage {
-    private const val preferencesName = "nuvio_collections"
+    private const val preferencesName = "cinebox_collections"
     private const val payloadKey = "collections_payload"
 
     private var preferences: SharedPreferences? = null

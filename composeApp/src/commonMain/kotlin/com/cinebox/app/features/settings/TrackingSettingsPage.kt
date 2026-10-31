@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cinebox.app.core.ui.CineboxLoadingIndicator
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.library.LibrarySourceMode
 import com.cinebox.app.features.mdblist.MdbListTracker
 import com.cinebox.app.features.profiles.ProfileRepository
@@ -44,72 +44,72 @@ import com.cinebox.app.features.trakt.TraktContinueWatchingDaysOptions
 import com.cinebox.app.features.trakt.normalizeTraktContinueWatchingDaysCap
 import com.cinebox.app.features.watchprogress.WatchProgressSourceCoordinator
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.tracking_source_mdblist
-import nuvio.composeapp.generated.resources.settings_mdblist_library_description
-import nuvio.composeapp.generated.resources.settings_mdblist_progress_description
-import nuvio.composeapp.generated.resources.action_retry
-import nuvio.composeapp.generated.resources.settings_tracking_connect_first
-import nuvio.composeapp.generated.resources.settings_tracking_data_sources
-import nuvio.composeapp.generated.resources.settings_tracking_nuvio_library_description
-import nuvio.composeapp.generated.resources.settings_tracking_nuvio_progress_description
-import nuvio.composeapp.generated.resources.settings_tracking_progress_refresh_failed
-import nuvio.composeapp.generated.resources.settings_tracking_services
-import nuvio.composeapp.generated.resources.settings_tracking_simkl_library_description
-import nuvio.composeapp.generated.resources.settings_tracking_simkl_progress_description
-import nuvio.composeapp.generated.resources.settings_tracking_simkl_recommendations_description
-import nuvio.composeapp.generated.resources.settings_tracking_source_fallback
-import nuvio.composeapp.generated.resources.settings_tracking_tmdb_recommendations_description
-import nuvio.composeapp.generated.resources.settings_tracking_trakt_library_description
-import nuvio.composeapp.generated.resources.settings_tracking_trakt_progress_description
-import nuvio.composeapp.generated.resources.settings_tracking_trakt_progress_required
-import nuvio.composeapp.generated.resources.settings_tracking_trakt_recommendations_description
-import nuvio.composeapp.generated.resources.settings_tracking_viewing_discovery
-import nuvio.composeapp.generated.resources.settings_tracking_anime_id_dialog_subtitle
-import nuvio.composeapp.generated.resources.settings_tracking_anime_id_dialog_title
-import nuvio.composeapp.generated.resources.settings_tracking_anime_id_imdb
-import nuvio.composeapp.generated.resources.settings_tracking_anime_id_imdb_description
-import nuvio.composeapp.generated.resources.settings_tracking_anime_id_kitsu
-import nuvio.composeapp.generated.resources.settings_tracking_anime_id_kitsu_description
-import nuvio.composeapp.generated.resources.settings_tracking_anime_id_tvdb
-import nuvio.composeapp.generated.resources.settings_tracking_anime_id_tvdb_description
-import nuvio.composeapp.generated.resources.settings_tracking_anime_id_mal
-import nuvio.composeapp.generated.resources.settings_tracking_anime_id_mal_description
-import nuvio.composeapp.generated.resources.settings_tracking_anime_id_subtitle
-import nuvio.composeapp.generated.resources.settings_tracking_anime_id_title
-import nuvio.composeapp.generated.resources.settings_tracking_anime_section
-import nuvio.composeapp.generated.resources.settings_tracking_mdblist_section
-import nuvio.composeapp.generated.resources.settings_mdblist_library_lists
-import nuvio.composeapp.generated.resources.settings_mdblist_library_lists_description
-import nuvio.composeapp.generated.resources.settings_mdblist_library_lists_summary
-import nuvio.composeapp.generated.resources.settings_trakt_comments
-import nuvio.composeapp.generated.resources.settings_trakt_comments_description
-import nuvio.composeapp.generated.resources.tracking_source_simkl
-import nuvio.composeapp.generated.resources.tracking_watch_progress_dialog_subtitle
-import nuvio.composeapp.generated.resources.trakt_all_history
-import nuvio.composeapp.generated.resources.trakt_continue_watching_subtitle
-import nuvio.composeapp.generated.resources.trakt_continue_watching_window
-import nuvio.composeapp.generated.resources.trakt_cw_window_subtitle
-import nuvio.composeapp.generated.resources.trakt_cw_window_title
-import nuvio.composeapp.generated.resources.trakt_days_format
-import nuvio.composeapp.generated.resources.trakt_library_source_dialog_subtitle
-import nuvio.composeapp.generated.resources.trakt_library_source_dialog_title
-import nuvio.composeapp.generated.resources.trakt_library_source_nuvio
-import nuvio.composeapp.generated.resources.trakt_library_source_subtitle
-import nuvio.composeapp.generated.resources.trakt_library_source_title
-import nuvio.composeapp.generated.resources.trakt_library_source_trakt
-import nuvio.composeapp.generated.resources.trakt_more_like_this_source_dialog_subtitle
-import nuvio.composeapp.generated.resources.trakt_more_like_this_source_dialog_title
-import nuvio.composeapp.generated.resources.trakt_more_like_this_source_subtitle
-import nuvio.composeapp.generated.resources.trakt_more_like_this_source_title
-import nuvio.composeapp.generated.resources.trakt_more_like_this_source_tmdb
-import nuvio.composeapp.generated.resources.trakt_more_like_this_source_trakt
-import nuvio.composeapp.generated.resources.trakt_more_like_this_source_simkl
-import nuvio.composeapp.generated.resources.trakt_watch_progress_dialog_title
-import nuvio.composeapp.generated.resources.trakt_watch_progress_source_nuvio
-import nuvio.composeapp.generated.resources.trakt_watch_progress_source_trakt
-import nuvio.composeapp.generated.resources.trakt_watch_progress_subtitle
-import nuvio.composeapp.generated.resources.trakt_watch_progress_title
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.tracking_source_mdblist
+import cinebox.composeapp.generated.resources.settings_mdblist_library_description
+import cinebox.composeapp.generated.resources.settings_mdblist_progress_description
+import cinebox.composeapp.generated.resources.action_retry
+import cinebox.composeapp.generated.resources.settings_tracking_connect_first
+import cinebox.composeapp.generated.resources.settings_tracking_data_sources
+import cinebox.composeapp.generated.resources.settings_tracking_cinebox_library_description
+import cinebox.composeapp.generated.resources.settings_tracking_cinebox_progress_description
+import cinebox.composeapp.generated.resources.settings_tracking_progress_refresh_failed
+import cinebox.composeapp.generated.resources.settings_tracking_services
+import cinebox.composeapp.generated.resources.settings_tracking_simkl_library_description
+import cinebox.composeapp.generated.resources.settings_tracking_simkl_progress_description
+import cinebox.composeapp.generated.resources.settings_tracking_simkl_recommendations_description
+import cinebox.composeapp.generated.resources.settings_tracking_source_fallback
+import cinebox.composeapp.generated.resources.settings_tracking_tmdb_recommendations_description
+import cinebox.composeapp.generated.resources.settings_tracking_trakt_library_description
+import cinebox.composeapp.generated.resources.settings_tracking_trakt_progress_description
+import cinebox.composeapp.generated.resources.settings_tracking_trakt_progress_required
+import cinebox.composeapp.generated.resources.settings_tracking_trakt_recommendations_description
+import cinebox.composeapp.generated.resources.settings_tracking_viewing_discovery
+import cinebox.composeapp.generated.resources.settings_tracking_anime_id_dialog_subtitle
+import cinebox.composeapp.generated.resources.settings_tracking_anime_id_dialog_title
+import cinebox.composeapp.generated.resources.settings_tracking_anime_id_imdb
+import cinebox.composeapp.generated.resources.settings_tracking_anime_id_imdb_description
+import cinebox.composeapp.generated.resources.settings_tracking_anime_id_kitsu
+import cinebox.composeapp.generated.resources.settings_tracking_anime_id_kitsu_description
+import cinebox.composeapp.generated.resources.settings_tracking_anime_id_tvdb
+import cinebox.composeapp.generated.resources.settings_tracking_anime_id_tvdb_description
+import cinebox.composeapp.generated.resources.settings_tracking_anime_id_mal
+import cinebox.composeapp.generated.resources.settings_tracking_anime_id_mal_description
+import cinebox.composeapp.generated.resources.settings_tracking_anime_id_subtitle
+import cinebox.composeapp.generated.resources.settings_tracking_anime_id_title
+import cinebox.composeapp.generated.resources.settings_tracking_anime_section
+import cinebox.composeapp.generated.resources.settings_tracking_mdblist_section
+import cinebox.composeapp.generated.resources.settings_mdblist_library_lists
+import cinebox.composeapp.generated.resources.settings_mdblist_library_lists_description
+import cinebox.composeapp.generated.resources.settings_mdblist_library_lists_summary
+import cinebox.composeapp.generated.resources.settings_trakt_comments
+import cinebox.composeapp.generated.resources.settings_trakt_comments_description
+import cinebox.composeapp.generated.resources.tracking_source_simkl
+import cinebox.composeapp.generated.resources.tracking_watch_progress_dialog_subtitle
+import cinebox.composeapp.generated.resources.trakt_all_history
+import cinebox.composeapp.generated.resources.trakt_continue_watching_subtitle
+import cinebox.composeapp.generated.resources.trakt_continue_watching_window
+import cinebox.composeapp.generated.resources.trakt_cw_window_subtitle
+import cinebox.composeapp.generated.resources.trakt_cw_window_title
+import cinebox.composeapp.generated.resources.trakt_days_format
+import cinebox.composeapp.generated.resources.trakt_library_source_dialog_subtitle
+import cinebox.composeapp.generated.resources.trakt_library_source_dialog_title
+import cinebox.composeapp.generated.resources.trakt_library_source_cinebox
+import cinebox.composeapp.generated.resources.trakt_library_source_subtitle
+import cinebox.composeapp.generated.resources.trakt_library_source_title
+import cinebox.composeapp.generated.resources.trakt_library_source_trakt
+import cinebox.composeapp.generated.resources.trakt_more_like_this_source_dialog_subtitle
+import cinebox.composeapp.generated.resources.trakt_more_like_this_source_dialog_title
+import cinebox.composeapp.generated.resources.trakt_more_like_this_source_subtitle
+import cinebox.composeapp.generated.resources.trakt_more_like_this_source_title
+import cinebox.composeapp.generated.resources.trakt_more_like_this_source_tmdb
+import cinebox.composeapp.generated.resources.trakt_more_like_this_source_trakt
+import cinebox.composeapp.generated.resources.trakt_more_like_this_source_simkl
+import cinebox.composeapp.generated.resources.trakt_watch_progress_dialog_title
+import cinebox.composeapp.generated.resources.trakt_watch_progress_source_cinebox
+import cinebox.composeapp.generated.resources.trakt_watch_progress_source_trakt
+import cinebox.composeapp.generated.resources.trakt_watch_progress_subtitle
+import cinebox.composeapp.generated.resources.trakt_watch_progress_title
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.trackingSettingsContent(
@@ -412,7 +412,7 @@ private fun TrackingPreferenceActionRow(
     isLoading: Boolean = false,
     enabled: Boolean = true,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     SettingsNavigationRow(
         title = title,
         description = listOfNotNull(
@@ -451,7 +451,7 @@ private fun TrackingInlineErrorRow(
     message: String,
     onRetry: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -485,8 +485,8 @@ private fun librarySourceOptions(
     return listOf(
         TrackingPickerOption(
             value = LibrarySourceMode.LOCAL,
-            title = stringResource(Res.string.trakt_library_source_nuvio),
-            description = stringResource(Res.string.settings_tracking_nuvio_library_description),
+            title = stringResource(Res.string.trakt_library_source_cinebox),
+            description = stringResource(Res.string.settings_tracking_cinebox_library_description),
         ),
         TrackingPickerOption(
             value = LibrarySourceMode.TRAKT,
@@ -522,9 +522,9 @@ private fun watchProgressSourceOptions(
     val simklAvailable = isTrackingBrandAvailable(TrackingBrand.SIMKL, traktConnected, simklConnected)
     return listOf(
         TrackingPickerOption(
-            value = WatchProgressSource.NUVIO_SYNC,
-            title = stringResource(Res.string.trakt_watch_progress_source_nuvio),
-            description = stringResource(Res.string.settings_tracking_nuvio_progress_description),
+            value = WatchProgressSource.CINEBOX_SYNC,
+            title = stringResource(Res.string.trakt_watch_progress_source_cinebox),
+            description = stringResource(Res.string.settings_tracking_cinebox_progress_description),
         ),
         TrackingPickerOption(
             value = WatchProgressSource.TRAKT,
@@ -605,7 +605,7 @@ private fun trackingUnavailableReason(
 @Composable
 private fun librarySourceModeLabel(source: LibrarySourceMode): String = when (source) {
     LibrarySourceMode.TRAKT -> stringResource(Res.string.trakt_library_source_trakt)
-    LibrarySourceMode.LOCAL -> stringResource(Res.string.trakt_library_source_nuvio)
+    LibrarySourceMode.LOCAL -> stringResource(Res.string.trakt_library_source_cinebox)
     LibrarySourceMode.SIMKL -> stringResource(Res.string.tracking_source_simkl)
     LibrarySourceMode.MDBLIST -> stringResource(Res.string.tracking_source_mdblist)
 }
@@ -613,7 +613,7 @@ private fun librarySourceModeLabel(source: LibrarySourceMode): String = when (so
 @Composable
 private fun watchProgressSourceLabel(source: WatchProgressSource): String = when (source) {
     WatchProgressSource.TRAKT -> stringResource(Res.string.trakt_watch_progress_source_trakt)
-    WatchProgressSource.NUVIO_SYNC -> stringResource(Res.string.trakt_watch_progress_source_nuvio)
+    WatchProgressSource.CINEBOX_SYNC -> stringResource(Res.string.trakt_watch_progress_source_cinebox)
     WatchProgressSource.SIMKL -> stringResource(Res.string.tracking_source_simkl)
     WatchProgressSource.MDBLIST -> stringResource(Res.string.tracking_source_mdblist)
 }

@@ -10,10 +10,10 @@ import com.cinebox.app.features.home.HomeCatalogDefinition
 import com.cinebox.app.features.home.HomeCatalogSection
 import com.cinebox.app.features.home.MetaPreview
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.media_movies
-import nuvio.composeapp.generated.resources.media_series
-import nuvio.composeapp.generated.resources.servers_resume_row
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.media_movies
+import cinebox.composeapp.generated.resources.media_series
+import cinebox.composeapp.generated.resources.servers_resume_row
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
 

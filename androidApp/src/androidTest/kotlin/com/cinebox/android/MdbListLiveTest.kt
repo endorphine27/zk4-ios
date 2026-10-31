@@ -1,4 +1,4 @@
-package com.nuvio.android
+package com.cinebox.android
 
 import android.content.Intent
 import android.util.Log

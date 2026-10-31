@@ -37,12 +37,12 @@ import com.cinebox.app.core.ui.CineboxAsyncImage as AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import com.cinebox.app.core.ui.CineboxCardDepthSurface
-import com.cinebox.app.core.ui.nuvioHorizontalScrollBleed
-import com.cinebox.app.core.ui.nuvioCardDepth
-import com.cinebox.app.core.ui.nuvioDesktopDragScroll
+import com.cinebox.app.core.ui.cineboxHorizontalScrollBleed
+import com.cinebox.app.core.ui.cineboxCardDepth
+import com.cinebox.app.core.ui.cineboxDesktopDragScroll
 import com.cinebox.app.features.details.MetaPerson
 import com.cinebox.app.features.details.castAvatarSharedTransitionKey
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -70,9 +70,9 @@ fun DetailCastSection(
             LazyRow(
                 state = rowState,
                 modifier = Modifier
-                    .nuvioHorizontalScrollBleed(horizontalScrollPadding)
+                    .cineboxHorizontalScrollBleed(horizontalScrollPadding)
                     .fillMaxWidth()
-                    .nuvioDesktopDragScroll(rowState),
+                    .cineboxDesktopDragScroll(rowState),
                 contentPadding = PaddingValues(horizontal = horizontalScrollPadding),
                 horizontalArrangement = Arrangement.spacedBy(sizing.avatarGap),
             ) {
@@ -171,7 +171,7 @@ private fun CastItem(
                     color = MaterialTheme.colorScheme.surfaceVariant,
                     shape = CircleShape,
                 )
-                .nuvioCardDepth(
+                .cineboxCardDepth(
                     shape = CircleShape,
                     surface = CineboxCardDepthSurface.Cast,
                 ),

@@ -20,8 +20,8 @@ sentry {
     )
     includeDependenciesReport.set(false)
     telemetry.set(false)
-    org.set("nuviomedia")
-    projectName.set("nuvio-desktop")
+    org.set("cineboxmedia")
+    projectName.set("cinebox-desktop")
     sentryAuthToken?.let(authToken::set)
     autoInstallation {
         enabled.set(false)

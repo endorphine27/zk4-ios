@@ -219,7 +219,7 @@ internal class NativePlayerController(
                         }
                     }
                 }
-            }, "nuvio-player-attach").apply {
+            }, "cinebox-player-attach").apply {
                 isDaemon = true
                 start()
             }
@@ -272,7 +272,7 @@ internal class NativePlayerController(
                     else -> current.onError("Previous player is still starting. Please try again.")
                 }
             }
-        }, "nuvio-player-create-wait").apply { isDaemon = true }
+        }, "cinebox-player-create-wait").apply { isDaemon = true }
         createWaitInFlight = worker
         worker.start()
         true
@@ -370,7 +370,7 @@ internal class NativePlayerController(
                     createsInFlight.remove(Thread.currentThread())
                 }
             }
-        }, "nuvio-player-create").apply { isDaemon = true }
+        }, "cinebox-player-create").apply { isDaemon = true }
         var admissionFailure: String? = null
         val admitted = synchronized(lifecycleLock) {
             when {
@@ -776,7 +776,7 @@ internal class NativePlayerController(
                                 .onFailure { error -> log.w(error) { "release callback failed" } }
                         }
                     }
-                }, "nuvio-player-release").apply {
+                }, "cinebox-player-release").apply {
                     isDaemon = true
                     releaseInFlight = this
                     releaseTimedOut = false
@@ -819,7 +819,7 @@ internal class NativePlayerController(
                     }.onFailure { error -> log.w(error) { "release timeout callback failed" } }
                 }
             }
-        }, "nuvio-player-release-watchdog").apply {
+        }, "cinebox-player-release-watchdog").apply {
             isDaemon = true
             start()
         }
@@ -924,7 +924,7 @@ internal class NativePlayerController(
                 runCatching { nativeDispose(current) }
                     .onFailure { error -> recordTerminalDisposeFailure(error, "native", current) }
             },
-            "nuvio-player-dispose",
+            "cinebox-player-dispose",
         ).apply {
             isDaemon = true
             start()

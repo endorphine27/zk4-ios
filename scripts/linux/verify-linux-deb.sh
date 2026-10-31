@@ -26,7 +26,7 @@ if [[ ! -f "$deb" ]]; then
     exit 1
 fi
 
-expected_maintainer="Nuvio Media <contact@nuvio.tv>"
+expected_maintainer="Cinebox Media <contact@nuvio.tv>"
 maintainer="$(dpkg-deb -f "$deb" Maintainer)"
 if [[ "$maintainer" != "$expected_maintainer" ]]; then
     echo "Unexpected Maintainer: '$maintainer'" >&2
@@ -35,7 +35,7 @@ if [[ "$maintainer" != "$expected_maintainer" ]]; then
 fi
 
 depends="$(dpkg-deb -f "$deb" Depends)"
-for dependency in "${NUVIO_LINUX_DEB_RUNTIME_DEPENDENCIES[@]}"; do
+for dependency in "${CINEBOX_LINUX_DEB_RUNTIME_DEPENDENCIES[@]}"; do
     if ! deb_relationship_has_package "$depends" "$dependency"; then
         echo "Missing runtime dependency: $dependency" >&2
         echo "Depends: $depends" >&2
@@ -43,7 +43,7 @@ for dependency in "${NUVIO_LINUX_DEB_RUNTIME_DEPENDENCIES[@]}"; do
     fi
 done
 
-contents_file="$(mktemp "${TMPDIR:-/tmp}/nuvio-deb-contents.XXXXXX")"
+contents_file="$(mktemp "${TMPDIR:-/tmp}/cinebox-deb-contents.XXXXXX")"
 cleanup() {
     rm -f "$contents_file"
 }

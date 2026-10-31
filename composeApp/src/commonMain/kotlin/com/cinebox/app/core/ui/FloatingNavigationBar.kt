@@ -33,6 +33,6 @@ internal expect fun FloatingNavigationBar(
 
 @Composable
 internal fun floatingNavigationBarPadding(): PaddingValues = PaddingValues(
-    bottom = nuvioBottomNavigationBarInsets().asPaddingValues().calculateBottomPadding() +
-        nuvioBottomNavigationExtraVerticalPadding + 8.dp,
+    bottom = cineboxBottomNavigationBarInsets().asPaddingValues().calculateBottomPadding() +
+        cineboxBottomNavigationExtraVerticalPadding + 8.dp,
 )

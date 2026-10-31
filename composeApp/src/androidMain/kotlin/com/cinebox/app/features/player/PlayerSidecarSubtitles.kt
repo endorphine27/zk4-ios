@@ -31,7 +31,7 @@ private const val SIDECAR_TAG = "CineboxSidecar"
 private val sidecarParserFactory = DefaultSubtitleParserFactory()
 private val mainHandler = Handler(Looper.getMainLooper())
 private const val SIDECAR_RENDER_INTERVAL_MS = 100L
-private const val EMPTY_CUE_SIGNATURE = 0x4E5556494FL // "NUVIO"
+private const val EMPTY_CUE_SIGNATURE = 0x4E5556494FL // "CINEBOX"
 
 internal class SidecarSubtitleController(
     private val scope: CoroutineScope,

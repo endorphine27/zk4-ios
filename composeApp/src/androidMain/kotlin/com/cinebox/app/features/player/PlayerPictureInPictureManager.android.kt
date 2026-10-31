@@ -19,7 +19,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.ui.unit.IntSize
 import androidx.lifecycle.Lifecycle
 import com.cinebox.app.R
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.getString
 
 internal const val PIP_ACTION_TOGGLE_PLAY_PAUSE = "com.cinebox.app.action.PIP_TOGGLE_PLAY_PAUSE"

@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 internal actual object EpisodeReleaseNotificationsStorage {
-    private const val preferencesName = "nuvio_episode_release_notifications"
+    private const val preferencesName = "cinebox_episode_release_notifications"
     private const val payloadKey = "episode_release_notifications_payload"
 
     private var preferences: SharedPreferences? = null

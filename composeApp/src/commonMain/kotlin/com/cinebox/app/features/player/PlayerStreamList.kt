@@ -28,8 +28,8 @@ import com.cinebox.app.features.streams.StreamItem
 import com.cinebox.app.features.streams.StreamsUiState
 import com.cinebox.app.features.streams.isSelectableForPlayback
 import com.cinebox.app.features.streams.rememberStreamSizeLabelFormat
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_player_no_streams_found
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_player_no_streams_found
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -45,7 +45,7 @@ class HomeCatalogSettingsRepositoryTest {
         originalLocale = Locale.getDefault()
         Locale.setDefault(Locale.ENGLISH)
         val context = RuntimeEnvironment.getApplication()
-        val stored = context.getSharedPreferences("nuvio_home_catalog_settings", Context.MODE_PRIVATE)
+        val stored = context.getSharedPreferences("cinebox_home_catalog_settings", Context.MODE_PRIVATE)
         stored.edit().clear().commit()
         preferences = RecordingPreferences(stored)
         HomeCatalogSettingsStorage.initialize(object : ContextWrapper(context) {
@@ -120,7 +120,7 @@ class HomeCatalogSettingsRepositoryTest {
     @Test
     fun catalogSyncPreservesPendingCollectionHeroSourceChanges(): Unit = runBlocking {
         val context = RuntimeEnvironment.getApplication()
-        listOf("nuvio_addons", "nuvio_collections", "nuvio_collection_mobile_settings").forEach { name ->
+        listOf("cinebox_addons", "cinebox_collections", "cinebox_collection_mobile_settings").forEach { name ->
             context.getSharedPreferences(name, Context.MODE_PRIVATE).edit().clear().commit()
         }
         AddonStorage.initialize(context)

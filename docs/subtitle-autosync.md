@@ -32,9 +32,9 @@ AutoSync has no debug logging setting and does not emit diagnostic logs.
 ## Sources
 
 - Mobile integration and retimer:
-  [NuvioMobile-Reshaped](https://github.com/DavidVamaiotu/NuvioMobile-Reshaped/tree/5332f76a).
+  [CineboxMobile-Reshaped](https://github.com/DavidVamaiotu/CineboxMobile-Reshaped/tree/5332f76a).
 - Reviewed matcher, parser, sampled-reference handling, and UX behavior:
-  [NuvioTV PR #3703](https://github.com/NuvioMedia/NuvioTV/pull/3703), head `613dbd2d`.
+  [CineboxTV PR #3703](https://github.com/NuvioMedia/NuvioTV/pull/3703), head `613dbd2d`.
 - The extractor rewrapping preserves upstream libass handling underneath AutoSync's
   observation wrapper. Existing parsers, general player preferences, dependencies,
   manifests, branding, and release workflows are kept intact.

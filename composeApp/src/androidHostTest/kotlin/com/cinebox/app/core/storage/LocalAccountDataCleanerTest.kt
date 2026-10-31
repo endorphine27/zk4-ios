@@ -28,7 +28,7 @@ class LocalAccountDataCleanerTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        preferences = context.getSharedPreferences("nuvio_cw_enrichment", Context.MODE_PRIVATE)
+        preferences = context.getSharedPreferences("cinebox_cw_enrichment", Context.MODE_PRIVATE)
         preferences.edit().clear().commit()
         ContinueWatchingEnrichmentStorage.initialize(context)
         PlatformLocalAccountDataCleaner.initialize(context)

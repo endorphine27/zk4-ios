@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
     <key>application-identifier</key>
-    <string>MDBLISTQA1.com.nuvio.mdblist.tests</string>
+    <string>MDBLISTQA1.com.cinebox.mdblist.tests</string>
     <key>keychain-access-groups</key>
     <array>
-        <string>MDBLISTQA1.com.nuvio.mdblist.tests</string>
+        <string>MDBLISTQA1.com.cinebox.mdblist.tests</string>
     </array>
 </dict>
 </plist>

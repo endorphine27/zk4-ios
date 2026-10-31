@@ -18,11 +18,11 @@ import androidx.compose.ui.semantics.Role
 import com.cinebox.app.features.tracking.TrackingLibraryTab
 import com.cinebox.app.features.tracking.membershipTitle
 import com.cinebox.app.features.tracking.trackingMembershipDestinations
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_cancel
-import nuvio.composeapp.generated.resources.action_save
-import nuvio.composeapp.generated.resources.compose_tracking_list_picker_loading
-import nuvio.composeapp.generated.resources.compose_tracking_list_picker_subtitle
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_cancel
+import cinebox.composeapp.generated.resources.action_save
+import cinebox.composeapp.generated.resources.compose_tracking_list_picker_loading
+import cinebox.composeapp.generated.resources.compose_tracking_list_picker_subtitle
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,7 +39,7 @@ fun TrackingListPickerDialog(
     onDismiss: () -> Unit,
 ) {
     if (!visible) return
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val destinations = trackingMembershipDestinations(tabs)
 
     DialogSurface(

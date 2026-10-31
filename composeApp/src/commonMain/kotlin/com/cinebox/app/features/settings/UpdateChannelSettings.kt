@@ -28,11 +28,11 @@ import androidx.compose.ui.unit.dp
 import com.cinebox.app.core.ui.DialogButton
 import com.cinebox.app.core.ui.DialogButtons
 import com.cinebox.app.core.ui.DialogSurface
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.updater.AppUpdaterPlatform
 import com.cinebox.app.features.updater.UpdateChannel
 import com.cinebox.app.features.updater.UpdatePreferences
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,7 +42,7 @@ internal fun UpdateChannelSettingsRow(isTablet: Boolean) {
 
     val channel by UpdatePreferences.shared.channel.collectAsState()
     var showDialog by rememberSaveable { mutableStateOf(false) }
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     SettingsNavigationRow(
         title = stringResource(Res.string.updates_channel_title),
         description = stringResource(Res.string.updates_channel_description),

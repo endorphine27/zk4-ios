@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 actual object LibraryDisplaySettingsStorage {
-    private const val preferencesName = "nuvio_library_display_settings"
+    private const val preferencesName = "cinebox_library_display_settings"
     private const val payloadKey = "library_display_settings_payload"
 
     private var preferences: SharedPreferences? = null

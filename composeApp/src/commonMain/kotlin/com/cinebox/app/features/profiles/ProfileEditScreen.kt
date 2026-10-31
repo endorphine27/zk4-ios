@@ -54,7 +54,7 @@ import com.cinebox.app.features.membership.CosmeticEntitlement
 import com.cinebox.app.features.membership.MemberAccessRepository
 import com.cinebox.app.features.membership.ProfileBackgroundRepository
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

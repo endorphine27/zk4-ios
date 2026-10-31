@@ -26,7 +26,7 @@ internal class NativePlayerHost : Canvas() {
     private companion object {
         val hiddenCursor: Cursor by lazy {
             val image = BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB)
-            Toolkit.getDefaultToolkit().createCustomCursor(image, Point(0, 0), "nuvio-hidden-cursor")
+            Toolkit.getDefaultToolkit().createCustomCursor(image, Point(0, 0), "cinebox-hidden-cursor")
         }
     }
 

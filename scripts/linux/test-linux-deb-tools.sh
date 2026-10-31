@@ -15,39 +15,39 @@ for command in dpkg-deb truncate; do
     fi
 done
 
-work_dir="$(mktemp -d "${TMPDIR:-/tmp}/nuvio-deb-test.XXXXXX")"
+work_dir="$(mktemp -d "${TMPDIR:-/tmp}/cinebox-deb-test.XXXXXX")"
 cleanup() {
     rm -rf "$work_dir"
 }
 trap cleanup EXIT
 
 package_root="$work_dir/package root"
-mkdir -p "$package_root/DEBIAN" "$package_root/usr/share/nuvio-test"
+mkdir -p "$package_root/DEBIAN" "$package_root/usr/share/cinebox-test"
 cat > "$package_root/DEBIAN/control" <<'CONTROL'
-Package: nuvio-test
+Package: cinebox-test
 Version: 1.0-1
 Architecture: all
-Maintainer: Nuvio Media <contact@nuvio.tv>
+Maintainer: Cinebox Media <contact@nuvio.tv>
 Depends: libmpv2 (>= 0.35),
- libwebkit2gtk-4.1-0 | nuvio-webkit-fallback,
+ libwebkit2gtk-4.1-0 | cinebox-webkit-fallback,
  libxcomposite1,
  libxext6
 Description: Linux DEB tooling fixture
 CONTROL
-printf 'fixture\n' > "$package_root/usr/share/nuvio-test/data file.txt"
+printf 'fixture\n' > "$package_root/usr/share/cinebox-test/data file.txt"
 
 # jpackage's own generated entry plus the xdg-desktop-menu hooks that
 # register it — the patch is supposed to get rid of both.
-mkdir -p "$package_root/opt/nuvio/lib"
-cat > "$package_root/opt/nuvio/lib/nuvio-Nuvio.desktop" <<'JPACKAGE'
+mkdir -p "$package_root/opt/cinebox/lib"
+cat > "$package_root/opt/cinebox/lib/cinebox-Cinebox.desktop" <<'JPACKAGE'
 [Desktop Entry]
-Name=Nuvio
-Comment=Nuvio
-Exec=/opt/nuvio/bin/Nuvio
-Icon=/opt/nuvio/lib/Nuvio.png
+Name=Cinebox
+Comment=Cinebox
+Exec=/opt/cinebox/bin/Cinebox
+Icon=/opt/cinebox/lib/Cinebox.png
 Terminal=false
 Type=Application
-Categories=Nuvio
+Categories=Cinebox
 MimeType=
 JPACKAGE
 cat > "$package_root/DEBIAN/postinst" <<'POSTINST'
@@ -55,7 +55,7 @@ cat > "$package_root/DEBIAN/postinst" <<'POSTINST'
 set -e
 case "$1" in
     configure)
-xdg-desktop-menu install /opt/nuvio/lib/nuvio-Nuvio.desktop
+xdg-desktop-menu install /opt/cinebox/lib/cinebox-Cinebox.desktop
     ;;
 esac
 exit 0
@@ -65,14 +65,14 @@ cat > "$package_root/DEBIAN/prerm" <<'PRERM'
 set -e
 case "$1" in
     remove|upgrade|deconfigure)
-xdg-desktop-menu uninstall /opt/nuvio/lib/nuvio-Nuvio.desktop
+xdg-desktop-menu uninstall /opt/cinebox/lib/cinebox-Cinebox.desktop
     ;;
 esac
 exit 0
 PRERM
 chmod 755 "$package_root/DEBIAN/postinst" "$package_root/DEBIAN/prerm"
 
-fixture="$work_dir/Nuvio fixture package.deb"
+fixture="$work_dir/Cinebox fixture package.deb"
 dpkg-deb --root-owner-group -b "$package_root" "$fixture" >/dev/null
 
 "$patch_script" "$fixture"
@@ -92,7 +92,7 @@ fi
 
 stripped_contents="$work_dir/stripped-contents.txt"
 dpkg-deb --contents "$fixture" > "$stripped_contents"
-if grep -q "opt/nuvio/lib/nuvio-Nuvio.desktop" "$stripped_contents"; then
+if grep -q "opt/cinebox/lib/cinebox-Cinebox.desktop" "$stripped_contents"; then
     echo "DEB still ships the jpackage-generated desktop entry." >&2
     exit 1
 fi

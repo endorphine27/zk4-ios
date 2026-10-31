@@ -48,7 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.cinebox.app.core.ui.secondaryClickAt
-import com.cinebox.app.core.ui.nuvioDesktopDragScroll
+import com.cinebox.app.core.ui.cineboxDesktopDragScroll
 import com.cinebox.app.core.ui.SkeletonBlock
 import com.cinebox.app.features.debrid.DebridProviders
 import com.cinebox.app.isDesktop
@@ -245,7 +245,7 @@ private fun StreamCardBadgeRow(
 
     Row(
         modifier = modifier
-            .nuvioDesktopDragScroll(scrollState)
+            .cineboxDesktopDragScroll(scrollState)
             .horizontalScroll(scrollState),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp),

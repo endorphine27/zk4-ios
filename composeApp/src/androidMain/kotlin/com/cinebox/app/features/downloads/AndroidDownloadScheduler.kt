@@ -226,12 +226,12 @@ internal class AndroidDownloadScheduler(val context: Context) {
     }
 
     private fun lock(fileName: String): Mutex = locks.getOrPut(fileName) { Mutex() }
-    private fun workName(transfer: AndroidDownloadTransfer) = "nuvio-download-${transfer.jobId}"
+    private fun workName(transfer: AndroidDownloadTransfer) = "cinebox-download-${transfer.jobId}"
 
     companion object {
         const val FILE_NAME = "download_file_name"
         const val GENERATION = "download_generation"
-        const val JOB_NAMESPACE = "nuvio-downloads"
+        const val JOB_NAMESPACE = "cinebox-downloads"
     }
 }
 

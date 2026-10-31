@@ -9,8 +9,8 @@ import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.addons_manifest_missing_field
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.addons_manifest_missing_field
 import org.jetbrains.compose.resources.getString
 
 internal object AddonManifestParser {

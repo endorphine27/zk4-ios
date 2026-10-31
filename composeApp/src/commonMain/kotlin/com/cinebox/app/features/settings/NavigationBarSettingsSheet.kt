@@ -25,10 +25,10 @@ import com.cinebox.app.core.ui.CineboxBottomSheetActionRow
 import com.cinebox.app.core.ui.CineboxBottomSheetDivider
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
 import com.cinebox.app.core.ui.CineboxPrimaryButton
-import com.cinebox.app.core.ui.dismissNuvioBottomSheet
+import com.cinebox.app.core.ui.dismissCineboxBottomSheet
 import com.cinebox.app.core.ui.floatingNavigationGlowSupported
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,7 +44,7 @@ internal fun NavigationBarSettingsSheet(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
     val dismiss: () -> Unit = {
-        scope.launch { dismissNuvioBottomSheet(sheetState, onDismiss) }
+        scope.launch { dismissCineboxBottomSheet(sheetState, onDismiss) }
     }
     CineboxModalBottomSheet(onDismissRequest = dismiss, sheetState = sheetState) {
         LazyColumn(Modifier.fillMaxWidth()) {

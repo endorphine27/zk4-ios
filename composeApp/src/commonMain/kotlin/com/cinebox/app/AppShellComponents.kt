@@ -63,11 +63,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cinebox.app.core.ui.DisintegrationRequest
-import com.cinebox.app.core.ui.LocalNuvioNavBarScrollState
+import com.cinebox.app.core.ui.LocalCineboxNavBarScrollState
 import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.core.ui.CineboxNavBarScrollState
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.cloud.CloudLibraryContentType
 import com.cinebox.app.features.cloud.CloudLibraryFile
 import com.cinebox.app.features.cloud.CloudLibraryItem
@@ -103,19 +103,19 @@ import com.cinebox.app.navigation.CineboxNavigator
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.hazeEffect
 import kotlinx.coroutines.flow.Flow
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.app_brand_name
-import nuvio.composeapp.generated.resources.compose_nav_calendar
-import nuvio.composeapp.generated.resources.compose_nav_tv
-import nuvio.composeapp.generated.resources.sidebar_tv
-import nuvio.composeapp.generated.resources.compose_nav_home
-import nuvio.composeapp.generated.resources.compose_nav_library
-import nuvio.composeapp.generated.resources.compose_nav_profile
-import nuvio.composeapp.generated.resources.compose_nav_search
-import nuvio.composeapp.generated.resources.compose_nav_settings
-import nuvio.composeapp.generated.resources.compose_settings_page_root
-import nuvio.composeapp.generated.resources.sidebar_library
-import nuvio.composeapp.generated.resources.sidebar_search
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.app_brand_name
+import cinebox.composeapp.generated.resources.compose_nav_calendar
+import cinebox.composeapp.generated.resources.compose_nav_tv
+import cinebox.composeapp.generated.resources.sidebar_tv
+import cinebox.composeapp.generated.resources.compose_nav_home
+import cinebox.composeapp.generated.resources.compose_nav_library
+import cinebox.composeapp.generated.resources.compose_nav_profile
+import cinebox.composeapp.generated.resources.compose_nav_search
+import cinebox.composeapp.generated.resources.compose_nav_settings
+import cinebox.composeapp.generated.resources.compose_settings_page_root
+import cinebox.composeapp.generated.resources.sidebar_library
+import cinebox.composeapp.generated.resources.sidebar_search
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -349,7 +349,7 @@ internal fun TabletFloatingTopBar(
     windowWidth: Dp? = null,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val statusBarPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered by interactionSource.collectIsHoveredAsState()
@@ -667,7 +667,7 @@ private fun TabletTopPillItem(
     textStyle: TextStyle = MaterialTheme.typography.labelLarge,
     icon: @Composable () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val selectedBgColor by animateColorAsState(
         targetValue = if (selected) tokens.colors.accent.copy(alpha = 0.18f) else Color.Transparent,
         label = "pill_bg_color",
@@ -726,7 +726,7 @@ private fun TabletTopPillItem(
 internal fun AppLoadingContent(
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center,
@@ -775,7 +775,7 @@ internal fun DesktopHoverSidebar(
     onProfileStackVisibleChange: (Boolean) -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val statusBarPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val profileState by ProfileRepository.state.collectAsStateWithLifecycle()
     val avatars by AvatarRepository.avatars.collectAsStateWithLifecycle()
@@ -956,7 +956,7 @@ private fun DesktopSidebarProfileTrigger(
     label: String,
     expanded: Boolean,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -1017,7 +1017,7 @@ private fun DesktopSidebarItem(
     onClick: () -> Unit,
     icon: @Composable (Color) -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val contentColor = if (selected) tokens.colors.textPrimary else tokens.colors.textMuted
     val iconColor = if (selected) tokens.colors.onAccent else contentColor
 

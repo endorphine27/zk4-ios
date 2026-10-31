@@ -4,11 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
 import com.cinebox.app.features.simkl.SimklBrandAsset
 import com.cinebox.app.features.simkl.simklBrandPainter
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.introdb_favicon
-import nuvio.composeapp.generated.resources.mdblist_logo
-import nuvio.composeapp.generated.resources.rating_tmdb
-import nuvio.composeapp.generated.resources.trakt_tv_favicon
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.introdb_favicon
+import cinebox.composeapp.generated.resources.mdblist_logo
+import cinebox.composeapp.generated.resources.rating_tmdb
+import cinebox.composeapp.generated.resources.trakt_tv_favicon
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

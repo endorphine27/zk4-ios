@@ -87,12 +87,12 @@ import dev.chrisbanes.haze.hazeEffect
 import com.cinebox.app.core.ui.CineboxDesktopAnimation
 import com.cinebox.app.core.ui.CineboxAsyncImage as AsyncImage
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import dev.chrisbanes.haze.HazeState
 import com.cinebox.app.isIos
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.getString
 import kotlin.math.max
@@ -412,7 +412,7 @@ private fun SidebarProfileSwitcherRow(
     isActive: Boolean,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -467,7 +467,7 @@ private fun SidebarProfileSwitcherRow(
 private fun SidebarAddProfileRow(
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -511,7 +511,7 @@ private fun SidebarCompactPinEntry(
     onCancel: () -> Unit,
     verifyPin: suspend (String) -> PinVerifyResult,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     var pin by remember(profileName) { mutableStateOf("") }
     var error by remember(profileName) { mutableStateOf<String?>(null) }
     var isVerifying by remember(profileName) { mutableStateOf(false) }
@@ -662,7 +662,7 @@ private fun SidebarCompactPinKeypad(
     onDigit: (String) -> Unit,
     onBackspace: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val rows = listOf(
         listOf("1", "2", "3"),
         listOf("4", "5", "6"),
@@ -734,7 +734,7 @@ fun NativeProfileSwitcherPopup(
     val activeProfile = profileState.activeProfile
     val profiles = profileState.profiles
     val avatars by AvatarRepository.avatars.collectAsStateWithLifecycle()
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val haptic = LocalHapticFeedback.current
     val density = LocalDensity.current
 
@@ -920,7 +920,7 @@ private fun PopupAddProfileBubble(
     delayMs: Int,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val itemAlpha = remember { Animatable(0f) }
     val itemScale = remember { Animatable(0.4f) }
 
@@ -994,7 +994,7 @@ private fun PopupProfileBubble(
     onBoundsChanged: (Rect) -> Unit,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val avatarColor = remember(profile.avatarColorHex) { parseHexColor(profile.avatarColorHex) }
     val avatarItem = remember(profile.avatarId, avatars) {
         profile.avatarId?.let { id -> avatars.find { it.id == id } }
@@ -1166,7 +1166,7 @@ fun ActiveProfileMiniAvatar(
     selected: Boolean,
     size: Int = 24,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     if (profile == null) {
         Icon(
             imageVector = Icons.Rounded.Person,

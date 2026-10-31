@@ -51,7 +51,7 @@ import com.cinebox.app.core.ui.DisintegrationRequest
 import com.cinebox.app.core.ui.CineboxAsyncImage as AsyncImage
 import com.cinebox.app.core.ui.CineboxCardDepthSurface
 import com.cinebox.app.core.ui.CineboxProgressBar
-import com.cinebox.app.core.ui.nuvioCardDepth
+import com.cinebox.app.core.ui.cineboxCardDepth
 import com.cinebox.app.core.ui.CineboxShelfSection
 import com.cinebox.app.core.ui.CineboxTokens
 import com.cinebox.app.core.ui.PosterLandscapeAspectRatio
@@ -74,7 +74,7 @@ import com.cinebox.app.features.watchprogress.CurrentDateProvider
 import com.cinebox.app.features.watchprogress.computeAirDateBadgeText
 import com.cinebox.app.isDesktop
 import kotlin.math.roundToInt
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 import com.cinebox.app.core.i18n.localizedEpisodeTitle
 
@@ -724,7 +724,7 @@ private fun ContinueWatchingCard(
             .aspectRatio(PosterLandscapeAspectRatio)
             .clip(RoundedCornerShape(cardMetrics.cornerRadius))
             .background(MaterialTheme.colorScheme.surfaceVariant)
-            .nuvioCardDepth(
+            .cineboxCardDepth(
                 shape = RoundedCornerShape(cardMetrics.cornerRadius),
                 surface = CineboxCardDepthSurface.ContinueWatching,
             ),
@@ -1040,7 +1040,7 @@ private fun ContinueWatchingPosterCard(
                 .let { if (isDesktop) it.aspectRatio(0.675f) else it.height(layout.posterCardHeight) }
                 .clip(RoundedCornerShape(cornerRadius))
                 .background(MaterialTheme.colorScheme.surfaceVariant)
-                .nuvioCardDepth(
+                .cineboxCardDepth(
                     shape = RoundedCornerShape(cornerRadius),
                     surface = CineboxCardDepthSurface.ContinueWatching,
                 )

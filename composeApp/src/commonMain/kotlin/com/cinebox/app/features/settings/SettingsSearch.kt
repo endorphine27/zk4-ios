@@ -45,11 +45,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.isDesktop
 import com.cinebox.app.isIos
 import com.cinebox.app.supportsPosterNavigationMotion
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 internal sealed class SettingsSearchTarget {
@@ -1101,7 +1101,7 @@ private fun SettingsSearchField(
     query: String,
     onQueryChange: (String) -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     OutlinedTextField(
         value = query,
         onValueChange = onQueryChange,
@@ -1148,7 +1148,7 @@ private fun SettingsSearchField(
 
 @Composable
 private fun SettingsSearchEmptyState(isTablet: Boolean) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     SettingsSection(
         title = stringResource(Res.string.settings_search_results_section),
         isTablet = isTablet,

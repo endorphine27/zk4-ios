@@ -56,9 +56,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.cinebox.app.isDesktop
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.home_view_all
-import nuvio.composeapp.generated.resources.poster_logo_content_description
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.home_view_all
+import cinebox.composeapp.generated.resources.poster_logo_content_description
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.abs
 import kotlin.math.roundToInt
@@ -91,7 +91,7 @@ fun <T> CineboxShelfSection(
     state: LazyListState = rememberLazyListState(),
     itemContent: @Composable (T) -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val duplicateSafeEntries = remember(entries, key) {
         key?.let { entries.withDuplicateSafeLazyKeys(it) }
     }
@@ -115,8 +115,8 @@ fun <T> CineboxShelfSection(
         LazyRow(
             state = state,
             modifier = rowModifier
-                .nuvioHorizontalScrollBleed(LocalVerticalBarPadding.current)
-                .nuvioDesktopDragScroll(state),
+                .cineboxHorizontalScrollBleed(LocalVerticalBarPadding.current)
+                .cineboxDesktopDragScroll(state),
             contentPadding = rowContentPadding.withVerticalBar(),
             horizontalArrangement = Arrangement.spacedBy(itemSpacing),
         ) {
@@ -148,7 +148,7 @@ fun <T> CineboxShelfSection(
     }
 }
 
-internal fun Modifier.nuvioDesktopDragScroll(
+internal fun Modifier.cineboxDesktopDragScroll(
     state: LazyListState,
 ): Modifier {
     if (!isDesktop) return this
@@ -189,7 +189,7 @@ internal fun Modifier.nuvioDesktopDragScroll(
     }
 }
 
-internal fun Modifier.nuvioDesktopDragScroll(
+internal fun Modifier.cineboxDesktopDragScroll(
     state: ScrollState,
 ): Modifier {
     if (!isDesktop) return this
@@ -247,7 +247,7 @@ fun CineboxPosterCard(
     onLongClick: (() -> Unit)? = null,
 ) {
     val posterCardStyle = rememberPosterCardStyleUiState()
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val effectiveBasePosterWidthDp = basePosterWidthDp ?: posterCardStyle.widthDp
     val cardWidth = shape.cardWidth(basePosterWidthDp = effectiveBasePosterWidthDp)
     val cardShape = RoundedCornerShape(posterCardStyle.cornerRadiusDp.dp)
@@ -270,7 +270,7 @@ fun CineboxPosterCard(
                 .aspectRatio(shape.aspectRatio)
                 .clip(cardShape)
                 .background(tokens.colors.surface)
-                .nuvioCardDepth(
+                .cineboxCardDepth(
                     shape = cardShape,
                     surface = CineboxCardDepthSurface.Posters,
                 )
@@ -396,7 +396,7 @@ private fun CineboxShelfSectionHeader(
     onTitleClick: (() -> Unit)? = null,
     viewAllPillSize: CineboxViewAllPillSize = CineboxViewAllPillSize.Default,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(
         modifier = modifier.fillMaxWidth(),
     ) {
@@ -437,7 +437,7 @@ private fun CineboxViewAllPill(
     size: CineboxViewAllPillSize,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val actionSize = if (size == CineboxViewAllPillSize.Compact) CineboxTokens.Space.s32 else CineboxTokens.Space.s40
     val iconSize = if (size == CineboxViewAllPillSize.Compact) CineboxTokens.Icon.sm else tokens.icons.md
     val viewAllText = stringResource(Res.string.home_view_all)
@@ -473,7 +473,7 @@ internal fun desktopCatalogShelfPosterBaseWidthDp(
         basePosterWidthDp
     }
 
-internal fun Modifier.nuvioShelfHoverOverdraw(inset: Dp): Modifier {
+internal fun Modifier.cineboxShelfHoverOverdraw(inset: Dp): Modifier {
     if (inset == 0.dp) return this
 
     // Expand the measured viewport, then place it negatively so edge items keep

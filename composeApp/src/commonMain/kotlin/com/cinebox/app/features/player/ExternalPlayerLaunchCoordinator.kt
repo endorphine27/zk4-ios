@@ -12,9 +12,9 @@ import kotlinx.coroutines.withTimeoutOrNull
 import kotlinx.serialization.json.addJsonObject
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.put
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.player_external_downloading_subtitles
-import nuvio.composeapp.generated.resources.player_external_loading_subtitles
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.player_external_downloading_subtitles
+import cinebox.composeapp.generated.resources.player_external_loading_subtitles
 import org.jetbrains.compose.resources.getString
 
 private const val SkipSegmentResolveTimeoutMs = 4_000L

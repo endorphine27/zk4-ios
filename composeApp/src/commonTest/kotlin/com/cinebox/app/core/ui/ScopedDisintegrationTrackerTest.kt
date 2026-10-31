@@ -89,7 +89,7 @@ class ScopedDisintegrationTrackerTest {
         assertEquals(listOf("simkl-one"), entries.map { it.item })
         assertTrue(entries.none { it.exiting })
 
-        val emptyEntries = tracker.sync(scope = "nuvio-sync", items = emptyList())
+        val emptyEntries = tracker.sync(scope = "cinebox-sync", items = emptyList())
 
         assertTrue(emptyEntries.isEmpty())
     }

@@ -28,11 +28,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.collections_folder_addon_not_found
-import nuvio.composeapp.generated.resources.collections_folder_trakt_movie_list
-import nuvio.composeapp.generated.resources.collections_folder_trakt_series_list
-import nuvio.composeapp.generated.resources.collections_tab_all
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.collections_folder_addon_not_found
+import cinebox.composeapp.generated.resources.collections_folder_trakt_movie_list
+import cinebox.composeapp.generated.resources.collections_folder_trakt_series_list
+import cinebox.composeapp.generated.resources.collections_tab_all
 import org.jetbrains.compose.resources.getString
 
 data class FolderTab(

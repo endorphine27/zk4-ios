@@ -9,7 +9,7 @@ import kotlin.test.assertTrue
 class PluginScraperCodeFileStoreTest {
     @Test
     fun scraperCodeRoundTripsWithoutRewritingUnlessRequested() {
-        val root = Files.createTempDirectory("nuvio-plugin-code").toFile()
+        val root = Files.createTempDirectory("cinebox-plugin-code").toFile()
         try {
             val store = PluginScraperCodeFileStore(root)
             val scraperId = "https://plugins.example/manifest.json:scraper"

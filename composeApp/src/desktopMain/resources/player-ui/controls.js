@@ -2311,7 +2311,7 @@ const renderActiveModal = (modalOpened = false) => {
   if (activeModal === "party") renderPartyModal();
 };
 
-window.nuvioNativeViewportChanged = () => {
+window.cineboxNativeViewportChanged = () => {
   root.classList.add("native-resizing");
   window.clearTimeout(nativeViewportTimer);
   const timeoutMs = state.isInPip ? 5000 : 180;
@@ -2322,7 +2322,7 @@ window.nuvioNativeViewportChanged = () => {
   if (activeModal) renderActiveModal();
 };
 
-window.nuvioNativeResizeEnded = () => {
+window.cineboxNativeResizeEnded = () => {
   window.clearTimeout(nativeViewportTimer);
   root.classList.remove("native-resizing");
   noteChromeActivity(true);
@@ -3607,11 +3607,11 @@ const clearSuppressNextRootClick = () => {
   }
 };
 
-window.nuvioNativeViewportChanged = () => {
+window.cineboxNativeViewportChanged = () => {
   root.classList.add("native-resizing");
 };
 
-window.nuvioNativeResizeEnded = () => {
+window.cineboxNativeResizeEnded = () => {
   pipPointerDown = false;
   clearSuppressNextRootClick();
   root.classList.remove("native-resizing");

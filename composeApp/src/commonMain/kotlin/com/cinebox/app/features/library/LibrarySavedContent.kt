@@ -20,18 +20,18 @@ import com.cinebox.app.core.ui.CineboxDropdownOption
 import com.cinebox.app.features.home.MetaPreview
 import com.cinebox.app.features.home.components.PosterGridRow
 import com.cinebox.app.features.home.components.PosterGridSkeletonRow
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.library_filter_all_types
-import nuvio.composeapp.generated.resources.library_filter_list
-import nuvio.composeapp.generated.resources.library_filter_sort
-import nuvio.composeapp.generated.resources.library_filter_type
-import nuvio.composeapp.generated.resources.library_sort_added_asc
-import nuvio.composeapp.generated.resources.library_sort_added_desc
-import nuvio.composeapp.generated.resources.library_sort_title_asc
-import nuvio.composeapp.generated.resources.library_sort_title_desc
-import nuvio.composeapp.generated.resources.library_sort_provider_order
-import nuvio.composeapp.generated.resources.library_sort_released_asc
-import nuvio.composeapp.generated.resources.library_sort_released_desc
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.library_filter_all_types
+import cinebox.composeapp.generated.resources.library_filter_list
+import cinebox.composeapp.generated.resources.library_filter_sort
+import cinebox.composeapp.generated.resources.library_filter_type
+import cinebox.composeapp.generated.resources.library_sort_added_asc
+import cinebox.composeapp.generated.resources.library_sort_added_desc
+import cinebox.composeapp.generated.resources.library_sort_title_asc
+import cinebox.composeapp.generated.resources.library_sort_title_desc
+import cinebox.composeapp.generated.resources.library_sort_provider_order
+import cinebox.composeapp.generated.resources.library_sort_released_asc
+import cinebox.composeapp.generated.resources.library_sort_released_desc
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -7,9 +7,9 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.network_empty_response_body
-import nuvio.composeapp.generated.resources.network_request_failed_http
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.network_empty_response_body
+import cinebox.composeapp.generated.resources.network_request_failed_http
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request

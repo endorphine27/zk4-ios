@@ -30,9 +30,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
-import com.cinebox.app.core.ui.dismissNuvioBottomSheet
+import com.cinebox.app.core.ui.dismissCineboxBottomSheet
 import com.cinebox.app.core.ui.isFullscreenActionActive
-import com.cinebox.app.core.ui.nuvioSafeBottomPadding
+import com.cinebox.app.core.ui.cineboxSafeBottomPadding
 import com.cinebox.app.core.ui.toggleFullscreenAction
 import com.cinebox.app.features.player.FullscreenPlayerDialog
 import com.cinebox.app.features.player.LockPlayerToLandscape
@@ -42,7 +42,7 @@ import com.cinebox.app.features.trailer.TrailerPlayer
 import com.cinebox.app.features.trailer.TrailerPlaybackSource
 import com.cinebox.app.isIos
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -156,7 +156,7 @@ fun TrailerPlayerPopup(
     val dismissSheet: () -> Unit = {
         releasePlayerThen {
             coroutineScope.launch {
-                dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
             }
         }
     }
@@ -169,7 +169,7 @@ fun TrailerPlayerPopup(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)
-                .padding(bottom = nuvioSafeBottomPadding(14.dp)),
+                .padding(bottom = cineboxSafeBottomPadding(14.dp)),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Row(

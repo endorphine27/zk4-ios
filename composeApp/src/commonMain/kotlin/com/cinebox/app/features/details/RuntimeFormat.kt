@@ -1,10 +1,10 @@
 package com.cinebox.app.features.details
 
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.details_runtime_hours_minutes
-import nuvio.composeapp.generated.resources.details_runtime_hours_only
-import nuvio.composeapp.generated.resources.details_runtime_minutes_only
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.details_runtime_hours_minutes
+import cinebox.composeapp.generated.resources.details_runtime_hours_only
+import cinebox.composeapp.generated.resources.details_runtime_minutes_only
 import org.jetbrains.compose.resources.getString
 
 private val hourTokenRegex = Regex("""(?i)(\d+)\s*h(?:ours?)?""")

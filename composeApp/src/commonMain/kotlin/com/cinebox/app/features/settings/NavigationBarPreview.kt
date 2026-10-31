@@ -32,15 +32,15 @@ import com.cinebox.app.core.ui.FloatingNavigationBar
 import com.cinebox.app.core.ui.FloatingNavigationItem
 import com.cinebox.app.core.ui.CineboxClassicNavigationBar
 import com.cinebox.app.core.ui.CineboxNavBarScrollState
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.rememberHazeState
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun NavigationBarPreview(style: NavBarStyle, isTablet: Boolean, glowEnabled: Boolean) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val hazeState = rememberHazeState()
     val barScrollState = remember(style, isTablet) {
         CineboxNavBarScrollState().apply {

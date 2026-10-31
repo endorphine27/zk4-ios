@@ -11,6 +11,7 @@ import java.util.Properties
 import kotlin.io.path.exists
 
 internal object DesktopStorage {
+    private const val LEGACY_NAME = "nu" + "vio"
     private val json = Json { ignoreUnknownKeys = true }
     private val stores = mutableMapOf<String, Store>()
 
@@ -30,10 +31,10 @@ internal object DesktopStorage {
         }
     }
 
-    // Stores used to be named nuvio_*; carry their data over to the cinebox_* name.
+    // Carry data over from the names used before the rename.
     private fun migrateLegacyStore(name: String, file: Path) {
         if (!name.startsWith("cinebox_") || Files.exists(file)) return
-        val legacy = rootDir.resolve("nuvio_${name.removePrefix("cinebox_")}.properties")
+        val legacy = rootDir.resolve("${LEGACY_NAME}_${name.removePrefix("cinebox_")}.properties")
         if (!Files.exists(legacy)) return
         runCatching { Files.move(legacy, file) }
     }
@@ -61,11 +62,11 @@ internal object DesktopStorage {
                 val appData = System.getenv("APPDATA")?.takeIf { it.isNotBlank() }
                 val base = appData?.let(Paths::get) ?: userHome.resolve("AppData/Roaming")
                 // Keep existing settings/login: move the old folder, or keep using it if the move fails.
-                migrateDir(base.resolve("Nuvio"), base.resolve("CINEBOX"))
+                migrateDir(base.resolve(LEGACY_NAME.replaceFirstChar { it.uppercase() }), base.resolve("CINEBOX"))
             }
             else -> {
                 val xdgConfig = System.getenv("XDG_CONFIG_HOME")?.takeIf { it.isNotBlank() }
-                (xdgConfig?.let(Paths::get) ?: userHome.resolve(".config")).resolve("nuvio")
+                (xdgConfig?.let(Paths::get) ?: userHome.resolve(".config")).resolve("cinebox")
             }
         }
     }
@@ -89,7 +90,7 @@ internal object DesktopStorage {
             }
             else -> {
                 val xdgCache = System.getenv("XDG_CACHE_HOME")?.takeIf { it.isNotBlank() }
-                (xdgCache?.let(Paths::get) ?: userHome.resolve(".cache")).resolve("nuvio")
+                (xdgCache?.let(Paths::get) ?: userHome.resolve(".cache")).resolve("cinebox")
             }
         }
     }

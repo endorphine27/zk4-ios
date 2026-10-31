@@ -2,8 +2,8 @@
 .kotlin
 .gradle
 **/build/
-!composeApp/src/**/kotlin/com/nuvio/app/core/build/
-!composeApp/src/**/kotlin/com/nuvio/app/core/build/**
+!composeApp/src/**/kotlin/com/cinebox/app/core/build/
+!composeApp/src/**/kotlin/com/cinebox/app/core/build/**
 xcuserdata
 !src/**/build/
 local.properties

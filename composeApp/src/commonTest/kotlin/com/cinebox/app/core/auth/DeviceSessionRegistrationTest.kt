@@ -7,17 +7,17 @@ class DeviceSessionRegistrationTest {
     @Test
     fun buildsOfficialClientRegistrationPayload() {
         val params = buildDeviceRegistrationParams(
-            installationId = "nuvio-desktop-installation",
+            installationId = "cinebox-desktop-installation",
             clientVersion = "1.2.3",
             metadata = DeviceClientMetadata(
-                clientName = "Nuvio Desktop",
+                clientName = "Cinebox Desktop",
                 deviceName = "Nayif MacBook Pro",
                 platform = "macOS 15.5",
             ),
         )
 
-        assertEquals("nuvio-desktop-installation", params.getValue("p_installation_id").toString().trim('"'))
-        assertEquals("Nuvio Desktop", params.getValue("p_client_name").toString().trim('"'))
+        assertEquals("cinebox-desktop-installation", params.getValue("p_installation_id").toString().trim('"'))
+        assertEquals("Cinebox Desktop", params.getValue("p_client_name").toString().trim('"'))
         assertEquals("1.2.3", params.getValue("p_client_version").toString().trim('"'))
         assertEquals("macOS 15.5", params.getValue("p_platform").toString().trim('"'))
         assertEquals("Nayif MacBook Pro", params.getValue("p_device_name").toString().trim('"'))

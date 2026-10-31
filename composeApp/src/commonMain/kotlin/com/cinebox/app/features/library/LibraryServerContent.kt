@@ -18,11 +18,11 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_retry
-import nuvio.composeapp.generated.resources.library_server_load_failed
-import nuvio.composeapp.generated.resources.library_servers_empty_message
-import nuvio.composeapp.generated.resources.library_servers_empty_title
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_retry
+import cinebox.composeapp.generated.resources.library_server_load_failed
+import cinebox.composeapp.generated.resources.library_servers_empty_message
+import cinebox.composeapp.generated.resources.library_servers_empty_title
 import org.jetbrains.compose.resources.stringResource
 
 internal data class LibraryServerShelf(

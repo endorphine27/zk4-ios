@@ -8,8 +8,8 @@ import com.cinebox.app.features.addons.enabledAddons
 import com.cinebox.app.features.catalog.supportsPagination
 import com.cinebox.app.features.servers.ServerCatalog
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.home_catalog_default_title
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.home_catalog_default_title
 import org.jetbrains.compose.resources.getString
 
 data class HomeCatalogDefinition(

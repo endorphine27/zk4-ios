@@ -7,8 +7,8 @@ import com.cinebox.app.features.plugins.PluginRuntimeResult
 import com.cinebox.app.features.plugins.PluginScraper
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.streams_plugin_repository_fallback
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.streams_plugin_repository_fallback
 import org.jetbrains.compose.resources.getString
 
 internal data class InstalledStreamAddonTarget(

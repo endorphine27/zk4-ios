@@ -6,12 +6,12 @@ import com.cinebox.app.features.player.OpeningOverlay
 import com.cinebox.app.features.player.subtitleLoadingStatusMessage
 import com.cinebox.app.features.streams.StreamLaunch
 import com.cinebox.app.features.streams.StreamsUiState
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.debrid_resolving_stream
-import nuvio.composeapp.generated.resources.player_loading_preparing
-import nuvio.composeapp.generated.resources.streams_finding_source
-import nuvio.composeapp.generated.resources.streams_loading_subtitles
-import nuvio.composeapp.generated.resources.youtube_resolving_stream
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.debrid_resolving_stream
+import cinebox.composeapp.generated.resources.player_loading_preparing
+import cinebox.composeapp.generated.resources.streams_finding_source
+import cinebox.composeapp.generated.resources.streams_loading_subtitles
+import cinebox.composeapp.generated.resources.youtube_resolving_stream
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

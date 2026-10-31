@@ -15,11 +15,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cinebox.app.isDesktop
 import com.cinebox.app.isIos
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_player_resize_fill
-import nuvio.composeapp.generated.resources.compose_player_resize_fit
-import nuvio.composeapp.generated.resources.compose_player_resize_stretch
-import nuvio.composeapp.generated.resources.compose_player_resize_zoom
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_player_resize_fill
+import cinebox.composeapp.generated.resources.compose_player_resize_fit
+import cinebox.composeapp.generated.resources.compose_player_resize_stretch
+import cinebox.composeapp.generated.resources.compose_player_resize_zoom
 import org.jetbrains.compose.resources.StringResource
 import kotlin.math.max
 

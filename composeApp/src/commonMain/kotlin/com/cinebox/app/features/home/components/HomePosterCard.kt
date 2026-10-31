@@ -45,7 +45,7 @@ fun HomePosterCard(
             modifier = modifier.then(hoverModifier),
             fallbackImageUrl = fallbackImageUrl,
             basePosterWidthDp = desktopCatalogShelfPosterBaseWidthDp(posterCardStyle.widthDp),
-            shape = if (isLandscapeMode) CineboxPosterShape.Landscape else item.posterShape.toNuvioPosterShape(),
+            shape = if (isLandscapeMode) CineboxPosterShape.Landscape else item.posterShape.toCineboxPosterShape(),
             detailLine = if (isLandscapeMode || posterCardStyle.hideLabelsEnabled) null else item.releaseInfo?.let { formatReleaseDateForDisplay(it) },
             showTitleBelow = !posterCardStyle.hideLabelsEnabled,
             bottomLeftLogoUrl = if (isLandscapeMode && showLandscapeOverlay && effectiveLandscapePoster.isNullOrBlank()) item.logo else null,
@@ -57,7 +57,7 @@ fun HomePosterCard(
     }
 }
 
-private fun PosterShape.toNuvioPosterShape(): CineboxPosterShape =
+private fun PosterShape.toCineboxPosterShape(): CineboxPosterShape =
     when (this) {
         PosterShape.Poster -> CineboxPosterShape.Poster
         PosterShape.Square -> CineboxPosterShape.Square

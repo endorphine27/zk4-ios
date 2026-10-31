@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 enum class WatchProgressSource {
     TRAKT,
     SIMKL,
-    NUVIO_SYNC,
+    CINEBOX_SYNC,
     MDBLIST;
 
     val providerId: TrackingProviderId?
@@ -15,7 +15,7 @@ enum class WatchProgressSource {
             TRAKT -> TrackingProviderId.TRAKT
             SIMKL -> TrackingProviderId.SIMKL
             MDBLIST -> TrackingProviderId.MDBLIST
-            NUVIO_SYNC -> null
+            CINEBOX_SYNC -> null
         }
 
     companion object {
@@ -42,9 +42,9 @@ fun effectiveWatchProgressSource(
     requestedSource: WatchProgressSource,
     isProviderAuthenticated: (TrackingProviderId) -> Boolean,
 ): WatchProgressSource {
-    val providerId = requestedSource.providerId ?: return WatchProgressSource.NUVIO_SYNC
+    val providerId = requestedSource.providerId ?: return WatchProgressSource.CINEBOX_SYNC
     return requestedSource.takeIf { isProviderAuthenticated(providerId) }
-        ?: WatchProgressSource.NUVIO_SYNC
+        ?: WatchProgressSource.CINEBOX_SYNC
 }
 
 fun effectiveLibrarySourceMode(

@@ -54,7 +54,7 @@ fun CineboxDropdownChip(
     onSelected: (CineboxDropdownOption) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     var isSheetVisible by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val coroutineScope = rememberCoroutineScope()
@@ -135,7 +135,7 @@ fun CineboxDropdownChip(
             sheetState = sheetState,
             onDismiss = {
                 coroutineScope.launch {
-                    dismissNuvioBottomSheet(
+                    dismissCineboxBottomSheet(
                         sheetState = sheetState,
                         onDismiss = { isSheetVisible = false },
                     )
@@ -144,7 +144,7 @@ fun CineboxDropdownChip(
             onSelected = { option ->
                 onSelected(option)
                 coroutineScope.launch {
-                    dismissNuvioBottomSheet(
+                    dismissCineboxBottomSheet(
                         sheetState = sheetState,
                         onDismiss = { isSheetVisible = false },
                     )
@@ -164,7 +164,7 @@ private fun CineboxDropdownOptionsSheet(
     onDismiss: () -> Unit,
     onSelected: (CineboxDropdownOption) -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     CineboxModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
@@ -172,7 +172,7 @@ private fun CineboxDropdownOptionsSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = nuvioSafeBottomPadding(tokens.spacing.screenHorizontal)),
+                .padding(bottom = cineboxSafeBottomPadding(tokens.spacing.screenHorizontal)),
         ) {
             Text(
                 text = title,

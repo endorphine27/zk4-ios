@@ -1,4 +1,4 @@
-package com.nuvio.android
+package com.cinebox.android
 
 import android.app.job.JobScheduler
 import android.net.Uri
@@ -20,7 +20,7 @@ class BackgroundDownloadTestActivity : MainActivity() {
         started = true
         val url = requireNotNull(intent.getStringExtra("downloadUrl"))
         require(Uri.parse(url).host == "10.0.2.2") { "Only the emulator's local fixture server is supported" }
-        val id = "nuvio-background-download-fixture"
+        val id = "cinebox-background-download-fixture"
         val result = DownloadsRepository.enqueueFromStream(
             contentType = "movie", videoId = id, parentMetaId = id, parentMetaType = "movie",
             title = "Background download test", logo = null, poster = null, background = null,
@@ -29,7 +29,7 @@ class BackgroundDownloadTestActivity : MainActivity() {
         )
         check(result == DownloadEnqueueResult.Started || result == DownloadEnqueueResult.Replaced)
         if (Build.VERSION.SDK_INT >= 34) {
-            val jobs = getSystemService(JobScheduler::class.java).forNamespace("nuvio-downloads").allPendingJobs
+            val jobs = getSystemService(JobScheduler::class.java).forNamespace("cinebox-downloads").allPendingJobs
             check(jobs.any { it.isUserInitiated && it.isPersisted })
         }
         // Exercise UI reload against the real scheduler; Robolectric does not share

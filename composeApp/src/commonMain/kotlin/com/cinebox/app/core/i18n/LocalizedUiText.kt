@@ -1,58 +1,58 @@
 package com.cinebox.app.core.i18n
 
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.player_picture_in_picture
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_play
-import nuvio.composeapp.generated.resources.action_play_episode
-import nuvio.composeapp.generated.resources.action_resume
-import nuvio.composeapp.generated.resources.action_resume_episode
-import nuvio.composeapp.generated.resources.compose_player_episode_code_episode_only
-import nuvio.composeapp.generated.resources.compose_player_episode_code_full
-import nuvio.composeapp.generated.resources.streams_episode_fallback_title
-import nuvio.composeapp.generated.resources.compose_player_no_subtitle_lines_found
-import nuvio.composeapp.generated.resources.compose_player_subtitle_lines_load_error
-import nuvio.composeapp.generated.resources.continue_watching_up_next
-import nuvio.composeapp.generated.resources.continue_watching_up_next_episode
-import nuvio.composeapp.generated.resources.date_month_april
-import nuvio.composeapp.generated.resources.date_month_august
-import nuvio.composeapp.generated.resources.date_month_december
-import nuvio.composeapp.generated.resources.date_month_february
-import nuvio.composeapp.generated.resources.date_month_january
-import nuvio.composeapp.generated.resources.date_month_july
-import nuvio.composeapp.generated.resources.date_month_june
-import nuvio.composeapp.generated.resources.date_month_march
-import nuvio.composeapp.generated.resources.date_month_may
-import nuvio.composeapp.generated.resources.date_month_november
-import nuvio.composeapp.generated.resources.date_month_october
-import nuvio.composeapp.generated.resources.date_month_september
-import nuvio.composeapp.generated.resources.date_month_short_apr
-import nuvio.composeapp.generated.resources.date_month_short_aug
-import nuvio.composeapp.generated.resources.date_month_short_dec
-import nuvio.composeapp.generated.resources.date_month_short_feb
-import nuvio.composeapp.generated.resources.date_month_short_jan
-import nuvio.composeapp.generated.resources.date_month_short_jul
-import nuvio.composeapp.generated.resources.date_month_short_jun
-import nuvio.composeapp.generated.resources.date_month_short_mar
-import nuvio.composeapp.generated.resources.date_month_short_may
-import nuvio.composeapp.generated.resources.date_month_short_nov
-import nuvio.composeapp.generated.resources.date_month_short_oct
-import nuvio.composeapp.generated.resources.date_month_short_sep
-import nuvio.composeapp.generated.resources.media_anime
-import nuvio.composeapp.generated.resources.media_channels
-import nuvio.composeapp.generated.resources.media_movie
-import nuvio.composeapp.generated.resources.media_movies
-import nuvio.composeapp.generated.resources.media_series
-import nuvio.composeapp.generated.resources.media_tv
-import nuvio.composeapp.generated.resources.p2p_error_unknown
-import nuvio.composeapp.generated.resources.settings_stream_badge_enter_url
-import nuvio.composeapp.generated.resources.settings_stream_badge_import_failed
-import nuvio.composeapp.generated.resources.settings_stream_badge_import_limit
-import nuvio.composeapp.generated.resources.settings_stream_badge_url_scheme_invalid
-import nuvio.composeapp.generated.resources.unit_bytes_b
-import nuvio.composeapp.generated.resources.unit_bytes_gb
-import nuvio.composeapp.generated.resources.unit_bytes_kb
-import nuvio.composeapp.generated.resources.unit_bytes_mb
+import cinebox.composeapp.generated.resources.player_picture_in_picture
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_play
+import cinebox.composeapp.generated.resources.action_play_episode
+import cinebox.composeapp.generated.resources.action_resume
+import cinebox.composeapp.generated.resources.action_resume_episode
+import cinebox.composeapp.generated.resources.compose_player_episode_code_episode_only
+import cinebox.composeapp.generated.resources.compose_player_episode_code_full
+import cinebox.composeapp.generated.resources.streams_episode_fallback_title
+import cinebox.composeapp.generated.resources.compose_player_no_subtitle_lines_found
+import cinebox.composeapp.generated.resources.compose_player_subtitle_lines_load_error
+import cinebox.composeapp.generated.resources.continue_watching_up_next
+import cinebox.composeapp.generated.resources.continue_watching_up_next_episode
+import cinebox.composeapp.generated.resources.date_month_april
+import cinebox.composeapp.generated.resources.date_month_august
+import cinebox.composeapp.generated.resources.date_month_december
+import cinebox.composeapp.generated.resources.date_month_february
+import cinebox.composeapp.generated.resources.date_month_january
+import cinebox.composeapp.generated.resources.date_month_july
+import cinebox.composeapp.generated.resources.date_month_june
+import cinebox.composeapp.generated.resources.date_month_march
+import cinebox.composeapp.generated.resources.date_month_may
+import cinebox.composeapp.generated.resources.date_month_november
+import cinebox.composeapp.generated.resources.date_month_october
+import cinebox.composeapp.generated.resources.date_month_september
+import cinebox.composeapp.generated.resources.date_month_short_apr
+import cinebox.composeapp.generated.resources.date_month_short_aug
+import cinebox.composeapp.generated.resources.date_month_short_dec
+import cinebox.composeapp.generated.resources.date_month_short_feb
+import cinebox.composeapp.generated.resources.date_month_short_jan
+import cinebox.composeapp.generated.resources.date_month_short_jul
+import cinebox.composeapp.generated.resources.date_month_short_jun
+import cinebox.composeapp.generated.resources.date_month_short_mar
+import cinebox.composeapp.generated.resources.date_month_short_may
+import cinebox.composeapp.generated.resources.date_month_short_nov
+import cinebox.composeapp.generated.resources.date_month_short_oct
+import cinebox.composeapp.generated.resources.date_month_short_sep
+import cinebox.composeapp.generated.resources.media_anime
+import cinebox.composeapp.generated.resources.media_channels
+import cinebox.composeapp.generated.resources.media_movie
+import cinebox.composeapp.generated.resources.media_movies
+import cinebox.composeapp.generated.resources.media_series
+import cinebox.composeapp.generated.resources.media_tv
+import cinebox.composeapp.generated.resources.p2p_error_unknown
+import cinebox.composeapp.generated.resources.settings_stream_badge_enter_url
+import cinebox.composeapp.generated.resources.settings_stream_badge_import_failed
+import cinebox.composeapp.generated.resources.settings_stream_badge_import_limit
+import cinebox.composeapp.generated.resources.settings_stream_badge_url_scheme_invalid
+import cinebox.composeapp.generated.resources.unit_bytes_b
+import cinebox.composeapp.generated.resources.unit_bytes_gb
+import cinebox.composeapp.generated.resources.unit_bytes_kb
+import cinebox.composeapp.generated.resources.unit_bytes_mb
 import org.jetbrains.compose.resources.getString
 
 fun localizedMediaTypeLabel(type: String): String {
@@ -186,7 +186,7 @@ fun localizedByteUnit(unit: String): String =
     }
 
 fun localizedPlayerPictureInPicture(): String =
-    resourceString("Nuvio is playing in Picture in Picture mode") { getString(Res.string.player_picture_in_picture) }
+    resourceString("Cinebox is playing in Picture in Picture mode") { getString(Res.string.player_picture_in_picture) }
 
 private fun resourceString(
     fallback: String,

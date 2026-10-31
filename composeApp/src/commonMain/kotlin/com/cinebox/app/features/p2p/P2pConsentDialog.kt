@@ -12,12 +12,12 @@ import com.cinebox.app.core.ui.DialogButton
 import com.cinebox.app.core.ui.DialogButtonStyle
 import com.cinebox.app.core.ui.DialogButtons
 import com.cinebox.app.core.ui.DialogSurface
-import com.cinebox.app.core.ui.nuvio
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.p2p_consent_body
-import nuvio.composeapp.generated.resources.p2p_consent_cancel
-import nuvio.composeapp.generated.resources.p2p_consent_enable
-import nuvio.composeapp.generated.resources.p2p_consent_title
+import com.cinebox.app.core.ui.cinebox
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.p2p_consent_body
+import cinebox.composeapp.generated.resources.p2p_consent_cancel
+import cinebox.composeapp.generated.resources.p2p_consent_enable
+import cinebox.composeapp.generated.resources.p2p_consent_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -32,7 +32,7 @@ fun P2pConsentDialog(
         Text(
             text = stringResource(Res.string.p2p_consent_body),
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.nuvio.colors.textSecondary,
+            color = MaterialTheme.cinebox.colors.textSecondary,
             modifier = Modifier
                 .heightIn(max = 360.dp)
                 .verticalScroll(rememberScrollState()),

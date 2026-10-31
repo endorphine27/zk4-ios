@@ -69,7 +69,7 @@ internal actual object ServerStorage {
             ?: error("Unable to create credential query")
 
     private inline fun <T> query(key: String?, block: (CFMutableDictionaryRef) -> T): T {
-        val service = CFStringCreateWithCString(null, "com.nuvio.media.servers", kCFStringEncodingUTF8)
+        val service = CFStringCreateWithCString(null, "com.cinebox.media.servers", kCFStringEncodingUTF8)
             ?: error("Unable to encode credential service")
         val account = key?.let { CFStringCreateWithCString(null, it, kCFStringEncodingUTF8) }
         val query = dictionary()

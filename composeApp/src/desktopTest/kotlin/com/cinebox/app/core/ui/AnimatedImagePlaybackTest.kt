@@ -306,7 +306,7 @@ class AnimatedImagePlaybackTest {
     /** The looping GIF with a comment block added, so every index has different bytes (and a different hash). */
     private fun distinctGif(index: Int): ByteArray {
         val gif = Base64.getDecoder().decode(LOOPING_GIF)
-        val comment = "nuvio-test-$index".toByteArray()
+        val comment = "cinebox-test-$index".toByteArray()
         val extension = byteArrayOf(0x21, 0xFE.toByte(), comment.size.toByte()) + comment + byteArrayOf(0x00)
         return gif.copyOfRange(0, gif.size - 1) + extension + gif.last()
     }

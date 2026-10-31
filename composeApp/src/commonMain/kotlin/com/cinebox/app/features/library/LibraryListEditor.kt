@@ -31,10 +31,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.tracking.LibraryListPrivacy
 import com.cinebox.app.features.tracking.TrackingListManagementCapabilities
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -47,7 +47,7 @@ internal fun LibraryListEditor(
     onSubmit: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val inputColors = OutlinedTextFieldDefaults.colors(
         focusedBorderColor = tokens.colors.borderFocus,
         unfocusedBorderColor = tokens.colors.borderDefault,

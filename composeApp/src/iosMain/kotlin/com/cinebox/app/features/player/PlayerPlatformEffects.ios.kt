@@ -16,8 +16,8 @@ import platform.UIKit.UIControlEventValueChanged
 import platform.UIKit.UIScreen
 import platform.UIKit.UISlider
 
-private const val lockPlayerToLandscapeNotification = "NuvioPlayerLockLandscape"
-private const val unlockPlayerOrientationNotification = "NuvioPlayerUnlockOrientation"
+private const val lockPlayerToLandscapeNotification = "CineboxPlayerLockLandscape"
+private const val unlockPlayerOrientationNotification = "CineboxPlayerUnlockOrientation"
 private var playerLandscapeLockCount = 0
 
 @Composable

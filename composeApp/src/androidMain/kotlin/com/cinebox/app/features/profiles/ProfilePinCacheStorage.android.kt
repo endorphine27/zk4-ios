@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 actual object ProfilePinCacheStorage {
-    private const val preferencesName = "nuvio_profile_pin_cache"
+    private const val preferencesName = "cinebox_profile_pin_cache"
 
     private var preferences: SharedPreferences? = null
 

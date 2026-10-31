@@ -15,11 +15,11 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.debrid_missing_api_key
-import nuvio.composeapp.generated.resources.debrid_not_cached
-import nuvio.composeapp.generated.resources.debrid_resolve_failed
-import nuvio.composeapp.generated.resources.debrid_stream_stale
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.debrid_missing_api_key
+import cinebox.composeapp.generated.resources.debrid_not_cached
+import cinebox.composeapp.generated.resources.debrid_resolve_failed
+import cinebox.composeapp.generated.resources.debrid_stream_stale
 import org.jetbrains.compose.resources.getString
 
 object DirectDebridPlaybackResolver {

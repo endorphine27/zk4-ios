@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 
 internal object PluginStorage {
-    private const val preferencesName = "nuvio_plugins"
+    private const val preferencesName = "cinebox_plugins"
     private const val pluginsStateKey = "plugins_state"
-    private const val scraperCodeDirectoryName = "nuvio_plugin_scrapers"
+    private const val scraperCodeDirectoryName = "cinebox_plugin_scrapers"
 
     private var preferences: SharedPreferences? = null
     private var scraperCodeStore: PluginScraperCodeFileStore? = null

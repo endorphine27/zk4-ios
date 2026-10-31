@@ -55,14 +55,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cinebox.app.core.ui.CineboxAsyncImage as AsyncImage
 import com.cinebox.app.core.ui.PlatformBackHandler
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_player_episode_title_format
-import nuvio.composeapp.generated.resources.detail_btn_play
-import nuvio.composeapp.generated.resources.player_next_episode
-import nuvio.composeapp.generated.resources.player_next_episode_finding_source
-import nuvio.composeapp.generated.resources.player_next_episode_playing_via_countdown
-import nuvio.composeapp.generated.resources.player_next_episode_thumbnail
-import nuvio.composeapp.generated.resources.player_next_episode_unaired
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_player_episode_title_format
+import cinebox.composeapp.generated.resources.detail_btn_play
+import cinebox.composeapp.generated.resources.player_next_episode
+import cinebox.composeapp.generated.resources.player_next_episode_finding_source
+import cinebox.composeapp.generated.resources.player_next_episode_playing_via_countdown
+import cinebox.composeapp.generated.resources.player_next_episode_thumbnail
+import cinebox.composeapp.generated.resources.player_next_episode_unaired
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

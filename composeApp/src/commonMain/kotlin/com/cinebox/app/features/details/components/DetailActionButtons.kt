@@ -46,16 +46,16 @@ import androidx.compose.ui.unit.dp
 import com.cinebox.app.core.ui.AppIconResource
 import com.cinebox.app.core.ui.appIconPainter
 import com.cinebox.app.core.ui.secondaryClick
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_play
-import nuvio.composeapp.generated.resources.details_actions_menu_label
-import nuvio.composeapp.generated.resources.hero_add_to_library
-import nuvio.composeapp.generated.resources.hero_mark_unwatched
-import nuvio.composeapp.generated.resources.hero_mark_watched
-import nuvio.composeapp.generated.resources.hero_remove_from_library
-import nuvio.composeapp.generated.resources.playback_unavailable
-import nuvio.composeapp.generated.resources.random_episode_title
-import nuvio.composeapp.generated.resources.shuffle_stop
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_play
+import cinebox.composeapp.generated.resources.details_actions_menu_label
+import cinebox.composeapp.generated.resources.hero_add_to_library
+import cinebox.composeapp.generated.resources.hero_mark_unwatched
+import cinebox.composeapp.generated.resources.hero_mark_watched
+import cinebox.composeapp.generated.resources.hero_remove_from_library
+import cinebox.composeapp.generated.resources.playback_unavailable
+import cinebox.composeapp.generated.resources.random_episode_title
+import cinebox.composeapp.generated.resources.shuffle_stop
 import org.jetbrains.compose.resources.stringResource
 
 data class DetailSecondaryAction(

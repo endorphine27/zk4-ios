@@ -22,16 +22,16 @@ class TraktSettingsRepositoryTest {
             profileId = 2,
             source = WatchProgressSource.TRAKT,
         )
-        val nuvioChoice = traktChoice.copy(source = WatchProgressSource.NUVIO_SYNC)
+        val cineboxChoice = traktChoice.copy(source = WatchProgressSource.CINEBOX_SYNC)
 
         newOutbox().record(traktChoice)
         val afterProcessRestart = newOutbox()
         assertEquals(traktChoice, afterProcessRestart.pendingFor("account-a", 2))
 
-        afterProcessRestart.record(nuvioChoice)
+        afterProcessRestart.record(cineboxChoice)
         assertFalse(afterProcessRestart.clearIfMatches(traktChoice))
-        assertEquals(nuvioChoice, afterProcessRestart.pendingFor("account-a", 2))
-        assertTrue(afterProcessRestart.clearIfMatches(nuvioChoice))
+        assertEquals(cineboxChoice, afterProcessRestart.pendingFor("account-a", 2))
+        assertTrue(afterProcessRestart.clearIfMatches(cineboxChoice))
         assertNull(afterProcessRestart.pendingFor("account-a", 2))
     }
 
@@ -45,7 +45,7 @@ class TraktSettingsRepositoryTest {
     @Test
     fun `watch progress source restores valid storage values`() {
         assertEquals(WatchProgressSource.TRAKT, WatchProgressSource.fromStorage("TRAKT"))
-        assertEquals(WatchProgressSource.NUVIO_SYNC, WatchProgressSource.fromStorage("NUVIO_SYNC"))
+        assertEquals(WatchProgressSource.CINEBOX_SYNC, WatchProgressSource.fromStorage("CINEBOX_SYNC"))
     }
 
     @Test
@@ -85,24 +85,24 @@ class TraktSettingsRepositoryTest {
     @Test
     fun `Trakt progress is active only when authenticated and selected`() {
         assertFalse(shouldUseTraktProgress(isAuthenticated = false, source = WatchProgressSource.TRAKT))
-        assertFalse(shouldUseTraktProgress(isAuthenticated = true, source = WatchProgressSource.NUVIO_SYNC))
+        assertFalse(shouldUseTraktProgress(isAuthenticated = true, source = WatchProgressSource.CINEBOX_SYNC))
         assertTrue(shouldUseTraktProgress(isAuthenticated = true, source = WatchProgressSource.TRAKT))
     }
 
     @Test
-    fun `effective progress source falls back to Nuvio when Trakt is unavailable`() {
+    fun `effective progress source falls back to Cinebox when Trakt is unavailable`() {
         assertEquals(
-            WatchProgressSource.NUVIO_SYNC,
+            WatchProgressSource.CINEBOX_SYNC,
             effectiveWatchProgressSource(
                 isTraktAuthenticated = false,
                 requestedSource = WatchProgressSource.TRAKT,
             ),
         )
         assertEquals(
-            WatchProgressSource.NUVIO_SYNC,
+            WatchProgressSource.CINEBOX_SYNC,
             effectiveWatchProgressSource(
                 isTraktAuthenticated = true,
-                requestedSource = WatchProgressSource.NUVIO_SYNC,
+                requestedSource = WatchProgressSource.CINEBOX_SYNC,
             ),
         )
         assertEquals(

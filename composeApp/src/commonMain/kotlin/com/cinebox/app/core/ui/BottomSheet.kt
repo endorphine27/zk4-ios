@@ -40,13 +40,13 @@ fun CineboxModalBottomSheet(
     onDismissRequest: () -> Unit,
     sheetState: SheetState,
     modifier: Modifier = Modifier,
-    containerColor: Color = MaterialTheme.nuvio.colors.surfaceSheet,
-    contentColor: Color = MaterialTheme.nuvio.colors.textPrimary,
+    containerColor: Color = MaterialTheme.cinebox.colors.surfaceSheet,
+    contentColor: Color = MaterialTheme.cinebox.colors.textPrimary,
     showDragHandle: Boolean = true,
     fullHeight: Boolean = false,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    if (usesNativeNuvioBottomSheet) {
+    if (usesNativeCineboxBottomSheet) {
         CineboxNativeModalBottomSheet(
             onDismissRequest = onDismissRequest,
             modifier = modifier,
@@ -57,7 +57,7 @@ fun CineboxModalBottomSheet(
             content = content,
         )
     } else {
-        val tokens = MaterialTheme.nuvio
+        val tokens = MaterialTheme.cinebox
         ModalBottomSheet(
             onDismissRequest = onDismissRequest,
             sheetState = sheetState,
@@ -89,7 +89,7 @@ fun CineboxModalBottomSheet(
 fun CineboxBottomSheetDivider(
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     HorizontalDivider(
         modifier = modifier.padding(horizontal = tokens.spacing.screenHorizontal),
         thickness = tokens.borders.hairline,
@@ -106,7 +106,7 @@ fun CineboxBottomSheetActionRow(
     selected: Boolean = false,
     trailingContent: (@Composable RowScope.() -> Unit)? = null,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -149,12 +149,12 @@ fun CineboxBottomSheetActionRow(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-suspend fun dismissNuvioBottomSheet(
+suspend fun dismissCineboxBottomSheet(
     sheetState: SheetState,
     onDismiss: () -> Unit,
 ) {
-    if (usesNativeNuvioBottomSheet) {
-        dismissNativeNuvioBottomSheet()
+    if (usesNativeCineboxBottomSheet) {
+        dismissNativeCineboxBottomSheet()
     } else if (sheetState.isVisible) {
         sheetState.hide()
     }
@@ -163,7 +163,7 @@ suspend fun dismissNuvioBottomSheet(
 
 @Composable
 private fun CineboxBottomSheetDragHandle(modifier: Modifier = Modifier) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Box(
         modifier = modifier
             .padding(top = CineboxTokens.Space.s10, bottom = CineboxTokens.Space.s4)

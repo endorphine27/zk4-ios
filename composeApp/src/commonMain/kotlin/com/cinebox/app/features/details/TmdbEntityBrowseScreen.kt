@@ -52,7 +52,7 @@ import com.cinebox.app.core.ui.CineboxAsyncImage as AsyncImage
 import com.cinebox.app.core.ui.CineboxBackButton
 import com.cinebox.app.core.ui.CineboxDesktopVerticalScrollbar
 import com.cinebox.app.core.ui.desktopPageHorizontalPaddingForWidth
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 import com.cinebox.app.core.ui.landscapePosterHeightForWidth
 import com.cinebox.app.core.ui.landscapePosterWidth

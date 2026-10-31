@@ -31,7 +31,7 @@ import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.core.ui.CineboxStatusModal
 import com.cinebox.app.core.ui.CineboxToastController
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.servers.ServerCapability
 import com.cinebox.app.features.servers.ServerConnection
 import com.cinebox.app.features.servers.ServerFailure
@@ -41,26 +41,26 @@ import com.cinebox.app.features.servers.serverFailure
 import com.cinebox.app.features.servers.supports
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_cancel
-import nuvio.composeapp.generated.resources.servers_catalog_metadata
-import nuvio.composeapp.generated.resources.servers_catalog_metadata_description
-import nuvio.composeapp.generated.resources.servers_enabled
-import nuvio.composeapp.generated.resources.servers_enabled_description
-import nuvio.composeapp.generated.resources.servers_import_watch_state
-import nuvio.composeapp.generated.resources.servers_import_watch_state_description
-import nuvio.composeapp.generated.resources.servers_libraries
-import nuvio.composeapp.generated.resources.servers_libraries_description
-import nuvio.composeapp.generated.resources.servers_no_libraries
-import nuvio.composeapp.generated.resources.servers_refresh_libraries
-import nuvio.composeapp.generated.resources.servers_remove
-import nuvio.composeapp.generated.resources.servers_remove_confirm_message
-import nuvio.composeapp.generated.resources.servers_remove_confirm_title
-import nuvio.composeapp.generated.resources.servers_sign_in_again
-import nuvio.composeapp.generated.resources.servers_signed_in_as
-import nuvio.composeapp.generated.resources.servers_status_auth
-import nuvio.composeapp.generated.resources.servers_status_disabled
-import nuvio.composeapp.generated.resources.servers_status_unreachable
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_cancel
+import cinebox.composeapp.generated.resources.servers_catalog_metadata
+import cinebox.composeapp.generated.resources.servers_catalog_metadata_description
+import cinebox.composeapp.generated.resources.servers_enabled
+import cinebox.composeapp.generated.resources.servers_enabled_description
+import cinebox.composeapp.generated.resources.servers_import_watch_state
+import cinebox.composeapp.generated.resources.servers_import_watch_state_description
+import cinebox.composeapp.generated.resources.servers_libraries
+import cinebox.composeapp.generated.resources.servers_libraries_description
+import cinebox.composeapp.generated.resources.servers_no_libraries
+import cinebox.composeapp.generated.resources.servers_refresh_libraries
+import cinebox.composeapp.generated.resources.servers_remove
+import cinebox.composeapp.generated.resources.servers_remove_confirm_message
+import cinebox.composeapp.generated.resources.servers_remove_confirm_title
+import cinebox.composeapp.generated.resources.servers_sign_in_again
+import cinebox.composeapp.generated.resources.servers_signed_in_as
+import cinebox.composeapp.generated.resources.servers_status_auth
+import cinebox.composeapp.generated.resources.servers_status_disabled
+import cinebox.composeapp.generated.resources.servers_status_unreachable
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 
@@ -96,7 +96,7 @@ private fun MediaServerSettingsBody(
     failure: ServerFailure?,
     isTablet: Boolean,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val scope = rememberCoroutineScope()
     var refreshing by remember(connection.id) { mutableStateOf(false) }
     var signIn by remember { mutableStateOf<ServerSignInRequest?>(null) }
@@ -293,7 +293,7 @@ internal fun ServerConnection.identity(): String = stringResource(
 
 @Composable
 internal fun ServerConnection.status(failure: ServerFailure?): Pair<String, Color>? {
-    val colors = MaterialTheme.nuvio.colors
+    val colors = MaterialTheme.cinebox.colors
     return when {
         !enabled -> stringResource(Res.string.servers_status_disabled) to colors.textMuted
         failure == ServerFailure.AUTH_REQUIRED -> stringResource(Res.string.servers_status_auth) to colors.danger

@@ -34,16 +34,16 @@ import com.cinebox.app.core.ui.CineboxBottomSheetDivider
 import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
 import com.cinebox.app.core.ui.SurfaceEdge
-import com.cinebox.app.core.ui.dismissNuvioBottomSheet
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.dismissCineboxBottomSheet
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.mdblist.MdbListLibraryListOption
 import com.cinebox.app.features.mdblist.localizedMdbListMessage
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_close
-import nuvio.composeapp.generated.resources.settings_mdblist_library_lists
-import nuvio.composeapp.generated.resources.settings_mdblist_library_lists_description
-import nuvio.composeapp.generated.resources.settings_mdblist_library_lists_empty
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_close
+import cinebox.composeapp.generated.resources.settings_mdblist_library_lists
+import cinebox.composeapp.generated.resources.settings_mdblist_library_lists_description
+import cinebox.composeapp.generated.resources.settings_mdblist_library_lists_empty
 import org.jetbrains.compose.resources.stringResource
 
 /** Multi-select counterpart of [TrackingAdaptivePicker]: one switch per MDBList list. */
@@ -89,7 +89,7 @@ private fun MdbListLibraryListsBottomSheet(
 
     fun dismiss() {
         scope.launch {
-            dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+            dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
         }
     }
 
@@ -120,7 +120,7 @@ private fun MdbListLibraryListsDialog(
     onToggle: (MdbListLibraryListOption) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     BasicAlertDialog(onDismissRequest = onDismiss) {
         Surface(
             modifier = Modifier
@@ -154,7 +154,7 @@ private fun MdbListLibraryListsContent(
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val horizontalPadding = if (isTablet) tokens.spacing.dialogPadding else tokens.spacing.screenHorizontal
     Column(modifier = modifier.fillMaxWidth()) {
         Column(

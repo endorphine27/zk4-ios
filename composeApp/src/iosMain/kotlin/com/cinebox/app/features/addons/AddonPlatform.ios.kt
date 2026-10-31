@@ -17,9 +17,9 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.isSuccess
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.network_empty_response_body
-import nuvio.composeapp.generated.resources.network_request_failed_http
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.network_empty_response_body
+import cinebox.composeapp.generated.resources.network_request_failed_http
 import org.jetbrains.compose.resources.getString
 import platform.Foundation.NSUserDefaults
 

@@ -18,9 +18,9 @@ import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.autosync_toast_failed
-import nuvio.composeapp.generated.resources.autosync_toast_failed_no_reference
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.autosync_toast_failed
+import cinebox.composeapp.generated.resources.autosync_toast_failed_no_reference
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
 

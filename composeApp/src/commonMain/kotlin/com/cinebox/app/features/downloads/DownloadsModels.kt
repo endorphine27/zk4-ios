@@ -4,11 +4,11 @@ import com.cinebox.app.features.player.SubtitleAddonRequest
 import com.cinebox.app.features.streams.StreamSubtitle
 import kotlinx.serialization.Serializable
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.downloads_enqueue_missing_url
-import nuvio.composeapp.generated.resources.downloads_enqueue_replaced
-import nuvio.composeapp.generated.resources.downloads_enqueue_started
-import nuvio.composeapp.generated.resources.downloads_enqueue_unsupported_format
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.downloads_enqueue_missing_url
+import cinebox.composeapp.generated.resources.downloads_enqueue_replaced
+import cinebox.composeapp.generated.resources.downloads_enqueue_started
+import cinebox.composeapp.generated.resources.downloads_enqueue_unsupported_format
 import org.jetbrains.compose.resources.getString
 
 @Serializable

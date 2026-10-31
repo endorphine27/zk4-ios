@@ -1,9 +1,9 @@
 package com.cinebox.app.features.player
 
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.player_loading_buffering
-import nuvio.composeapp.generated.resources.player_loading_building
-import nuvio.composeapp.generated.resources.player_loading_starting
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.player_loading_buffering
+import cinebox.composeapp.generated.resources.player_loading_building
+import cinebox.composeapp.generated.resources.player_loading_starting
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull

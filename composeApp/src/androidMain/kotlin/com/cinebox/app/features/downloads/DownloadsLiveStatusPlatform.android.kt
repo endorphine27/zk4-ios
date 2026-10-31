@@ -14,12 +14,12 @@ import androidx.core.content.ContextCompat
 import com.cinebox.app.core.deeplink.buildDownloadsDeepLinkUrl
 import com.cinebox.app.features.settings.AppIconPlatform
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.getString
 
 internal actual object DownloadsLiveStatusPlatform {
     private const val channelId = "downloads_live_status"
-    private const val notificationsPrefName = "nuvio_download_live_notifications"
+    private const val notificationsPrefName = "cinebox_download_live_notifications"
     private const val trackedDownloadIdsKey = "tracked_download_ids"
 
     private var appContext: Context? = null

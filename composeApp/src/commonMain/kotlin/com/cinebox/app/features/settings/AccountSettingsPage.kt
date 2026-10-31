@@ -32,24 +32,24 @@ import com.cinebox.app.core.ui.CineboxPrimaryButton
 import com.cinebox.app.core.ui.CineboxStatusModal
 import com.cinebox.app.core.ui.CineboxSurfaceCard
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_cancel
-import nuvio.composeapp.generated.resources.compose_settings_page_account
-import nuvio.composeapp.generated.resources.auth_account_deletion_failed
-import nuvio.composeapp.generated.resources.settings_account_delete_account
-import nuvio.composeapp.generated.resources.settings_account_delete_account_description
-import nuvio.composeapp.generated.resources.settings_account_delete_confirm_message
-import nuvio.composeapp.generated.resources.settings_account_delete_confirm_title
-import nuvio.composeapp.generated.resources.settings_account_email
-import nuvio.composeapp.generated.resources.settings_account_not_signed_in
-import nuvio.composeapp.generated.resources.settings_account_sign_out
-import nuvio.composeapp.generated.resources.settings_account_sign_out_confirm_message
-import nuvio.composeapp.generated.resources.settings_account_sign_out_confirm_title
-import nuvio.composeapp.generated.resources.settings_account_status
-import nuvio.composeapp.generated.resources.settings_account_status_anonymous
-import nuvio.composeapp.generated.resources.settings_account_status_signed_in
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_cancel
+import cinebox.composeapp.generated.resources.compose_settings_page_account
+import cinebox.composeapp.generated.resources.auth_account_deletion_failed
+import cinebox.composeapp.generated.resources.settings_account_delete_account
+import cinebox.composeapp.generated.resources.settings_account_delete_account_description
+import cinebox.composeapp.generated.resources.settings_account_delete_confirm_message
+import cinebox.composeapp.generated.resources.settings_account_delete_confirm_title
+import cinebox.composeapp.generated.resources.settings_account_email
+import cinebox.composeapp.generated.resources.settings_account_not_signed_in
+import cinebox.composeapp.generated.resources.settings_account_sign_out
+import cinebox.composeapp.generated.resources.settings_account_sign_out_confirm_message
+import cinebox.composeapp.generated.resources.settings_account_sign_out_confirm_title
+import cinebox.composeapp.generated.resources.settings_account_status
+import cinebox.composeapp.generated.resources.settings_account_status_anonymous
+import cinebox.composeapp.generated.resources.settings_account_status_signed_in
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.accountSettingsContent(
@@ -178,7 +178,7 @@ private fun DeleteAccountCard(
     errorMessage: String?,
     onDeleteClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
 
     CineboxSurfaceCard {
         Text(

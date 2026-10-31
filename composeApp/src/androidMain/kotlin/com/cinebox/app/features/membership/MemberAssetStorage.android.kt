@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import java.io.File
 
 internal actual object MemberAssetStorage {
-    private const val preferencesName = "nuvio_member_access"
+    private const val preferencesName = "cinebox_member_access"
     private const val accessPayloadKey = "access_payload"
     private const val backgroundCatalogPayloadKey = "background_catalog_payload"
     private var preferences: SharedPreferences? = null

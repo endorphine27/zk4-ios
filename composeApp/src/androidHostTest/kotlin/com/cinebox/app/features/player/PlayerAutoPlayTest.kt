@@ -52,7 +52,7 @@ class PlayerAutoPlayTest {
         scope.cancel()
         WatchProgressRepository.clearLocalState()
         RuntimeEnvironment.getApplication()
-            .getSharedPreferences("nuvio_watch_progress", Context.MODE_PRIVATE)
+            .getSharedPreferences("cinebox_watch_progress", Context.MODE_PRIVATE)
             .edit().clear().commit()
     }
 

@@ -1,55 +1,55 @@
 #!/usr/bin/env bash
 
-readonly NUVIO_LINUX_SHORTCUT_RELATIVE_PATH="usr/share/applications/nuvio.desktop"
-readonly NUVIO_LINUX_SHORTCUT_NAME="Nuvio"
-readonly NUVIO_LINUX_SHORTCUT_COMMENT="Nuvio Media Player"
-readonly NUVIO_LINUX_SHORTCUT_CATEGORIES="AudioVideo;"
-readonly NUVIO_LINUX_SHORTCUT_STARTUP_NOTIFY="true"
-readonly NUVIO_LINUX_SHORTCUT_STARTUP_WM_CLASS="com-nuvio-app-MainKt"
-readonly NUVIO_LINUX_SHORTCUT_MIME_TYPES="x-scheme-handler/nuvio;x-scheme-handler/stremio;"
+readonly CINEBOX_LINUX_SHORTCUT_RELATIVE_PATH="usr/share/applications/cinebox.desktop"
+readonly CINEBOX_LINUX_SHORTCUT_NAME="Cinebox"
+readonly CINEBOX_LINUX_SHORTCUT_COMMENT="Cinebox Media Player"
+readonly CINEBOX_LINUX_SHORTCUT_CATEGORIES="AudioVideo;"
+readonly CINEBOX_LINUX_SHORTCUT_STARTUP_NOTIFY="true"
+readonly CINEBOX_LINUX_SHORTCUT_STARTUP_WM_CLASS="com-cinebox-app-MainKt"
+readonly CINEBOX_LINUX_SHORTCUT_MIME_TYPES="x-scheme-handler/cinebox;x-scheme-handler/stremio;"
 
-nuvio_linux_desktop_entry_exists() {
+cinebox_linux_desktop_entry_exists() {
     if [[ $# -ne 1 ]]; then
         return 2
     fi
 
     local root_dir="$1"
-    find "$root_dir" -type f -path "*/${NUVIO_LINUX_SHORTCUT_RELATIVE_PATH}" | grep -q .
+    find "$root_dir" -type f -path "*/${CINEBOX_LINUX_SHORTCUT_RELATIVE_PATH}" | grep -q .
 }
 
-nuvio_linux_ensure_startup_wm_class() {
+cinebox_linux_ensure_startup_wm_class() {
     if [[ $# -ne 1 ]]; then
         return 2
     fi
 
-    local desktop_file="$1/$NUVIO_LINUX_SHORTCUT_RELATIVE_PATH"
+    local desktop_file="$1/$CINEBOX_LINUX_SHORTCUT_RELATIVE_PATH"
     [[ -f "$desktop_file" ]] || return 1
 
     if grep -q '^StartupWMClass=' "$desktop_file"; then
-        sed -i "s|^StartupWMClass=.*$|StartupWMClass=${NUVIO_LINUX_SHORTCUT_STARTUP_WM_CLASS}|" "$desktop_file"
+        sed -i "s|^StartupWMClass=.*$|StartupWMClass=${CINEBOX_LINUX_SHORTCUT_STARTUP_WM_CLASS}|" "$desktop_file"
     else
-        printf 'StartupWMClass=%s\n' "$NUVIO_LINUX_SHORTCUT_STARTUP_WM_CLASS" >> "$desktop_file"
+        printf 'StartupWMClass=%s\n' "$CINEBOX_LINUX_SHORTCUT_STARTUP_WM_CLASS" >> "$desktop_file"
     fi
 }
 
 # This apparently gets stripped during repackaging (that's done to patch the deps for deb/rpm) so we need to add the shortcut again.
-nuvio_linux_write_desktop_entry() {
+cinebox_linux_write_desktop_entry() {
     if [[ $# -ne 1 ]]; then
         return 2
     fi
 
     local root_dir="$1"
-    local desktop_file="$root_dir/$NUVIO_LINUX_SHORTCUT_RELATIVE_PATH"
+    local desktop_file="$root_dir/$CINEBOX_LINUX_SHORTCUT_RELATIVE_PATH"
     mkdir -p "$(dirname "$desktop_file")"
-    nuvio_linux_write_desktop_entry_file "$desktop_file" "/opt/nuvio/bin/Nuvio %u" "/opt/nuvio/lib/Nuvio.png"
+    cinebox_linux_write_desktop_entry_file "$desktop_file" "/opt/cinebox/bin/Cinebox %u" "/opt/cinebox/lib/Cinebox.png"
 }
 
-nuvio_linux_ensure_uri_handler() {
+cinebox_linux_ensure_uri_handler() {
     if [[ $# -ne 1 ]]; then
         return 2
     fi
 
-    local desktop_file="$1/$NUVIO_LINUX_SHORTCUT_RELATIVE_PATH"
+    local desktop_file="$1/$CINEBOX_LINUX_SHORTCUT_RELATIVE_PATH"
     [[ -f "$desktop_file" ]] || return 1
 
     local mime_types
@@ -59,7 +59,7 @@ nuvio_linux_ensure_uri_handler() {
     fi
     local handler
     local -a handlers
-    IFS=';' read -r -a handlers <<< "$NUVIO_LINUX_SHORTCUT_MIME_TYPES"
+    IFS=';' read -r -a handlers <<< "$CINEBOX_LINUX_SHORTCUT_MIME_TYPES"
     for handler in "${handlers[@]}"; do
         [[ -z "$handler" ]] && continue
         if [[ ";$mime_types" != *";$handler;"* ]]; then
@@ -80,17 +80,17 @@ nuvio_linux_ensure_uri_handler() {
     fi
 }
 
-# jpackage drops its own generated entry (/opt/nuvio/lib/<pkg>-<name>.desktop)
+# jpackage drops its own generated entry (/opt/cinebox/lib/<pkg>-<name>.desktop)
 # and registers it from the maintainer scripts with xdg-desktop-menu. We ship a
 # better one in usr/share/applications, so keeping both meant two icons after
 # every install/upgrade. Remove the hook and the file it points at.
-nuvio_linux_strip_generated_desktop_integration() {
+cinebox_linux_strip_generated_desktop_integration() {
     if [[ $# -ne 1 ]]; then
         return 2
     fi
 
     local root_dir="$1"
-    local shortcut_path="/${NUVIO_LINUX_SHORTCUT_RELATIVE_PATH}"
+    local shortcut_path="/${CINEBOX_LINUX_SHORTCUT_RELATIVE_PATH}"
     local script script_path entry
 
     for script in preinst postinst prerm postrm; do
@@ -108,7 +108,7 @@ nuvio_linux_strip_generated_desktop_integration() {
     done
 }
 
-nuvio_linux_write_desktop_entry_file() {
+cinebox_linux_write_desktop_entry_file() {
     if [[ $# -ne 3 ]]; then
         return 2
     fi
@@ -120,25 +120,25 @@ nuvio_linux_write_desktop_entry_file() {
     cat > "$desktop_file" <<'EOF'
 [Desktop Entry]
 Type=Application
-Name=__NUVIO_NAME__
-Comment=__NUVIO_COMMENT__
-Exec=__NUVIO_EXEC__
-Icon=__NUVIO_ICON__
+Name=__CINEBOX_NAME__
+Comment=__CINEBOX_COMMENT__
+Exec=__CINEBOX_EXEC__
+Icon=__CINEBOX_ICON__
 Terminal=false
-Categories=__NUVIO_CATEGORIES__
-StartupNotify=__NUVIO_STARTUP_NOTIFY__
-StartupWMClass=__NUVIO_STARTUP_WM_CLASS__
-MimeType=__NUVIO_MIME_TYPES__
+Categories=__CINEBOX_CATEGORIES__
+StartupNotify=__CINEBOX_STARTUP_NOTIFY__
+StartupWMClass=__CINEBOX_STARTUP_WM_CLASS__
+MimeType=__CINEBOX_MIME_TYPES__
 EOF
 
     sed -i \
-        -e "s|__NUVIO_NAME__|${NUVIO_LINUX_SHORTCUT_NAME}|g" \
-        -e "s|__NUVIO_COMMENT__|${NUVIO_LINUX_SHORTCUT_COMMENT}|g" \
-        -e "s|__NUVIO_EXEC__|${exec_path}|g" \
-        -e "s|__NUVIO_ICON__|${icon_path}|g" \
-        -e "s|__NUVIO_CATEGORIES__|${NUVIO_LINUX_SHORTCUT_CATEGORIES}|g" \
-        -e "s|__NUVIO_STARTUP_NOTIFY__|${NUVIO_LINUX_SHORTCUT_STARTUP_NOTIFY}|g" \
-        -e "s|__NUVIO_STARTUP_WM_CLASS__|${NUVIO_LINUX_SHORTCUT_STARTUP_WM_CLASS}|g" \
-        -e "s|__NUVIO_MIME_TYPES__|${NUVIO_LINUX_SHORTCUT_MIME_TYPES}|g" \
+        -e "s|__CINEBOX_NAME__|${CINEBOX_LINUX_SHORTCUT_NAME}|g" \
+        -e "s|__CINEBOX_COMMENT__|${CINEBOX_LINUX_SHORTCUT_COMMENT}|g" \
+        -e "s|__CINEBOX_EXEC__|${exec_path}|g" \
+        -e "s|__CINEBOX_ICON__|${icon_path}|g" \
+        -e "s|__CINEBOX_CATEGORIES__|${CINEBOX_LINUX_SHORTCUT_CATEGORIES}|g" \
+        -e "s|__CINEBOX_STARTUP_NOTIFY__|${CINEBOX_LINUX_SHORTCUT_STARTUP_NOTIFY}|g" \
+        -e "s|__CINEBOX_STARTUP_WM_CLASS__|${CINEBOX_LINUX_SHORTCUT_STARTUP_WM_CLASS}|g" \
+        -e "s|__CINEBOX_MIME_TYPES__|${CINEBOX_LINUX_SHORTCUT_MIME_TYPES}|g" \
         "$desktop_file"
 }

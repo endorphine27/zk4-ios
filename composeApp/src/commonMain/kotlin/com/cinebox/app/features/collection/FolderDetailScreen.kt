@@ -62,7 +62,7 @@ import com.cinebox.app.core.ui.CineboxPosterShape
 import com.cinebox.app.core.ui.CineboxScreenHeader
 import com.cinebox.app.core.ui.catalogPosterBaseWidthDp
 import com.cinebox.app.core.ui.desktopPageHorizontalPaddingForWidth
-import com.cinebox.app.core.ui.nuvioSafeBottomPadding
+import com.cinebox.app.core.ui.cineboxSafeBottomPadding
 import com.cinebox.app.core.ui.posterGridColumnCountForViewport
 import com.cinebox.app.core.ui.rememberPosterCardStyleUiState
 import com.cinebox.app.core.ui.withDuplicateSafeLazyKeys
@@ -82,10 +82,10 @@ import com.cinebox.app.navigation.LocalUseNativeNavigation
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.collections_folder_empty_items
-import nuvio.composeapp.generated.resources.collections_folder_not_found
-import nuvio.composeapp.generated.resources.collections_tab_all
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.collections_folder_empty_items
+import cinebox.composeapp.generated.resources.collections_folder_not_found
+import cinebox.composeapp.generated.resources.collections_tab_all
 import org.jetbrains.compose.resources.stringResource
 
 private val FolderCoverHeight = 176.dp
@@ -422,7 +422,7 @@ private fun TabbedGridContent(
                                 start = pageHorizontalPadding,
                                 end = pageHorizontalPadding,
                                 top = if (isDesktop) 8.dp else 4.dp,
-                                bottom = nuvioSafeBottomPadding(18.dp),
+                                bottom = cineboxSafeBottomPadding(18.dp),
                             ),
                             horizontalArrangement = Arrangement.spacedBy(if (isDesktop) 12.dp else 10.dp),
                             verticalArrangement = Arrangement.spacedBy(if (isDesktop) 18.dp else 14.dp),
@@ -514,7 +514,7 @@ private fun RowsContent(
             state = listState,
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(
-                bottom = nuvioSafeBottomPadding(18.dp),
+                bottom = cineboxSafeBottomPadding(18.dp),
             ),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
@@ -618,7 +618,7 @@ private fun EmptyMessage() {
     }
 }
 
-private fun PosterShape.toNuvioPosterShape(): CineboxPosterShape =
+private fun PosterShape.toCineboxPosterShape(): CineboxPosterShape =
     when (this) {
         PosterShape.Poster -> CineboxPosterShape.Poster
         PosterShape.Square -> CineboxPosterShape.Square

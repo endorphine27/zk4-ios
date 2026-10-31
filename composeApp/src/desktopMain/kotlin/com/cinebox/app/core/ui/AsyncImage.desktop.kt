@@ -182,7 +182,7 @@ private fun Any?.withDesktopImageOptions(
         if (highQualitySize) size(MaxDesktopSourceSizePx)
         if (animated) {
             extras[CineboxAnimatedImageKey] = true
-            memoryCacheKeyExtra("nuvio.animated", "true")
+            memoryCacheKeyExtra("cinebox.animated", "true")
         }
     }
     return builder.build()

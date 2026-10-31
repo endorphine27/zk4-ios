@@ -24,7 +24,7 @@ class ThemeSettingsStorageTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        context.getSharedPreferences("nuvio_theme_settings", Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("cinebox_theme_settings", Context.MODE_PRIVATE).edit().clear().commit()
         ThemeSettingsStorage.initialize(context)
     }
 
@@ -44,7 +44,7 @@ class ThemeSettingsStorageTest {
     @Test
     fun olderPayloadClearsOnlyTheCurrentProfilesGlowPreference() {
         val preferences = RuntimeEnvironment.getApplication()
-            .getSharedPreferences("nuvio_theme_settings", Context.MODE_PRIVATE)
+            .getSharedPreferences("cinebox_theme_settings", Context.MODE_PRIVATE)
         val otherProfileKey = ProfileScopedKey.of("nav_bar_glow_enabled", 99)
         preferences.edit().putBoolean(otherProfileKey, false).commit()
         ThemeSettingsStorage.saveNavBarGlowEnabled(false)
@@ -86,7 +86,7 @@ class ThemeSettingsStorageTest {
     @Test
     fun replacingAnOlderPayloadClearsOnlyTheCurrentProfilesGradient() {
         val context = RuntimeEnvironment.getApplication()
-        val preferences = context.getSharedPreferences("nuvio_theme_settings", Context.MODE_PRIVATE)
+        val preferences = context.getSharedPreferences("cinebox_theme_settings", Context.MODE_PRIVATE)
         val otherProfileKey = ProfileScopedKey.of("custom_theme_colors", 99)
         preferences.edit().putString(otherProfileKey, "#111111,#222222,#333333").commit()
         ThemeSettingsStorage.saveCustomThemeColors(CustomThemeColors.Default.encode())

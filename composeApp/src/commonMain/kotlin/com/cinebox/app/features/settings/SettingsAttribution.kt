@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.cinebox.app.core.build.AppVersionPolicy
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_about_based_on_version_format
-import nuvio.composeapp.generated.resources.compose_about_made_with
-import nuvio.composeapp.generated.resources.compose_about_version_format
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_about_based_on_version_format
+import cinebox.composeapp.generated.resources.compose_about_made_with
+import cinebox.composeapp.generated.resources.compose_about_version_format
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import com.cinebox.app.core.network.NetworkCondition
 import com.cinebox.app.core.network.messageForEmptyState
 import com.cinebox.app.core.network.titleForEmptyState
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_retry
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_retry
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -19,7 +19,7 @@ fun CineboxNetworkOfflineCard(
     modifier: Modifier = Modifier,
     onRetry: (() -> Unit)? = null,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     CineboxSurfaceCard(modifier = modifier) {
         Text(
             text = condition.titleForEmptyState(),

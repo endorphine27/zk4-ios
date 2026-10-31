@@ -32,7 +32,7 @@ import com.cinebox.app.core.ui.CineboxCardDepthSurface
 import com.cinebox.app.core.ui.CineboxPosterWatchedOverlay
 import com.cinebox.app.core.ui.SkeletonPoster
 import com.cinebox.app.core.ui.desktopPosterHoverScale
-import com.cinebox.app.core.ui.nuvioCardDepth
+import com.cinebox.app.core.ui.cineboxCardDepth
 import com.cinebox.app.core.ui.posterCardClickable
 import com.cinebox.app.core.ui.rememberPosterCardStyleUiState
 import com.cinebox.app.features.home.MetaPreview
@@ -133,7 +133,7 @@ private fun PosterGridTile(
                     .aspectRatio(item.posterShape.posterGridAspectRatio())
                     .clip(RoundedCornerShape(cornerRadiusDp.dp))
                     .background(MaterialTheme.colorScheme.surface)
-                    .nuvioCardDepth(
+                    .cineboxCardDepth(
                         shape = RoundedCornerShape(cornerRadiusDp.dp),
                         surface = CineboxCardDepthSurface.Posters,
                     )

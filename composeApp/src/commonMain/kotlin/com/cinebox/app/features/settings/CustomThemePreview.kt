@@ -18,16 +18,16 @@ import androidx.compose.ui.draw.clip
 import com.cinebox.app.core.ui.CustomThemeColors
 import com.cinebox.app.core.ui.CineboxTokens
 import com.cinebox.app.core.ui.accentBrush
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.core.ui.toColorPalette
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.custom_theme_preview
-import nuvio.composeapp.generated.resources.custom_theme_preview_accent
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.custom_theme_preview
+import cinebox.composeapp.generated.resources.custom_theme_preview_accent
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun CustomThemePreview(colors: CustomThemeColors) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val palette = remember(colors) { colors.toColorPalette() }
     Column(
         modifier = Modifier.fillMaxWidth().clip(tokens.shapes.card)

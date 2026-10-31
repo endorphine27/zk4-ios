@@ -103,7 +103,7 @@ internal actual object ExternalPlayerPlatform {
 }
 
 private fun IosExternalPlayerSpec.schemeProbeUrl(): NSURL =
-    NSURL.URLWithString("$scheme://") ?: NSURL.URLWithString("nuvio://")!!
+    NSURL.URLWithString("$scheme://") ?: NSURL.URLWithString("cinebox://")!!
 
 private fun String.urlQueryEncode(): String {
     val hex = "0123456789ABCDEF"

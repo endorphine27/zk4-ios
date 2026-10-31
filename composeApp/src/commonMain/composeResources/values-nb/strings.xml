@@ -32,7 +32,7 @@
     <string name="action_save">Lagre</string>
     <string name="action_saved">Lagret</string>
     <string name="action_saving">Lagrer…</string>
-    <string name="action_support_nuvio">Støtt CINEBOX</string>
+    <string name="action_support_cinebox">Støtt CINEBOX</string>
     <string name="action_switch">Bytt</string>
     <string name="action_update">Oppdater</string>
     <string name="action_validate">Valider</string>
@@ -1595,9 +1595,9 @@ Du bruker denne funksjonen helt på eget ansvar. P2P kan deaktiveres når som he
     <string name="settings_licenses_attributions_mpvkit_body">Brukes for avspilling på iOS.</string>
     <string name="settings_licenses_attributions_mpvkit_license">Lisensiert under LGPL v3.0.</string>
     <string name="settings_licenses_attributions_mpvkit_title">MPVKit</string>
-    <string name="settings_licenses_attributions_nuvio_body">Kildekode og lisensvilkår finnes i prosjektets repository.</string>
-    <string name="settings_licenses_attributions_nuvio_license">Lisensiert under GNU General Public License v3.0.</string>
-    <string name="settings_licenses_attributions_nuvio_title">CINEBOX Mobile</string>
+    <string name="settings_licenses_attributions_cinebox_body">Kildekode og lisensvilkår finnes i prosjektets repository.</string>
+    <string name="settings_licenses_attributions_cinebox_license">Lisensiert under GNU General Public License v3.0.</string>
+    <string name="settings_licenses_attributions_cinebox_title">CINEBOX Mobile</string>
     <string name="settings_licenses_attributions_premiumize_body">CINEBOX kobler til Premiumize for kontoautentisering, tilgang til skybibliotek, cachesjekker og skyavspillingsfunksjoner. CINEBOX er ikke tilknyttet eller godkjent av Premiumize.</string>
     <string name="settings_licenses_attributions_premiumize_title">Premiumize</string>
     <string name="settings_licenses_attributions_section_app">APP-LISENS</string>
@@ -2041,8 +2041,8 @@ Du bruker denne funksjonen helt på eget ansvar. P2P kan deaktiveres når som he
     <string name="settings_tracking_disconnect_description">Dette fjerner tilkoblingen fra CINEBOX. Dataene dine på %1$s forblir intakte, og utilgjengelige bibliotek- eller fremdriftskilder faller midlertidig tilbake til CINEBOX.</string>
     <string name="settings_tracking_disconnect_title">Koble fra %1$s?</string>
     <string name="settings_tracking_features">KILDEPREFERANSER</string>
-    <string name="settings_tracking_nuvio_library_description">Behold lagrede titler i CINEBOX-biblioteket ditt.</string>
-    <string name="settings_tracking_nuvio_progress_description">Gjenoppta med fremdrift lagret av CINEBOX Sync.</string>
+    <string name="settings_tracking_cinebox_library_description">Behold lagrede titler i CINEBOX-biblioteket ditt.</string>
+    <string name="settings_tracking_cinebox_progress_description">Gjenoppta med fremdrift lagret av CINEBOX Sync.</string>
     <string name="settings_tracking_progress_refresh_failed">Kilden ble endret, men den nyeste seer-fremdriften kunne ikke oppdateres.</string>
     <string name="settings_tracking_services">Kontoer</string>
     <string name="settings_tracking_simkl_library_description">Bruk Simkl plan-to-watch- og statuslistene dine.</string>
@@ -2206,8 +2206,8 @@ Du bruker denne funksjonen helt på eget ansvar. P2P kan deaktiveres når som he
     <string name="trakt_library_load_failed">Kunne ikke laste Trakt-bibliotek</string>
     <string name="trakt_library_source_dialog_subtitle">Velg hvor du vil lagre og administrere bibliotekelementer</string>
     <string name="trakt_library_source_dialog_title">Bibliotekkilde</string>
-    <string name="trakt_library_source_nuvio">CINEBOX-bibliotek</string>
-    <string name="trakt_library_source_nuvio_selected">CINEBOX-bibliotek valgt</string>
+    <string name="trakt_library_source_cinebox">CINEBOX-bibliotek</string>
+    <string name="trakt_library_source_cinebox_selected">CINEBOX-bibliotek valgt</string>
     <string name="trakt_library_source_subtitle">Velg hvilket bibliotek som skal brukes for lagring og visning av samlingen din</string>
     <string name="trakt_library_source_title">Bibliotekkilde</string>
     <string name="trakt_library_source_trakt">Trakt</string>
@@ -2238,8 +2238,8 @@ Du bruker denne funksjonen helt på eget ansvar. P2P kan deaktiveres når som he
     <string name="trakt_user_fallback">Trakt-bruker</string>
     <string name="trakt_watch_progress_dialog_subtitle">Velg om resume og Fortsett å se skal bruke Trakt eller CINEBOX Sync mens Trakt scrobbling er aktiv.</string>
     <string name="trakt_watch_progress_dialog_title">Seer-fremdrift</string>
-    <string name="trakt_watch_progress_nuvio_selected">Seer-fremdrift satt til CINEBOX Sync</string>
-    <string name="trakt_watch_progress_source_nuvio">CINEBOX Sync</string>
+    <string name="trakt_watch_progress_cinebox_selected">Seer-fremdrift satt til CINEBOX Sync</string>
+    <string name="trakt_watch_progress_source_cinebox">CINEBOX Sync</string>
     <string name="trakt_watch_progress_source_trakt">Trakt</string>
     <string name="trakt_watch_progress_subtitle">Velg hvilken fremdriftskilde som driver resume og Fortsett å se</string>
     <string name="trakt_watch_progress_title">Seer-fremdrift</string>

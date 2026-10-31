@@ -172,7 +172,7 @@ fun CineboxPosterZoomActionOverlay(
     onDismissed: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val previewShape = RoundedCornerShape(PosterZoomFinalCornerRadius)
     val hapticFeedback = LocalHapticFeedback.current
     val scope = rememberCoroutineScope()
@@ -464,7 +464,7 @@ fun CineboxPosterZoomActionOverlay(
                                 clip = true
                             }
                             .background(tokens.colors.surfaceCard)
-                            .nuvioCardDepth(
+                            .cineboxCardDepth(
                                 shape = previewShape,
                                 surface = depthSurface,
                             ),
@@ -520,7 +520,7 @@ private fun PosterZoomMenuRow(
     onSelected: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val contentColor = if (action.isDestructive) tokens.colors.danger else tokens.colors.textPrimary
     Row(
         modifier = modifier

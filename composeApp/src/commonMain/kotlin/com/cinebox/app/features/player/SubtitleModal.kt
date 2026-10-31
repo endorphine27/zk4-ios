@@ -46,18 +46,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.core.ui.withDuplicateSafeLazyKeys
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.addon_title
-import nuvio.composeapp.generated.resources.compose_player_built_in
-import nuvio.composeapp.generated.resources.compose_player_fetch_subtitles
-import nuvio.composeapp.generated.resources.compose_player_languages
-import nuvio.composeapp.generated.resources.compose_player_none
-import nuvio.composeapp.generated.resources.compose_player_style
-import nuvio.composeapp.generated.resources.compose_player_subtitles
-import nuvio.composeapp.generated.resources.settings_playback_option_forced
-import nuvio.composeapp.generated.resources.subtitle_language_unknown
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.addon_title
+import cinebox.composeapp.generated.resources.compose_player_built_in
+import cinebox.composeapp.generated.resources.compose_player_fetch_subtitles
+import cinebox.composeapp.generated.resources.compose_player_languages
+import cinebox.composeapp.generated.resources.compose_player_none
+import cinebox.composeapp.generated.resources.compose_player_style
+import cinebox.composeapp.generated.resources.compose_player_subtitles
+import cinebox.composeapp.generated.resources.settings_playback_option_forced
+import cinebox.composeapp.generated.resources.subtitle_language_unknown
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -326,7 +326,7 @@ private fun SubtitleRail(
     width: Dp,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
 
     Column(
         modifier = Modifier.width(width),
@@ -349,7 +349,7 @@ private fun SubtitleLanguageRow(
     selected: Boolean,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val label = when (item.key) {
         SubtitleOffLanguageKey -> stringResource(Res.string.compose_player_none)
         SubtitleUnknownLanguageKey -> stringResource(Res.string.subtitle_language_unknown)
@@ -398,7 +398,7 @@ private fun SubtitleOptionRow(
     selected: Boolean,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val sourceLabel: String
     val title: String
     val metadata: String?
@@ -483,7 +483,7 @@ private fun SubtitleSourceChip(
     label: String,
     selected: Boolean,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val shape = RoundedCornerShape(999.dp)
 
     Box(
@@ -517,7 +517,7 @@ private fun SubtitleRailEmptyState(
     text: String,
     onClick: (() -> Unit)? = null,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
 
     Row(
         modifier = Modifier

@@ -28,9 +28,9 @@ import com.cinebox.app.features.player.PlayerControlsAction
 import com.cinebox.app.features.player.PlayerEngineController
 import com.cinebox.app.features.player.PlayerPlaybackSnapshot
 import com.cinebox.app.features.player.PlayerResizeMode
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_retry
-import nuvio.composeapp.generated.resources.trailer_unable_to_play
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_retry
+import cinebox.composeapp.generated.resources.trailer_unable_to_play
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

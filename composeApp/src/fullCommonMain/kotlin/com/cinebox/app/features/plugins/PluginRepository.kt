@@ -31,13 +31,13 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.encodeToJsonElement
 import kotlinx.serialization.json.put
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.plugins_error_enter_repo_url
-import nuvio.composeapp.generated.resources.plugins_error_enter_valid_url
-import nuvio.composeapp.generated.resources.plugins_error_provider_not_found
-import nuvio.composeapp.generated.resources.plugins_repository_already_installed
-import nuvio.composeapp.generated.resources.plugins_repository_install_failed
-import nuvio.composeapp.generated.resources.plugins_repository_refresh_failed
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.plugins_error_enter_repo_url
+import cinebox.composeapp.generated.resources.plugins_error_enter_valid_url
+import cinebox.composeapp.generated.resources.plugins_error_provider_not_found
+import cinebox.composeapp.generated.resources.plugins_repository_already_installed
+import cinebox.composeapp.generated.resources.plugins_repository_install_failed
+import cinebox.composeapp.generated.resources.plugins_repository_refresh_failed
 import org.jetbrains.compose.resources.getString
 
 @Serializable

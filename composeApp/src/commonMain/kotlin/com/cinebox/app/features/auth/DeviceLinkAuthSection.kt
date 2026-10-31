@@ -28,17 +28,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cinebox.app.core.auth.DeviceLinkAuthFailure
 import com.cinebox.app.core.auth.DeviceLinkAuthState
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_auth_link_cancel
-import nuvio.composeapp.generated.resources.compose_auth_link_code_expired
-import nuvio.composeapp.generated.resources.compose_auth_link_creating_code
-import nuvio.composeapp.generated.resources.compose_auth_link_failed
-import nuvio.composeapp.generated.resources.compose_auth_link_open
-import nuvio.composeapp.generated.resources.compose_auth_link_open_failed
-import nuvio.composeapp.generated.resources.compose_auth_link_sign_in
-import nuvio.composeapp.generated.resources.compose_auth_link_signing_in
-import nuvio.composeapp.generated.resources.compose_auth_link_try_again
-import nuvio.composeapp.generated.resources.compose_auth_link_waiting
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_auth_link_cancel
+import cinebox.composeapp.generated.resources.compose_auth_link_code_expired
+import cinebox.composeapp.generated.resources.compose_auth_link_creating_code
+import cinebox.composeapp.generated.resources.compose_auth_link_failed
+import cinebox.composeapp.generated.resources.compose_auth_link_open
+import cinebox.composeapp.generated.resources.compose_auth_link_open_failed
+import cinebox.composeapp.generated.resources.compose_auth_link_sign_in
+import cinebox.composeapp.generated.resources.compose_auth_link_signing_in
+import cinebox.composeapp.generated.resources.compose_auth_link_try_again
+import cinebox.composeapp.generated.resources.compose_auth_link_waiting
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

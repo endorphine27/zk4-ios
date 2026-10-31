@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 actual object BingeGroupCacheStorage {
-    private const val preferencesName = "nuvio_binge_group_cache"
+    private const val preferencesName = "cinebox_binge_group_cache"
 
     private var preferences: SharedPreferences? = null
 

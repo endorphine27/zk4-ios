@@ -10,7 +10,7 @@ import com.cinebox.app.features.player.skip.SkipInterval
 import com.cinebox.app.features.player.skip.internalSkipAction
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import kotlin.math.abs
 import kotlin.math.roundToInt
 import kotlin.time.Duration.Companion.milliseconds

@@ -7,9 +7,9 @@ import com.cinebox.app.features.servers.ServerPlaybackSession
 import com.cinebox.app.features.servers.label
 import com.cinebox.app.features.servers.readableTranscodeReason
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.servers_audio_switch_failed
-import nuvio.composeapp.generated.resources.servers_subtitle_switch_failed
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.servers_audio_switch_failed
+import cinebox.composeapp.generated.resources.servers_subtitle_switch_failed
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource

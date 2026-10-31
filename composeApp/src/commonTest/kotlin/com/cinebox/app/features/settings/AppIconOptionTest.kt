@@ -3,8 +3,8 @@ package com.cinebox.app.features.settings
 import com.cinebox.app.core.ui.AppTheme
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.app_logo_wordmark_gold
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.app_logo_wordmark_gold
 
 class AppIconOptionTest {
     @Test

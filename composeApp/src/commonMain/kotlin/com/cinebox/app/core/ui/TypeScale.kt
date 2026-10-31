@@ -19,7 +19,7 @@ data class CineboxTypeScale(
     val displayMd: TextStyle,
 )
 
-internal val LocalNuvioTypeScale = staticCompositionLocalOf {
+internal val LocalCineboxTypeScale = staticCompositionLocalOf {
     CineboxTypeScale(
         labelXs = TextStyle(fontSize = CineboxTokens.Type.labelXs, lineHeight = CineboxTokens.LineHeight.labelXs, fontWeight = FontWeight.Medium),
         labelSm = TextStyle(fontSize = CineboxTokens.Type.labelSm, lineHeight = CineboxTokens.LineHeight.labelSm, fontWeight = FontWeight.Medium),
@@ -34,6 +34,6 @@ internal val LocalNuvioTypeScale = staticCompositionLocalOf {
     )
 }
 
-val MaterialTheme.nuvioTypeScale: CineboxTypeScale
+val MaterialTheme.cineboxTypeScale: CineboxTypeScale
     @Composable
-    get() = LocalNuvioTypeScale.current
+    get() = LocalCineboxTypeScale.current

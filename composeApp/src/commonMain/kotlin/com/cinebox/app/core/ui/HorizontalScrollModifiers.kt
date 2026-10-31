@@ -13,10 +13,10 @@ private val NoPadding = PaddingValues()
  * Keeps the initial horizontal inset while allowing a horizontal scroller's
  * content to move through that inset once scrolling starts.
  */
-fun Modifier.nuvioHorizontalScrollBleed(horizontalPadding: Dp): Modifier =
-    nuvioHorizontalScrollBleed(PaddingValues(horizontal = horizontalPadding.coerceAtLeast(0.dp)))
+fun Modifier.cineboxHorizontalScrollBleed(horizontalPadding: Dp): Modifier =
+    cineboxHorizontalScrollBleed(PaddingValues(horizontal = horizontalPadding.coerceAtLeast(0.dp)))
 
-fun Modifier.nuvioHorizontalScrollBleed(padding: PaddingValues): Modifier {
+fun Modifier.cineboxHorizontalScrollBleed(padding: PaddingValues): Modifier {
     if (padding == NoPadding) return this
 
     return layout { measurable, constraints ->

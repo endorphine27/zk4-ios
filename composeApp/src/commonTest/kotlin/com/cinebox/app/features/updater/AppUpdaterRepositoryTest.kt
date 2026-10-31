@@ -60,9 +60,9 @@ class AppUpdaterRepositoryTest {
     fun desktopSelectsFirstPublishedReleaseInGithubOrderWithoutChannelOrSemverFiltering() {
         val response = """[
             {"tag_name": "desktop-preview", "name": "Desktop Preview", "prerelease": true, "assets": [
-                {"name": "Nuvio.dmg", "browser_download_url": "https://example.com/preview.dmg"}]},
+                {"name": "Cinebox.dmg", "browser_download_url": "https://example.com/preview.dmg"}]},
             {"tag_name": "2.0.0", "assets": [
-                {"name": "Nuvio.dmg", "browser_download_url": "https://example.com/stable.dmg"}]}
+                {"name": "Cinebox.dmg", "browser_download_url": "https://example.com/stable.dmg"}]}
         ]"""
 
         val update = AppUpdaterRepository.selectUpdate(

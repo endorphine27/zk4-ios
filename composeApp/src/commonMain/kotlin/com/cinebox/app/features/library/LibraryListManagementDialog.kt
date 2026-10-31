@@ -32,14 +32,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material3.rememberModalBottomSheetState
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
 import com.cinebox.app.core.ui.CineboxPrimaryButton
-import com.cinebox.app.core.ui.dismissNuvioBottomSheet
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.dismissCineboxBottomSheet
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.tracking.LibraryListPrivacy
 import com.cinebox.app.features.tracking.TrackingLibraryTab
 import com.cinebox.app.features.tracking.TrackingLibraryTabKind
 import com.cinebox.app.features.tracking.TrackingListManagementCapabilities
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,7 +59,7 @@ fun LibraryListManagementDialog(
     onDismiss: () -> Unit,
     errorMessage: String? = null,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val personal = tabs.filter { it.kind == TrackingLibraryTabKind.PERSONAL }
     val editing = personal.firstOrNull { it.key == state.key }
     val creating = state.mode == LibraryListDialogMode.EDIT && state.key == null
@@ -71,7 +71,7 @@ fun LibraryListManagementDialog(
         val back = { keyboard?.hide(); onBack() }
         val dismiss: () -> Unit = {
             keyboard?.hide()
-            scope.launch { dismissNuvioBottomSheet(sheetState, onDismiss) }
+            scope.launch { dismissCineboxBottomSheet(sheetState, onDismiss) }
         }
         Column(
             modifier = Modifier.fillMaxWidth().heightIn(max = 640.dp).imePadding().navigationBarsPadding()

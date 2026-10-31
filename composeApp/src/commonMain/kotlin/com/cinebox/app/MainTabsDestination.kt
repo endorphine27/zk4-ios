@@ -37,15 +37,15 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.cinebox.app.core.ui.LocalNuvioBottomNavigationOverlayPadding
-import com.cinebox.app.core.ui.LocalNuvioNavBarScrollState
+import com.cinebox.app.core.ui.LocalCineboxBottomNavigationOverlayPadding
+import com.cinebox.app.core.ui.LocalCineboxNavBarScrollState
 import com.cinebox.app.core.ui.CineboxNavBarScrollState
 import com.cinebox.app.core.ui.CineboxClassicNavigationBar
 import com.cinebox.app.core.ui.DesktopNavigationBar
 import com.cinebox.app.core.ui.FloatingNavigationBar
 import com.cinebox.app.core.ui.FloatingNavigationItem
 import com.cinebox.app.core.ui.PlatformBackHandler
-import com.cinebox.app.core.ui.rememberNuvioNavBarScrollState
+import com.cinebox.app.core.ui.rememberCineboxNavBarScrollState
 import com.cinebox.app.features.home.HomeCatalogSettingsRepository
 import com.cinebox.app.features.profiles.CineboxProfile
 import com.cinebox.app.features.profiles.ProfileSwitcherTab
@@ -54,17 +54,17 @@ import com.cinebox.app.features.settings.NavBarStyle
 import com.cinebox.app.features.settings.ThemeSettingsRepository
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.rememberHazeState
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_nav_calendar
-import nuvio.composeapp.generated.resources.compose_nav_home
-import nuvio.composeapp.generated.resources.compose_nav_library
-import nuvio.composeapp.generated.resources.compose_nav_profile
-import nuvio.composeapp.generated.resources.compose_nav_search
-import nuvio.composeapp.generated.resources.compose_nav_settings
-import nuvio.composeapp.generated.resources.compose_nav_tv
-import nuvio.composeapp.generated.resources.sidebar_library
-import nuvio.composeapp.generated.resources.sidebar_search
-import nuvio.composeapp.generated.resources.sidebar_tv
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_nav_calendar
+import cinebox.composeapp.generated.resources.compose_nav_home
+import cinebox.composeapp.generated.resources.compose_nav_library
+import cinebox.composeapp.generated.resources.compose_nav_profile
+import cinebox.composeapp.generated.resources.compose_nav_search
+import cinebox.composeapp.generated.resources.compose_nav_settings
+import cinebox.composeapp.generated.resources.compose_nav_tv
+import cinebox.composeapp.generated.resources.sidebar_library
+import cinebox.composeapp.generated.resources.sidebar_search
+import cinebox.composeapp.generated.resources.sidebar_tv
 import org.jetbrains.compose.resources.stringResource
 @Composable
 internal fun MainTabsDestination(
@@ -113,7 +113,7 @@ internal fun MainTabsDestination(
             null
         }
         val tabsRouteActiveState = rememberUpdatedState(rootRouteActive)
-        val navBarScrollState = rememberNuvioNavBarScrollState()
+        val navBarScrollState = rememberCineboxNavBarScrollState()
         LaunchedEffect(selectedTab) {
             navBarScrollState.switchToTab(selectedTab)
         }
@@ -251,8 +251,8 @@ internal fun MainTabsDestination(
                     navBarStyleSetting == NavBarStyle.ADAPTIVE
                 }
                 CompositionLocalProvider(
-                    LocalNuvioBottomNavigationOverlayPadding provides if (useNativeBottomTabs) 49.dp else if (!isDesktop && !isTabletLayout && navBarStyleSetting != NavBarStyle.CLASSIC) 72.dp else 0.dp,
-                    LocalNuvioNavBarScrollState provides navBarScrollState,
+                    LocalCineboxBottomNavigationOverlayPadding provides if (useNativeBottomTabs) 49.dp else if (!isDesktop && !isTabletLayout && navBarStyleSetting != NavBarStyle.CLASSIC) 72.dp else 0.dp,
+                    LocalCineboxNavBarScrollState provides navBarScrollState,
                 ) {
                     AppTabHost(
                         selectedTab = selectedTab,

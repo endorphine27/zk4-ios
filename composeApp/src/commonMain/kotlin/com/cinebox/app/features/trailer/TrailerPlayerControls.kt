@@ -37,15 +37,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.cinebox.app.core.ui.nuvioTypeScale
+import com.cinebox.app.core.ui.cineboxTypeScale
 import com.cinebox.app.features.player.PlayPauseControlButton
 import com.cinebox.app.features.player.PlayerHeaderIconButton
 import com.cinebox.app.features.player.playerHorizontalSafePadding
 import com.cinebox.app.features.player.PlayerLayoutMetrics
 import com.cinebox.app.features.player.PlayerSeekBar
 import kotlinx.coroutines.delay
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.trailer_exit_fullscreen
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.trailer_exit_fullscreen
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -95,7 +95,7 @@ internal fun TrailerPlayerControls(
                         Text(
                             text = title,
                             modifier = Modifier.weight(1f).padding(end = 10.dp),
-                            style = MaterialTheme.nuvioTypeScale.titleLg.copy(
+                            style = MaterialTheme.cineboxTypeScale.titleLg.copy(
                                 fontSize = metrics.titleSize,
                                 lineHeight = metrics.titleSize * 1.16f,
                                 fontWeight = FontWeight.Bold,

@@ -45,12 +45,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cinebox.app.core.ui.CineboxAsyncImage as AsyncImage
 import com.cinebox.app.core.ui.CineboxBackButton
-import com.cinebox.app.core.ui.nuvioTypeScale
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_player_episode_code_full
-import nuvio.composeapp.generated.resources.compose_player_go_back
-import nuvio.composeapp.generated.resources.compose_player_playback_error
-import nuvio.composeapp.generated.resources.compose_player_youre_watching
+import com.cinebox.app.core.ui.cineboxTypeScale
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_player_episode_code_full
+import cinebox.composeapp.generated.resources.compose_player_go_back
+import cinebox.composeapp.generated.resources.compose_player_playback_error
+import cinebox.composeapp.generated.resources.compose_player_youre_watching
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.max
@@ -133,13 +133,13 @@ internal fun GestureFeedbackPill(
         }
         Text(
             text = messageText,
-            style = MaterialTheme.nuvioTypeScale.bodyLg.copy(fontWeight = FontWeight.SemiBold),
+            style = MaterialTheme.cineboxTypeScale.bodyLg.copy(fontWeight = FontWeight.SemiBold),
             color = Color.White,
         )
         secondaryMessageText?.let { secondaryMessage ->
             Text(
                 text = secondaryMessage,
-                style = MaterialTheme.nuvioTypeScale.bodyMd.copy(fontWeight = FontWeight.SemiBold),
+                style = MaterialTheme.cineboxTypeScale.bodyMd.copy(fontWeight = FontWeight.SemiBold),
                 color = feedback.secondaryMessageColor ?: Color.White.copy(alpha = 0.92f),
             )
         }
@@ -190,9 +190,9 @@ internal fun PauseMetadataOverlay(
         }
         val titleFontScale = if (compactHeight) 1.35f else 1.8f
         val descriptionStyle = if (compactHeight) {
-            MaterialTheme.nuvioTypeScale.bodyMd.copy(lineHeight = 20.sp)
+            MaterialTheme.cineboxTypeScale.bodyMd.copy(lineHeight = 20.sp)
         } else {
-            MaterialTheme.nuvioTypeScale.bodyLg.copy(lineHeight = 24.sp)
+            MaterialTheme.cineboxTypeScale.bodyLg.copy(lineHeight = 24.sp)
         }
         val descriptionMaxLines = if (compactHeight) 2 else 3
         val descriptionWidthFraction = if (compactHeight) 0.82f else 0.62f
@@ -210,7 +210,7 @@ internal fun PauseMetadataOverlay(
         ) {
             Text(
                 text = stringResource(Res.string.compose_player_youre_watching),
-                style = MaterialTheme.nuvioTypeScale.bodyLg,
+                style = MaterialTheme.cineboxTypeScale.bodyLg,
                 color = Color(0xFFB8B8B8),
             )
             androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(if (compactHeight) 8.dp else 12.dp))
@@ -227,7 +227,7 @@ internal fun PauseMetadataOverlay(
             } else {
                 Text(
                     text = title,
-                    style = MaterialTheme.nuvioTypeScale.displayMd.copy(
+                    style = MaterialTheme.cineboxTypeScale.displayMd.copy(
                         fontSize = max(metrics.titleSize.value * titleFontScale, 32f).sp,
                         fontWeight = FontWeight.ExtraBold,
                     ),
@@ -245,7 +245,7 @@ internal fun PauseMetadataOverlay(
 
             Text(
                 text = episodeInfo,
-                style = MaterialTheme.nuvioTypeScale.bodyLg,
+                style = MaterialTheme.cineboxTypeScale.bodyLg,
                 color = Color(0xFFCCCCCC),
                 modifier = Modifier.padding(top = if (compactHeight) 6.dp else 8.dp),
             )
@@ -253,7 +253,7 @@ internal fun PauseMetadataOverlay(
             if (!episodeTitle.isNullOrBlank()) {
                 Text(
                     text = episodeTitle,
-                    style = MaterialTheme.nuvioTypeScale.titleLg,
+                    style = MaterialTheme.cineboxTypeScale.titleLg,
                     color = Color.White,
                     maxLines = if (compactHeight) 1 else 2,
                     overflow = TextOverflow.Ellipsis,
@@ -299,13 +299,13 @@ internal fun ErrorModal(
         ) {
             Text(
                 text = stringResource(Res.string.compose_player_playback_error),
-                style = MaterialTheme.nuvioTypeScale.displaySm.copy(fontWeight = FontWeight.Bold),
+                style = MaterialTheme.cineboxTypeScale.displaySm.copy(fontWeight = FontWeight.Bold),
                 color = Color.White,
                 textAlign = TextAlign.Center,
             )
             Text(
                 text = message,
-                style = MaterialTheme.nuvioTypeScale.bodyLg.copy(lineHeight = 24.sp),
+                style = MaterialTheme.cineboxTypeScale.bodyLg.copy(lineHeight = 24.sp),
                 color = Color.White.copy(alpha = 0.72f),
                 textAlign = TextAlign.Center,
                 maxLines = 4,
@@ -324,7 +324,7 @@ internal fun ErrorModal(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 12.dp),
-                    style = MaterialTheme.nuvioTypeScale.bodyLg.copy(fontWeight = FontWeight.Bold),
+                    style = MaterialTheme.cineboxTypeScale.bodyLg.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onPrimary,
                     textAlign = TextAlign.Center,
                 )

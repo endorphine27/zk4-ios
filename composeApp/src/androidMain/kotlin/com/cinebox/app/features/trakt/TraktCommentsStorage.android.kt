@@ -10,7 +10,7 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 internal actual object TraktCommentsStorage {
-    private const val preferencesName = "nuvio_trakt_comments"
+    private const val preferencesName = "cinebox_trakt_comments"
     private const val enabledKey = "comments_enabled"
     private val syncKeys = listOf(enabledKey)
 

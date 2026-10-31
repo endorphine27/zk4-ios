@@ -17,8 +17,8 @@ import com.cinebox.app.features.profiles.ProfileRepository
 import com.cinebox.app.features.tracking.TrackingProviderRegistry
 import com.cinebox.app.features.tracking.providerId
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.library_create_list
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.library_create_list
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -4,7 +4,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
-fun nuvioOverlayGradientBrush(): Brush = Brush.linearGradient(
+fun cineboxOverlayGradientBrush(): Brush = Brush.linearGradient(
     colorStops = arrayOf(
         0f to Color(0xFF21113B),
         0.12f to Color(0xFF21113B),

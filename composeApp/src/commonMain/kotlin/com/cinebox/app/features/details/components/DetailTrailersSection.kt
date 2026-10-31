@@ -41,15 +41,15 @@ import com.cinebox.app.core.ui.CineboxAsyncImage as AsyncImage
 import com.cinebox.app.core.ui.Menu
 import com.cinebox.app.core.ui.MenuItem
 import com.cinebox.app.core.ui.CineboxCardDepthSurface
-import com.cinebox.app.core.ui.nuvioCardDepth
-import com.cinebox.app.core.ui.nuvioDesktopDragScroll
-import com.cinebox.app.core.ui.nuvioHorizontalScrollBleed
+import com.cinebox.app.core.ui.cineboxCardDepth
+import com.cinebox.app.core.ui.cineboxDesktopDragScroll
+import com.cinebox.app.core.ui.cineboxHorizontalScrollBleed
 import com.cinebox.app.core.ui.rememberPosterCardStyleUiState
 import com.cinebox.app.features.details.MetaTrailer
-import nuvio.composeapp.generated.resources.*
-import nuvio.composeapp.generated.resources.detail_tab_trailer
-import nuvio.composeapp.generated.resources.detail_trailer_category_count
-import nuvio.composeapp.generated.resources.detail_trailers_title
+import cinebox.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.detail_tab_trailer
+import cinebox.composeapp.generated.resources.detail_trailer_category_count
+import cinebox.composeapp.generated.resources.detail_trailers_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -165,9 +165,9 @@ fun DetailTrailersSection(
             LazyRow(
                 state = rowState,
                 modifier = Modifier
-                    .nuvioHorizontalScrollBleed(horizontalScrollPadding)
+                    .cineboxHorizontalScrollBleed(horizontalScrollPadding)
                     .fillMaxWidth()
-                    .nuvioDesktopDragScroll(rowState),
+                    .cineboxDesktopDragScroll(rowState),
                 contentPadding = PaddingValues(horizontal = horizontalScrollPadding),
                 horizontalArrangement = Arrangement.spacedBy(sizing.cardSpacing),
             ) {
@@ -206,7 +206,7 @@ private fun TrailerCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(cornerRadius))
-                .nuvioCardDepth(
+                .cineboxCardDepth(
                     shape = RoundedCornerShape(cornerRadius),
                     surface = CineboxCardDepthSurface.Trailers,
                 )

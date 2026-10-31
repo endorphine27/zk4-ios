@@ -52,8 +52,8 @@ import androidx.compose.ui.unit.sp
 import com.cinebox.app.core.ui.AppIconResource
 import com.cinebox.app.core.ui.CineboxBackButton
 import com.cinebox.app.core.ui.appIconPainter
-import com.cinebox.app.core.ui.nuvioTypeScale
-import nuvio.composeapp.generated.resources.*
+import com.cinebox.app.core.ui.cineboxTypeScale
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -196,7 +196,7 @@ internal fun PlayerControlActions(
             ) {
                 Text(
                     text = formatPlaybackRuntime(displayedPositionMs, playbackSnapshot.durationMs, showRemainingTime),
-                    style = MaterialTheme.nuvioTypeScale.bodyMd.copy(fontSize = (metrics.timeSize.value + 2).sp),
+                    style = MaterialTheme.cineboxTypeScale.bodyMd.copy(fontSize = (metrics.timeSize.value + 2).sp),
                     color = Color.White.copy(alpha = 0.9f),
                     maxLines = 1,
                 )

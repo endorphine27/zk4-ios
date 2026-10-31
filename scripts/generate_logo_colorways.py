@@ -353,7 +353,7 @@ def draw_master(rendered):
     canvas_height = header_height + card_height * 4 + row_gap * 3 + margin
     canvas = Image.new("RGB", (canvas_width, canvas_height), BLACK)
     draw = ImageDraw.Draw(canvas)
-    draw.text((margin, 42), "NUVIO / COLOR SYSTEM", font=font(58), fill="#F7F7F7")
+    draw.text((margin, 42), "CINEBOX / COLOR SYSTEM", font=font(58), fill="#F7F7F7")
     draw.text(
         (margin, 120),
         "24 curated logo colorways · pure black preview field · original geometry preserved",
@@ -398,7 +398,7 @@ def draw_master(rendered):
                     fill="#F4F4F4",
                 )
                 draw.text((badge_left + 12, top + 379), "DESIGNER PICK", font=font(12), fill=BLACK)
-    canvas.save(OUTPUT / "Nuvio-Color-System-Master.png", optimize=True)
+    canvas.save(OUTPUT / "Cinebox-Color-System-Master.png", optimize=True)
 
 
 def draw_family_board(family, rendered_by_slug):
@@ -411,7 +411,7 @@ def draw_family_board(family, rendered_by_slug):
     canvas_height = header_height + card_height * 2 + gap + margin
     canvas = Image.new("RGB", (canvas_width, canvas_height), BLACK)
     draw = ImageDraw.Draw(canvas)
-    draw.text((margin, 44), f"NUVIO / {family['name'].upper()}", font=font(58), fill="#F7F7F7")
+    draw.text((margin, 44), f"CINEBOX / {family['name'].upper()}", font=font(58), fill="#F7F7F7")
     draw.text(
         (margin, 124),
         "Six curated logo shades shown on pure black #000000",
@@ -440,7 +440,7 @@ def draw_family_board(family, rendered_by_slug):
 
 def write_guide():
     lines = [
-        "# Nuvio logo color system",
+        "# Cinebox logo color system",
         "",
         "This set contains 24 professionally curated colorways across four usage families. Every preview uses pure black `#000000`. Logo geometry, transparency, highlights, overlap shading, and the white play glyph are preserved.",
         "",

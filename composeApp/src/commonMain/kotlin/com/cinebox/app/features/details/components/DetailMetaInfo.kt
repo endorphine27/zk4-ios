@@ -37,8 +37,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cinebox.app.core.build.AppFeaturePolicy
-import com.cinebox.app.core.ui.nuvioDesktopDragScroll
-import com.cinebox.app.core.ui.nuvioHorizontalScrollBleed
+import com.cinebox.app.core.ui.cineboxDesktopDragScroll
+import com.cinebox.app.core.ui.cineboxHorizontalScrollBleed
 import com.cinebox.app.isDesktop
 import com.cinebox.app.features.details.MetaDetails
 import com.cinebox.app.features.details.MetaExternalRating
@@ -54,14 +54,14 @@ import com.cinebox.app.features.mdblist.MdbListMetadataService.PROVIDER_TOMATOES
 import com.cinebox.app.features.mdblist.MdbListMetadataService.PROVIDER_TRAKT
 import com.cinebox.app.features.mdblist.RottenTomatoesStatus
 import com.cinebox.app.features.mdblist.rottenTomatoesStatus
-import nuvio.composeapp.generated.resources.*
-import nuvio.composeapp.generated.resources.rating_audience_score
-import nuvio.composeapp.generated.resources.rating_imdb
-import nuvio.composeapp.generated.resources.rating_letterboxd
-import nuvio.composeapp.generated.resources.rating_metacritic
-import nuvio.composeapp.generated.resources.rating_rotten_tomatoes
-import nuvio.composeapp.generated.resources.rating_tmdb
-import nuvio.composeapp.generated.resources.rating_trakt
+import cinebox.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.rating_audience_score
+import cinebox.composeapp.generated.resources.rating_imdb
+import cinebox.composeapp.generated.resources.rating_letterboxd
+import cinebox.composeapp.generated.resources.rating_metacritic
+import cinebox.composeapp.generated.resources.rating_rotten_tomatoes
+import cinebox.composeapp.generated.resources.rating_tmdb
+import cinebox.composeapp.generated.resources.rating_trakt
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.painterResource
@@ -184,9 +184,9 @@ internal fun DetailRatingsRow(
     RatingsRow(
         ratings = ratings,
         modifier = modifier
-            .nuvioHorizontalScrollBleed(horizontalScrollPadding)
+            .cineboxHorizontalScrollBleed(horizontalScrollPadding)
             .fillMaxWidth()
-            .nuvioDesktopDragScroll(scrollState)
+            .cineboxDesktopDragScroll(scrollState)
             .horizontalScroll(scrollState)
             .padding(horizontal = horizontalScrollPadding),
     )

@@ -3,13 +3,13 @@ package com.cinebox.app.features.notifications
 import com.cinebox.app.core.time.parseEpisodeReleaseLocalDate
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_player_episode_code_episode_only
-import nuvio.composeapp.generated.resources.compose_player_episode_code_full
-import nuvio.composeapp.generated.resources.notifications_episode_release_body_code
-import nuvio.composeapp.generated.resources.notifications_episode_release_body_code_title
-import nuvio.composeapp.generated.resources.notifications_episode_release_body_generic
-import nuvio.composeapp.generated.resources.notifications_episode_release_body_title
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_player_episode_code_episode_only
+import cinebox.composeapp.generated.resources.compose_player_episode_code_full
+import cinebox.composeapp.generated.resources.notifications_episode_release_body_code
+import cinebox.composeapp.generated.resources.notifications_episode_release_body_code_title
+import cinebox.composeapp.generated.resources.notifications_episode_release_body_generic
+import cinebox.composeapp.generated.resources.notifications_episode_release_body_title
 import org.jetbrains.compose.resources.getString
 import kotlin.math.abs
 

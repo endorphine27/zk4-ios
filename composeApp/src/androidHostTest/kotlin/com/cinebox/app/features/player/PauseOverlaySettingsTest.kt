@@ -23,7 +23,7 @@ class PauseOverlaySettingsTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        context.getSharedPreferences("nuvio_player_settings", Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("cinebox_player_settings", Context.MODE_PRIVATE).edit().clear().commit()
         PlayerSettingsStorage.initialize(context)
         PlayerSettingsRepository.clearLocalState()
     }
@@ -76,7 +76,7 @@ class PauseOverlaySettingsTest {
         assertFalse(PlayerSettingsRepository.uiState.value.pauseOverlayEnabled)
 
         val preferences = RuntimeEnvironment.getApplication()
-            .getSharedPreferences("nuvio_player_settings", Context.MODE_PRIVATE)
+            .getSharedPreferences("cinebox_player_settings", Context.MODE_PRIVATE)
         val otherProfileKey = ProfileScopedKey.of("pause_overlay_enabled", 99)
         preferences.edit().putBoolean(otherProfileKey, false).commit()
 

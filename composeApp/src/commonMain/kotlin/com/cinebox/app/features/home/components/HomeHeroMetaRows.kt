@@ -27,9 +27,9 @@ import com.cinebox.app.features.details.components.ImdbYellow
 import com.cinebox.app.features.details.components.RatingsRow
 import com.cinebox.app.features.details.formatRuntimeForDisplay
 import com.cinebox.app.features.home.MetaPreview
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.media_movie
-import nuvio.composeapp.generated.resources.media_series
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.media_movie
+import cinebox.composeapp.generated.resources.media_series
 import org.jetbrains.compose.resources.stringResource
 
 private const val HERO_RATINGS_LIMIT = 3

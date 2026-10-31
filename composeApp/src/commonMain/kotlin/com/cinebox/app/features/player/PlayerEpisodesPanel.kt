@@ -43,24 +43,24 @@ import coil3.compose.AsyncImage
 import com.cinebox.app.core.format.formatReleaseDateForDisplay
 import com.cinebox.app.core.ui.CineboxAnimatedWatchedBadge
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.details.MetaVideo
 import com.cinebox.app.features.streams.StreamItem
 import com.cinebox.app.features.streams.StreamsUiState
 import com.cinebox.app.features.watchprogress.WatchProgressEntry
 import com.cinebox.app.features.watchprogress.buildPlaybackVideoId
 import com.cinebox.app.features.watching.application.WatchingState
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_back
-import nuvio.composeapp.generated.resources.action_close
-import nuvio.composeapp.generated.resources.compose_player_episode_code_episode_only
-import nuvio.composeapp.generated.resources.compose_player_episode_code_full
-import nuvio.composeapp.generated.resources.compose_player_no_episodes_available
-import nuvio.composeapp.generated.resources.compose_player_panel_episodes
-import nuvio.composeapp.generated.resources.compose_player_panel_streams
-import nuvio.composeapp.generated.resources.compose_player_playing
-import nuvio.composeapp.generated.resources.episodes_season
-import nuvio.composeapp.generated.resources.episodes_specials
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_back
+import cinebox.composeapp.generated.resources.action_close
+import cinebox.composeapp.generated.resources.compose_player_episode_code_episode_only
+import cinebox.composeapp.generated.resources.compose_player_episode_code_full
+import cinebox.composeapp.generated.resources.compose_player_no_episodes_available
+import cinebox.composeapp.generated.resources.compose_player_panel_episodes
+import cinebox.composeapp.generated.resources.compose_player_panel_streams
+import cinebox.composeapp.generated.resources.compose_player_playing
+import cinebox.composeapp.generated.resources.episodes_season
+import cinebox.composeapp.generated.resources.episodes_specials
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -157,7 +157,7 @@ private fun EpisodesListPanelContent(
     onEpisodeSelected: (MetaVideo) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val groupedEpisodes = remember(episodes) {
         episodes
             .filter { it.season != null || it.episode != null }
@@ -292,7 +292,7 @@ private fun EpisodeSeasonChip(
     isSelected: Boolean,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val shape = RoundedCornerShape(24.dp)
 
     Box(
@@ -323,7 +323,7 @@ private fun EpisodeRow(
     blurUnwatchedEpisodes: Boolean,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val cardShape = RoundedCornerShape(16.dp)
     val shouldBlurArtwork = blurUnwatchedEpisodes && !isWatched
     val playingDescription = stringResource(Res.string.compose_player_playing)
@@ -438,7 +438,7 @@ private fun EpisodeStreamsPanelContent(
     onReload: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val episode = state.selectedEpisode ?: return
     val streamsUiState = state.streamsUiState
 

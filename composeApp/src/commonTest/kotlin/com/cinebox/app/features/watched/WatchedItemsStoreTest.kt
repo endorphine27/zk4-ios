@@ -24,11 +24,11 @@ class WatchedItemsStoreTest {
                             name = key,
                             markedAtEpochMs = index.toLong(),
                         )
-                        store.update { nuvioItems, providerItems, dirtyNuvioKeys, dirtyProviderKeys ->
-                            nuvioItems[key] = item
+                        store.update { cineboxItems, providerItems, dirtyCineboxKeys, dirtyProviderKeys ->
+                            cineboxItems[key] = item
                             providerItems
                                 .getOrPut(TrackingProviderId.TRAKT, ::mutableMapOf)[key] = item
-                            dirtyNuvioKeys += key
+                            dirtyCineboxKeys += key
                             dirtyProviderKeys
                                 .getOrPut(TrackingProviderId.TRAKT, ::mutableSetOf) += key
                         }
@@ -38,22 +38,22 @@ class WatchedItemsStoreTest {
             repeat(4) {
                 launch(Dispatchers.Default) {
                     repeat(500) {
-                        store.read { nuvioItems, providerItems, dirtyNuvioKeys, dirtyProviderKeys ->
-                            val nuvioKeys = nuvioItems.keys.toSet()
-                            assertEquals(nuvioKeys, providerItems[TrackingProviderId.TRAKT].orEmpty().keys)
-                            assertEquals(nuvioKeys, dirtyNuvioKeys)
-                            assertEquals(nuvioKeys, dirtyProviderKeys[TrackingProviderId.TRAKT].orEmpty())
+                        store.read { cineboxItems, providerItems, dirtyCineboxKeys, dirtyProviderKeys ->
+                            val cineboxKeys = cineboxItems.keys.toSet()
+                            assertEquals(cineboxKeys, providerItems[TrackingProviderId.TRAKT].orEmpty().keys)
+                            assertEquals(cineboxKeys, dirtyCineboxKeys)
+                            assertEquals(cineboxKeys, dirtyProviderKeys[TrackingProviderId.TRAKT].orEmpty())
                         }
                     }
                 }
             }
         }
 
-        store.read { nuvioItems, providerItems, dirtyNuvioKeys, dirtyProviderKeys ->
-            assertEquals(2_000, nuvioItems.size)
-            assertEquals(nuvioItems.keys, providerItems[TrackingProviderId.TRAKT].orEmpty().keys)
-            assertEquals(nuvioItems.keys, dirtyNuvioKeys)
-            assertEquals(nuvioItems.keys, dirtyProviderKeys[TrackingProviderId.TRAKT])
+        store.read { cineboxItems, providerItems, dirtyCineboxKeys, dirtyProviderKeys ->
+            assertEquals(2_000, cineboxItems.size)
+            assertEquals(cineboxItems.keys, providerItems[TrackingProviderId.TRAKT].orEmpty().keys)
+            assertEquals(cineboxItems.keys, dirtyCineboxKeys)
+            assertEquals(cineboxItems.keys, dirtyProviderKeys[TrackingProviderId.TRAKT])
         }
     }
 }

@@ -14,7 +14,7 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 actual object DebridSettingsStorage {
-    private const val preferencesName = "nuvio_debrid_settings"
+    private const val preferencesName = "cinebox_debrid_settings"
     private const val enabledKey = "debrid_enabled"
     private const val cloudLibraryEnabledKey = "debrid_cloud_library_enabled"
     private const val preferredResolverProviderIdKey = "debrid_preferred_resolver_provider_id"

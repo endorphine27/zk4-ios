@@ -85,7 +85,7 @@ import com.cinebox.app.core.ui.PosterZoomOverlayExitAnimation
 import com.cinebox.app.core.ui.TrackingListPickerDialog
 import com.cinebox.app.core.ui.isLiquidGlassNativeTabBarSupported
 import com.cinebox.app.core.ui.localizedContinueWatchingSubtitle
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.core.ui.platformExitApp
 import com.cinebox.app.features.addons.AddAddonResult
 import com.cinebox.app.features.addons.AddonRepository
@@ -193,7 +193,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.runtime.rememberUpdatedState
@@ -696,17 +696,17 @@ internal fun MainAppContent(
                         DeviceSessionRegistration.registerIfAuthenticated()
                         MemberAccessRepository.refreshIfStale()
                         if (syncProfileId != null) {
-                            SyncManager.startPeriodicNuvioSyncPull(syncProfileId)
+                            SyncManager.startPeriodicCineboxSyncPull(syncProfileId)
                             SyncManager.requestForegroundPull(syncProfileId)
                         } else {
-                            SyncManager.stopPeriodicNuvioSyncPull()
+                            SyncManager.stopPeriodicCineboxSyncPull()
                         }
                     }
-                    AppVisibility.Background -> SyncManager.stopPeriodicNuvioSyncPull()
+                    AppVisibility.Background -> SyncManager.stopPeriodicCineboxSyncPull()
                 }
             }
         } finally {
-            SyncManager.stopPeriodicNuvioSyncPull()
+            SyncManager.stopPeriodicCineboxSyncPull()
         }
     }
     var resumePromptItem by remember { mutableStateOf<ContinueWatchingItem?>(null) }
@@ -1354,7 +1354,7 @@ internal fun MainAppContent(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(MaterialTheme.nuvio.colors.background)
+                    .background(MaterialTheme.cinebox.colors.background)
                     .pointerInput(Unit) {
                         awaitPointerEventScope {
                             while (true) {
@@ -1385,7 +1385,7 @@ internal fun MainAppContent(
                             Modifier
                         },
                     )
-                    .background(MaterialTheme.nuvio.colors.background),
+                    .background(MaterialTheme.cinebox.colors.background),
             ) {
             val verticalBarPadding = LocalVerticalBarPadding.current
             val drawsUnderVerticalBar = currentRoute.drawsUnderVerticalBar(selectedTab)

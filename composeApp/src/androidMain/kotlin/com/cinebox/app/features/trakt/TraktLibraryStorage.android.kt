@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 internal actual object TraktLibraryStorage {
-    private const val preferencesName = "nuvio_trakt_library"
+    private const val preferencesName = "cinebox_trakt_library"
     private const val payloadKey = "trakt_library_payload"
 
     private var preferences: SharedPreferences? = null

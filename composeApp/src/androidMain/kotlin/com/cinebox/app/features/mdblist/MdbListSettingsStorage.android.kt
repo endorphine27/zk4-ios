@@ -12,7 +12,7 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 actual object MdbListSettingsStorage {
-    private const val preferencesName = "nuvio_mdblist_settings"
+    private const val preferencesName = "cinebox_mdblist_settings"
     private const val enabledKey = "mdblist_enabled"
     private const val apiKey = "mdblist_api_key"
     private const val useImdbKey = "mdblist_use_imdb"

@@ -28,13 +28,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cinebox.app.core.ui.DialogButton
-import com.cinebox.app.core.ui.nuvio
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_back
-import nuvio.composeapp.generated.resources.party_companion_chatting_as
-import nuvio.composeapp.generated.resources.party_companion_seat_left
-import nuvio.composeapp.generated.resources.party_error_ended
-import nuvio.composeapp.generated.resources.party_reconnecting
+import com.cinebox.app.core.ui.cinebox
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_back
+import cinebox.composeapp.generated.resources.party_companion_chatting_as
+import cinebox.composeapp.generated.resources.party_companion_seat_left
+import cinebox.composeapp.generated.resources.party_error_ended
+import cinebox.composeapp.generated.resources.party_reconnecting
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -52,7 +52,7 @@ internal fun PartyCompanionScreen(onBack: () -> Unit) {
 
 @Composable
 private fun LinkedChat(link: PartyCompanionLink) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val seat = link.seat
     Column(modifier = Modifier.fillMaxSize()) {
         Row(
@@ -99,7 +99,7 @@ private fun CompanionError(
     error: PartyCompanionError,
     onBack: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(
         modifier = Modifier
             .fillMaxSize()

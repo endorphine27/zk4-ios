@@ -24,7 +24,7 @@ import com.cinebox.app.core.i18n.localizedMediaStatusLabel
 import com.cinebox.app.features.details.MetaDetails
 import com.cinebox.app.features.details.formatRuntimeForDisplay
 import com.cinebox.app.isDesktop
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

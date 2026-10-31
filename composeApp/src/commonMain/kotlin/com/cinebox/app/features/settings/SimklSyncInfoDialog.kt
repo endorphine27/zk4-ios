@@ -12,23 +12,23 @@ import com.cinebox.app.core.ui.DialogButton
 import com.cinebox.app.core.ui.DialogButtonStyle
 import com.cinebox.app.core.ui.DialogButtons
 import com.cinebox.app.core.ui.DialogSurface
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.simkl.SIMKL_AUTOMATIC_REFRESH_INTERVAL_MINUTES
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_close
-import nuvio.composeapp.generated.resources.settings_simkl_sync_info_activity
-import nuvio.composeapp.generated.resources.settings_simkl_sync_info_description
-import nuvio.composeapp.generated.resources.settings_simkl_sync_info_docs
-import nuvio.composeapp.generated.resources.settings_simkl_sync_info_library_statuses
-import nuvio.composeapp.generated.resources.settings_simkl_sync_info_manual
-import nuvio.composeapp.generated.resources.settings_simkl_sync_info_title
-import nuvio.composeapp.generated.resources.settings_trakt_failed_open_browser
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_close
+import cinebox.composeapp.generated.resources.settings_simkl_sync_info_activity
+import cinebox.composeapp.generated.resources.settings_simkl_sync_info_description
+import cinebox.composeapp.generated.resources.settings_simkl_sync_info_docs
+import cinebox.composeapp.generated.resources.settings_simkl_sync_info_library_statuses
+import cinebox.composeapp.generated.resources.settings_simkl_sync_info_manual
+import cinebox.composeapp.generated.resources.settings_simkl_sync_info_title
+import cinebox.composeapp.generated.resources.settings_trakt_failed_open_browser
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun SimklSyncInfoDialog(onDismiss: () -> Unit) {
     val uriHandler = LocalUriHandler.current
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     var browserError by rememberSaveable { mutableStateOf(false) }
 
     DialogSurface(

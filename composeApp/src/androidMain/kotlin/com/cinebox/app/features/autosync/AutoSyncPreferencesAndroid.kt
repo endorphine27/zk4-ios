@@ -4,7 +4,7 @@ import android.content.Context
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 internal object AutoSyncPreferencesAndroid {
-    private const val preferencesName = "nuvio_autosync_settings"
+    private const val preferencesName = "cinebox_autosync_settings"
     private const val preferredSubtitleAutoSyncOnStartKey =
         "preferred_subtitle_auto_sync_on_start"
     private const val aggressiveModeKey = "auto_sync_aggressive_mode"

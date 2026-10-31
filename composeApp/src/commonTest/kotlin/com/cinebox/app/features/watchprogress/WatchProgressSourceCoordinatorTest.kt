@@ -14,7 +14,7 @@ import kotlinx.coroutines.runBlocking
 class WatchProgressSourceCoordinatorTest {
     @Test
     fun `serialized transition uses latest source for the same profile`() {
-        val queued = context(source = WatchProgressSource.NUVIO_SYNC)
+        val queued = context(source = WatchProgressSource.CINEBOX_SYNC)
         val latest = context(source = WatchProgressSource.TRAKT)
 
         assertEquals(
@@ -55,7 +55,7 @@ class WatchProgressSourceCoordinatorTest {
         )
 
         runner.transition(
-            context = context(source = WatchProgressSource.NUVIO_SYNC),
+            context = context(source = WatchProgressSource.CINEBOX_SYNC),
             refreshIfUnchanged = false,
             forceSnapshot = false,
         )
@@ -90,7 +90,7 @@ class WatchProgressSourceCoordinatorTest {
         val invalidations = mutableListOf<Pair<Int, WatchProgressSource>>()
         var sourceChangedAtRefresh = false
         val runner = WatchProgressSourceTransitionRunner(
-            currentAppliedSource = { WatchProgressSource.NUVIO_SYNC },
+            currentAppliedSource = { WatchProgressSource.CINEBOX_SYNC },
             invalidateCache = { profileId, source -> invalidations += profileId to source },
             activateProgressSource = {},
             activateWatchedSource = {},
@@ -119,7 +119,7 @@ class WatchProgressSourceCoordinatorTest {
             onInvalidate = { invalidationCount += 1 },
             onRefresh = { refreshCount += 1 },
         )
-        val context = context(source = WatchProgressSource.NUVIO_SYNC)
+        val context = context(source = WatchProgressSource.CINEBOX_SYNC)
 
         runner.transition(context = context, refreshIfUnchanged = false, forceSnapshot = false)
         runner.transition(context = context, refreshIfUnchanged = false, forceSnapshot = false)
@@ -139,16 +139,16 @@ class WatchProgressSourceCoordinatorTest {
 
         runner.transition(
             context = context(
-                source = WatchProgressSource.NUVIO_SYNC,
-                isNuvioAuthenticated = false,
+                source = WatchProgressSource.CINEBOX_SYNC,
+                isCineboxAuthenticated = false,
             ),
             refreshIfUnchanged = false,
             forceSnapshot = false,
         )
         runner.transition(
             context = context(
-                source = WatchProgressSource.NUVIO_SYNC,
-                isNuvioAuthenticated = true,
+                source = WatchProgressSource.CINEBOX_SYNC,
+                isCineboxAuthenticated = true,
             ),
             refreshIfUnchanged = false,
             forceSnapshot = false,
@@ -212,7 +212,7 @@ class WatchProgressSourceCoordinatorTest {
 
     @Test
     fun `reverting after a failed source switch reactivates and refreshes the last successful source`() = runBlocking {
-        var appliedSource = WatchProgressSource.NUVIO_SYNC
+        var appliedSource = WatchProgressSource.CINEBOX_SYNC
         val invalidations = mutableListOf<WatchProgressSource>()
         val refreshedSources = mutableListOf<WatchProgressSource>()
         var failTraktWatchedRefresh = true
@@ -233,7 +233,7 @@ class WatchProgressSourceCoordinatorTest {
 
         assertTrue(
             runner.transition(
-                context = context(source = WatchProgressSource.NUVIO_SYNC),
+                context = context(source = WatchProgressSource.CINEBOX_SYNC),
                 refreshIfUnchanged = true,
                 forceSnapshot = true,
             ).succeeded,
@@ -248,25 +248,25 @@ class WatchProgressSourceCoordinatorTest {
 
         failTraktWatchedRefresh = false
         val reverted = runner.transition(
-            context = context(source = WatchProgressSource.NUVIO_SYNC),
+            context = context(source = WatchProgressSource.CINEBOX_SYNC),
             refreshIfUnchanged = false,
             forceSnapshot = true,
         )
 
         assertTrue(reverted.succeeded)
-        assertEquals(WatchProgressSource.NUVIO_SYNC, appliedSource)
+        assertEquals(WatchProgressSource.CINEBOX_SYNC, appliedSource)
         assertEquals(
-            listOf(WatchProgressSource.TRAKT, WatchProgressSource.NUVIO_SYNC),
+            listOf(WatchProgressSource.TRAKT, WatchProgressSource.CINEBOX_SYNC),
             invalidations,
         )
         assertEquals(
             listOf(
-                WatchProgressSource.NUVIO_SYNC,
-                WatchProgressSource.NUVIO_SYNC,
+                WatchProgressSource.CINEBOX_SYNC,
+                WatchProgressSource.CINEBOX_SYNC,
                 WatchProgressSource.TRAKT,
                 WatchProgressSource.TRAKT,
-                WatchProgressSource.NUVIO_SYNC,
-                WatchProgressSource.NUVIO_SYNC,
+                WatchProgressSource.CINEBOX_SYNC,
+                WatchProgressSource.CINEBOX_SYNC,
             ),
             refreshedSources,
         )
@@ -330,12 +330,12 @@ class WatchProgressSourceCoordinatorTest {
 
     private fun context(
         source: WatchProgressSource,
-        isNuvioAuthenticated: Boolean = true,
+        isCineboxAuthenticated: Boolean = true,
     ): WatchProgressSourceContext = WatchProgressSourceContext(
         profileId = 1,
         requestedSource = source,
         effectiveSource = source,
-        isNuvioAuthenticated = isNuvioAuthenticated,
+        isCineboxAuthenticated = isCineboxAuthenticated,
     )
 
     private data class RefreshCall(

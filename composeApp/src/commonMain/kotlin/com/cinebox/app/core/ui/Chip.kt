@@ -19,7 +19,7 @@ fun Chip(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Surface(
         selected = selected,
         onClick = onClick,

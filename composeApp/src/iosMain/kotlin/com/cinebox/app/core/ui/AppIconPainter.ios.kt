@@ -2,15 +2,15 @@ package com.cinebox.app.core.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.ic_player_aspect_ratio
-import nuvio.composeapp.generated.resources.ic_player_audio_filled
-import nuvio.composeapp.generated.resources.ic_player_episodes
-import nuvio.composeapp.generated.resources.ic_player_pause
-import nuvio.composeapp.generated.resources.ic_player_play
-import nuvio.composeapp.generated.resources.ic_player_source
-import nuvio.composeapp.generated.resources.ic_player_subtitles
-import nuvio.composeapp.generated.resources.library_add_plus
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.ic_player_aspect_ratio
+import cinebox.composeapp.generated.resources.ic_player_audio_filled
+import cinebox.composeapp.generated.resources.ic_player_episodes
+import cinebox.composeapp.generated.resources.ic_player_pause
+import cinebox.composeapp.generated.resources.ic_player_play
+import cinebox.composeapp.generated.resources.ic_player_source
+import cinebox.composeapp.generated.resources.ic_player_subtitles
+import cinebox.composeapp.generated.resources.library_add_plus
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

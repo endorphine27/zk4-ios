@@ -1,14 +1,14 @@
 package com.cinebox.app.features.settings
 
 import androidx.compose.foundation.lazy.LazyListScope
-import nuvio.composeapp.generated.resources.compose_settings_page_debrid
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_settings_page_mdblist_ratings
-import nuvio.composeapp.generated.resources.compose_settings_page_tmdb_enrichment
-import nuvio.composeapp.generated.resources.settings_integrations_mdblist_description
-import nuvio.composeapp.generated.resources.settings_integrations_debrid_description
-import nuvio.composeapp.generated.resources.settings_integrations_section_title
-import nuvio.composeapp.generated.resources.settings_integrations_tmdb_description
+import cinebox.composeapp.generated.resources.compose_settings_page_debrid
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_settings_page_mdblist_ratings
+import cinebox.composeapp.generated.resources.compose_settings_page_tmdb_enrichment
+import cinebox.composeapp.generated.resources.settings_integrations_mdblist_description
+import cinebox.composeapp.generated.resources.settings_integrations_debrid_description
+import cinebox.composeapp.generated.resources.settings_integrations_section_title
+import cinebox.composeapp.generated.resources.settings_integrations_tmdb_description
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.integrationsContent(

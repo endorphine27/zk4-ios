@@ -9,9 +9,9 @@ class AppUpdateAssetSelectionTest {
     fun `selects current architecture installer before other installer assets`() {
         val selected = selectBestUpdateAsset(
             assets = listOf(
-                asset("Nuvio-0.2.0-windows-arm64.msi"),
-                asset("Nuvio-0.2.0-windows-x64.msi"),
-                asset("Nuvio-0.2.0.exe"),
+                asset("Cinebox-0.2.0-windows-arm64.msi"),
+                asset("Cinebox-0.2.0-windows-x64.msi"),
+                asset("Cinebox-0.2.0.exe"),
             ),
             selector = AppUpdateAssetSelector(
                 fileExtensions = listOf(".msi", ".exe"),
@@ -20,7 +20,7 @@ class AppUpdateAssetSelectionTest {
             ),
         )
 
-        assertEquals("Nuvio-0.2.0-windows-x64.msi", selected?.name)
+        assertEquals("Cinebox-0.2.0-windows-x64.msi", selected?.name)
     }
 
     @Test
@@ -28,8 +28,8 @@ class AppUpdateAssetSelectionTest {
         val selected = selectBestUpdateAsset(
             assets = listOf(
                 asset("checksums.txt", contentType = "application/octet-stream"),
-                asset("Nuvio-0.2.0-windows-x64.zip", contentType = "application/octet-stream"),
-                asset("Nuvio-0.2.0-windows-x64.msi", contentType = "application/octet-stream"),
+                asset("Cinebox-0.2.0-windows-x64.zip", contentType = "application/octet-stream"),
+                asset("Cinebox-0.2.0-windows-x64.msi", contentType = "application/octet-stream"),
             ),
             selector = AppUpdateAssetSelector(
                 fileExtensions = listOf(".msi", ".exe"),
@@ -37,15 +37,15 @@ class AppUpdateAssetSelectionTest {
             ),
         )
 
-        assertEquals("Nuvio-0.2.0-windows-x64.msi", selected?.name)
+        assertEquals("Cinebox-0.2.0-windows-x64.msi", selected?.name)
     }
 
     @Test
     fun `falls back to universal installer when architecture is not present`() {
         val selected = selectBestUpdateAsset(
             assets = listOf(
-                asset("Nuvio-0.2.0-universal.msi"),
-                asset("Nuvio-0.2.0-arm64.msi"),
+                asset("Cinebox-0.2.0-universal.msi"),
+                asset("Cinebox-0.2.0-arm64.msi"),
             ),
             selector = AppUpdateAssetSelector(
                 fileExtensions = listOf(".msi"),
@@ -54,15 +54,15 @@ class AppUpdateAssetSelectionTest {
             ),
         )
 
-        assertEquals("Nuvio-0.2.0-universal.msi", selected?.name)
+        assertEquals("Cinebox-0.2.0-universal.msi", selected?.name)
     }
 
     @Test
     fun `supports android apk content type when extension is missing`() {
         val selected = selectBestUpdateAsset(
             assets = listOf(
-                asset("Nuvio-arm64", contentType = "application/vnd.android.package-archive"),
-                asset("Nuvio-x86", contentType = "application/vnd.android.package-archive"),
+                asset("Cinebox-arm64", contentType = "application/vnd.android.package-archive"),
+                asset("Cinebox-x86", contentType = "application/vnd.android.package-archive"),
             ),
             selector = AppUpdateAssetSelector(
                 fileExtensions = listOf(".apk"),
@@ -71,14 +71,14 @@ class AppUpdateAssetSelectionTest {
             ),
         )
 
-        assertEquals("Nuvio-x86", selected?.name)
+        assertEquals("Cinebox-x86", selected?.name)
     }
 
     @Test
     fun `returns null when no asset matches the selector`() {
         val selected = selectBestUpdateAsset(
             assets = listOf(
-                asset("Nuvio-0.2.0-windows-x64.zip"),
+                asset("Cinebox-0.2.0-windows-x64.zip"),
                 asset("checksums.txt"),
             ),
             selector = AppUpdateAssetSelector(fileExtensions = listOf(".msi", ".exe")),

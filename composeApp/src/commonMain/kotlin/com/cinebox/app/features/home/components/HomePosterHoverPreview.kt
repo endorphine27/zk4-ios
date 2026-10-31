@@ -75,7 +75,7 @@ import com.cinebox.app.core.ui.CineboxAsyncImage
 import com.cinebox.app.core.ui.CineboxPosterWatchedOverlay
 import com.cinebox.app.core.ui.CineboxTokens
 import com.cinebox.app.core.ui.PosterZoomOverlayCoordinator
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.core.ui.rememberPosterCardStyleUiState
 import com.cinebox.app.core.ui.secondaryClick
 import com.cinebox.app.features.home.MetaPreview
@@ -93,14 +93,14 @@ import com.cinebox.app.features.watching.application.WatchingActions
 import com.cinebox.app.isDesktop
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.hero_add_to_library
-import nuvio.composeapp.generated.resources.hero_mark_unwatched
-import nuvio.composeapp.generated.resources.hero_mark_watched
-import nuvio.composeapp.generated.resources.hero_remove_from_library
-import nuvio.composeapp.generated.resources.home_view_details
-import nuvio.composeapp.generated.resources.poster_logo_content_description
-import nuvio.composeapp.generated.resources.tracking_lists_update_failed
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.hero_add_to_library
+import cinebox.composeapp.generated.resources.hero_mark_unwatched
+import cinebox.composeapp.generated.resources.hero_mark_watched
+import cinebox.composeapp.generated.resources.hero_remove_from_library
+import cinebox.composeapp.generated.resources.home_view_details
+import cinebox.composeapp.generated.resources.poster_logo_content_description
+import cinebox.composeapp.generated.resources.tracking_lists_update_failed
 import org.jetbrains.compose.resources.stringResource
 
 private const val HoverPreviewCloseDelayMillis = 120L
@@ -364,7 +364,7 @@ private fun HomePosterPreviewCard(
     onWatchedClick: () -> Unit,
     onSaveClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val shape = RoundedCornerShape(CineboxTokens.Radius.xl)
     val previewBackground = tokens.colors.background
     val clickInteractionSource = remember { MutableInteractionSource() }

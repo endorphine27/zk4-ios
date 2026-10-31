@@ -71,14 +71,14 @@ import com.cinebox.app.core.ui.CineboxShelfSection
 import com.cinebox.app.core.ui.CineboxViewAllPillSize
 import com.cinebox.app.core.ui.ScopedDisintegrationTracker
 import com.cinebox.app.core.ui.SkeletonBlock
-import com.cinebox.app.core.ui.nuvioConsumePointerEvents
+import com.cinebox.app.core.ui.cineboxConsumePointerEvents
 import com.cinebox.app.core.ui.posterGridColumnCountForViewport
 import com.cinebox.app.features.home.components.posterGridColumnCountForWidth
 import com.cinebox.app.isDesktop
 import com.cinebox.app.core.ui.rememberPosterCardStyleUiState
 import com.cinebox.app.core.ui.shimmer
 import com.cinebox.app.core.ui.LocalVerticalBarPadding
-import com.cinebox.app.core.ui.nuvioHorizontalScrollBleed
+import com.cinebox.app.core.ui.cineboxHorizontalScrollBleed
 import com.cinebox.app.features.cloud.CloudLibraryFile
 import com.cinebox.app.features.cloud.CloudLibraryItem
 import com.cinebox.app.features.cloud.CloudLibraryItemType
@@ -101,7 +101,7 @@ import com.cinebox.app.core.poster.withCustomPosterUrl
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -318,13 +318,13 @@ fun LibraryScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .nuvioHorizontalScrollBleed(LocalVerticalBarPadding.current),
+                        .cineboxHorizontalScrollBleed(LocalVerticalBarPadding.current),
                 ) {
                     Box(
                         modifier = Modifier
                             .matchParentSize()
                             .background(MaterialTheme.colorScheme.background)
-                            .nuvioConsumePointerEvents(),
+                            .cineboxConsumePointerEvents(),
                     )
                     androidx.compose.foundation.layout.Column(
                         modifier = Modifier

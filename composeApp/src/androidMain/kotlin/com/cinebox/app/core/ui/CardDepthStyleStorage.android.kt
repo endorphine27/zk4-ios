@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 internal actual object CardDepthStyleStorage {
-    private const val preferencesName = "nuvio_card_depth_style"
+    private const val preferencesName = "cinebox_card_depth_style"
     private const val payloadKey = "card_depth_style_payload"
 
     private var preferences: SharedPreferences? = null

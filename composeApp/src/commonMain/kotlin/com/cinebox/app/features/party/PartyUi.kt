@@ -43,35 +43,35 @@ import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.cinebox.app.core.network.ServerConfigurationRepository
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.profiles.AvatarRepository
 import com.cinebox.app.features.profiles.ProfileRepository
 import com.cinebox.app.features.profiles.parseHexColor
 import com.cinebox.app.features.profiles.profileAvatarImageUrl
 import kotlinx.coroutines.delay
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.party_control_everyone
-import nuvio.composeapp.generated.resources.party_control_host_only
-import nuvio.composeapp.generated.resources.party_ended
-import nuvio.composeapp.generated.resources.party_episode_format
-import nuvio.composeapp.generated.resources.party_error_ended
-import nuvio.composeapp.generated.resources.party_error_full
-import nuvio.composeapp.generated.resources.party_error_network
-import nuvio.composeapp.generated.resources.party_error_not_found
-import nuvio.composeapp.generated.resources.party_error_rate_limited
-import nuvio.composeapp.generated.resources.party_error_removed
-import nuvio.composeapp.generated.resources.party_media_changed
-import nuvio.composeapp.generated.resources.party_member_joined
-import nuvio.composeapp.generated.resources.party_member_left
-import nuvio.composeapp.generated.resources.party_removed
-import nuvio.composeapp.generated.resources.party_sign_in_required
-import nuvio.composeapp.generated.resources.party_status_buffering
-import nuvio.composeapp.generated.resources.party_status_choosing
-import nuvio.composeapp.generated.resources.party_status_elsewhere
-import nuvio.composeapp.generated.resources.party_status_loading
-import nuvio.composeapp.generated.resources.party_status_offline
-import nuvio.composeapp.generated.resources.party_status_ready
-import nuvio.composeapp.generated.resources.party_unavailable
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.party_control_everyone
+import cinebox.composeapp.generated.resources.party_control_host_only
+import cinebox.composeapp.generated.resources.party_ended
+import cinebox.composeapp.generated.resources.party_episode_format
+import cinebox.composeapp.generated.resources.party_error_ended
+import cinebox.composeapp.generated.resources.party_error_full
+import cinebox.composeapp.generated.resources.party_error_network
+import cinebox.composeapp.generated.resources.party_error_not_found
+import cinebox.composeapp.generated.resources.party_error_rate_limited
+import cinebox.composeapp.generated.resources.party_error_removed
+import cinebox.composeapp.generated.resources.party_media_changed
+import cinebox.composeapp.generated.resources.party_member_joined
+import cinebox.composeapp.generated.resources.party_member_left
+import cinebox.composeapp.generated.resources.party_removed
+import cinebox.composeapp.generated.resources.party_sign_in_required
+import cinebox.composeapp.generated.resources.party_status_buffering
+import cinebox.composeapp.generated.resources.party_status_choosing
+import cinebox.composeapp.generated.resources.party_status_elsewhere
+import cinebox.composeapp.generated.resources.party_status_loading
+import cinebox.composeapp.generated.resources.party_status_offline
+import cinebox.composeapp.generated.resources.party_status_ready
+import cinebox.composeapp.generated.resources.party_unavailable
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
@@ -95,7 +95,7 @@ internal fun PartyAvatar(
     modifier: Modifier = Modifier,
     size: Dp = 44.dp,
     presence: PartyPresenceState? = null,
-    ringColor: Color = MaterialTheme.nuvio.colors.background,
+    ringColor: Color = MaterialTheme.cinebox.colors.background,
 ) {
     val storage = "${ServerConfigurationRepository.active.value.backendUrl}/storage/v1/object/"
     PartyAvatar(
@@ -117,9 +117,9 @@ internal fun PartyAvatar(
     modifier: Modifier = Modifier,
     size: Dp = 44.dp,
     presence: PartyPresenceState? = null,
-    ringColor: Color = MaterialTheme.nuvio.colors.background,
+    ringColor: Color = MaterialTheme.cinebox.colors.background,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Box(modifier = modifier.size(size)) {
         Box(
             modifier = Modifier
@@ -161,7 +161,7 @@ private fun PresenceDot(
     ringColor: Color,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
         if (state == PartyPresenceState.Busy) {
             val transition = rememberInfiniteTransition()
@@ -208,7 +208,7 @@ internal fun AvatarStack(
     members: List<PartyMember>,
     size: Dp,
     modifier: Modifier = Modifier,
-    ringColor: Color = MaterialTheme.nuvio.colors.background,
+    ringColor: Color = MaterialTheme.cinebox.colors.background,
     animateIn: Boolean = false,
 ) {
     val shown = members.take(3)
@@ -229,12 +229,12 @@ internal fun AvatarStack(
                     modifier = Modifier
                         .size(size)
                         .clip(CircleShape)
-                        .background(MaterialTheme.nuvio.colors.surfaceCard),
+                        .background(MaterialTheme.cinebox.colors.surfaceCard),
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
                         text = "+$extra",
-                        color = MaterialTheme.nuvio.colors.textPrimary,
+                        color = MaterialTheme.cinebox.colors.textPrimary,
                         style = MaterialTheme.typography.titleMedium.copy(fontSize = (size.value * 0.36f).sp),
                         fontWeight = FontWeight.SemiBold,
                     )
@@ -279,7 +279,7 @@ internal fun OpenSeat(
     size: Dp,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Box(
         modifier = modifier
             .size(size)

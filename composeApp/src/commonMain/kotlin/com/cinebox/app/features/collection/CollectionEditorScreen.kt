@@ -66,11 +66,11 @@ import com.cinebox.app.core.ui.CineboxScreen
 import com.cinebox.app.core.ui.CineboxScreenHeader
 import com.cinebox.app.core.ui.CineboxSectionLabel
 import com.cinebox.app.core.ui.CineboxSurfaceCard
-import com.cinebox.app.core.ui.nuvioSafeBottomPadding
+import com.cinebox.app.core.ui.cineboxSafeBottomPadding
 import com.cinebox.app.core.ui.PlatformBackHandler
 import com.cinebox.app.features.home.PosterShape
 import com.cinebox.app.features.trakt.TraktPublicListSearchResult
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 import sh.calvin.reorderable.ReorderableItem
@@ -117,7 +117,7 @@ fun CollectionEditorScreen(
     onNavigateToPage: ((page: CollectionEditorPage, title: String) -> Unit)? = null,
 ) {
     val state by CollectionEditorRepository.uiState.collectAsState()
-    val bottomInset = nuvioSafeBottomPadding()
+    val bottomInset = cineboxSafeBottomPadding()
 
     LaunchedEffect(collectionId, initializeRepository) {
         if (initializeRepository) {
@@ -633,7 +633,7 @@ private fun FolderEditorPage(
     onSave: () -> Unit,
 ) {
     val folder = state.editingFolder ?: return
-    val bottomInset = nuvioSafeBottomPadding()
+    val bottomInset = cineboxSafeBottomPadding()
     val catalogPickerTitle = stringResource(Res.string.collections_editor_select_catalogs)
     val tmdbSourcePickerTitle = stringResource(Res.string.collections_editor_tmdb_sources)
     val traktSourcePickerTitle = stringResource(Res.string.collections_editor_trakt_sources)
@@ -1015,7 +1015,7 @@ private fun CatalogPickerScreen(
         }
 
         item {
-            Spacer(modifier = Modifier.height(24.dp + nuvioSafeBottomPadding()))
+            Spacer(modifier = Modifier.height(24.dp + cineboxSafeBottomPadding()))
         }
     }
 }
@@ -1026,7 +1026,7 @@ private fun TmdbSourcePickerScreen(
     state: CollectionEditorUiState,
     onBack: () -> Unit,
 ) {
-    val bottomInset = nuvioSafeBottomPadding()
+    val bottomInset = cineboxSafeBottomPadding()
     val sourceType = when (state.tmdbBuilderMode) {
         TmdbBuilderMode.PRESETS -> TmdbCollectionSourceType.DISCOVER
         TmdbBuilderMode.LIST -> TmdbCollectionSourceType.LIST
@@ -1638,7 +1638,7 @@ private fun TraktSourcePickerScreen(
     state: CollectionEditorUiState,
     onBack: () -> Unit,
 ) {
-    val bottomInset = nuvioSafeBottomPadding()
+    val bottomInset = cineboxSafeBottomPadding()
     val searchResultsTitle = stringResource(Res.string.collections_editor_trakt_search_results)
     val trendingTitle = stringResource(Res.string.collections_editor_trakt_trending)
     val popularTitle = stringResource(Res.string.collections_editor_trakt_popular)

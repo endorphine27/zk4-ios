@@ -17,10 +17,10 @@ fun CineboxProgressBar(
     progress: Float,
     modifier: Modifier = Modifier,
     height: Dp = CineboxTokens.Space.s4,
-    trackColor: Color = MaterialTheme.nuvio.colors.playerTimelineTrack,
-    fillColor: Color = MaterialTheme.nuvio.colors.playerTimelineFill,
+    trackColor: Color = MaterialTheme.cinebox.colors.playerTimelineTrack,
+    fillColor: Color = MaterialTheme.cinebox.colors.playerTimelineFill,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val clampedProgress = progress.coerceIn(0f, 1f)
     Box(
         modifier = modifier

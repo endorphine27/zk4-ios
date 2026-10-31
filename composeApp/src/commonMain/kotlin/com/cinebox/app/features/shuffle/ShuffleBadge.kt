@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.shuffle_badge
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.shuffle_badge
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

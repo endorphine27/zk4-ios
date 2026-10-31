@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>com.nuvio.media.desktop</id>
-  <name>Nuvio</name>
+  <id>com.cinebox.media.desktop</id>
+  <name>Cinebox</name>
   <summary>Discover movies and shows, save favorites and Watch from your own library</summary>
-  <icon type="stock">com.nuvio.media.desktop</icon>
-  <developer id="com.nuvio.media">
-    <name>Nuvio Media</name>
+  <icon type="stock">com.cinebox.media.desktop</icon>
+  <developer id="com.cinebox.media">
+    <name>Cinebox Media</name>
   </developer>
-  <developer_name>Nuvio Media</developer_name>
+  <developer_name>Cinebox Media</developer_name>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
-  <launchable type="desktop-id">com.nuvio.media.desktop.desktop</launchable>
+  <launchable type="desktop-id">com.cinebox.media.desktop.desktop</launchable>
   <categories>
     <category>AudioVideo</category>
   </categories>
@@ -20,7 +20,7 @@
   </releases>
   <description>
     <p>Discover movies and shows, save favorites and Watch from your own library</p>
-    <p>Nuvio is a modern media organizer for movies and TV shows.</p>
+    <p>Cinebox is a modern media organizer for movies and TV shows.</p>
     <p>Discover titles, build your own library, track progress, and keep your watch history in sync with Trakt in a clean interface designed for large screens.</p>
   </description>
 </component>

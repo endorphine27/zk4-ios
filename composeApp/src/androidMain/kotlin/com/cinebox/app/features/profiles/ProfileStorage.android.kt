@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 actual object ProfileStorage {
-    private const val preferencesName = "nuvio_profile_cache"
+    private const val preferencesName = "cinebox_profile_cache"
     private const val payloadKey = "profile_payload"
 
     private var preferences: SharedPreferences? = null

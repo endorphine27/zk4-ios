@@ -17,8 +17,8 @@ Options:
   -h, --help       Show this help.
 
 Environment:
-  NUVIO_MACOS_X64_JDK_HOME  Optional x86_64 JDK home.
-                            Defaults to ~/.nuvio/jdks/temurin-17-x64/Contents/Home.
+  CINEBOX_MACOS_X64_JDK_HOME  Optional x86_64 JDK home.
+                            Defaults to ~/.cinebox/jdks/temurin-17-x64/Contents/Home.
 USAGE
 }
 
@@ -103,7 +103,7 @@ if [[ "$skip_arm" == false ]]; then
 fi
 
 if [[ "$skip_intel" == false ]]; then
-  x64_jdk_home="${NUVIO_MACOS_X64_JDK_HOME:-$HOME/.nuvio/jdks/temurin-17-x64/Contents/Home}"
+  x64_jdk_home="${CINEBOX_MACOS_X64_JDK_HOME:-$HOME/.cinebox/jdks/temurin-17-x64/Contents/Home}"
   x64_java="$x64_jdk_home/bin/java"
 
   if [[ ! -x "$x64_java" ]]; then
@@ -111,7 +111,7 @@ if [[ "$skip_intel" == false ]]; then
 x86_64 JDK not found at:
   $x64_jdk_home
 
-Set NUVIO_MACOS_X64_JDK_HOME to an x86_64 JDK home, or install one at the default path.
+Set CINEBOX_MACOS_X64_JDK_HOME to an x86_64 JDK home, or install one at the default path.
 EOF
     exit 1
   fi
@@ -138,7 +138,7 @@ EOF
     "PATH=$x64_jdk_home/bin:$PATH" \
     arch -x86_64 ./gradlew \
     "${intel_tasks[@]}" \
-    "-Pnuvio.macos.arch=x86_64" \
+    "-Pcinebox.macos.arch=x86_64" \
     "${common_gradle_args[@]}" \
     "${extra_gradle_args[@]}"
 fi

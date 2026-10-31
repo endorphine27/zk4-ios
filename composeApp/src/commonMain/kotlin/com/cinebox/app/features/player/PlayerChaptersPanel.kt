@@ -32,8 +32,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.cinebox.app.core.ui.nuvio
-import nuvio.composeapp.generated.resources.*
+import com.cinebox.app.core.ui.cinebox
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 /**
@@ -113,7 +113,7 @@ private fun ChapterRow(
     remainingMs: Long?,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val accent = MaterialTheme.colorScheme.primary
     val shape = RoundedCornerShape(12.dp)
     Column(

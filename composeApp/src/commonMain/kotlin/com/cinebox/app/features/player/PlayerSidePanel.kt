@@ -50,14 +50,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.core.ui.PlatformBackHandler
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.core.ui.shimmer
 import com.cinebox.app.features.streams.ProviderFilterRow
 import com.cinebox.app.features.streams.StreamsUiState
 import com.cinebox.app.features.streams.rememberRefreshRotation
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.collections_tab_all
-import nuvio.composeapp.generated.resources.streams_refresh
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.collections_tab_all
+import cinebox.composeapp.generated.resources.streams_refresh
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -68,7 +68,7 @@ internal fun PlayerSidePanel(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val backgroundInteraction = remember { MutableInteractionSource() }
     val panelInteraction = remember { MutableInteractionSource() }
 
@@ -124,7 +124,7 @@ internal fun PlayerPanelHeader(
     modifier: Modifier = Modifier,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
 
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -155,7 +155,7 @@ internal fun PlayerDialogButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
 
     Box(
         modifier = modifier
@@ -238,7 +238,7 @@ private fun AddonFilterChip(
     icon: ImageVector? = null,
     iconModifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val containerColor = when {
         hasError -> tokens.colors.danger.copy(alpha = 0.06f)
         isSelected -> tokens.colors.accent

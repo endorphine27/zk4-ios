@@ -36,21 +36,21 @@ import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.features.membership.MemberTier
 import com.cinebox.app.features.membership.MembershipOverview
 import com.cinebox.app.features.membership.MembershipOverviewState
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.community_membership_connected_description
-import nuvio.composeapp.generated.resources.community_membership_connected_title
-import nuvio.composeapp.generated.resources.community_membership_description
-import nuvio.composeapp.generated.resources.community_membership_manage
-import nuvio.composeapp.generated.resources.community_membership_refresh
-import nuvio.composeapp.generated.resources.community_membership_refreshing
-import nuvio.composeapp.generated.resources.community_membership_supporter_since
-import nuvio.composeapp.generated.resources.community_membership_tier_supporter
-import nuvio.composeapp.generated.resources.community_membership_tier_supporter_plus
-import nuvio.composeapp.generated.resources.community_membership_title
-import nuvio.composeapp.generated.resources.community_membership_thank_you
-import nuvio.composeapp.generated.resources.community_membership_unable_load
-import nuvio.composeapp.generated.resources.community_membership_you_are
-import nuvio.composeapp.generated.resources.community_view_supporter_membership
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.community_membership_connected_description
+import cinebox.composeapp.generated.resources.community_membership_connected_title
+import cinebox.composeapp.generated.resources.community_membership_description
+import cinebox.composeapp.generated.resources.community_membership_manage
+import cinebox.composeapp.generated.resources.community_membership_refresh
+import cinebox.composeapp.generated.resources.community_membership_refreshing
+import cinebox.composeapp.generated.resources.community_membership_supporter_since
+import cinebox.composeapp.generated.resources.community_membership_tier_supporter
+import cinebox.composeapp.generated.resources.community_membership_tier_supporter_plus
+import cinebox.composeapp.generated.resources.community_membership_title
+import cinebox.composeapp.generated.resources.community_membership_thank_you
+import cinebox.composeapp.generated.resources.community_membership_unable_load
+import cinebox.composeapp.generated.resources.community_membership_you_are
+import cinebox.composeapp.generated.resources.community_view_supporter_membership
 import org.jetbrains.compose.resources.stringResource
 
 private val CardColor = Color(0xFF07080B)

@@ -23,7 +23,7 @@ import platform.posix.rewind
 
 internal object PluginStorage {
     private const val pluginsStateKey = "plugins_state"
-    private const val scraperCodeDirectoryName = "nuvio_plugin_scrapers"
+    private const val scraperCodeDirectoryName = "cinebox_plugin_scrapers"
     private val scraperCodeLock = SynchronizedObject()
 
     fun loadState(profileId: Int): String? =

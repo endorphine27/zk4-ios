@@ -1,12 +1,12 @@
 package com.cinebox.app.features.library
 
 import androidx.compose.runtime.Composable
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.library_status_completed
-import nuvio.composeapp.generated.resources.library_status_dropped
-import nuvio.composeapp.generated.resources.library_status_on_hold
-import nuvio.composeapp.generated.resources.library_status_plan_to_watch
-import nuvio.composeapp.generated.resources.library_status_watching
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.library_status_completed
+import cinebox.composeapp.generated.resources.library_status_dropped
+import cinebox.composeapp.generated.resources.library_status_on_hold
+import cinebox.composeapp.generated.resources.library_status_plan_to_watch
+import cinebox.composeapp.generated.resources.library_status_watching
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 

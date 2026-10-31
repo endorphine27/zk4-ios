@@ -13,12 +13,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.cinebox.app.features.player.desktop.DesktopHostOs
 
-internal actual val nuvioPlatformExtraTopPadding: Dp = 0.dp
-internal actual val nuvioPlatformExtraBottomPadding: Dp = 0.dp
-internal actual val nuvioBottomNavigationExtraVerticalPadding: Dp = 0.dp
+internal actual val cineboxPlatformExtraTopPadding: Dp = 0.dp
+internal actual val cineboxPlatformExtraBottomPadding: Dp = 0.dp
+internal actual val cineboxBottomNavigationExtraVerticalPadding: Dp = 0.dp
 
 @Composable
-internal actual fun nuvioBottomNavigationBarInsets(): WindowInsets = WindowInsets(0.dp)
+internal actual fun cineboxBottomNavigationBarInsets(): WindowInsets = WindowInsets(0.dp)
 
 @Composable
 internal actual fun platformPhysicalTopInset(): Dp = 0.dp

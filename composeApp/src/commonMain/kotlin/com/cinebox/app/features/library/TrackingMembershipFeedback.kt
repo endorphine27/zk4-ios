@@ -4,8 +4,8 @@ import com.cinebox.app.core.ui.CineboxToastController
 import com.cinebox.app.features.tracking.TrackingLibraryTab
 import com.cinebox.app.features.tracking.TrackingMembershipApplyResult
 import com.cinebox.app.features.tracking.TrackingProviderRegistry
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.tracking_list_status_rewritten
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.tracking_list_status_rewritten
 import org.jetbrains.compose.resources.getString
 
 internal suspend fun showTrackingMembershipRewriteFeedback(result: TrackingMembershipApplyResult) {

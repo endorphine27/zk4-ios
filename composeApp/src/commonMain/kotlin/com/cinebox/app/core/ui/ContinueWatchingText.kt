@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import com.cinebox.app.features.cloud.CloudLibraryContentType
 import com.cinebox.app.core.i18n.localizedEpisodeTitle
 import com.cinebox.app.features.watchprogress.ContinueWatchingItem
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

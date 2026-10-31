@@ -98,10 +98,10 @@ import com.cinebox.app.core.ui.PosterZoomAnchor
 import com.cinebox.app.core.ui.PosterZoomAnchorHolder
 import com.cinebox.app.core.ui.PosterZoomOverlayAction
 import com.cinebox.app.core.ui.desktopPageHorizontalPaddingForWidth
-import com.cinebox.app.core.ui.nuvioDesktopDragScroll
+import com.cinebox.app.core.ui.cineboxDesktopDragScroll
 import com.cinebox.app.core.ui.ScreenActivityEffect
 import com.cinebox.app.core.ui.TrackingListPickerDialog
-import com.cinebox.app.core.ui.nuvioSafeBottomPadding
+import com.cinebox.app.core.ui.cineboxSafeBottomPadding
 import com.cinebox.app.core.ui.rememberHeroStretchState
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.rememberHazeState
@@ -176,7 +176,7 @@ import com.kmpalette.rememberDominantColorState
 import com.kmpalette.extensions.painter.rememberPainterDominantColorState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 
@@ -1607,7 +1607,7 @@ fun MetaDetailsScreen(
                                 key = "detail-bottom-spacer",
                                 contentType = "detail-spacer",
                             ) {
-                                Spacer(modifier = Modifier.height(nuvioSafeBottomPadding(32.dp)))
+                                Spacer(modifier = Modifier.height(cineboxSafeBottomPadding(32.dp)))
                             }
                         }
                         CineboxDesktopVerticalScrollbar(

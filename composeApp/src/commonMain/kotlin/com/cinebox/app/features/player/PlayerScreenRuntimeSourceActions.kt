@@ -21,8 +21,8 @@ import com.cinebox.app.features.watchprogress.WatchProgressRepository
 import com.cinebox.app.features.watchprogress.buildPlaybackVideoId
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.youtube_resolution_failed
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.youtube_resolution_failed
 import org.jetbrains.compose.resources.getString
 
 internal fun PlayerScreenRuntime.resolveDebridForPlayer(

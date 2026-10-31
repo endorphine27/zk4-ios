@@ -5,13 +5,13 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 GRADLEW="$ROOT_DIR/gradlew"
 
-ANDROID_APP_ID="com.nuvio.app"
+ANDROID_APP_ID="com.cinebox.app"
 ANDROID_ACTIVITY=".MainActivity"
 IOS_PROJECT="$ROOT_DIR/iosApp/iosApp.xcodeproj"
 IOS_SCHEME="iosApp"
 IOS_DERIVED_DATA_BASE="$ROOT_DIR/build/ios-derived"
-IOS_APP_NAME="Nuvio.app"
-IOS_BUNDLE_ID="com.nuvio.app.Nuvio"
+IOS_APP_NAME="Cinebox.app"
+IOS_BUNDLE_ID="com.cinebox.app.Cinebox"
 IOS_PREFERRED_DEVICE_MODEL="iPhone 14 Pro"
 
 usage() {
@@ -319,7 +319,7 @@ run_ios_simulator() {
   simulator_app_path="$derived_data_path/Build/Products/Debug-iphonesimulator/$IOS_APP_NAME"
 
   echo "Building iOS $distribution debug app for simulator $simulator_id..."
-  env NUVIO_IOS_DISTRIBUTION="$distribution" xcodebuild \
+  env CINEBOX_IOS_DISTRIBUTION="$distribution" xcodebuild \
     -project "$IOS_PROJECT" \
     -scheme "$IOS_SCHEME" \
     -configuration Debug \
@@ -369,7 +369,7 @@ run_ios_physical() {
     fi
 
     echo "Building iOS $distribution debug app for physical device $physical_device_id..."
-    env NUVIO_IOS_DISTRIBUTION="$distribution" xcodebuild \
+    env CINEBOX_IOS_DISTRIBUTION="$distribution" xcodebuild \
       -project "$IOS_PROJECT" \
       -scheme "$IOS_SCHEME" \
       -configuration Debug \

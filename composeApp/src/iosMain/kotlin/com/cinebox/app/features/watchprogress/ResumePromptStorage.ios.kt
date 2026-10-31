@@ -4,8 +4,8 @@ import com.cinebox.app.core.storage.ProfileScopedKey
 import platform.Foundation.NSUserDefaults
 
 actual object ResumePromptStorage {
-    private const val wasInPlayerKey = "nuvio_resume_prompt_was_in_player"
-    private const val lastPlayerVideoIdKey = "nuvio_resume_prompt_last_player_video_id"
+    private const val wasInPlayerKey = "cinebox_resume_prompt_was_in_player"
+    private const val lastPlayerVideoIdKey = "cinebox_resume_prompt_last_player_video_id"
 
     actual fun loadWasInPlayer(): Boolean =
         NSUserDefaults.standardUserDefaults.boolForKey(ProfileScopedKey.of(wasInPlayerKey))

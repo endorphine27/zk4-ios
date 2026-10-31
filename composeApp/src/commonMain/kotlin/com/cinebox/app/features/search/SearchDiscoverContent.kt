@@ -26,7 +26,7 @@ import com.cinebox.app.features.home.MetaPreview
 import com.cinebox.app.features.home.components.PosterGridRow
 import com.cinebox.app.features.home.components.PosterGridSkeletonRow
 import com.cinebox.app.features.home.components.HomeEmptyStateCard
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.discoverContent(

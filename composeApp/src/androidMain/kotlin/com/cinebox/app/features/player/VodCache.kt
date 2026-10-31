@@ -27,8 +27,8 @@ import java.util.concurrent.atomic.AtomicLong
 @UnstableApi
 internal object VodCache {
     private const val TAG = "VodCache"
-    private const val DIR_NAME = "nuvio_vod_cache"
-    private const val STALE_PREFIX = "nuvio_vod_cache_stale_"
+    private const val DIR_NAME = "cinebox_vod_cache"
+    private const val STALE_PREFIX = "cinebox_vod_cache_stale_"
     private const val FRAGMENT_BYTES = 8L * 1024L * 1024L
     private const val RETAIN_BEHIND_BYTES = 1024L * 1024L * 1024L
     private const val TRIM_STEP_BYTES = 64L * 1024L * 1024L

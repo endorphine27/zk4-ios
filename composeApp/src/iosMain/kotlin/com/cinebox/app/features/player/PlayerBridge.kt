@@ -6,7 +6,7 @@ import platform.UIKit.UIViewController
  * Bridge interface for the MPV player.
  * Swift side implements this and registers a factory at app startup.
  */
-interface NuvioPlayerBridge {
+interface CineboxPlayerBridge {
     fun createPlayerViewController(): UIViewController
     fun loadFile(url: String)
     fun loadFileWithAudio(
@@ -93,14 +93,14 @@ interface NuvioPlayerBridge {
  * Registry for the player bridge factory.
  * Swift calls [registerFactory] during app startup before Compose is initialized.
  */
-object NuvioPlayerBridgeFactory {
-    private var factoryRef: NuvioPlayerBridgeCreator? = null
+object CineboxPlayerBridgeFactory {
+    private var factoryRef: CineboxPlayerBridgeCreator? = null
 
-    fun registerFactory(creator: NuvioPlayerBridgeCreator) {
+    fun registerFactory(creator: CineboxPlayerBridgeCreator) {
         this.factoryRef = creator
     }
 
-    fun create(): NuvioPlayerBridge? = factoryRef?.createBridge()
+    fun create(): CineboxPlayerBridge? = factoryRef?.createBridge()
 
     val isRegistered: Boolean get() = factoryRef != null
 }
@@ -109,6 +109,6 @@ object NuvioPlayerBridgeFactory {
  * Interface for creating bridge instances.
  * Swift implements this to provide the factory.
  */
-interface NuvioPlayerBridgeCreator {
-    fun createBridge(): NuvioPlayerBridge
+interface CineboxPlayerBridgeCreator {
+    fun createBridge(): CineboxPlayerBridge
 }

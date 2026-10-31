@@ -7,8 +7,8 @@ import platform.Foundation.NSNotificationCenter
 import platform.Foundation.NSUserDefaults
 
 internal actual object DownloadsLiveStatusPlatform {
-    private const val notificationName = "NuvioDownloadsLiveStatusUpdated"
-    private const val userDefaultsPayloadKey = "nuvio.downloads.live_status.payload"
+    private const val notificationName = "CineboxDownloadsLiveStatusUpdated"
+    private const val userDefaultsPayloadKey = "cinebox.downloads.live_status.payload"
 
     private val json = Json {
         encodeDefaults = true

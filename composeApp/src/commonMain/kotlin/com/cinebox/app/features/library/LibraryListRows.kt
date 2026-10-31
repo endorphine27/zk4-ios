@@ -21,10 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.tracking.TrackingLibraryTab
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.library_lists_empty
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.library_lists_empty
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -33,7 +33,7 @@ internal fun LibraryListRows(
     onEdit: (TrackingLibraryTab) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     if (tabs.isEmpty()) {
         Column(
             modifier.fillMaxWidth().padding(vertical = 28.dp),

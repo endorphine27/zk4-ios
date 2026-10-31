@@ -14,7 +14,7 @@ import com.cinebox.app.core.ui.DialogButtons
 import com.cinebox.app.core.ui.DialogOption
 import com.cinebox.app.core.ui.DialogSurface
 import com.cinebox.app.features.player.skip.AutoSkipSegmentType
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

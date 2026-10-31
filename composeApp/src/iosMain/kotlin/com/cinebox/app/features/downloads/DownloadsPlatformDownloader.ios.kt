@@ -11,13 +11,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.download_failed
-import nuvio.composeapp.generated.resources.downloads_error_finalize_file_failed
-import nuvio.composeapp.generated.resources.downloads_error_open_partial_file_failed
-import nuvio.composeapp.generated.resources.downloads_error_partial_file_not_open
-import nuvio.composeapp.generated.resources.downloads_error_write_partial_file_failed
-import nuvio.composeapp.generated.resources.network_request_failed_http
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.download_failed
+import cinebox.composeapp.generated.resources.downloads_error_finalize_file_failed
+import cinebox.composeapp.generated.resources.downloads_error_open_partial_file_failed
+import cinebox.composeapp.generated.resources.downloads_error_partial_file_not_open
+import cinebox.composeapp.generated.resources.downloads_error_write_partial_file_failed
+import cinebox.composeapp.generated.resources.network_request_failed_http
 import org.jetbrains.compose.resources.getString
 import platform.Foundation.NSError
 import platform.Foundation.NSDate
@@ -396,7 +396,7 @@ private fun NSURLResponse?.toDownloadResult(): IosDownloadResult {
 @OptIn(ExperimentalForeignApi::class)
 private fun downloadsDirectoryPath(): String {
     val root = NSHomeDirectory().trimEnd('/')
-    val path = "$root/Documents/nuvio_downloads"
+    val path = "$root/Documents/cinebox_downloads"
     NSFileManager.defaultManager.createDirectoryAtPath(
         path = path,
         withIntermediateDirectories = true,

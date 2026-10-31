@@ -56,7 +56,7 @@ import com.cinebox.app.core.ui.CineboxSectionLabel
 import com.cinebox.app.core.ui.CineboxStatusModal
 import com.cinebox.app.core.ui.CineboxSurfaceCard
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

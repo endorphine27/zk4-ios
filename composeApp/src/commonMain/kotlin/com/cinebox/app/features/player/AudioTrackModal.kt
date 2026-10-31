@@ -29,10 +29,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.cinebox.app.core.ui.nuvio
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_player_audio_tracks
-import nuvio.composeapp.generated.resources.compose_player_no_audio_tracks_available
+import com.cinebox.app.core.ui.cinebox
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_player_audio_tracks
+import cinebox.composeapp.generated.resources.compose_player_no_audio_tracks_available
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -103,7 +103,7 @@ private fun AudioTrackRow(
     isSelected: Boolean,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val primaryColor = if (isSelected) tokens.colors.onAccent else Color.White
     val secondaryColor = if (isSelected) {
         tokens.colors.onAccent.copy(alpha = 0.82f)

@@ -10,7 +10,7 @@ def main():
         if shutil.which(command) is None:
             raise SystemExit(f"Install {command} to run the native audio preference tests.")
 
-    with tempfile.TemporaryDirectory(prefix="nuvio-audio-preferences-") as directory:
+    with tempfile.TemporaryDirectory(prefix="cinebox-audio-preferences-") as directory:
         root = Path(directory)
         media = root / "audio-preferences.mka"
         subprocess.run([

@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
-internal actual val usesNativeNuvioBottomSheet: Boolean = false
+internal actual val usesNativeCineboxBottomSheet: Boolean = false
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -20,4 +20,4 @@ internal actual fun CineboxNativeModalBottomSheet(
     content: @Composable ColumnScope.() -> Unit,
 ) = Unit
 
-internal actual fun dismissNativeNuvioBottomSheet() = Unit
+internal actual fun dismissNativeCineboxBottomSheet() = Unit

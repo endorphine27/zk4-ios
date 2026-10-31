@@ -49,7 +49,7 @@ static constexpr double kMaxVolumePercent = 200.0;
 
 @class PlayerMetalView;
 @class MpvWebPlayer;
-@class NuvioPlayerOpenGLLayer;
+@class CineboxPlayerOpenGLLayer;
 
 @interface PlayerMetalView : NSView
 - (double)edrMax;
@@ -64,13 +64,13 @@ static constexpr double kMaxVolumePercent = 200.0;
 - (void)setFullscreenTransitionActive:(BOOL)active;
 @end
 
-@interface NuvioMainThreadPriorityLock : NSObject
+@interface CineboxMainThreadPriorityLock : NSObject
 - (void)beforeLocking;
 - (void)afterLocked;
 @end
 
-@interface NuvioPlayerOpenGLLayer : CAOpenGLLayer
-@property(nonatomic, assign, getter=isNuvioLiveResize) BOOL nuvioLiveResize;
+@interface CineboxPlayerOpenGLLayer : CAOpenGLLayer
+@property(nonatomic, assign, getter=isCineboxLiveResize) BOOL cineboxLiveResize;
 @property(nonatomic, assign, readonly) GLint bufferDepth;
 - (instancetype)initWithOwner:(PlayerMetalView *)owner;
 - (void)setMpvRenderContext:(mpv_render_context *)renderContext;
@@ -547,7 +547,7 @@ static void *mpvOpenGLGetProcAddress(void *ctx, const char *name) {
     return address;
 }
 
-@implementation NuvioMainThreadPriorityLock {
+@implementation CineboxMainThreadPriorityLock {
     NSCondition *_condition;
     BOOL _mainThreadNeedsLock;
 }
@@ -585,13 +585,13 @@ static void *mpvOpenGLGetProcAddress(void *ctx, const char *name) {
 
 @end
 
-@implementation NuvioPlayerOpenGLLayer {
+@implementation CineboxPlayerOpenGLLayer {
     __weak PlayerMetalView *_owner;
     CGLPixelFormatObj _pixelFormat;
     CGLContextObj _glContext;
     dispatch_queue_t _renderQueue;
     NSRecursiveLock *_displayLock;
-    NuvioMainThreadPriorityLock *_mainThreadPriorityLock;
+    CineboxMainThreadPriorityLock *_mainThreadPriorityLock;
     NSRecursiveLock *_renderLock;
     mpv_render_context *_renderContext;
     std::atomic_bool _needsFlip;
@@ -599,7 +599,7 @@ static void *mpvOpenGLGetProcAddress(void *ctx, const char *name) {
     std::atomic_bool _renderQueued;
 }
 
-@synthesize nuvioLiveResize = _nuvioLiveResize;
+@synthesize cineboxLiveResize = _cineboxLiveResize;
 @synthesize bufferDepth = _bufferDepth;
 
 - (instancetype)initWithOwner:(PlayerMetalView *)owner {
@@ -608,10 +608,10 @@ static void *mpvOpenGLGetProcAddress(void *ctx, const char *name) {
         return nil;
     }
     _owner = owner;
-    _renderQueue = dispatch_queue_create("com.nuvio.player.mpvgl", DISPATCH_QUEUE_SERIAL);
+    _renderQueue = dispatch_queue_create("com.cinebox.player.mpvgl", DISPATCH_QUEUE_SERIAL);
     dispatch_set_target_queue(_renderQueue, dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0));
     _displayLock = [NSRecursiveLock new];
-    _mainThreadPriorityLock = [NuvioMainThreadPriorityLock new];
+    _mainThreadPriorityLock = [CineboxMainThreadPriorityLock new];
     _renderLock = [NSRecursiveLock new];
     _needsFlip.store(false);
     _forceDraw.store(false);
@@ -640,12 +640,12 @@ static void *mpvOpenGLGetProcAddress(void *ctx, const char *name) {
     }
 }
 
-- (void)setNuvioLiveResize:(BOOL)nuvioLiveResize {
-    if (_nuvioLiveResize == nuvioLiveResize) {
+- (void)setCineboxLiveResize:(BOOL)cineboxLiveResize {
+    if (_cineboxLiveResize == cineboxLiveResize) {
         return;
     }
-    _nuvioLiveResize = nuvioLiveResize;
-    if (nuvioLiveResize) {
+    _cineboxLiveResize = cineboxLiveResize;
+    if (cineboxLiveResize) {
         self.asynchronous = YES;
         [self requestRenderForced:YES];
     } else {
@@ -665,10 +665,10 @@ static void *mpvOpenGLGetProcAddress(void *ctx, const char *name) {
                 pixelFormat:(CGLPixelFormatObj)pf
                forLayerTime:(CFTimeInterval)t
                 displayTime:(const CVTimeStamp *)ts {
-    if (_nuvioLiveResize && [NSThread isMainThread]) {
+    if (_cineboxLiveResize && [NSThread isMainThread]) {
         return NO;
     }
-    if (!_nuvioLiveResize) {
+    if (!_cineboxLiveResize) {
         self.asynchronous = NO;
     }
 
@@ -800,7 +800,7 @@ static void mpvRenderUpdateCallback(void *callbackContext) {
 }
 
 @implementation PlayerMetalView {
-    NuvioPlayerOpenGLLayer *_openGLLayer;
+    CineboxPlayerOpenGLLayer *_openGLLayer;
     mpv_render_context *_mpvRenderContext;
     BOOL _hasConfiguredEdr;
     BOOL _edrEnabled;
@@ -818,7 +818,7 @@ static void mpvRenderUpdateCallback(void *callbackContext) {
 
     self.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     self.wantsLayer = YES;
-    _openGLLayer = [[NuvioPlayerOpenGLLayer alloc] initWithOwner:self];
+    _openGLLayer = [[CineboxPlayerOpenGLLayer alloc] initWithOwner:self];
     _openGLLayer.frame = self.bounds;
     _openGLLayer.contentsGravity = kCAGravityResize;
     self.layer = _openGLLayer;
@@ -831,7 +831,7 @@ static void mpvRenderUpdateCallback(void *callbackContext) {
 }
 
 - (CALayer *)makeBackingLayer {
-    return _openGLLayer ?: [[NuvioPlayerOpenGLLayer alloc] initWithOwner:self];
+    return _openGLLayer ?: [[CineboxPlayerOpenGLLayer alloc] initWithOwner:self];
 }
 
 - (void)layout {
@@ -860,7 +860,7 @@ static void mpvRenderUpdateCallback(void *callbackContext) {
 
 - (void)viewWillStartLiveResize {
     [super viewWillStartLiveResize];
-    _openGLLayer.nuvioLiveResize = YES;
+    _openGLLayer.cineboxLiveResize = YES;
 }
 
 - (void)viewDidEndLiveResize {
@@ -872,7 +872,7 @@ static void mpvRenderUpdateCallback(void *callbackContext) {
 - (void)setFullscreenTransitionActive:(BOOL)active {
     _fullscreenTransitionActive = active;
     BOOL transitionLike = active || self.inLiveResize || self.window.inLiveResize;
-    _openGLLayer.nuvioLiveResize = transitionLike;
+    _openGLLayer.cineboxLiveResize = transitionLike;
     if (!transitionLike) {
         [self updateMetalLayerLayout];
         [_openGLLayer requestRenderForced:YES];
@@ -895,7 +895,7 @@ static void mpvRenderUpdateCallback(void *callbackContext) {
     BOOL liveResize = self.inLiveResize || self.window.inLiveResize || _fullscreenTransitionActive;
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
-    _openGLLayer.nuvioLiveResize = liveResize;
+    _openGLLayer.cineboxLiveResize = liveResize;
     _openGLLayer.contentsScale = scale;
     _openGLLayer.frame = self.bounds;
     if (!liveResize) {
@@ -1181,8 +1181,8 @@ static void setMpvOptionString(mpv_handle *mpv, const char *name, const char *va
     _cachedPaused.store(!playWhenReady);
     _cachedLoading.store(true);
     _cachedEnded.store(false);
-    _mpvEventQueue = dispatch_queue_create("com.nuvio.desktop.mpv-events", DISPATCH_QUEUE_SERIAL);
-    _mpvDrainQueue = dispatch_queue_create("com.nuvio.desktop.mpv-drain", DISPATCH_QUEUE_SERIAL);
+    _mpvEventQueue = dispatch_queue_create("com.cinebox.desktop.mpv-events", DISPATCH_QUEUE_SERIAL);
+    _mpvDrainQueue = dispatch_queue_create("com.cinebox.desktop.mpv-drain", DISPATCH_QUEUE_SERIAL);
     _mpvDrainStopped.store(false);
     _aoIsAvfoundation.store(false);
     _requestedVolumePercent.store(100.0);
@@ -1361,7 +1361,7 @@ static void setMpvOptionString(mpv_handle *mpv, const char *name, const char *va
 
     _lastControlsViewportNudgeSize = bounds.size;
     _lastControlsViewportNudgeAt = now;
-    NSString *script = @"window.nuvioNativeViewportChanged ? window.nuvioNativeViewportChanged() : window.dispatchEvent(new Event('resize'));";
+    NSString *script = @"window.cineboxNativeViewportChanged ? window.cineboxNativeViewportChanged() : window.dispatchEvent(new Event('resize'));";
     [_webView evaluateJavaScript:script completionHandler:nil];
     [self scheduleControlsResizeEnded];
 }
@@ -1391,7 +1391,7 @@ static void setMpvOptionString(mpv_handle *mpv, const char *name, const char *va
         [self scheduleControlsResizeEnded];
         return;
     }
-    NSString *script = @"window.nuvioNativeResizeEnded ? window.nuvioNativeResizeEnded() : document.getElementById('playerRoot')?.classList.remove('native-resizing');";
+    NSString *script = @"window.cineboxNativeResizeEnded ? window.cineboxNativeResizeEnded() : document.getElementById('playerRoot')?.classList.remove('native-resizing');";
     [_webView evaluateJavaScript:script completionHandler:nil];
 }
 
@@ -1778,7 +1778,7 @@ static void setMpvOptionString(mpv_handle *mpv, const char *name, const char *va
         NSString *reason = [NSString stringWithFormat:@"mpv_initialize failed: %s", mpv_error_string(initResult)];
         @throw [NSException exceptionWithName:@"PlayerBridgeError" reason:reason userInfo:nil];
     }
-    if (getenv("NUVIO_MPV_DEBUG")) {
+    if (getenv("CINEBOX_MPV_DEBUG")) {
         mpv_request_log_messages(_mpv, "info");
     }
     [self startMpvEventDrain];
@@ -2175,7 +2175,7 @@ static void setMpvOptionString(mpv_handle *mpv, const char *name, const char *va
     return [self doubleProperty:"speed" fallback:_cachedSpeed.load()];
 }
 
-static void nuvioMpvWakeup(void *ctx) {
+static void cineboxMpvWakeup(void *ctx) {
     MpvWebPlayer *player = (__bridge MpvWebPlayer *)ctx;
     [player scheduleMpvEventDrain];
 }
@@ -2185,7 +2185,7 @@ static void nuvioMpvWakeup(void *ctx) {
     if (!mpv) return;
     _mpvDrainStopped.store(false);
     mpv_observe_property(mpv, 2, "current-ao", MPV_FORMAT_STRING);
-    mpv_set_wakeup_callback(mpv, nuvioMpvWakeup, (__bridge void *)self);
+    mpv_set_wakeup_callback(mpv, cineboxMpvWakeup, (__bridge void *)self);
 }
 
 - (void)scheduleMpvEventDrain {

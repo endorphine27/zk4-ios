@@ -41,13 +41,13 @@ import com.cinebox.app.core.ui.CineboxTokens
 import com.cinebox.app.core.ui.ThemeColors
 import com.cinebox.app.core.ui.accentBrush
 import com.cinebox.app.core.ui.labelRes
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.membership.MemberAccessRepository
 import com.cinebox.app.features.membership.availableAppThemes
 import com.cinebox.app.features.profiles.ProfileRepository
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.cd_selected
-import nuvio.composeapp.generated.resources.custom_theme_edit
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.cd_selected
+import cinebox.composeapp.generated.resources.custom_theme_edit
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -119,7 +119,7 @@ private fun ThemeChip(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val palette = remember(theme, customColors) { ThemeColors.getColorPalette(theme, customColors) }
     Column(
         modifier = modifier

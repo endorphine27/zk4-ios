@@ -12,8 +12,8 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 actual object StreamBadgeSettingsStorage {
-    private const val preferencesName = "nuvio_stream_badge_settings"
-    private const val legacyDebridPreferencesName = "nuvio_debrid_settings"
+    private const val preferencesName = "cinebox_stream_badge_settings"
+    private const val legacyDebridPreferencesName = "cinebox_debrid_settings"
     private const val streamBadgeRulesKey = "stream_badge_rules"
     private const val showFileSizeBadgesKey = "show_file_size_badges"
     private const val showAddonLogoKey = "show_addon_logo"

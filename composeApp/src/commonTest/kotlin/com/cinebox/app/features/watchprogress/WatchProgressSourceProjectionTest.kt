@@ -6,10 +6,10 @@ import kotlin.test.assertEquals
 
 class WatchProgressSourceProjectionTest {
     @Test
-    fun `remote source excludes every Nuvio progress entry`() {
-        val nuvioEntries = listOf(
+    fun `remote source excludes every Cinebox progress entry`() {
+        val cineboxEntries = listOf(
             entry(parentMetaId = "shared", updatedAt = 200L),
-            entry(parentMetaId = "nuvio-only", updatedAt = 300L),
+            entry(parentMetaId = "cinebox-only", updatedAt = 300L),
         )
         val providerEntries = listOf(
             entry(parentMetaId = "shared", updatedAt = 100L),
@@ -18,7 +18,7 @@ class WatchProgressSourceProjectionTest {
         listOf(WatchProgressSource.TRAKT, WatchProgressSource.SIMKL).forEach { source ->
             val projected = projectWatchProgressSourceEntries(
                 source = source,
-                nuvioEntries = nuvioEntries,
+                cineboxEntries = cineboxEntries,
                 providerEntries = providerEntries,
             )
 
@@ -27,17 +27,17 @@ class WatchProgressSourceProjectionTest {
     }
 
     @Test
-    fun `Nuvio source excludes every provider progress entry`() {
-        val nuvioEntries = listOf(entry(parentMetaId = "nuvio"))
+    fun `Cinebox source excludes every provider progress entry`() {
+        val cineboxEntries = listOf(entry(parentMetaId = "cinebox"))
         val providerEntries = listOf(entry(parentMetaId = "provider"))
 
         val projected = projectWatchProgressSourceEntries(
-            source = WatchProgressSource.NUVIO_SYNC,
-            nuvioEntries = nuvioEntries,
+            source = WatchProgressSource.CINEBOX_SYNC,
+            cineboxEntries = cineboxEntries,
             providerEntries = providerEntries,
         )
 
-        assertEquals(nuvioEntries, projected)
+        assertEquals(cineboxEntries, projected)
     }
 
     private fun entry(

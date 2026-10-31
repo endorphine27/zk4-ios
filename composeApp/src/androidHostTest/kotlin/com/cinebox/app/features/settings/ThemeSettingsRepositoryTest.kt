@@ -22,7 +22,7 @@ class ThemeSettingsRepositoryTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        context.getSharedPreferences("nuvio_theme_settings", Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("cinebox_theme_settings", Context.MODE_PRIVATE).edit().clear().commit()
         ThemeSettingsStorage.initialize(context)
         MemberAssetStorage.initialize(context)
         MemberAccessRepository.clearLocalState()

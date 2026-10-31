@@ -2,7 +2,7 @@
 
 # Shared Linux RPM dependency definitions and requirement parsing helpers.
 
-readonly -a NUVIO_LINUX_RPM_RUNTIME_DEPENDENCIES=(
+readonly -a CINEBOX_LINUX_RPM_RUNTIME_DEPENDENCIES=(
     mpv-libs
     webkit2gtk4.1
     libXcomposite

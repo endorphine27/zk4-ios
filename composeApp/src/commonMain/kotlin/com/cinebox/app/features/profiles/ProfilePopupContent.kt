@@ -56,11 +56,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeTint
 import dev.chrisbanes.haze.hazeEffect
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -81,7 +81,7 @@ internal fun ProfilePopupContent(
     onPinCancelled: () -> Unit,
     onPinVerified: (CineboxProfile) -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val shape = RoundedCornerShape(22.dp)
     val panelAlignment = if (opensBelow) Alignment.TopCenter else Alignment.BottomCenter
     val dismissPopup by rememberUpdatedState(onDismissRequest)
@@ -210,7 +210,7 @@ private fun ProfilePopupItem(
     onClick: () -> Unit,
     avatar: @Composable () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val scale by animateFloatAsState(if (isHovered) 1.04f else 1f, tween(90), label = "profile_hover")
     Column(
         modifier.graphicsLayer { scaleX = scale; scaleY = scale }

@@ -2,8 +2,8 @@ package com.cinebox.app.features.updater
 
 import com.cinebox.app.core.build.AppVersionConfig
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.updates_not_available
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.updates_not_available
 import org.jetbrains.compose.resources.getString
 
 actual object AppUpdaterPlatform {

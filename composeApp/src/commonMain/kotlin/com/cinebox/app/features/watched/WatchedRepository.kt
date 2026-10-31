@@ -43,7 +43,7 @@ internal enum class WatchedTrackerHistorySync {
 }
 
 internal data class WatchedPushOutcome(
-    val nuvioSyncSucceeded: Boolean = false,
+    val cineboxSyncSucceeded: Boolean = false,
     val succeededTrackerProviderIds: Set<TrackingProviderId> = emptySet(),
 )
 
@@ -65,26 +65,26 @@ internal fun isWatchedSourceOperationCurrent(
 
 internal fun watchedItemsForSource(
     source: WatchProgressSource,
-    nuvioItems: Collection<WatchedItem>,
+    cineboxItems: Collection<WatchedItem>,
     providerItems: Map<TrackingProviderId, Collection<WatchedItem>>,
 ): Collection<WatchedItem> = source.providerId
     ?.let { providerId -> providerItems[providerId].orEmpty() }
-    ?: nuvioItems
+    ?: cineboxItems
 
-internal fun shouldAcknowledgeNuvioWatchedPush(
+internal fun shouldAcknowledgeCineboxWatchedPush(
     source: WatchProgressSource,
     outcome: WatchedPushOutcome,
-): Boolean = source.providerId == null && outcome.nuvioSyncSucceeded
+): Boolean = source.providerId == null && outcome.cineboxSyncSucceeded
 
 internal fun replaceWatchedItemsForSource(
     source: WatchProgressSource,
-    nuvioItems: MutableMap<String, WatchedItem>,
+    cineboxItems: MutableMap<String, WatchedItem>,
     providerItems: MutableMap<TrackingProviderId, MutableMap<String, WatchedItem>>,
     replacement: Map<String, WatchedItem>,
 ) {
     val target = source.providerId
         ?.let { providerId -> providerItems.getOrPut(providerId, ::mutableMapOf) }
-        ?: nuvioItems
+        ?: cineboxItems
     target.clear()
     target.putAll(replacement)
 }
@@ -141,16 +141,16 @@ object WatchedRepository {
     private var hasLoaded = false
     private var currentProfileId: Int = 1
     private var profileGeneration: Long = 0L
-    private var activeSource: WatchProgressSource = WatchProgressSource.NUVIO_SYNC
+    private var activeSource: WatchProgressSource = WatchProgressSource.CINEBOX_SYNC
     private var sourceGeneration: Long = 0L
     private val itemsStore = WatchedItemsStore()
-    private var nuvioFullyWatchedSeriesKeys: Set<String> = emptySet()
+    private var cineboxFullyWatchedSeriesKeys: Set<String> = emptySet()
     private var providerFullyWatchedSeriesKeys: MutableMap<TrackingProviderId, Set<String>> = mutableMapOf()
     private var expandedSiblingKeys: Set<String> = emptySet()
     private var providerExtraWatchedKeys: MutableMap<TrackingProviderId, Set<String>> = mutableMapOf()
-    private var nuvioHasLoaded: Boolean = false
+    private var cineboxHasLoaded: Boolean = false
     private var loadedProviders: MutableSet<TrackingProviderId> = mutableSetOf()
-    private var nuvioHasLoadedRemote: Boolean = false
+    private var cineboxHasLoadedRemote: Boolean = false
     private var providersLoadedFromRemote: MutableSet<TrackingProviderId> = mutableSetOf()
     private var lastSuccessfulPushEpochMs: Long = 0L
     private var deltaCursorEventId: Long = 0L
@@ -191,21 +191,21 @@ object WatchedRepository {
         hasLoaded = false
         currentProfileId = 1
         profileGeneration += 1L
-        activeSource = WatchProgressSource.NUVIO_SYNC
+        activeSource = WatchProgressSource.CINEBOX_SYNC
         sourceGeneration += 1L
-        itemsStore.update { nuvioItems, providerItems, dirtyNuvioKeys, dirtyProviderKeys ->
-            nuvioItems.clear()
+        itemsStore.update { cineboxItems, providerItems, dirtyCineboxKeys, dirtyProviderKeys ->
+            cineboxItems.clear()
             providerItems.clear()
-            dirtyNuvioKeys.clear()
+            dirtyCineboxKeys.clear()
             dirtyProviderKeys.clear()
         }
-        nuvioFullyWatchedSeriesKeys = emptySet()
+        cineboxFullyWatchedSeriesKeys = emptySet()
         providerFullyWatchedSeriesKeys.clear()
         expandedSiblingKeys = emptySet()
         providerExtraWatchedKeys.clear()
-        nuvioHasLoaded = false
+        cineboxHasLoaded = false
         loadedProviders.clear()
-        nuvioHasLoadedRemote = false
+        cineboxHasLoadedRemote = false
         providersLoadedFromRemote.clear()
         lastSuccessfulPushEpochMs = 0L
         deltaCursorEventId = 0L
@@ -217,22 +217,22 @@ object WatchedRepository {
     private fun loadFromDisk(profileId: Int) {
         currentProfileId = profileId
         profileGeneration += 1L
-        activeSource = WatchProgressSource.NUVIO_SYNC
+        activeSource = WatchProgressSource.CINEBOX_SYNC
         sourceGeneration += 1L
         hasLoaded = true
-        itemsStore.update { nuvioItems, providerItems, dirtyNuvioKeys, dirtyProviderKeys ->
-            nuvioItems.clear()
+        itemsStore.update { cineboxItems, providerItems, dirtyCineboxKeys, dirtyProviderKeys ->
+            cineboxItems.clear()
             providerItems.clear()
-            dirtyNuvioKeys.clear()
+            dirtyCineboxKeys.clear()
             dirtyProviderKeys.clear()
         }
-        nuvioFullyWatchedSeriesKeys = emptySet()
+        cineboxFullyWatchedSeriesKeys = emptySet()
         providerFullyWatchedSeriesKeys.clear()
         expandedSiblingKeys = emptySet()
         providerExtraWatchedKeys.clear()
-        nuvioHasLoaded = true
+        cineboxHasLoaded = true
         loadedProviders.clear()
-        nuvioHasLoadedRemote = false
+        cineboxHasLoadedRemote = false
         providersLoadedFromRemote.clear()
 
         val payload = WatchedStorage.loadPayload(profileId).orEmpty().trim()
@@ -254,9 +254,9 @@ object WatchedRepository {
             val restoredProviderPayloads = storedPayload.providerPayloads.mapNotNull { (storageId, providerPayload) ->
                 TrackingProviderId.fromStorage(storageId)?.let { providerId -> providerId to providerPayload }
             }.toMap()
-            itemsStore.update { nuvioItems, providerItems, dirtyNuvioKeys, dirtyProviderKeys ->
-                nuvioItems.putAll(restoredItems)
-                dirtyNuvioKeys += storedPayload.dirtyWatchedKeys.filter { key -> key in restoredItems }
+            itemsStore.update { cineboxItems, providerItems, dirtyCineboxKeys, dirtyProviderKeys ->
+                cineboxItems.putAll(restoredItems)
+                dirtyCineboxKeys += storedPayload.dirtyWatchedKeys.filter { key -> key in restoredItems }
                 restoredProviderPayloads.forEach { (providerId, providerPayload) ->
                     val providerItemsByKey = (providerPayload.items + expandProviderWatchedItems(providerPayload.itemGroups))
                         .map(WatchedItem::normalizedMarkedAt)
@@ -266,7 +266,7 @@ object WatchedRepository {
                         .filterTo(mutableSetOf()) { key -> key in providerItemsByKey }
                 }
             }
-            nuvioFullyWatchedSeriesKeys = storedPayload.fullyWatchedSeriesKeys
+            cineboxFullyWatchedSeriesKeys = storedPayload.fullyWatchedSeriesKeys
             expandedSiblingKeys = storedPayload.expandedSiblingKeys
             restoredProviderPayloads.forEach { (providerId, providerPayload) ->
                 providerFullyWatchedSeriesKeys[providerId] = providerPayload.fullyWatchedSeriesKeys
@@ -278,7 +278,7 @@ object WatchedRepository {
             lastSuccessfulPushEpochMs = 0L
             deltaCursorEventId = 0L
             deltaInitialized = false
-            nuvioFullyWatchedSeriesKeys = emptySet()
+            cineboxFullyWatchedSeriesKeys = emptySet()
         }
 
         publish()
@@ -387,8 +387,8 @@ object WatchedRepository {
             val authState = AuthRepository.state.value
             if (authState !is AuthState.Authenticated || authState.isAnonymous) {
                 // Local watched state is authoritative when this account has no CINEBOX upstream.
-                nuvioHasLoaded = true
-                nuvioHasLoadedRemote = true
+                cineboxHasLoaded = true
+                cineboxHasLoadedRemote = true
                 publish()
                 return true
             }
@@ -407,7 +407,7 @@ object WatchedRepository {
                     resetDeltaState = true,
                 )
             } ?: if (forceSnapshot) {
-                refreshNuvioSnapshot(
+                refreshCineboxSnapshot(
                     operation = operation,
                     profileId = profileId,
                 )
@@ -425,7 +425,7 @@ object WatchedRepository {
         }
     }
 
-    private suspend fun refreshNuvioSnapshot(
+    private suspend fun refreshCineboxSnapshot(
         operation: WatchedRefreshOperation,
         profileId: Int,
     ): Boolean {
@@ -467,7 +467,7 @@ object WatchedRepository {
         val extraWatchedKeys = adapter.pullExtraWatchedKeys(profileId)
         val source = operation.sourceOperation.source
         log.i {
-            "Watched adapter result source=$source provider=${source.providerId?.storageId ?: "nuvio"} " +
+            "Watched adapter result source=$source provider=${source.providerId?.storageId ?: "cinebox"} " +
                 "profile=$profileId serverItems=${serverItems.size} " +
                 "movies=${serverItems.count { it.type == "movie" }} " +
                 "episodes=${serverItems.count { it.season != null && it.episode != null }} " +
@@ -485,13 +485,13 @@ object WatchedRepository {
             }
             return false
         }
-        itemsStore.update { nuvioItems, providerItems, dirtyNuvioKeys, dirtyProviderKeys ->
+        itemsStore.update { cineboxItems, providerItems, dirtyCineboxKeys, dirtyProviderKeys ->
             val items = source.providerId
                 ?.let { providerId -> providerItems[providerId]?.values.orEmpty() }
-                ?: nuvioItems.values
+                ?: cineboxItems.values
             val dirtyKeys = source.providerId
                 ?.let { providerId -> dirtyProviderKeys.getOrPut(providerId, ::mutableSetOf) }
-                ?: dirtyNuvioKeys
+                ?: dirtyCineboxKeys
             val merged = mergeWatchedSnapshot(
                 serverItems = serverItems,
                 localItems = items.toList(),
@@ -500,7 +500,7 @@ object WatchedRepository {
             )
             replaceWatchedItemsForSource(
                 source = source,
-                nuvioItems = nuvioItems,
+                cineboxItems = cineboxItems,
                 providerItems = providerItems,
                 replacement = merged.items,
             )
@@ -515,8 +515,8 @@ object WatchedRepository {
             loadedProviders += providerId
             providersLoadedFromRemote += providerId
         } ?: run {
-            nuvioHasLoaded = true
-            nuvioHasLoadedRemote = true
+            cineboxHasLoaded = true
+            cineboxHasLoadedRemote = true
             if (resetDeltaState) {
                 deltaCursorEventId = 0L
                 deltaInitialized = false
@@ -574,10 +574,10 @@ object WatchedRepository {
             if (!isActiveOperation(operation)) return false
             if (events.isEmpty()) break
 
-            itemsStore.update { nuvioItems, _, dirtyNuvioKeys, _ ->
+            itemsStore.update { cineboxItems, _, dirtyCineboxKeys, _ ->
                 applyWatchedDeltaEvents(
-                    targetItems = nuvioItems,
-                    dirtyKeys = dirtyNuvioKeys,
+                    targetItems = cineboxItems,
+                    dirtyKeys = dirtyCineboxKeys,
                     events = events,
                 )
             }
@@ -590,9 +590,9 @@ object WatchedRepository {
         }
 
         if (!isActiveOperation(operation)) return false
-        nuvioHasLoaded = true
-        val remoteReadinessChanged = !nuvioHasLoadedRemote
-        nuvioHasLoadedRemote = true
+        cineboxHasLoaded = true
+        val remoteReadinessChanged = !cineboxHasLoadedRemote
+        cineboxHasLoadedRemote = true
         if (changed || remoteReadinessChanged) {
             publish()
         }
@@ -703,17 +703,17 @@ object WatchedRepository {
     }
 
     private fun itemsForSourceSnapshot(source: WatchProgressSource): List<WatchedItem> =
-        itemsStore.read { nuvioItems, providerItems, _, _ ->
+        itemsStore.read { cineboxItems, providerItems, _, _ ->
             val items = source.providerId
                 ?.let { providerId -> providerItems[providerId]?.values.orEmpty() }
-                ?: nuvioItems.values
+                ?: cineboxItems.values
             items.toList()
         }
 
     private fun fullyWatchedSeriesKeysForSource(source: WatchProgressSource): Set<String> =
         source.providerId
             ?.let { providerId -> providerFullyWatchedSeriesKeys[providerId].orEmpty() }
-            ?: nuvioFullyWatchedSeriesKeys
+            ?: cineboxFullyWatchedSeriesKeys
 
     private fun setFullyWatchedSeriesKeysForSource(
         source: WatchProgressSource,
@@ -722,18 +722,18 @@ object WatchedRepository {
         source.providerId?.let { providerId ->
             providerFullyWatchedSeriesKeys[providerId] = keys
         } ?: run {
-            nuvioFullyWatchedSeriesKeys = keys
+            cineboxFullyWatchedSeriesKeys = keys
         }
     }
 
     private fun hasLoadedSource(source: WatchProgressSource): Boolean =
-        source.providerId?.let(loadedProviders::contains) ?: nuvioHasLoaded
+        source.providerId?.let(loadedProviders::contains) ?: cineboxHasLoaded
 
     private fun itemCountForSource(source: WatchProgressSource): Int =
-        itemsStore.read { nuvioItems, providerItems, _, _ ->
+        itemsStore.read { cineboxItems, providerItems, _, _ ->
             source.providerId
                 ?.let { providerId -> providerItems[providerId]?.size ?: 0 }
-                ?: nuvioItems.size
+                ?: cineboxItems.size
         }
 
     fun toggleWatched(item: WatchedItem) {
@@ -790,13 +790,13 @@ object WatchedRepository {
         val timestampedItems = items.map { watchedItem ->
             watchedItem.copy(markedAtEpochMs = markedAt)
         }
-        itemsStore.update { nuvioItems, providerItems, dirtyNuvioKeys, dirtyProviderKeys ->
+        itemsStore.update { cineboxItems, providerItems, dirtyCineboxKeys, dirtyProviderKeys ->
             val targetItems = source.providerId
                 ?.let { providerId -> providerItems.getOrPut(providerId, ::mutableMapOf) }
-                ?: nuvioItems
+                ?: cineboxItems
             val dirtyKeys = source.providerId
                 ?.let { providerId -> dirtyProviderKeys.getOrPut(providerId, ::mutableSetOf) }
-                ?: dirtyNuvioKeys
+                ?: dirtyCineboxKeys
             timestampedItems.forEach { watchedItem ->
                 val key = watchedItemKey(watchedItem.type, watchedItem.id, watchedItem.season, watchedItem.episode)
                 targetItems[key] = watchedItem
@@ -846,13 +846,13 @@ object WatchedRepository {
         ensureLoaded()
         if (items.isEmpty()) return
         val source = activeSource
-        val (removedItems, removedExtraKeys) = itemsStore.update { nuvioItems, providerItems, dirtyNuvioKeys, dirtyProviderKeys ->
+        val (removedItems, removedExtraKeys) = itemsStore.update { cineboxItems, providerItems, dirtyCineboxKeys, dirtyProviderKeys ->
             val targetItems = source.providerId
                 ?.let { providerId -> providerItems.getOrPut(providerId, ::mutableMapOf) }
-                ?: nuvioItems
+                ?: cineboxItems
             val dirtyKeys = source.providerId
                 ?.let { providerId -> dirtyProviderKeys.getOrPut(providerId, ::mutableSetOf) }
-                ?: dirtyNuvioKeys
+                ?: dirtyCineboxKeys
             var extraKeysChanged = false
             val removed = items.mapNotNull { watchedItem ->
                 val keys = watchedItemKeys(
@@ -903,10 +903,10 @@ object WatchedRepository {
         ensureLoaded()
         val source = activeSource
         val keys = watchedItemKeys(type = type, id = id, season = season, episode = episode)
-        val stored = itemsStore.read { nuvioItems, providerItems, _, _ ->
+        val stored = itemsStore.read { cineboxItems, providerItems, _, _ ->
             source.providerId?.let { providerId ->
                 providerItems[providerId]?.let { itemsByKey -> keys.any(itemsByKey::containsKey) } == true
-            } ?: keys.any(nuvioItems::containsKey)
+            } ?: keys.any(cineboxItems::containsKey)
         }
         if (stored) return true
         val providerId = source.providerId ?: return false
@@ -1062,7 +1062,7 @@ object WatchedRepository {
                     trackerHistorySync = trackerHistorySync,
                     source = source,
                 )
-                if (shouldAcknowledgeNuvioWatchedPush(source = source, outcome = outcome)) {
+                if (shouldAcknowledgeCineboxWatchedPush(source = source, outcome = outcome)) {
                     recordSuccessfulPush(
                         profileId = profileId,
                         operationGeneration = operationGeneration,
@@ -1096,14 +1096,14 @@ object WatchedRepository {
     }
 
     private fun publish() {
-        val (nuvioItems, providerItems) = itemsStore.read { storedNuvioItems, storedProviderItems, _, _ ->
-            storedNuvioItems.values.toList() to storedProviderItems.mapValues { (_, itemsByKey) ->
+        val (cineboxItems, providerItems) = itemsStore.read { storedCineboxItems, storedProviderItems, _, _ ->
+            storedCineboxItems.values.toList() to storedProviderItems.mapValues { (_, itemsByKey) ->
                 itemsByKey.values.toList()
             }
         }
         val items = watchedItemsForSource(
             source = activeSource,
-            nuvioItems = nuvioItems,
+            cineboxItems = cineboxItems,
             providerItems = providerItems,
         )
             .map(WatchedItem::normalizedMarkedAt)
@@ -1119,7 +1119,7 @@ object WatchedRepository {
         val isLoaded = hasLoadedSource(activeSource)
         val hasLoadedRemoteItems = activeSource.providerId
             ?.let(providersLoadedFromRemote::contains)
-            ?: nuvioHasLoadedRemote
+            ?: cineboxHasLoadedRemote
         _fullyWatchedSeriesKeys.value = fullyWatchedSeriesKeys + expandedSiblingKeys
         _uiState.value = WatchedUiState(
             items = items,
@@ -1128,7 +1128,7 @@ object WatchedRepository {
             hasLoadedRemoteItems = hasLoadedRemoteItems,
         )
         log.i {
-            "Watched publish source=$activeSource provider=${activeSource.providerId?.storageId ?: "nuvio"} " +
+            "Watched publish source=$activeSource provider=${activeSource.providerId?.storageId ?: "cinebox"} " +
                 "items=${items.size} keys=${watchedKeys.size} fullyWatchedSeries=${fullyWatchedSeriesKeys.size} " +
                 "isLoaded=$isLoaded hasLoadedRemote=$hasLoadedRemoteItems " +
                 "itemKeys=[${diagnosticItemKeySample(items)}] " +
@@ -1202,7 +1202,7 @@ object WatchedRepository {
     }
 
     private fun persist() {
-        val storedPayload = itemsStore.read { nuvioItems, providerItems, dirtyNuvioKeys, dirtyProviderKeys ->
+        val storedPayload = itemsStore.read { cineboxItems, providerItems, dirtyCineboxKeys, dirtyProviderKeys ->
             val providerIds = buildSet {
                 addAll(providerItems.keys)
                 addAll(dirtyProviderKeys.keys)
@@ -1211,15 +1211,15 @@ object WatchedRepository {
                 addAll(loadedProviders)
             }
             StoredWatchedPayload(
-                items = nuvioItems.values
+                items = cineboxItems.values
                     .map(WatchedItem::normalizedMarkedAt)
                     .sortedByDescending { it.markedAtEpochMs },
-                fullyWatchedSeriesKeys = nuvioFullyWatchedSeriesKeys,
+                fullyWatchedSeriesKeys = cineboxFullyWatchedSeriesKeys,
                 expandedSiblingKeys = expandedSiblingKeys,
                 lastSuccessfulPushEpochMs = lastSuccessfulPushEpochMs,
                 deltaCursorEventId = deltaCursorEventId,
                 deltaInitialized = deltaInitialized,
-                dirtyWatchedKeys = dirtyNuvioKeys.toSet(),
+                dirtyWatchedKeys = dirtyCineboxKeys.toSet(),
                 providerPayloads = providerIds.associate { providerId ->
                     val items = providerItems[providerId]
                         .orEmpty()
@@ -1253,21 +1253,21 @@ object WatchedRepository {
             .map { item -> normalizeWatchedMarkedAtEpochMs(item.markedAtEpochMs) }
             .maxOrNull()
             ?: return
-        val changed = itemsStore.update { nuvioItems, _, dirtyNuvioKeys, _ ->
+        val changed = itemsStore.update { cineboxItems, _, dirtyCineboxKeys, _ ->
             val acknowledgedDirtyKeys = acknowledgeSuccessfulWatchedPush(
-                currentItems = nuvioItems,
-                dirtyKeys = dirtyNuvioKeys,
+                currentItems = cineboxItems,
+                dirtyKeys = dirtyCineboxKeys,
                 pushedItems = items,
             )
             val updatedLastSuccessfulPushEpochMs = maxOf(lastSuccessfulPushEpochMs, latestPushed)
             if (
-                acknowledgedDirtyKeys == dirtyNuvioKeys &&
+                acknowledgedDirtyKeys == dirtyCineboxKeys &&
                 updatedLastSuccessfulPushEpochMs == lastSuccessfulPushEpochMs
             ) {
                 false
             } else {
-                dirtyNuvioKeys.clear()
-                dirtyNuvioKeys += acknowledgedDirtyKeys
+                dirtyCineboxKeys.clear()
+                dirtyCineboxKeys += acknowledgedDirtyKeys
                 lastSuccessfulPushEpochMs = updatedLastSuccessfulPushEpochMs
                 true
             }
@@ -1283,13 +1283,13 @@ object WatchedRepository {
     ): WatchedPushOutcome {
         val (serverItems, items) = items.partition(ServerWatched::isServerItem)
         if (trackerHistorySync == WatchedTrackerHistorySync.Mirror) ServerWatched.apply(serverItems, played = true)
-        if (items.isEmpty()) return WatchedPushOutcome(nuvioSyncSucceeded = true)
-        var nuvioSyncSucceeded = false
+        if (items.isEmpty()) return WatchedPushOutcome(cineboxSyncSucceeded = true)
+        var cineboxSyncSucceeded = false
         val succeededTrackerProviderIds = linkedSetOf<TrackingProviderId>()
         if (source.providerId == null) {
             try {
                 syncAdapter.push(profileId = profileId, items = items)
-                nuvioSyncSucceeded = true
+                cineboxSyncSucceeded = true
             } catch (error: CancellationException) {
                 throw error
             } catch (error: Throwable) {
@@ -1310,7 +1310,7 @@ object WatchedRepository {
             }
         }
         return WatchedPushOutcome(
-            nuvioSyncSucceeded = nuvioSyncSucceeded,
+            cineboxSyncSucceeded = cineboxSyncSucceeded,
             succeededTrackerProviderIds = succeededTrackerProviderIds,
         )
     }

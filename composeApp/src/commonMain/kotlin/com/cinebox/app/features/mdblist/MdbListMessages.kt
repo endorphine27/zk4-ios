@@ -2,7 +2,7 @@ package com.cinebox.app.features.mdblist
 
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.compose.resources.getString
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.StringResource
 
 internal fun MdbListAuthError.messageResource(): StringResource = when (this) {

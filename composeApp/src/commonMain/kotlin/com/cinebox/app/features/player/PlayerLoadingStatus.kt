@@ -3,14 +3,14 @@ package com.cinebox.app.features.player
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.player_loading_buffering
-import nuvio.composeapp.generated.resources.player_loading_building
-import nuvio.composeapp.generated.resources.player_loading_starting
-import nuvio.composeapp.generated.resources.player_loading_subtitles
-import nuvio.composeapp.generated.resources.player_loading_subtitles_from
-import nuvio.composeapp.generated.resources.player_loading_subtitles_progress
-import nuvio.composeapp.generated.resources.player_loading_subtitles_addon
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.player_loading_buffering
+import cinebox.composeapp.generated.resources.player_loading_building
+import cinebox.composeapp.generated.resources.player_loading_starting
+import cinebox.composeapp.generated.resources.player_loading_subtitles
+import cinebox.composeapp.generated.resources.player_loading_subtitles_from
+import cinebox.composeapp.generated.resources.player_loading_subtitles_progress
+import cinebox.composeapp.generated.resources.player_loading_subtitles_addon
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 

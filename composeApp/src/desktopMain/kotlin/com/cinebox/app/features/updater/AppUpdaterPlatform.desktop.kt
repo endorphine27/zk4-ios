@@ -5,11 +5,11 @@ import com.cinebox.app.core.storage.DesktopStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.updates_download_failed
-import nuvio.composeapp.generated.resources.updates_download_failed_http
-import nuvio.composeapp.generated.resources.updates_downloaded_file_missing
-import nuvio.composeapp.generated.resources.updates_empty_download_body
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.updates_download_failed
+import cinebox.composeapp.generated.resources.updates_download_failed_http
+import cinebox.composeapp.generated.resources.updates_downloaded_file_missing
+import cinebox.composeapp.generated.resources.updates_empty_download_body
 import org.jetbrains.compose.resources.getString
 import java.io.File
 import java.io.FileOutputStream
@@ -177,7 +177,7 @@ actual object AppUpdaterPlatform {
     }
 
     private fun scheduleAppExit() {
-        thread(name = "nuvio-updater-exit", isDaemon = true) {
+        thread(name = "cinebox-updater-exit", isDaemon = true) {
             Thread.sleep(500)
             exitProcess(0)
         }

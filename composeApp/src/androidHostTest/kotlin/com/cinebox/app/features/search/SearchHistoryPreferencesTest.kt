@@ -19,7 +19,7 @@ class SearchHistoryPreferencesTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        context.getSharedPreferences("nuvio_search_history", Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("cinebox_search_history", Context.MODE_PRIVATE).edit().clear().commit()
         SearchHistoryStorage.initialize(context)
         SearchHistoryRepository.onProfileChanged()
     }
@@ -58,7 +58,7 @@ class SearchHistoryPreferencesTest {
     @Test
     fun changingPreferenceDoesNotReadOrOverwriteAnotherProfile() {
         val preferences = RuntimeEnvironment.getApplication()
-            .getSharedPreferences("nuvio_search_history", Context.MODE_PRIVATE)
+            .getSharedPreferences("cinebox_search_history", Context.MODE_PRIVATE)
         val otherProfileKey = ProfileScopedKey.of("recent_searches_enabled", 99)
         preferences.edit().putBoolean(otherProfileKey, false).commit()
 

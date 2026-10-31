@@ -11,10 +11,10 @@ import com.cinebox.app.navigation.AppRoute
 import platform.UIKit.UIColor
 import platform.UIKit.UIViewController
 
-private val nuvioBackgroundColor = UIColor(red = 0.051, green = 0.051, blue = 0.051, alpha = 1.0)
+private val cineboxBackgroundColor = UIColor(red = 0.051, green = 0.051, blue = 0.051, alpha = 1.0)
 
 @Suppress("unused")
-fun MainViewController(): UIViewController = nuvioComposeViewController {
+fun MainViewController(): UIViewController = cineboxComposeViewController {
     App()
 }
 
@@ -32,7 +32,7 @@ fun MainViewController(
     verticalBar: VerticalBar,
 ): UIViewController {
     val initialTab = AppScreenTab.fromName(initialTabName)
-    return nuvioComposeViewController(verticalBar) {
+    return cineboxComposeViewController(verticalBar) {
         App(
             initialTab = initialTab,
             useNativeNavigation = true,
@@ -60,7 +60,7 @@ fun ScreenViewController(
     appGateController: AppGateController,
     verticalBar: VerticalBar,
     hinge: Hinge,
-): UIViewController = nuvioComposeViewController(verticalBar, hinge) {
+): UIViewController = cineboxComposeViewController(verticalBar, hinge) {
     App(
         initialRoute = route,
         useNativeNavigation = true,
@@ -105,7 +105,7 @@ fun AppGateViewController(
     view.backgroundColor = UIColor.clearColor
 }
 
-private fun nuvioComposeViewController(
+private fun cineboxComposeViewController(
     verticalBar: VerticalBar = VerticalBar(),
     hinge: Hinge = Hinge(),
     content: @androidx.compose.runtime.Composable () -> Unit,
@@ -119,5 +119,5 @@ private fun nuvioComposeViewController(
         )
     },
 ).apply {
-    view.backgroundColor = nuvioBackgroundColor
+    view.backgroundColor = cineboxBackgroundColor
 }

@@ -6,8 +6,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import com.cinebox.app.core.ui.CineboxToastController
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.external_player_failed
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.external_player_failed
 import org.jetbrains.compose.resources.getString
 import platform.Foundation.NSURL
 import platform.UIKit.UIApplication

@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.cinebox.app.core.ui.CineboxAsyncImage as AsyncImage
 import com.cinebox.app.features.details.MetaCompany
 import com.cinebox.app.features.details.MetaDetails
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalLayoutApi::class)

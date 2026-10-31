@@ -61,11 +61,11 @@ import com.cinebox.app.core.format.extractReleaseYearForDisplay
 import com.cinebox.app.core.ui.CineboxTokens
 import com.cinebox.app.features.details.MetaDetails
 import com.cinebox.app.features.details.formatRuntimeForDisplay
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.detail_logo_content_description
-import nuvio.composeapp.generated.resources.details_season_count
-import nuvio.composeapp.generated.resources.details_director
-import nuvio.composeapp.generated.resources.details_writer
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.detail_logo_content_description
+import cinebox.composeapp.generated.resources.details_season_count
+import cinebox.composeapp.generated.resources.details_director
+import cinebox.composeapp.generated.resources.details_writer
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 import com.cinebox.app.core.ui.LocalVerticalBarPadding

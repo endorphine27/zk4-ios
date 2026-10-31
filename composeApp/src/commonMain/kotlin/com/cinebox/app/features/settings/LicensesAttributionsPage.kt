@@ -36,7 +36,7 @@ import com.cinebox.app.features.cloud.TorboxCloudLibraryPosterUrl
 import com.cinebox.app.features.cloud.cloudLibraryDisplayArtworkUrl
 import com.cinebox.app.isDesktop
 import com.cinebox.app.isIos
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -48,8 +48,8 @@ private const val PremiumizeUrl = "https://www.premiumize.me"
 private const val TorboxUrl = "https://torbox.app"
 private const val MdbListUrl = "https://mdblist.com"
 private const val IntroDbUrl = "https://introdb.app/"
-private const val CineboxRepositoryUrl = "https://github.com/NuvioMedia/CineboxMobile"
-private const val DesktopRepositoryUrl = "https://github.com/NuvioMedia/CineboxDesktop"
+private const val CineboxRepositoryUrl = "https://github.com/NuvioMedia/NuvioMobile"
+private const val DesktopRepositoryUrl = "https://github.com/NuvioMedia/NuvioDesktop"
 private const val MpvUrl = "https://github.com/mpv-player/mpv"
 private const val MpvKitUrl = "https://github.com/mpvkit/MPVKit"
 private const val ApacheLicenseUrl = "https://www.apache.org/licenses/LICENSE-2.0"
@@ -392,9 +392,9 @@ private fun attributionItems(): List<AttributionItem> = listOf(
 
 internal fun appLicenseItem(): LicenseItem =
     LicenseItem(
-        titleRes = if (isDesktop) Res.string.app_brand_name else Res.string.settings_licenses_attributions_nuvio_title,
-        bodyRes = Res.string.settings_licenses_attributions_nuvio_body,
-        licenseRes = Res.string.settings_licenses_attributions_nuvio_license,
+        titleRes = if (isDesktop) Res.string.app_brand_name else Res.string.settings_licenses_attributions_cinebox_title,
+        bodyRes = Res.string.settings_licenses_attributions_cinebox_body,
+        licenseRes = Res.string.settings_licenses_attributions_cinebox_license,
         link = if (isDesktop) DesktopRepositoryUrl else CineboxRepositoryUrl,
     )
 

@@ -40,9 +40,9 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 
@@ -53,7 +53,7 @@ internal fun InlinePinEntry(
     onCancel: () -> Unit,
     verifyPin: suspend (String) -> PinVerifyResult,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     var pin by remember { mutableStateOf("") }
     var error by remember { mutableStateOf<String?>(null) }
     var isVerifying by remember { mutableStateOf(false) }
@@ -179,7 +179,7 @@ private fun CompactPinKeypad(
     onDigit: (String) -> Unit,
     onBackspace: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val rows = listOf(
         listOf("1", "2", "3"),
         listOf("4", "5", "6"),

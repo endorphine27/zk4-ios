@@ -32,7 +32,7 @@ class MdbListMobileParityTest {
     @Test
     fun sourcesRemainIndependentAndSameNamedDestinationsIdentifyProvider() {
         assertEquals(LibrarySourceMode.MDBLIST, effectiveLibrarySourceMode(LibrarySourceMode.MDBLIST) { it == TrackingProviderId.MDBLIST })
-        assertEquals(WatchProgressSource.NUVIO_SYNC, effectiveWatchProgressSource(WatchProgressSource.MDBLIST) { false })
+        assertEquals(WatchProgressSource.CINEBOX_SYNC, effectiveWatchProgressSource(WatchProgressSource.MDBLIST) { false })
         assertEquals(WatchProgressSource.MDBLIST, effectiveWatchProgressSource(WatchProgressSource.MDBLIST) { it == TrackingProviderId.MDBLIST })
         val names = listOf(TrackingProviderId.TRAKT, TrackingProviderId.MDBLIST).map {
             TrackingLibraryTab(it.storageId, "Watchlist", it, TrackingLibraryTabKind.WATCHLIST).membershipTitle()

@@ -38,7 +38,7 @@ import kotlinx.coroutines.sync.withLock
 data class WatchProgressSourceTransitionState(
     val profileId: Int? = null,
     val requestedSource: WatchProgressSource = DEFAULT_WATCH_PROGRESS_SOURCE,
-    val effectiveSource: WatchProgressSource = WatchProgressSource.NUVIO_SYNC,
+    val effectiveSource: WatchProgressSource = WatchProgressSource.CINEBOX_SYNC,
     val isRefreshing: Boolean = false,
     val lastRefreshSucceeded: Boolean? = null,
 )
@@ -57,7 +57,7 @@ internal data class WatchProgressSourceContext(
     val profileId: Int,
     val requestedSource: WatchProgressSource,
     val effectiveSource: WatchProgressSource,
-    val isNuvioAuthenticated: Boolean,
+    val isCineboxAuthenticated: Boolean,
 )
 
 internal fun resolveSerializedWatchProgressContext(
@@ -496,7 +496,7 @@ object WatchProgressSourceCoordinator {
                     TrackingProviderRegistry.watchedProvider(providerId) != null
             },
         ),
-        isNuvioAuthenticated = authState is AuthState.Authenticated && !authState.isAnonymous,
+        isCineboxAuthenticated = authState is AuthState.Authenticated && !authState.isAnonymous,
     )
 
     private fun currentContext(profileId: Int): WatchProgressSourceContext = buildContext(

@@ -34,12 +34,12 @@ import androidx.compose.ui.semantics.semantics
 import com.cinebox.app.core.ui.HsvColor
 import com.cinebox.app.core.ui.CineboxTokens
 import com.cinebox.app.core.ui.formatHexColor
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import kotlin.math.roundToInt
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.custom_theme_brightness
-import nuvio.composeapp.generated.resources.custom_theme_hue
-import nuvio.composeapp.generated.resources.custom_theme_saturation
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.custom_theme_brightness
+import cinebox.composeapp.generated.resources.custom_theme_hue
+import cinebox.composeapp.generated.resources.custom_theme_saturation
 import org.jetbrains.compose.resources.stringResource
 
 private val colorSwatches = listOf(
@@ -53,7 +53,7 @@ internal fun ThemeColorPicker(
     colorIndex: Int,
     onColorChanged: (Int) -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     var hsv by remember(colorIndex) { mutableStateOf(HsvColor.fromRgb(color)) }
     var emittedColor by remember(colorIndex) { mutableStateOf(color) }
     LaunchedEffect(color, colorIndex) {
@@ -124,7 +124,7 @@ private fun ColorChannelSlider(
     onValueChange: (Float) -> Unit,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val sliderState = remember(valueRange) { SliderState(trackRange = valueRange) }
     sliderState.value = value
     Column {

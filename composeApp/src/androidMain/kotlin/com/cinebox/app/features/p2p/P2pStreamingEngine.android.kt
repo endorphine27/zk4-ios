@@ -32,7 +32,7 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
 private const val TAG = "P2pStreamingEngine"
-private const val DIAGNOSTIC_TAG = "NuvioP2PDiag"
+private const val DIAGNOSTIC_TAG = "CineboxP2PDiag"
 private const val DIAGNOSTIC_SAMPLE_INTERVAL_MS = 1_000L
 
 internal fun buildNuvioEngineConfig(

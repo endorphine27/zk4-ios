@@ -25,7 +25,7 @@ class ContinueWatchingEnrichmentStorageTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        val stored = context.getSharedPreferences("nuvio_cw_enrichment", Context.MODE_PRIVATE)
+        val stored = context.getSharedPreferences("cinebox_cw_enrichment", Context.MODE_PRIVATE)
         stored.edit().clear().commit()
         preferences = RecordingPreferences(stored)
         ContinueWatchingEnrichmentStorage.initialize(object : ContextWrapper(context) {

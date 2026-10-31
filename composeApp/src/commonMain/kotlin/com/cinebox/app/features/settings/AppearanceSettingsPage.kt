@@ -33,51 +33,51 @@ import com.cinebox.app.core.ui.CineboxBottomSheetActionRow
 import com.cinebox.app.core.ui.CineboxBottomSheetDivider
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
 import com.cinebox.app.core.ui.CineboxStatusModal
-import com.cinebox.app.core.ui.dismissNuvioBottomSheet
+import com.cinebox.app.core.ui.dismissCineboxBottomSheet
 import com.cinebox.app.core.ui.labelRes
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.cd_selected
-import nuvio.composeapp.generated.resources.collections_header
-import nuvio.composeapp.generated.resources.compose_settings_page_continue_watching
-import nuvio.composeapp.generated.resources.compose_settings_page_homescreen
-import nuvio.composeapp.generated.resources.compose_settings_page_hover_preview
-import nuvio.composeapp.generated.resources.compose_settings_page_meta_screen
-import nuvio.composeapp.generated.resources.compose_settings_page_poster_customization
-import nuvio.composeapp.generated.resources.compose_settings_page_streams
-import nuvio.composeapp.generated.resources.settings_appearance_app_language
-import nuvio.composeapp.generated.resources.settings_appearance_app_language_restart_message
-import nuvio.composeapp.generated.resources.settings_appearance_app_language_restart_title
-import nuvio.composeapp.generated.resources.settings_appearance_app_language_sheet_title
-import nuvio.composeapp.generated.resources.settings_appearance_app_icon
-import nuvio.composeapp.generated.resources.settings_appearance_nav_bar_style
-import nuvio.composeapp.generated.resources.settings_appearance_sidebar_style
-import nuvio.composeapp.generated.resources.settings_appearance_top_bar_style
-import nuvio.composeapp.generated.resources.settings_appearance_nav_bar_style_sheet_title
-import nuvio.composeapp.generated.resources.settings_appearance_sidebar_style_sheet_title
-import nuvio.composeapp.generated.resources.settings_appearance_top_bar_style_sheet_title
-import nuvio.composeapp.generated.resources.settings_nav_bar_glow_on
-import nuvio.composeapp.generated.resources.settings_nav_bar_glow_off
-import nuvio.composeapp.generated.resources.settings_nav_bar_summary
-import nuvio.composeapp.generated.resources.settings_appearance_amoled_black
-import nuvio.composeapp.generated.resources.settings_appearance_amoled_description
-import nuvio.composeapp.generated.resources.settings_appearance_continue_watching_description
-import nuvio.composeapp.generated.resources.settings_appearance_desktop_navigation
-import nuvio.composeapp.generated.resources.settings_appearance_desktop_navigation_top_bar
-import nuvio.composeapp.generated.resources.settings_appearance_desktop_navigation_sheet_title
-import nuvio.composeapp.generated.resources.settings_appearance_hover_preview_description
-import nuvio.composeapp.generated.resources.settings_appearance_liquid_glass
-import nuvio.composeapp.generated.resources.settings_appearance_liquid_glass_description
-import nuvio.composeapp.generated.resources.settings_appearance_poster_customization_description
-import nuvio.composeapp.generated.resources.settings_appearance_section_detail_page
-import nuvio.composeapp.generated.resources.settings_appearance_section_display
-import nuvio.composeapp.generated.resources.settings_appearance_section_home
-import nuvio.composeapp.generated.resources.settings_appearance_section_streams
-import nuvio.composeapp.generated.resources.settings_appearance_section_theme
-import nuvio.composeapp.generated.resources.settings_content_discovery_collections_description
-import nuvio.composeapp.generated.resources.settings_content_discovery_homescreen_description
-import nuvio.composeapp.generated.resources.settings_content_discovery_meta_screen_description
-import nuvio.composeapp.generated.resources.compose_settings_root_streams_description
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.cd_selected
+import cinebox.composeapp.generated.resources.collections_header
+import cinebox.composeapp.generated.resources.compose_settings_page_continue_watching
+import cinebox.composeapp.generated.resources.compose_settings_page_homescreen
+import cinebox.composeapp.generated.resources.compose_settings_page_hover_preview
+import cinebox.composeapp.generated.resources.compose_settings_page_meta_screen
+import cinebox.composeapp.generated.resources.compose_settings_page_poster_customization
+import cinebox.composeapp.generated.resources.compose_settings_page_streams
+import cinebox.composeapp.generated.resources.settings_appearance_app_language
+import cinebox.composeapp.generated.resources.settings_appearance_app_language_restart_message
+import cinebox.composeapp.generated.resources.settings_appearance_app_language_restart_title
+import cinebox.composeapp.generated.resources.settings_appearance_app_language_sheet_title
+import cinebox.composeapp.generated.resources.settings_appearance_app_icon
+import cinebox.composeapp.generated.resources.settings_appearance_nav_bar_style
+import cinebox.composeapp.generated.resources.settings_appearance_sidebar_style
+import cinebox.composeapp.generated.resources.settings_appearance_top_bar_style
+import cinebox.composeapp.generated.resources.settings_appearance_nav_bar_style_sheet_title
+import cinebox.composeapp.generated.resources.settings_appearance_sidebar_style_sheet_title
+import cinebox.composeapp.generated.resources.settings_appearance_top_bar_style_sheet_title
+import cinebox.composeapp.generated.resources.settings_nav_bar_glow_on
+import cinebox.composeapp.generated.resources.settings_nav_bar_glow_off
+import cinebox.composeapp.generated.resources.settings_nav_bar_summary
+import cinebox.composeapp.generated.resources.settings_appearance_amoled_black
+import cinebox.composeapp.generated.resources.settings_appearance_amoled_description
+import cinebox.composeapp.generated.resources.settings_appearance_continue_watching_description
+import cinebox.composeapp.generated.resources.settings_appearance_desktop_navigation
+import cinebox.composeapp.generated.resources.settings_appearance_desktop_navigation_top_bar
+import cinebox.composeapp.generated.resources.settings_appearance_desktop_navigation_sheet_title
+import cinebox.composeapp.generated.resources.settings_appearance_hover_preview_description
+import cinebox.composeapp.generated.resources.settings_appearance_liquid_glass
+import cinebox.composeapp.generated.resources.settings_appearance_liquid_glass_description
+import cinebox.composeapp.generated.resources.settings_appearance_poster_customization_description
+import cinebox.composeapp.generated.resources.settings_appearance_section_detail_page
+import cinebox.composeapp.generated.resources.settings_appearance_section_display
+import cinebox.composeapp.generated.resources.settings_appearance_section_home
+import cinebox.composeapp.generated.resources.settings_appearance_section_streams
+import cinebox.composeapp.generated.resources.settings_appearance_section_theme
+import cinebox.composeapp.generated.resources.settings_content_discovery_collections_description
+import cinebox.composeapp.generated.resources.settings_content_discovery_homescreen_description
+import cinebox.composeapp.generated.resources.settings_content_discovery_meta_screen_description
+import cinebox.composeapp.generated.resources.compose_settings_root_streams_description
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -381,7 +381,7 @@ private fun DesktopNavigationLayoutBottomSheet(
     CineboxModalBottomSheet(
         onDismissRequest = {
             coroutineScope.launch {
-                dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
             }
         },
         sheetState = sheetState,
@@ -410,7 +410,7 @@ private fun DesktopNavigationLayoutBottomSheet(
                     onClick = {
                         onLayoutSelected(layout)
                         coroutineScope.launch {
-                            dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                            dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
                         }
                     },
                     trailingContent = {
@@ -454,7 +454,7 @@ private fun AppearanceLanguageBottomSheet(
     CineboxModalBottomSheet(
         onDismissRequest = {
             coroutineScope.launch {
-                dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
             }
         },
         sheetState = sheetState,
@@ -481,7 +481,7 @@ private fun AppearanceLanguageBottomSheet(
                     onClick = {
                         onLanguageSelected(option.language)
                         coroutineScope.launch {
-                            dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                            dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
                         }
                     },
                     trailingContent = {
@@ -521,7 +521,7 @@ private fun NavBarStyleBottomSheet(
     CineboxModalBottomSheet(
         onDismissRequest = {
             coroutineScope.launch {
-                dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
             }
         },
         sheetState = sheetState,
@@ -557,7 +557,7 @@ private fun NavBarStyleBottomSheet(
                     onClick = {
                         onStyleSelected(style)
                         coroutineScope.launch {
-                            dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+                            dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
                         }
                     },
                     trailingContent = {

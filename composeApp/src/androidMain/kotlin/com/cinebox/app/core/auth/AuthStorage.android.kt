@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 actual object AuthStorage {
-    private const val PREFS_NAME = "nuvio_auth"
+    private const val PREFS_NAME = "cinebox_auth"
     private const val KEY_ANONYMOUS_USER_ID = "anonymous_user_id"
 
     private var preferences: SharedPreferences? = null

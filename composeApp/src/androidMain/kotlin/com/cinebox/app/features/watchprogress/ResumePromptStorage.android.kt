@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 actual object ResumePromptStorage {
-    private const val preferencesName = "nuvio_resume_prompt"
+    private const val preferencesName = "cinebox_resume_prompt"
     private const val wasInPlayerKey = "was_in_player"
     private const val lastPlayerVideoIdKey = "last_player_video_id"
 

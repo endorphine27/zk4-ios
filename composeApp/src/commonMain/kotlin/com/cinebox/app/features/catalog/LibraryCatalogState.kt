@@ -11,8 +11,8 @@ import com.cinebox.app.features.profiles.ProfileRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.library_error_sort_failed
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.library_error_sort_failed
 import org.jetbrains.compose.resources.getString
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map

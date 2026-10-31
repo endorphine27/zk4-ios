@@ -17,15 +17,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.episodes_cd_watched
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.episodes_cd_watched
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun CineboxWatchedBadge(
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val palette = MaterialTheme.themePalette
     Box(
         modifier = modifier

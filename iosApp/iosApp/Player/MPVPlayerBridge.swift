@@ -6,7 +6,7 @@ import ComposeApp
 
 // MARK: - Player Bridge Implementation (Kotlin protocol conformance)
 
-final class MPVPlayerBridgeImpl: NSObject, NuvioPlayerBridge {
+final class MPVPlayerBridgeImpl: NSObject, CineboxPlayerBridge {
 
     private var playerVC: MPVPlayerViewController?
 
@@ -1412,16 +1412,16 @@ final class MPVPlayerViewController: UIViewController {
 
 // MARK: - Bridge Creator (implements Kotlin protocol)
 
-final class MPVPlayerBridgeCreator: NSObject, NuvioPlayerBridgeCreator {
-    func createBridge() -> any NuvioPlayerBridge {
+final class MPVPlayerBridgeCreator: NSObject, CineboxPlayerBridgeCreator {
+    func createBridge() -> any CineboxPlayerBridge {
         return MPVPlayerBridgeImpl()
     }
 }
 
 // MARK: - Registration (called from Swift app startup)
 
-enum NuvioPlayerRegistration {
+enum CineboxPlayerRegistration {
     static func register() {
-        NuvioPlayerBridgeFactory.shared.registerFactory(creator: MPVPlayerBridgeCreator())
+        CineboxPlayerBridgeFactory.shared.registerFactory(creator: MPVPlayerBridgeCreator())
     }
 }

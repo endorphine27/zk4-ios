@@ -1,8 +1,8 @@
 package com.cinebox.app.features.addons
 
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.generic_addon
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.generic_addon
 import org.jetbrains.compose.resources.getString
 
 data class AddonManifest(

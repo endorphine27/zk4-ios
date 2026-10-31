@@ -28,7 +28,7 @@ internal actual fun CineboxDesktopVerticalScrollbar(
         // A density change resizes items without necessarily changing the list's pixel width.
         adapter = remember(state, LocalDensity.current) { MeasuredLazyListScrollbarAdapter(state) },
         modifier = modifier.recalculateWindowInsets().statusBarsPadding(),
-        style = nuvioDesktopScrollbarStyle(backgroundColor),
+        style = cineboxDesktopScrollbarStyle(backgroundColor),
     )
 }
 
@@ -41,7 +41,7 @@ internal actual fun CineboxDesktopVerticalScrollbar(
     VerticalScrollbar(
         adapter = rememberScrollbarAdapter(state),
         modifier = modifier.recalculateWindowInsets().statusBarsPadding(),
-        style = nuvioDesktopScrollbarStyle(backgroundColor),
+        style = cineboxDesktopScrollbarStyle(backgroundColor),
     )
 }
 
@@ -54,12 +54,12 @@ internal actual fun CineboxDesktopVerticalScrollbar(
     VerticalScrollbar(
         adapter = rememberScrollbarAdapter(state),
         modifier = modifier.recalculateWindowInsets().statusBarsPadding(),
-        style = nuvioDesktopScrollbarStyle(backgroundColor),
+        style = cineboxDesktopScrollbarStyle(backgroundColor),
     )
 }
 
 @Composable
-private fun nuvioDesktopScrollbarStyle(backgroundColor: Color?): ScrollbarStyle {
+private fun cineboxDesktopScrollbarStyle(backgroundColor: Color?): ScrollbarStyle {
     val colorScheme = MaterialTheme.colorScheme
     val adaptiveThumbColor = backgroundColor?.let { color ->
         if (color.luminance() > EqualBlackWhiteContrastLuminance) Color.Black else Color.White

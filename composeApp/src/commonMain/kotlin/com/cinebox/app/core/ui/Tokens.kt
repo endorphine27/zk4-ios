@@ -356,16 +356,16 @@ data class CineboxThemeTokens(
     val components: CineboxComponentTokens,
 )
 
-internal val LocalNuvioThemeTokens = staticCompositionLocalOf {
-    defaultNuvioThemeTokens(ThemeColors.White, amoled = false, colorScheme = null)
+internal val LocalCineboxThemeTokens = staticCompositionLocalOf {
+    defaultCineboxThemeTokens(ThemeColors.White, amoled = false, colorScheme = null)
 }
 
-val MaterialTheme.nuvio: CineboxThemeTokens
+val MaterialTheme.cinebox: CineboxThemeTokens
     @Composable
     @Stable
-    get() = LocalNuvioThemeTokens.current
+    get() = LocalCineboxThemeTokens.current
 
-internal fun defaultNuvioThemeTokens(
+internal fun defaultCineboxThemeTokens(
     palette: ThemeColorPalette,
     amoled: Boolean,
     colorScheme: ColorScheme?,

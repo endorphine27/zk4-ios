@@ -39,9 +39,9 @@ import coil3.request.crossfade
 import com.cinebox.app.core.ui.themePalette
 import com.cinebox.app.core.ui.accentBrush
 import com.cinebox.app.features.membership.ProfileBackgroundCatalogItem
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.profile_background_custom
-import nuvio.composeapp.generated.resources.profile_background_normal
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.profile_background_custom
+import cinebox.composeapp.generated.resources.profile_background_normal
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalLayoutApi::class)

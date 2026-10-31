@@ -29,14 +29,14 @@ import com.cinebox.app.core.auth.AuthRepository
 import com.cinebox.app.core.auth.AuthState
 import com.cinebox.app.core.network.NetworkCondition
 import com.cinebox.app.core.network.NetworkStatusRepository
-import com.cinebox.app.core.ui.LocalNuvioBottomNavigationOverlayPadding
-import com.cinebox.app.core.ui.LocalNuvioNavBarScrollState
+import com.cinebox.app.core.ui.LocalCineboxBottomNavigationOverlayPadding
+import com.cinebox.app.core.ui.LocalCineboxNavBarScrollState
 import com.cinebox.app.core.ui.LocalVerticalBarPadding
-import com.cinebox.app.core.ui.nuvioHorizontalScrollBleed
+import com.cinebox.app.core.ui.cineboxHorizontalScrollBleed
 import com.cinebox.app.core.ui.ScreenActivityEffect
 import com.cinebox.app.core.ui.CineboxScreen
 import com.cinebox.app.core.ui.CineboxNetworkOfflineCard
-import com.cinebox.app.core.ui.nuvioSafeBottomPadding
+import com.cinebox.app.core.ui.cineboxSafeBottomPadding
 import com.cinebox.app.core.ui.rememberHeroStretchState
 import com.cinebox.app.core.ui.rememberPosterCardStyleUiState
 import com.cinebox.app.core.ui.withDuplicateSafeLazyKeys
@@ -115,7 +115,7 @@ import com.cinebox.app.features.home.components.homeCatalogPreviewLimitForWidth
 import com.cinebox.app.features.home.components.homeSectionHorizontalPaddingForWidth
 import com.cinebox.app.features.home.components.rememberContinueWatchingLayout
 import kotlinx.coroutines.CancellationException
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -177,7 +177,7 @@ fun HomeScreen(
         TrackingSettingsRepository.ensureLoaded()
         TrackingSettingsRepository.uiState
     }.collectAsStateWithLifecycle()
-    val navBarScrollState = LocalNuvioNavBarScrollState.current
+    val navBarScrollState = LocalCineboxNavBarScrollState.current
     var observedOfflineState by remember { mutableStateOf(false) }
 
     ScreenActivityEffect(scrollToTopRequests) { active ->
@@ -951,8 +951,8 @@ fun HomeScreen(
         }
         val continueWatchingLayout = rememberContinueWatchingLayout(maxWidth.value, posterCardStyle)
         val nativeBottomNavigationOverlayHeight =
-            if (LocalNuvioBottomNavigationOverlayPadding.current > 0.dp) {
-                nuvioSafeBottomPadding()
+            if (LocalCineboxBottomNavigationOverlayPadding.current > 0.dp) {
+                cineboxSafeBottomPadding()
             } else {
                 0.dp
             }
@@ -1003,7 +1003,7 @@ fun HomeScreen(
                 item(key = "home_hero", contentType = "hero") {
                     Crossfade(
                         targetState = showHeroSkeleton,
-                        modifier = Modifier.nuvioHorizontalScrollBleed(LocalVerticalBarPadding.current),
+                        modifier = Modifier.cineboxHorizontalScrollBleed(LocalVerticalBarPadding.current),
                         animationSpec = tween(320),
                         label = "HomeHeroLoading",
                     ) { isLoading ->

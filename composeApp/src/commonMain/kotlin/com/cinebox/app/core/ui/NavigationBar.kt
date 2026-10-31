@@ -125,7 +125,7 @@ class CineboxNavBarScrollState {
 }
 
 @Composable
-fun rememberNuvioNavBarScrollState(): CineboxNavBarScrollState {
+fun rememberCineboxNavBarScrollState(): CineboxNavBarScrollState {
     return androidx.compose.runtime.remember { CineboxNavBarScrollState() }
 }
 
@@ -256,7 +256,7 @@ private class CineboxNavigationBarScopeImpl(
         modifier: Modifier,
         label: String?,
     ) {
-        val tokens = MaterialTheme.nuvio
+        val tokens = MaterialTheme.cinebox
         val palette = MaterialTheme.themePalette
         val iconColor by animateColorAsState(
             targetValue = if (selected) tokens.colors.accent else tokens.colors.textMuted,
@@ -306,7 +306,7 @@ private class CineboxNavigationBarScopeImpl(
         modifier: Modifier,
         label: String?,
     ) {
-        val tokens = MaterialTheme.nuvio
+        val tokens = MaterialTheme.cinebox
         val palette = MaterialTheme.themePalette
         val iconColor by animateColorAsState(
             targetValue = if (selected) tokens.colors.accent else tokens.colors.textMuted,
@@ -354,7 +354,7 @@ private class CineboxNavigationBarScopeImpl(
         label: String?,
         content: @Composable () -> Unit,
     ) {
-        val tokens = MaterialTheme.nuvio
+        val tokens = MaterialTheme.cinebox
         val selectedBgColor by animateColorAsState(
             targetValue = if (selected) tokens.colors.accent.copy(alpha = CineboxTokens.Opacity.selected)
             else Color.Transparent,
@@ -430,7 +430,7 @@ fun CineboxClassicNavigationBar(
     modifier: Modifier = Modifier,
     content: @Composable CineboxNavigationBarScope.() -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(modifier.fillMaxWidth()) {
         androidx.compose.material3.HorizontalDivider(
             thickness = CineboxTokens.Space.hairline,
@@ -439,8 +439,8 @@ fun CineboxClassicNavigationBar(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(nuvioBottomNavigationBarInsets().asPaddingValues())
-                .padding(horizontal = CineboxTokens.Space.s4, vertical = nuvioBottomNavigationExtraVerticalPadding),
+                .padding(cineboxBottomNavigationBarInsets().asPaddingValues())
+                .padding(horizontal = CineboxTokens.Space.s4, vertical = cineboxBottomNavigationExtraVerticalPadding),
             horizontalArrangement = Arrangement.spacedBy(tokens.spacing.controlGap, Alignment.CenterHorizontally),
         ) {
             CineboxClassicNavigationBarScopeImpl(this).content()
@@ -461,7 +461,7 @@ private class CineboxClassicNavigationBarScopeImpl(
         modifier: Modifier,
         label: String?,
     ) {
-        val tokens = MaterialTheme.nuvio
+        val tokens = MaterialTheme.cinebox
         val palette = MaterialTheme.themePalette
         val iconColor by animateColorAsState(
             targetValue = if (selected) tokens.colors.accent else tokens.colors.textMuted,
@@ -499,7 +499,7 @@ private class CineboxClassicNavigationBarScopeImpl(
         modifier: Modifier,
         label: String?,
     ) {
-        val tokens = MaterialTheme.nuvio
+        val tokens = MaterialTheme.cinebox
         val palette = MaterialTheme.themePalette
         val iconColor by animateColorAsState(
             targetValue = if (selected) tokens.colors.accent else tokens.colors.textMuted,
@@ -536,7 +536,7 @@ private class CineboxClassicNavigationBarScopeImpl(
         label: String?,
         content: @Composable () -> Unit,
     ) {
-        val tokens = MaterialTheme.nuvio
+        val tokens = MaterialTheme.cinebox
         with(rowScope) {
             Box(
                 modifier = modifier

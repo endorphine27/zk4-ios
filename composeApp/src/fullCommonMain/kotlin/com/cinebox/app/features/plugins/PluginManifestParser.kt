@@ -2,10 +2,10 @@ package com.cinebox.app.features.plugins
 
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.plugins_manifest_name_missing
-import nuvio.composeapp.generated.resources.plugins_manifest_no_providers
-import nuvio.composeapp.generated.resources.plugins_manifest_version_missing
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.plugins_manifest_name_missing
+import cinebox.composeapp.generated.resources.plugins_manifest_no_providers
+import cinebox.composeapp.generated.resources.plugins_manifest_version_missing
 import org.jetbrains.compose.resources.getString
 
 internal object PluginManifestParser {

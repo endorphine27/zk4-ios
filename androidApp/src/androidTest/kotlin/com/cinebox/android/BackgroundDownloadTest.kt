@@ -1,4 +1,4 @@
-package com.nuvio.android
+package com.cinebox.android
 
 import android.content.Intent
 import androidx.test.core.app.ActivityScenario
@@ -50,6 +50,6 @@ class BackgroundDownloadTest {
     )
 
     companion object {
-        private const val FIXTURE_ID = "nuvio-background-download-fixture"
+        private const val FIXTURE_ID = "cinebox-background-download-fixture"
     }
 }

@@ -49,7 +49,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.streams.STREAM_BADGE_IMPORT_LIMIT
 import com.cinebox.app.features.streams.StreamBadgeChip
 import com.cinebox.app.features.streams.StreamBadgeChipSize
@@ -61,47 +61,47 @@ import com.cinebox.app.features.streams.StreamBadgeRules
 import com.cinebox.app.features.streams.StreamBadgeSettingsRepository
 import com.cinebox.app.features.streams.StreamBackgroundMode
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_cancel
-import nuvio.composeapp.generated.resources.action_close
-import nuvio.composeapp.generated.resources.action_delete
-import nuvio.composeapp.generated.resources.action_import
-import nuvio.composeapp.generated.resources.settings_fusion_badge_group_title
-import nuvio.composeapp.generated.resources.settings_fusion_badge_other_group_title
-import nuvio.composeapp.generated.resources.settings_fusion_badge_preview_action
-import nuvio.composeapp.generated.resources.settings_fusion_badge_preview_count
-import nuvio.composeapp.generated.resources.settings_fusion_badge_preview_empty
-import nuvio.composeapp.generated.resources.settings_fusion_badge_preview_title
-import nuvio.composeapp.generated.resources.settings_fusion_badge_url_active
-import nuvio.composeapp.generated.resources.settings_fusion_badge_url_inactive
-import nuvio.composeapp.generated.resources.settings_fusion_badge_url_label
-import nuvio.composeapp.generated.resources.settings_fusion_badge_url_status_summary
-import nuvio.composeapp.generated.resources.settings_fusion_badge_urls_imported
-import nuvio.composeapp.generated.resources.settings_fusion_badges_empty
-import nuvio.composeapp.generated.resources.settings_fusion_badges_summary
-import nuvio.composeapp.generated.resources.settings_stream_badge_position_bottom
-import nuvio.composeapp.generated.resources.settings_stream_badge_position_description
-import nuvio.composeapp.generated.resources.settings_stream_badge_position_dialog_description
-import nuvio.composeapp.generated.resources.settings_stream_badge_position_dialog_title
-import nuvio.composeapp.generated.resources.settings_stream_badge_position_title
-import nuvio.composeapp.generated.resources.settings_stream_badge_position_top
-import nuvio.composeapp.generated.resources.settings_stream_badge_urls_description
-import nuvio.composeapp.generated.resources.settings_stream_badge_urls_title
-import nuvio.composeapp.generated.resources.settings_stream_badges_section
-import nuvio.composeapp.generated.resources.settings_stream_size_badges_description
-import nuvio.composeapp.generated.resources.settings_stream_badges_in_player_description
-import nuvio.composeapp.generated.resources.settings_stream_badges_in_player_title
-import nuvio.composeapp.generated.resources.settings_stream_player_badges_description
-import nuvio.composeapp.generated.resources.settings_stream_player_badges_same
-import nuvio.composeapp.generated.resources.settings_stream_player_badges_title
-import nuvio.composeapp.generated.resources.settings_stream_size_badges_title
-import nuvio.composeapp.generated.resources.settings_stream_addon_logo_title
-import nuvio.composeapp.generated.resources.settings_stream_addon_logo_description
-import nuvio.composeapp.generated.resources.settings_stream_display_section
-import nuvio.composeapp.generated.resources.settings_stream_background_title
-import nuvio.composeapp.generated.resources.settings_stream_background_description
-import nuvio.composeapp.generated.resources.settings_meta_background_mode_cinematic
-import nuvio.composeapp.generated.resources.settings_meta_background_mode_normal
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_cancel
+import cinebox.composeapp.generated.resources.action_close
+import cinebox.composeapp.generated.resources.action_delete
+import cinebox.composeapp.generated.resources.action_import
+import cinebox.composeapp.generated.resources.settings_fusion_badge_group_title
+import cinebox.composeapp.generated.resources.settings_fusion_badge_other_group_title
+import cinebox.composeapp.generated.resources.settings_fusion_badge_preview_action
+import cinebox.composeapp.generated.resources.settings_fusion_badge_preview_count
+import cinebox.composeapp.generated.resources.settings_fusion_badge_preview_empty
+import cinebox.composeapp.generated.resources.settings_fusion_badge_preview_title
+import cinebox.composeapp.generated.resources.settings_fusion_badge_url_active
+import cinebox.composeapp.generated.resources.settings_fusion_badge_url_inactive
+import cinebox.composeapp.generated.resources.settings_fusion_badge_url_label
+import cinebox.composeapp.generated.resources.settings_fusion_badge_url_status_summary
+import cinebox.composeapp.generated.resources.settings_fusion_badge_urls_imported
+import cinebox.composeapp.generated.resources.settings_fusion_badges_empty
+import cinebox.composeapp.generated.resources.settings_fusion_badges_summary
+import cinebox.composeapp.generated.resources.settings_stream_badge_position_bottom
+import cinebox.composeapp.generated.resources.settings_stream_badge_position_description
+import cinebox.composeapp.generated.resources.settings_stream_badge_position_dialog_description
+import cinebox.composeapp.generated.resources.settings_stream_badge_position_dialog_title
+import cinebox.composeapp.generated.resources.settings_stream_badge_position_title
+import cinebox.composeapp.generated.resources.settings_stream_badge_position_top
+import cinebox.composeapp.generated.resources.settings_stream_badge_urls_description
+import cinebox.composeapp.generated.resources.settings_stream_badge_urls_title
+import cinebox.composeapp.generated.resources.settings_stream_badges_section
+import cinebox.composeapp.generated.resources.settings_stream_size_badges_description
+import cinebox.composeapp.generated.resources.settings_stream_badges_in_player_description
+import cinebox.composeapp.generated.resources.settings_stream_badges_in_player_title
+import cinebox.composeapp.generated.resources.settings_stream_player_badges_description
+import cinebox.composeapp.generated.resources.settings_stream_player_badges_same
+import cinebox.composeapp.generated.resources.settings_stream_player_badges_title
+import cinebox.composeapp.generated.resources.settings_stream_size_badges_title
+import cinebox.composeapp.generated.resources.settings_stream_addon_logo_title
+import cinebox.composeapp.generated.resources.settings_stream_addon_logo_description
+import cinebox.composeapp.generated.resources.settings_stream_display_section
+import cinebox.composeapp.generated.resources.settings_stream_background_title
+import cinebox.composeapp.generated.resources.settings_stream_background_description
+import cinebox.composeapp.generated.resources.settings_meta_background_mode_cinematic
+import cinebox.composeapp.generated.resources.settings_meta_background_mode_normal
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.streamsSettingsContent(isTablet: Boolean) {
@@ -162,7 +162,7 @@ internal fun LazyListScope.streamsSettingsContent(isTablet: Boolean) {
 
         Spacer(
             modifier = Modifier.height(
-                if (isTablet) CineboxTokens.Space.s18 else MaterialTheme.nuvio.spacing.listGap,
+                if (isTablet) CineboxTokens.Space.s18 else MaterialTheme.cinebox.spacing.listGap,
             ),
         )
 
@@ -254,7 +254,7 @@ private fun StreamBackgroundModeDialog(
     onModeSelected: (StreamBackgroundMode) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     DialogSurface(
         onDismissRequest = onDismiss,
         title = stringResource(Res.string.settings_stream_background_title),
@@ -353,7 +353,7 @@ private fun StreamBadgePositionDialog(
     onPlacementSelected: (StreamBadgePlacement) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     DialogSurface(
         onDismissRequest = onDismiss,
         title = stringResource(Res.string.settings_stream_badge_position_dialog_title),
@@ -395,7 +395,7 @@ private fun BadgeUrlManagerDialog(
     currentRules: StreamBadgeRules,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val scope = rememberCoroutineScope()
     val imports = currentRules.normalized().imports
     var draftUrl by rememberSaveable { mutableStateOf("") }
@@ -539,7 +539,7 @@ private fun BadgeUrlRow(
     onPreview: () -> Unit,
     onDelete: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val containerColor = if (import.isActive) {
         tokens.colors.overlaySelected
     } else {
@@ -630,7 +630,7 @@ private fun BadgePreviewDialog(
     import: StreamBadgeImport,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val sections = badgePreviewSections(import)
     val badgeCount = sections.sumOf { it.filters.size }
 

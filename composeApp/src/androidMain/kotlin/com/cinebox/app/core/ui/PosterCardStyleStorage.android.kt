@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 actual object PosterCardStyleStorage {
-    private const val preferencesName = "nuvio_poster_card_style"
+    private const val preferencesName = "cinebox_poster_card_style"
     private const val payloadKey = "poster_card_style_payload"
 
     private var preferences: SharedPreferences? = null

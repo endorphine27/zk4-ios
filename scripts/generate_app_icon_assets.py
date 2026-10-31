@@ -183,22 +183,22 @@ def adaptive_icon_contents(foreground_name: str) -> str:
 
 def splash_theme_name(ios_name: str) -> str:
     if ios_name == "AppIcon":
-        return "Theme.Nuvio.Splash"
-    return f"Theme.Nuvio.Splash.{ios_name.removeprefix('AppIcon')}"
+        return "Theme.Cinebox.Splash"
+    return f"Theme.Cinebox.Splash.{ios_name.removeprefix('AppIcon')}"
 
 
 def base_theme_contents() -> str:
     alternate_themes = "\n".join(
-        f'    <style name="{splash_theme_name(ios_name)}" parent="@style/Theme.Nuvio.Splash" />'
+        f'    <style name="{splash_theme_name(ios_name)}" parent="@style/Theme.Cinebox.Splash" />'
         for _, _, ios_name, _ in VARIANTS[1:]
     )
     return f"""<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Nuvio" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:windowBackground">@color/nuvio_background</item>
+    <style name="Theme.Cinebox" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/cinebox_background</item>
     </style>
 
-    <style name="Theme.Nuvio.Splash" parent="@style/Theme.Nuvio" />
+    <style name="Theme.Cinebox.Splash" parent="@style/Theme.Cinebox" />
 {alternate_themes}
 </resources>
 """
@@ -206,21 +206,21 @@ def base_theme_contents() -> str:
 
 def v31_theme_contents() -> str:
     alternate_themes = "\n\n".join(
-        f"""    <style name="{splash_theme_name(ios_name)}" parent="@style/Theme.Nuvio.Splash">
+        f"""    <style name="{splash_theme_name(ios_name)}" parent="@style/Theme.Cinebox.Splash">
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo_{key}</item>
     </style>"""
         for key, _, ios_name, _ in VARIANTS[1:]
     )
     return f"""<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Nuvio" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:windowBackground">@color/nuvio_background</item>
+    <style name="Theme.Cinebox" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/cinebox_background</item>
     </style>
 
-    <style name="Theme.Nuvio.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/nuvio_background</item>
+    <style name="Theme.Cinebox.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/cinebox_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.Nuvio</item>
+        <item name="postSplashScreenTheme">@style/Theme.Cinebox</item>
     </style>
 
 {alternate_themes}
@@ -260,7 +260,7 @@ def generate_preview_board(icons: list[tuple[str, Image.Image]]) -> None:
     draw = ImageDraw.Draw(board)
     title_font = ImageFont.truetype(FONT, 34)
     label_font = ImageFont.truetype(FONT, 18)
-    draw.text((margin, 28), "NUVIO / APP ICON CATALOGUE", fill=(245, 245, 247), font=title_font)
+    draw.text((margin, 28), "CINEBOX / APP ICON CATALOGUE", fill=(245, 245, 247), font=title_font)
     draw.text((margin, 70), "6 shortlisted colorways · pure black field", fill=(150, 150, 158), font=label_font)
 
     for index, (label, icon) in enumerate(icons):

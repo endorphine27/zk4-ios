@@ -25,12 +25,12 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cinebox.app.core.ui.accentBrush
 import com.cinebox.app.core.ui.gradientMask
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.core.ui.themePalette
 import com.cinebox.app.features.downloads.DownloadStatus
 import com.cinebox.app.features.downloads.DownloadsRepository
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_settings_root_downloads_title
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_settings_root_downloads_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -56,7 +56,7 @@ internal fun LibraryDownloadsButton(onClick: () -> Unit) {
 @Composable
 private fun FlowingDownloadIcon() {
     val palette = MaterialTheme.themePalette
-    val dimAlpha = MaterialTheme.nuvio.opacity.overlayLight
+    val dimAlpha = MaterialTheme.cinebox.opacity.overlayLight
     val colors = palette.accentGradient.takeIf { it.size >= 2 }
         ?: listOf(palette.secondary, palette.secondary.copy(alpha = dimAlpha))
     val phase by rememberInfiniteTransition(label = "downloadsFlow").animateFloat(

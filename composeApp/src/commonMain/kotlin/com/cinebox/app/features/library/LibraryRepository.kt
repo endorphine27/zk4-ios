@@ -43,10 +43,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.library_local_tab_title
-import nuvio.composeapp.generated.resources.library_server_title_unsupported
-import nuvio.composeapp.generated.resources.library_other
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.library_local_tab_title
+import cinebox.composeapp.generated.resources.library_server_title_unsupported
+import cinebox.composeapp.generated.resources.library_other
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
 
@@ -61,7 +61,7 @@ object LibraryRepository {
 
     private val localState = LibraryLocalState()
     private val loadLock = SynchronizedObject()
-    private val nuvioSyncMutex = Mutex()
+    private val cineboxSyncMutex = Mutex()
     private val persistenceLock = SynchronizedObject()
     private val lastPersistedRevisionByProfile = mutableMapOf<Int, Long>()
     internal var syncAdapter: LibrarySyncAdapter = SupabaseLibrarySyncAdapter
@@ -216,7 +216,7 @@ object LibraryRepository {
             return
         }
 
-        nuvioSyncMutex.withLock {
+        cineboxSyncMutex.withLock {
             val serializedToken = activeOperationToken(profileId) ?: return@withLock
             val pullSnapshot = localState.markPullStarted(serializedToken) ?: return@withLock
 
@@ -559,7 +559,7 @@ object LibraryRepository {
         }
         val pushJob = syncScope.launch(start = CoroutineStart.LAZY) {
             delay(delayMs)
-            nuvioSyncMutex.withLock {
+            cineboxSyncMutex.withLock {
                 if (!localState.isCurrent(snapshot)) {
                     val current = localState.snapshot()
                     log.d {

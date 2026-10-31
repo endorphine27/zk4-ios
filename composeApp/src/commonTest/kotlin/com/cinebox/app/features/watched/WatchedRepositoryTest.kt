@@ -192,27 +192,27 @@ class WatchedRepositoryTest {
     }
 
     @Test
-    fun successfulTrackerPush_doesNotAcknowledgeFailedNuvioPush() {
+    fun successfulTrackerPush_doesNotAcknowledgeFailedCineboxPush() {
         val outcome = WatchedPushOutcome(
-            nuvioSyncSucceeded = false,
+            cineboxSyncSucceeded = false,
             succeededTrackerProviderIds = setOf(TrackingProviderId.TRAKT),
         )
 
         assertFalse(
-            shouldAcknowledgeNuvioWatchedPush(
-                source = WatchProgressSource.NUVIO_SYNC,
+            shouldAcknowledgeCineboxWatchedPush(
+                source = WatchProgressSource.CINEBOX_SYNC,
                 outcome = outcome,
             ),
         )
     }
 
     @Test
-    fun successfulNuvioPush_acknowledgesNuvioDirtyState() {
-        val outcome = WatchedPushOutcome(nuvioSyncSucceeded = true)
+    fun successfulCineboxPush_acknowledgesCineboxDirtyState() {
+        val outcome = WatchedPushOutcome(cineboxSyncSucceeded = true)
 
         assertTrue(
-            shouldAcknowledgeNuvioWatchedPush(
-                source = WatchProgressSource.NUVIO_SYNC,
+            shouldAcknowledgeCineboxWatchedPush(
+                source = WatchProgressSource.CINEBOX_SYNC,
                 outcome = outcome,
             ),
         )
@@ -242,15 +242,15 @@ class WatchedRepositoryTest {
 
     @Test
     fun watchedItemsForSource_keepsProviderSnapshotsIsolated() {
-        val nuvioItem = watchedItem(id = "nuvio", markedAtEpochMs = 1_000L)
+        val cineboxItem = watchedItem(id = "cinebox", markedAtEpochMs = 1_000L)
         val traktItem = watchedItem(id = "trakt", markedAtEpochMs = 2_000L)
         val simklItem = watchedItem(id = "simkl", markedAtEpochMs = 3_000L)
 
         assertEquals(
-            listOf(nuvioItem),
+            listOf(cineboxItem),
             watchedItemsForSource(
-                source = WatchProgressSource.NUVIO_SYNC,
-                nuvioItems = listOf(nuvioItem),
+                source = WatchProgressSource.CINEBOX_SYNC,
+                cineboxItems = listOf(cineboxItem),
                 providerItems = mapOf(
                     TrackingProviderId.TRAKT to listOf(traktItem),
                     TrackingProviderId.SIMKL to listOf(simklItem),
@@ -261,7 +261,7 @@ class WatchedRepositoryTest {
             listOf(traktItem),
             watchedItemsForSource(
                 source = WatchProgressSource.TRAKT,
-                nuvioItems = listOf(nuvioItem),
+                cineboxItems = listOf(cineboxItem),
                 providerItems = mapOf(
                     TrackingProviderId.TRAKT to listOf(traktItem),
                     TrackingProviderId.SIMKL to listOf(simklItem),
@@ -272,7 +272,7 @@ class WatchedRepositoryTest {
             listOf(simklItem),
             watchedItemsForSource(
                 source = WatchProgressSource.SIMKL,
-                nuvioItems = listOf(nuvioItem),
+                cineboxItems = listOf(cineboxItem),
                 providerItems = mapOf(
                     TrackingProviderId.TRAKT to listOf(traktItem),
                     TrackingProviderId.SIMKL to listOf(simklItem),
@@ -287,7 +287,7 @@ class WatchedRepositoryTest {
             succeededTrackerProviderIds = setOf(TrackingProviderId.TRAKT),
         )
 
-        assertFalse(shouldAcknowledgeNuvioWatchedPush(WatchProgressSource.TRAKT, outcome))
+        assertFalse(shouldAcknowledgeCineboxWatchedPush(WatchProgressSource.TRAKT, outcome))
     }
 
     @Test
@@ -308,23 +308,23 @@ class WatchedRepositoryTest {
     }
 
     @Test
-    fun replacingTraktSnapshot_doesNotOverwriteNuvioSnapshot() {
-        val nuvioItem = watchedItem(id = "nuvio", markedAtEpochMs = 1_000L)
+    fun replacingTraktSnapshot_doesNotOverwriteCineboxSnapshot() {
+        val cineboxItem = watchedItem(id = "cinebox", markedAtEpochMs = 1_000L)
         val previousTraktItem = watchedItem(id = "old-trakt", markedAtEpochMs = 2_000L)
         val refreshedTraktItem = watchedItem(id = "new-trakt", markedAtEpochMs = 3_000L)
-        val nuvioItems = mutableMapOf("nuvio" to nuvioItem)
+        val cineboxItems = mutableMapOf("cinebox" to cineboxItem)
         val providerItems = mutableMapOf(
             TrackingProviderId.TRAKT to mutableMapOf("old-trakt" to previousTraktItem),
         )
 
         replaceWatchedItemsForSource(
             source = WatchProgressSource.TRAKT,
-            nuvioItems = nuvioItems,
+            cineboxItems = cineboxItems,
             providerItems = providerItems,
             replacement = mapOf("new-trakt" to refreshedTraktItem),
         )
 
-        assertEquals(mapOf("nuvio" to nuvioItem), nuvioItems)
+        assertEquals(mapOf("cinebox" to cineboxItem), cineboxItems)
         assertEquals(
             mapOf("new-trakt" to refreshedTraktItem),
             providerItems[TrackingProviderId.TRAKT].orEmpty(),
@@ -332,9 +332,9 @@ class WatchedRepositoryTest {
     }
 
     @Test
-    fun effectiveWatchedSource_fallsBackToNuvioWhenTraktIsUnavailable() {
+    fun effectiveWatchedSource_fallsBackToCineboxWhenTraktIsUnavailable() {
         assertEquals(
-            WatchProgressSource.NUVIO_SYNC,
+            WatchProgressSource.CINEBOX_SYNC,
             effectiveWatchedSource(
                 requestedSource = WatchProgressSource.TRAKT,
                 connectedProviderIds = emptySet(),
@@ -359,7 +359,7 @@ class WatchedRepositoryTest {
             ),
         )
         assertEquals(
-            WatchProgressSource.NUVIO_SYNC,
+            WatchProgressSource.CINEBOX_SYNC,
             effectiveWatchedSource(
                 requestedSource = WatchProgressSource.SIMKL,
                 connectedProviderIds = emptySet(),
@@ -384,7 +384,7 @@ class WatchedRepositoryTest {
         assertFalse(
             isWatchedSourceOperationCurrent(
                 operation = traktOperation,
-                activeSource = WatchProgressSource.NUVIO_SYNC,
+                activeSource = WatchProgressSource.CINEBOX_SYNC,
                 activeGeneration = 5L,
             ),
         )

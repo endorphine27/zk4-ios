@@ -22,9 +22,9 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_exit_fullscreen
-import nuvio.composeapp.generated.resources.action_fullscreen
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_exit_fullscreen
+import cinebox.composeapp.generated.resources.action_fullscreen
 import org.jetbrains.compose.resources.stringResource
 
 internal expect val isFullscreenActionSupported: Boolean

@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 internal actual object PlayerTrackPreferenceStorage {
-    private const val preferencesName = "nuvio_player_track_preferences"
+    private const val preferencesName = "cinebox_player_track_preferences"
     private const val subtitleTypeKey = "subtitle_type"
     private const val subtitleLanguageKey = "subtitle_language"
     private const val subtitleNameKey = "subtitle_name"

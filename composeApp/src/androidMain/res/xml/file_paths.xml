@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
     <cache-path
-        name="nuvio_updates"
+        name="cinebox_updates"
         path="updates/" />
     <cache-path
-        name="nuvio_subtitles"
+        name="cinebox_subtitles"
         path="subtitles/" />
     <files-path
-        name="nuvio_downloads"
+        name="cinebox_downloads"
         path="downloads/" />
 </paths>

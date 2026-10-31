@@ -67,10 +67,10 @@ import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.core.ui.CineboxTokens
 import com.cinebox.app.core.ui.accentBrush
 import com.cinebox.app.core.ui.appIconPainter
-import com.cinebox.app.core.ui.nuvioTypeScale
+import com.cinebox.app.core.ui.cineboxTypeScale
 import com.cinebox.app.core.ui.themePalette
 import com.cinebox.app.features.streams.StreamBadge
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -360,7 +360,7 @@ private fun NowPlayingTile(
     onNextEpisodeClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
-    val typeScale = MaterialTheme.nuvioTypeScale
+    val typeScale = MaterialTheme.cineboxTypeScale
     Tile(onClick = null, modifier = modifier.fillMaxHeight()) {
         Row(
             modifier = Modifier.fillMaxSize().padding(start = 16.dp, end = 4.dp),
@@ -415,7 +415,7 @@ private fun ActionTile(action: PlayerControlAction, onClick: () -> Unit) {
             Spacer(Modifier.height(6.dp))
             Text(
                 text = action.description,
-                style = MaterialTheme.nuvioTypeScale.labelSm.copy(fontSize = 11.sp, lineHeight = 13.sp),
+                style = MaterialTheme.cineboxTypeScale.labelSm.copy(fontSize = 11.sp, lineHeight = 13.sp),
                 color = Color.White.copy(alpha = 0.8f),
                 textAlign = TextAlign.Center,
                 maxLines = 2,
@@ -430,7 +430,7 @@ private fun ActionTile(action: PlayerControlAction, onClick: () -> Unit) {
 private fun TimeLabel(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
-        style = MaterialTheme.nuvioTypeScale.labelSm,
+        style = MaterialTheme.cineboxTypeScale.labelSm,
         color = Color.White.copy(alpha = 0.85f),
         maxLines = 1,
         modifier = modifier,
@@ -456,7 +456,7 @@ internal fun FoldLockedControls(
                 Spacer(Modifier.width(12.dp))
                 Text(
                     text = label,
-                    style = MaterialTheme.nuvioTypeScale.bodyMd.copy(fontWeight = FontWeight.SemiBold),
+                    style = MaterialTheme.cineboxTypeScale.bodyMd.copy(fontWeight = FontWeight.SemiBold),
                     color = Color.White,
                 )
             }

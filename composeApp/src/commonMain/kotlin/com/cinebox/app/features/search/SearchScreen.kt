@@ -48,7 +48,7 @@ import com.cinebox.app.core.ui.CineboxInputField
 import com.cinebox.app.core.ui.CineboxScreen
 import com.cinebox.app.core.ui.CineboxNetworkOfflineCard
 import com.cinebox.app.core.ui.CineboxScreenHeader
-import com.cinebox.app.core.ui.nuvioConsumePointerEvents
+import com.cinebox.app.core.ui.cineboxConsumePointerEvents
 import com.cinebox.app.core.ui.rememberPosterCardStyleUiState
 import com.cinebox.app.core.ui.withDuplicateSafeLazyKeys
 import com.cinebox.app.core.ui.ScreenActivityEffect
@@ -72,22 +72,22 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_retry
-import nuvio.composeapp.generated.resources.compose_nav_search
-import nuvio.composeapp.generated.resources.home_empty_no_sources_title
-import nuvio.composeapp.generated.resources.search_empty_no_sources_message
-import nuvio.composeapp.generated.resources.compose_search_clear
-import nuvio.composeapp.generated.resources.compose_search_discover_title
-import nuvio.composeapp.generated.resources.compose_search_empty_failed_message
-import nuvio.composeapp.generated.resources.compose_search_empty_failed_title
-import nuvio.composeapp.generated.resources.compose_search_empty_no_results_message
-import nuvio.composeapp.generated.resources.compose_search_empty_no_results_title
-import nuvio.composeapp.generated.resources.compose_search_empty_no_search_catalogs_message
-import nuvio.composeapp.generated.resources.compose_search_empty_no_search_catalogs_title
-import nuvio.composeapp.generated.resources.compose_search_placeholder
-import nuvio.composeapp.generated.resources.compose_search_recent_searches
-import nuvio.composeapp.generated.resources.compose_search_remove_recent_search
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_retry
+import cinebox.composeapp.generated.resources.compose_nav_search
+import cinebox.composeapp.generated.resources.home_empty_no_sources_title
+import cinebox.composeapp.generated.resources.search_empty_no_sources_message
+import cinebox.composeapp.generated.resources.compose_search_clear
+import cinebox.composeapp.generated.resources.compose_search_discover_title
+import cinebox.composeapp.generated.resources.compose_search_empty_failed_message
+import cinebox.composeapp.generated.resources.compose_search_empty_failed_title
+import cinebox.composeapp.generated.resources.compose_search_empty_no_results_message
+import cinebox.composeapp.generated.resources.compose_search_empty_no_results_title
+import cinebox.composeapp.generated.resources.compose_search_empty_no_search_catalogs_message
+import cinebox.composeapp.generated.resources.compose_search_empty_no_search_catalogs_title
+import cinebox.composeapp.generated.resources.compose_search_placeholder
+import cinebox.composeapp.generated.resources.compose_search_recent_searches
+import cinebox.composeapp.generated.resources.compose_search_remove_recent_search
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -269,7 +269,7 @@ fun SearchScreen(
                     modifier = Modifier
                         .matchParentSize()
                         .background(MaterialTheme.colorScheme.background)
-                        .nuvioConsumePointerEvents(),
+                        .cineboxConsumePointerEvents(),
                 )
                 androidx.compose.foundation.layout.Column(
                     modifier = Modifier.fillMaxWidth(),

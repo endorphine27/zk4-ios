@@ -10,9 +10,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.io.IOException
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.network_empty_response_body
-import nuvio.composeapp.generated.resources.network_request_failed_http
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.network_empty_response_body
+import cinebox.composeapp.generated.resources.network_request_failed_http
 import org.jetbrains.compose.resources.getString
 import okhttp3.Cache
 import okhttp3.ResponseBody
@@ -28,7 +28,7 @@ import kotlin.text.Charsets
 import java.util.concurrent.TimeUnit
 
 actual object AddonStorage {
-    private const val preferencesName = "nuvio_addons"
+    private const val preferencesName = "cinebox_addons"
     private const val addonUrlsKey = "installed_manifest_urls"
     private const val addonEnabledStatesKey = "installed_manifest_enabled_states"
 

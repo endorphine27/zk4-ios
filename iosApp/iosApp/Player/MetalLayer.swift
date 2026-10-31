@@ -54,7 +54,7 @@ class MetalLayer: CAMetalLayer {
         return drawable
     }
 
-    @objc var nuvioPiPConsumesVideo: Bool {
+    @objc var cineboxPiPConsumesVideo: Bool {
         get {
             pictureInPictureLock.lock()
             defer { pictureInPictureLock.unlock() }
@@ -67,7 +67,7 @@ class MetalLayer: CAMetalLayer {
         }
     }
 
-    @objc func nuvioEnqueuePiPFrame(_ pixelBuffer: CVPixelBuffer, presentationTime: Double, isPictureInPictureFrame: Bool) {
+    @objc func cineboxEnqueuePiPFrame(_ pixelBuffer: CVPixelBuffer, presentationTime: Double, isPictureInPictureFrame: Bool) {
         pictureInPictureSink?.submit(pixelBuffer, pts: presentationTime, isPictureInPictureFrame: isPictureInPictureFrame)
     }
 

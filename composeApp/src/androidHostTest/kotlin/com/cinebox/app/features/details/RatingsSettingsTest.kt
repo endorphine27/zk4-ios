@@ -20,7 +20,7 @@ class RatingsSettingsTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        context.getSharedPreferences("nuvio_meta_screen_settings", Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("cinebox_meta_screen_settings", Context.MODE_PRIVATE).edit().clear().commit()
         MetaScreenSettingsStorage.initialize(context)
         MetaScreenSettingsRepository.clearLocalState()
     }
@@ -68,7 +68,7 @@ class RatingsSettingsTest {
     @Test
     fun savingRatingsDoesNotChangeAnotherProfilesPayload() {
         val preferences = RuntimeEnvironment.getApplication()
-            .getSharedPreferences("nuvio_meta_screen_settings", Context.MODE_PRIVATE)
+            .getSharedPreferences("cinebox_meta_screen_settings", Context.MODE_PRIVATE)
         val otherProfileKey = ProfileScopedKey.of("meta_screen_settings_payload", 99)
         val otherPayload = """{"show_overall_ratings":true,"episode_ratings_visibility":"SHOW_ALL"}"""
         preferences.edit().putString(otherProfileKey, otherPayload).commit()

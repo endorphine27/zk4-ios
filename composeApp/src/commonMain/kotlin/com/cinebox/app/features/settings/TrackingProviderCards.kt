@@ -57,7 +57,7 @@ import com.cinebox.app.core.ui.DialogButtonStyle
 import com.cinebox.app.core.ui.DialogSurface
 import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.profiles.ProfileRepository
 import com.cinebox.app.features.simkl.SimklAuthError
 import com.cinebox.app.features.simkl.SimklAuthRepository
@@ -75,53 +75,53 @@ import com.cinebox.app.features.trakt.TraktConnectionMode
 import com.cinebox.app.features.trakt.traktBrandPainter
 import com.cinebox.app.features.watchprogress.WatchProgressSourceCoordinator
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_cancel
-import nuvio.composeapp.generated.resources.settings_simkl_authorization_expired
-import nuvio.composeapp.generated.resources.settings_simkl_authorization_revoked
-import nuvio.composeapp.generated.resources.settings_simkl_connect
-import nuvio.composeapp.generated.resources.settings_simkl_connected_as
-import nuvio.composeapp.generated.resources.settings_simkl_connected_description
-import nuvio.composeapp.generated.resources.settings_simkl_default_user
-import nuvio.composeapp.generated.resources.settings_simkl_disconnect
-import nuvio.composeapp.generated.resources.settings_simkl_disconnect_description
-import nuvio.composeapp.generated.resources.settings_simkl_finish_sign_in
-import nuvio.composeapp.generated.resources.settings_simkl_invalid_callback
-import nuvio.composeapp.generated.resources.settings_simkl_missing_credentials
-import nuvio.composeapp.generated.resources.settings_simkl_open_login
-import nuvio.composeapp.generated.resources.settings_simkl_open_pin
-import nuvio.composeapp.generated.resources.settings_simkl_pin_code_copied
-import nuvio.composeapp.generated.resources.settings_simkl_pin_finish_sign_in
-import nuvio.composeapp.generated.resources.settings_simkl_pin_instructions
-import nuvio.composeapp.generated.resources.settings_simkl_sign_in_description
-import nuvio.composeapp.generated.resources.settings_simkl_sign_in_failed
-import nuvio.composeapp.generated.resources.settings_simkl_sync_info_action
-import nuvio.composeapp.generated.resources.settings_simkl_sync_now
-import nuvio.composeapp.generated.resources.settings_simkl_visit
-import nuvio.composeapp.generated.resources.settings_mdblist_disconnect_description
-import nuvio.composeapp.generated.resources.settings_tracking_approval_redirect
-import nuvio.composeapp.generated.resources.settings_tracking_disconnect_description
-import nuvio.composeapp.generated.resources.settings_tracking_disconnect_title
-import nuvio.composeapp.generated.resources.settings_trakt_approval_redirect
-import nuvio.composeapp.generated.resources.settings_trakt_connect
-import nuvio.composeapp.generated.resources.settings_trakt_connected_as
-import nuvio.composeapp.generated.resources.settings_trakt_default_user
-import nuvio.composeapp.generated.resources.settings_trakt_disconnect
-import nuvio.composeapp.generated.resources.settings_trakt_disconnect_description
-import nuvio.composeapp.generated.resources.settings_trakt_failed_open_browser
-import nuvio.composeapp.generated.resources.settings_trakt_finish_sign_in
-import nuvio.composeapp.generated.resources.settings_trakt_missing_credentials
-import nuvio.composeapp.generated.resources.settings_trakt_open_activation
-import nuvio.composeapp.generated.resources.settings_trakt_open_login
-import nuvio.composeapp.generated.resources.settings_trakt_device_code_copied
-import nuvio.composeapp.generated.resources.settings_trakt_device_finish_sign_in
-import nuvio.composeapp.generated.resources.settings_trakt_device_instructions
-import nuvio.composeapp.generated.resources.settings_trakt_save_actions_description
-import nuvio.composeapp.generated.resources.settings_trakt_sign_in_description
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_cancel
+import cinebox.composeapp.generated.resources.settings_simkl_authorization_expired
+import cinebox.composeapp.generated.resources.settings_simkl_authorization_revoked
+import cinebox.composeapp.generated.resources.settings_simkl_connect
+import cinebox.composeapp.generated.resources.settings_simkl_connected_as
+import cinebox.composeapp.generated.resources.settings_simkl_connected_description
+import cinebox.composeapp.generated.resources.settings_simkl_default_user
+import cinebox.composeapp.generated.resources.settings_simkl_disconnect
+import cinebox.composeapp.generated.resources.settings_simkl_disconnect_description
+import cinebox.composeapp.generated.resources.settings_simkl_finish_sign_in
+import cinebox.composeapp.generated.resources.settings_simkl_invalid_callback
+import cinebox.composeapp.generated.resources.settings_simkl_missing_credentials
+import cinebox.composeapp.generated.resources.settings_simkl_open_login
+import cinebox.composeapp.generated.resources.settings_simkl_open_pin
+import cinebox.composeapp.generated.resources.settings_simkl_pin_code_copied
+import cinebox.composeapp.generated.resources.settings_simkl_pin_finish_sign_in
+import cinebox.composeapp.generated.resources.settings_simkl_pin_instructions
+import cinebox.composeapp.generated.resources.settings_simkl_sign_in_description
+import cinebox.composeapp.generated.resources.settings_simkl_sign_in_failed
+import cinebox.composeapp.generated.resources.settings_simkl_sync_info_action
+import cinebox.composeapp.generated.resources.settings_simkl_sync_now
+import cinebox.composeapp.generated.resources.settings_simkl_visit
+import cinebox.composeapp.generated.resources.settings_mdblist_disconnect_description
+import cinebox.composeapp.generated.resources.settings_tracking_approval_redirect
+import cinebox.composeapp.generated.resources.settings_tracking_disconnect_description
+import cinebox.composeapp.generated.resources.settings_tracking_disconnect_title
+import cinebox.composeapp.generated.resources.settings_trakt_approval_redirect
+import cinebox.composeapp.generated.resources.settings_trakt_connect
+import cinebox.composeapp.generated.resources.settings_trakt_connected_as
+import cinebox.composeapp.generated.resources.settings_trakt_default_user
+import cinebox.composeapp.generated.resources.settings_trakt_disconnect
+import cinebox.composeapp.generated.resources.settings_trakt_disconnect_description
+import cinebox.composeapp.generated.resources.settings_trakt_failed_open_browser
+import cinebox.composeapp.generated.resources.settings_trakt_finish_sign_in
+import cinebox.composeapp.generated.resources.settings_trakt_missing_credentials
+import cinebox.composeapp.generated.resources.settings_trakt_open_activation
+import cinebox.composeapp.generated.resources.settings_trakt_open_login
+import cinebox.composeapp.generated.resources.settings_trakt_device_code_copied
+import cinebox.composeapp.generated.resources.settings_trakt_device_finish_sign_in
+import cinebox.composeapp.generated.resources.settings_trakt_device_instructions
+import cinebox.composeapp.generated.resources.settings_trakt_save_actions_description
+import cinebox.composeapp.generated.resources.settings_trakt_sign_in_description
 import org.jetbrains.compose.resources.stringResource
 
 internal enum class TrackingBrand(val displayName: String) {
-    NUVIO("CINEBOX"),
+    CINEBOX("CINEBOX"),
     TRAKT("Trakt"),
     SIMKL("Simkl"),
     MDBLIST("MDBList"),
@@ -140,7 +140,7 @@ internal fun isTrackingBrandAvailable(
     simklConnected: Boolean,
     mdblistConnected: Boolean = false,
 ): Boolean = when (brand) {
-    TrackingBrand.NUVIO,
+    TrackingBrand.CINEBOX,
     TrackingBrand.TMDB,
     -> true
     TrackingBrand.TRAKT -> traktConnected
@@ -368,7 +368,7 @@ internal fun TrackingProviderCard(
     onInfoRequested: (() -> Unit)? = null,
     onDisconnect: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val clipboardManager = LocalClipboardManager.current
     val uriHandler = LocalUriHandler.current
     val actionScope = rememberCoroutineScope()
@@ -715,7 +715,7 @@ private fun TrackingDisconnectDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     DialogSurface(
         onDismissRequest = onDismiss,
         title = stringResource(Res.string.settings_tracking_disconnect_title, brand.displayName),
@@ -727,7 +727,7 @@ private fun TrackingDisconnectDialog(
                 TrackingBrand.SIMKL ->
                     stringResource(Res.string.settings_simkl_disconnect_description)
                 TrackingBrand.MDBLIST -> stringResource(Res.string.settings_mdblist_disconnect_description)
-                TrackingBrand.NUVIO,
+                TrackingBrand.CINEBOX,
                 TrackingBrand.TMDB,
                 -> stringResource(
                     Res.string.settings_tracking_disconnect_description,
@@ -782,11 +782,11 @@ internal fun TrackingBrandGlyph(
             modifier = modifier,
             contentScale = ContentScale.Fit,
         )
-        TrackingBrand.NUVIO -> Icon(
+        TrackingBrand.CINEBOX -> Icon(
             imageVector = Icons.Rounded.Sync,
             contentDescription = contentDescription,
             modifier = modifier,
-            tint = MaterialTheme.nuvio.colors.accent,
+            tint = MaterialTheme.cinebox.colors.accent,
         )
     }
 }
@@ -800,7 +800,7 @@ private fun TrackingBrandWordmark(
         TrackingBrand.TRAKT -> traktBrandPainter(TraktBrandAsset.Wordmark)
         TrackingBrand.SIMKL -> simklBrandPainter(SimklBrandAsset.Wordmark)
         TrackingBrand.MDBLIST -> integrationLogoPainter(IntegrationLogo.MdbList)
-        TrackingBrand.NUVIO,
+        TrackingBrand.CINEBOX,
         TrackingBrand.TMDB,
         -> return
     }
@@ -815,7 +815,7 @@ private fun TrackingBrandWordmark(
                 .width(124.dp)
                 .height(30.dp)
             TrackingBrand.MDBLIST -> Modifier.width(130.dp).height(32.dp)
-            TrackingBrand.NUVIO,
+            TrackingBrand.CINEBOX,
             TrackingBrand.TMDB,
             -> Modifier
         },
@@ -834,7 +834,7 @@ private fun TrackingBrand.cardBrush(): Brush = when (this) {
     TrackingBrand.MDBLIST -> Brush.linearGradient(
         colors = listOf(Color(0xFF173D69), Color(0xFF225C97), Color(0xFF16385D)),
     )
-    TrackingBrand.NUVIO,
+    TrackingBrand.CINEBOX,
     TrackingBrand.TMDB,
     -> Brush.linearGradient(colors = listOf(Color(0xFF242424), Color(0xFF111111)))
 }

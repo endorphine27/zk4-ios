@@ -42,7 +42,7 @@ import androidx.compose.ui.unit.sp
 import com.cinebox.app.core.ui.FloatingNavigationItem
 import com.cinebox.app.core.ui.accentBrush
 import com.cinebox.app.core.ui.gradientMask
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.core.ui.themePalette
 import com.cinebox.app.core.ui.visualNavIndex
 import org.jetbrains.compose.resources.painterResource
@@ -59,7 +59,7 @@ internal fun JellyTabRow(
     horizontalLabels: Boolean = false,
     iconSize: Dp = if (compactSize) 24.dp else 28.dp,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val palette = MaterialTheme.themePalette
     val color = if (horizontalLabels && active) tokens.colors.textPrimary else if (active) tokens.colors.accent else tokens.colors.textMuted
     val iconModifier = Modifier.size(if (horizontalLabels) iconSize - 10.dp else iconSize)

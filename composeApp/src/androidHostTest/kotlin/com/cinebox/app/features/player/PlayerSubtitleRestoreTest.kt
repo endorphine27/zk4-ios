@@ -32,7 +32,7 @@ class PlayerSubtitleRestoreTest {
     @Before
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        listOf("nuvio_player_track_preferences", "nuvio_watch_progress", "nuvio_player_settings").forEach {
+        listOf("cinebox_player_track_preferences", "cinebox_watch_progress", "cinebox_player_settings").forEach {
             context.getSharedPreferences(it, Context.MODE_PRIVATE).edit().clear().commit()
         }
         PlayerTrackPreferenceStorage.initialize(context)

@@ -18,9 +18,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.details_show_less
-import nuvio.composeapp.generated.resources.details_show_more
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.details_show_less
+import cinebox.composeapp.generated.resources.details_show_more
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

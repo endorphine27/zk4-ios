@@ -16,8 +16,8 @@ import com.cinebox.app.features.watching.domain.isShortPlaceholderDuration
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.player_engine_switching_manual_message
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.player_engine_switching_manual_message
 import kotlin.math.abs
 import kotlin.time.TimeSource
 

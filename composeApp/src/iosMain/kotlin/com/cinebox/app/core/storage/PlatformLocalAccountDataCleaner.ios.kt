@@ -98,7 +98,7 @@ internal actual object PlatformLocalAccountDataCleaner {
             }
         }
 
-        val scraperCodePath = "${NSHomeDirectory()}/Library/Application Support/nuvio_plugin_scrapers"
+        val scraperCodePath = "${NSHomeDirectory()}/Library/Application Support/cinebox_plugin_scrapers"
         if (NSFileManager.defaultManager.fileExistsAtPath(scraperCodePath)) {
             NSFileManager.defaultManager.removeItemAtPath(scraperCodePath, null)
         }

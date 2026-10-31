@@ -29,7 +29,7 @@ import com.cinebox.app.core.ui.CineboxShelfSection
 import com.cinebox.app.core.ui.PosterLandscapeAspectRatio
 import com.cinebox.app.core.ui.desktopCatalogShelfPosterBaseWidthDp
 import com.cinebox.app.core.ui.landscapePosterWidth
-import com.cinebox.app.core.ui.nuvioCardDepth
+import com.cinebox.app.core.ui.cineboxCardDepth
 import com.cinebox.app.core.ui.posterCardClickable
 import com.cinebox.app.core.ui.rememberPosterCardStyleUiState
 import com.cinebox.app.features.collection.Collection
@@ -133,7 +133,7 @@ private fun CollectionFolderCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(aspectRatio)
-                .nuvioCardDepth(
+                .cineboxCardDepth(
                     shape = shapeCorner,
                     surface = CineboxCardDepthSurface.Posters,
                 ),

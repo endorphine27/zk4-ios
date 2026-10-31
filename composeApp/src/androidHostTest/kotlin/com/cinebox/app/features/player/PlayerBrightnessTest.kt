@@ -31,7 +31,7 @@ class PlayerBrightnessTest {
     @Before
     fun initialize() {
         val context = compose.activity
-        context.getSharedPreferences("nuvio_player_settings", Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("cinebox_player_settings", Context.MODE_PRIVATE).edit().clear().commit()
         PlayerSettingsStorage.initialize(context)
         compose.runOnUiThread {
             context.window.attributes = context.window.attributes.apply { screenBrightness = -1f }

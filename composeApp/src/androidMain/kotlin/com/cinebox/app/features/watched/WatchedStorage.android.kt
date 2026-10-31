@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 actual object WatchedStorage {
-    private const val preferencesName = "nuvio_watched"
+    private const val preferencesName = "cinebox_watched"
     private fun payloadKey(profileId: Int) = "watched_payload_$profileId"
 
     private var preferences: SharedPreferences? = null

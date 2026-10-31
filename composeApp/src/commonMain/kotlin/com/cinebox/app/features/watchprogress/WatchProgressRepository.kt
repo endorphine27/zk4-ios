@@ -240,10 +240,10 @@ object WatchProgressRepository {
     val uiState: StateFlow<WatchProgressUiState> = _uiState.asStateFlow()
 
     private var hasLoaded = false
-    private var hasLoadedNuvioRemoteProgress = false
+    private var hasLoadedCineboxRemoteProgress = false
     private var currentProfileId: Int = 1
     private var profileGeneration: Long = 0L
-    private var activeSource: WatchProgressSource = WatchProgressSource.NUVIO_SYNC
+    private var activeSource: WatchProgressSource = WatchProgressSource.CINEBOX_SYNC
     private val _activeSourceState = MutableStateFlow(activeSource)
     internal val activeSourceState: StateFlow<WatchProgressSource> = _activeSourceState.asStateFlow()
     private val entriesLock = SynchronizedObject()
@@ -252,7 +252,7 @@ object WatchProgressRepository {
     private var metadataResolutionJob: Job? = null
     private val metadataResolutionRetryCoordinator = MetadataResolutionRetryCoordinator()
     private val providerMetadataOverlay = ProviderProgressMetadataOverlay()
-    private val nuvioPullMutex = Mutex()
+    private val cineboxPullMutex = Mutex()
     private var lastSuccessfulPushEpochMs = 0L
     private var deltaCursorEventId = 0L
     private var deltaInitialized = false
@@ -320,10 +320,10 @@ object WatchProgressRepository {
         previousAccountJob.cancel()
         cancelMetadataResolution(resetProviderHistory = true)
         hasLoaded = false
-        hasLoadedNuvioRemoteProgress = false
+        hasLoadedCineboxRemoteProgress = false
         currentProfileId = 1
         profileGeneration += 1L
-        updateActiveSource(WatchProgressSource.NUVIO_SYNC)
+        updateActiveSource(WatchProgressSource.CINEBOX_SYNC)
         providerMetadataOverlay.clear()
         clearLocalEntries()
         lastSuccessfulPushEpochMs = 0L
@@ -339,7 +339,7 @@ object WatchProgressRepository {
         currentProfileId = profileId
         profileGeneration += 1L
         hasLoaded = true
-        hasLoadedNuvioRemoteProgress = false
+        hasLoadedCineboxRemoteProgress = false
         providerMetadataOverlay.clear()
         clearLocalEntries()
 
@@ -425,7 +425,7 @@ object WatchProgressRepository {
         updateActiveSource(source)
         cancelMetadataResolution(resetProviderHistory = false)
         providerMetadataOverlay.clear()
-        activeProgressProvider()?.onActivated() ?: run { hasLoadedNuvioRemoteProgress = false }
+        activeProgressProvider()?.onActivated() ?: run { hasLoadedCineboxRemoteProgress = false }
         publish()
         if (activeProgressProvider()?.providesCompleteMetadata != true) {
             resolveRemoteMetadata()
@@ -457,7 +457,7 @@ object WatchProgressRepository {
                 force = force,
             )
         }
-        return refreshNuvioSource(
+        return refreshCineboxSource(
             profileId = profileId,
             operationGeneration = operationGeneration,
             force = force,
@@ -521,7 +521,7 @@ object WatchProgressRepository {
         }
     }
 
-    private suspend fun refreshNuvioSource(
+    private suspend fun refreshCineboxSource(
         profileId: Int,
         operationGeneration: Long,
         force: Boolean,
@@ -529,15 +529,15 @@ object WatchProgressRepository {
         val authState = AuthRepository.state.value
         if (authState !is AuthState.Authenticated || authState.isAnonymous) {
             // There is no upstream source for this account, so local state is authoritative.
-            hasLoadedNuvioRemoteProgress = true
+            hasLoadedCineboxRemoteProgress = true
             publish()
             return true
         }
 
-        return nuvioPullMutex.withLock {
+        return cineboxPullMutex.withLock {
             try {
                 if (force) {
-                    pullNuvioSnapshotFromServer(
+                    pullCineboxSnapshotFromServer(
                         profileId = profileId,
                         operationGeneration = operationGeneration,
                     )
@@ -557,7 +557,7 @@ object WatchProgressRepository {
         }
     }
 
-    private suspend fun pullNuvioSnapshotFromServer(
+    private suspend fun pullCineboxSnapshotFromServer(
         profileId: Int,
         operationGeneration: Long,
     ) {
@@ -694,8 +694,8 @@ object WatchProgressRepository {
         }
 
         hasLoaded = true
-        val remoteReadinessChanged = !hasLoadedNuvioRemoteProgress
-        hasLoadedNuvioRemoteProgress = true
+        val remoteReadinessChanged = !hasLoadedCineboxRemoteProgress
+        hasLoadedCineboxRemoteProgress = true
         if (changed || remoteReadinessChanged) {
             publish()
         }
@@ -760,7 +760,7 @@ object WatchProgressRepository {
             deltaInitialized = false
         }
         hasLoaded = true
-        hasLoadedNuvioRemoteProgress = true
+        hasLoadedCineboxRemoteProgress = true
         publish()
         persist()
         resolveRemoteMetadata()
@@ -1440,7 +1440,7 @@ object WatchProgressRepository {
             source = activeSource,
             entries = sortedEntries,
             providerSnapshot = providerSnapshot,
-            hasLoadedNuvioRemoteProgress = hasLoadedNuvioRemoteProgress,
+            hasLoadedCineboxRemoteProgress = hasLoadedCineboxRemoteProgress,
         )
     }
 
@@ -1562,7 +1562,7 @@ object WatchProgressRepository {
             .orEmpty()
         val projectedEntries = projectWatchProgressSourceEntries(
             source = activeSource,
-            nuvioEntries = localEntriesSnapshot(),
+            cineboxEntries = localEntriesSnapshot(),
             providerEntries = providerEntries,
         )
         return if (activeSource.providerId == null) {
@@ -1741,11 +1741,11 @@ internal fun projectWatchProgressUiState(
     source: WatchProgressSource,
     entries: List<WatchProgressEntry>,
     providerSnapshot: TrackingProgressSnapshot?,
-    hasLoadedNuvioRemoteProgress: Boolean,
+    hasLoadedCineboxRemoteProgress: Boolean,
 ): WatchProgressUiState = WatchProgressUiState(
     source = source,
     entries = entries,
     hiddenContentIds = providerSnapshot?.hiddenContentIds.orEmpty(),
     hasLoadedRemoteProgress =
-        providerSnapshot?.hasLoadedRemoteProgress ?: hasLoadedNuvioRemoteProgress,
+        providerSnapshot?.hasLoadedRemoteProgress ?: hasLoadedCineboxRemoteProgress,
 )

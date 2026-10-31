@@ -18,10 +18,10 @@ import com.cinebox.app.navigation.EntityBrowseRoute
 import com.cinebox.app.navigation.CineboxNavigator
 import com.cinebox.app.navigation.PersonDetailRoute
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.person_role_creator
-import nuvio.composeapp.generated.resources.person_role_director
-import nuvio.composeapp.generated.resources.person_role_writer
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.person_role_creator
+import cinebox.composeapp.generated.resources.person_role_director
+import cinebox.composeapp.generated.resources.person_role_writer
 import org.jetbrains.compose.resources.stringResource
 
 internal typealias ContentPlayAction = (

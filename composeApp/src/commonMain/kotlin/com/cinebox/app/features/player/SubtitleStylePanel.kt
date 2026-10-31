@@ -32,28 +32,28 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.cinebox.app.core.ui.nuvio
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_action_off
-import nuvio.composeapp.generated.resources.compose_action_on
-import nuvio.composeapp.generated.resources.compose_player_auto_sync
-import nuvio.composeapp.generated.resources.compose_player_bold
-import nuvio.composeapp.generated.resources.compose_player_bottom_offset
-import nuvio.composeapp.generated.resources.compose_player_capture_line
-import nuvio.composeapp.generated.resources.compose_player_color
-import nuvio.composeapp.generated.resources.compose_player_font_size
-import nuvio.composeapp.generated.resources.compose_player_font_size_value
-import nuvio.composeapp.generated.resources.compose_player_loading_lines
-import nuvio.composeapp.generated.resources.compose_player_no_subtitle_lines_found
-import nuvio.composeapp.generated.resources.compose_player_outline
-import nuvio.composeapp.generated.resources.compose_player_outline_color
-import nuvio.composeapp.generated.resources.compose_player_reload
-import nuvio.composeapp.generated.resources.compose_player_reset
-import nuvio.composeapp.generated.resources.compose_player_reset_defaults
-import nuvio.composeapp.generated.resources.compose_player_select_addon_subtitle_first
-import nuvio.composeapp.generated.resources.compose_player_style
-import nuvio.composeapp.generated.resources.compose_player_subtitle_delay
-import nuvio.composeapp.generated.resources.compose_player_text_opacity
+import com.cinebox.app.core.ui.cinebox
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_action_off
+import cinebox.composeapp.generated.resources.compose_action_on
+import cinebox.composeapp.generated.resources.compose_player_auto_sync
+import cinebox.composeapp.generated.resources.compose_player_bold
+import cinebox.composeapp.generated.resources.compose_player_bottom_offset
+import cinebox.composeapp.generated.resources.compose_player_capture_line
+import cinebox.composeapp.generated.resources.compose_player_color
+import cinebox.composeapp.generated.resources.compose_player_font_size
+import cinebox.composeapp.generated.resources.compose_player_font_size_value
+import cinebox.composeapp.generated.resources.compose_player_loading_lines
+import cinebox.composeapp.generated.resources.compose_player_no_subtitle_lines_found
+import cinebox.composeapp.generated.resources.compose_player_outline
+import cinebox.composeapp.generated.resources.compose_player_outline_color
+import cinebox.composeapp.generated.resources.compose_player_reload
+import cinebox.composeapp.generated.resources.compose_player_reset
+import cinebox.composeapp.generated.resources.compose_player_reset_defaults
+import cinebox.composeapp.generated.resources.compose_player_select_addon_subtitle_first
+import cinebox.composeapp.generated.resources.compose_player_style
+import cinebox.composeapp.generated.resources.compose_player_subtitle_delay
+import cinebox.composeapp.generated.resources.compose_player_text_opacity
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.abs
 import kotlin.math.roundToInt
@@ -279,7 +279,7 @@ private fun SubtitleToggleChip(
     enabled: Boolean,
     onClick: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
 
     Box(
         modifier = Modifier
@@ -340,7 +340,7 @@ private fun SubtitleAutoSyncSection(
     onCueSelected: (SubtitleSyncCue) -> Unit,
     onReload: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val capturedPositionMs = state.capturedPositionMs
     val nearestCues = if (capturedPositionMs == null) {
         emptyList()
@@ -420,7 +420,7 @@ private fun SubtitleTextAction(
     onClick: () -> Unit,
     enabled: Boolean = true,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
 
     Box(
         modifier = Modifier

@@ -8,7 +8,7 @@ internal actual object PlatformMdbListSyncStorage : MdbListSyncStorage {
     private lateinit var preferences: SharedPreferences
 
     fun initialize(context: Context) {
-        preferences = context.applicationContext.getSharedPreferences("nuvio_mdblist_sync", Context.MODE_PRIVATE)
+        preferences = context.applicationContext.getSharedPreferences("cinebox_mdblist_sync", Context.MODE_PRIVATE)
     }
 
     actual override suspend fun load(profileId: Int): String? =

@@ -32,7 +32,7 @@ class AppUpdaterControllerTest {
     @BeforeTest
     fun initialize() {
         val context = RuntimeEnvironment.getApplication()
-        context.getSharedPreferences("nuvio_updater", Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("cinebox_updater", Context.MODE_PRIVATE).edit().clear().commit()
         context.applicationInfo.flags = context.applicationInfo.flags or ApplicationInfo.FLAG_DEBUGGABLE
         AndroidAppUpdaterPlatform.initialize(context)
         preferences = UpdatePreferences("1.1.0")

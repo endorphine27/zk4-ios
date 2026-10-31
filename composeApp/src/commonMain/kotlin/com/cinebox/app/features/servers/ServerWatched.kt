@@ -14,8 +14,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.servers_watched_failed
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.servers_watched_failed
 import org.jetbrains.compose.resources.getString
 
 internal object ServerWatched {

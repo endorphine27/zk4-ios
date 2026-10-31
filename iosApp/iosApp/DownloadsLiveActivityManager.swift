@@ -3,8 +3,8 @@ import Foundation
 import ActivityKit
 #endif
 
-private let downloadsLiveStatusUpdatedNotification = Notification.Name("NuvioDownloadsLiveStatusUpdated")
-private let downloadsLiveStatusPayloadKey = "nuvio.downloads.live_status.payload"
+private let downloadsLiveStatusUpdatedNotification = Notification.Name("CineboxDownloadsLiveStatusUpdated")
+private let downloadsLiveStatusPayloadKey = "cinebox.downloads.live_status.payload"
 
 final class DownloadsLiveActivityManager {
     static let shared = DownloadsLiveActivityManager()

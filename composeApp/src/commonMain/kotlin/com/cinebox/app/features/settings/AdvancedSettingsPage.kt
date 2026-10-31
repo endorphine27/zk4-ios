@@ -20,48 +20,48 @@ import com.cinebox.app.core.ui.DialogButtons
 import com.cinebox.app.core.ui.DialogButtonStyle
 import com.cinebox.app.core.ui.DialogSurface
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.features.profiles.ProfileRepository
 import com.cinebox.app.features.watchprogress.ContinueWatchingEnrichmentCache
 import com.cinebox.app.features.watchprogress.WatchProgressRepository
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_cancel
-import nuvio.composeapp.generated.resources.settings_advanced_clear_cw_cache
-import nuvio.composeapp.generated.resources.settings_advanced_clear_cw_cache_done
-import nuvio.composeapp.generated.resources.settings_advanced_clear_cw_cache_subtitle
-import nuvio.composeapp.generated.resources.settings_advanced_discord_rich_presence
-import nuvio.composeapp.generated.resources.settings_advanced_discord_rich_presence_description
-import nuvio.composeapp.generated.resources.settings_advanced_opengl_renderer
-import nuvio.composeapp.generated.resources.settings_advanced_opengl_renderer_description
-import nuvio.composeapp.generated.resources.settings_advanced_opengl_renderer_external_description
-import nuvio.composeapp.generated.resources.settings_advanced_remember_last_profile
-import nuvio.composeapp.generated.resources.settings_advanced_remember_last_profile_description
-import nuvio.composeapp.generated.resources.settings_advanced_section_cache
-import nuvio.composeapp.generated.resources.settings_advanced_section_diagnostics
-import nuvio.composeapp.generated.resources.settings_advanced_section_discord
-import nuvio.composeapp.generated.resources.settings_advanced_section_startup
-import nuvio.composeapp.generated.resources.settings_advanced_section_windows_graphics
-import nuvio.composeapp.generated.resources.settings_advanced_sentry_reports
-import nuvio.composeapp.generated.resources.settings_advanced_sentry_reports_subtitle
-import nuvio.composeapp.generated.resources.settings_advanced_sentry_reports_subtitle_desktop
-import nuvio.composeapp.generated.resources.sentry_disable_dialog_subtitle
-import nuvio.composeapp.generated.resources.sentry_disable_dialog_subtitle_desktop
-import nuvio.composeapp.generated.resources.sentry_disable_dialog_title
-import nuvio.composeapp.generated.resources.sentry_enable_dialog_subtitle
-import nuvio.composeapp.generated.resources.sentry_enable_dialog_subtitle_desktop
-import nuvio.composeapp.generated.resources.sentry_enable_dialog_title
-import nuvio.composeapp.generated.resources.sentry_help_body
-import nuvio.composeapp.generated.resources.sentry_help_body_desktop
-import nuvio.composeapp.generated.resources.sentry_help_title
-import nuvio.composeapp.generated.resources.sentry_keep_enabled
-import nuvio.composeapp.generated.resources.sentry_not_sent_body
-import nuvio.composeapp.generated.resources.sentry_not_sent_title
-import nuvio.composeapp.generated.resources.sentry_sent_body
-import nuvio.composeapp.generated.resources.sentry_sent_body_desktop
-import nuvio.composeapp.generated.resources.sentry_sent_title
-import nuvio.composeapp.generated.resources.sentry_turn_off
-import nuvio.composeapp.generated.resources.sentry_turn_on
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_cancel
+import cinebox.composeapp.generated.resources.settings_advanced_clear_cw_cache
+import cinebox.composeapp.generated.resources.settings_advanced_clear_cw_cache_done
+import cinebox.composeapp.generated.resources.settings_advanced_clear_cw_cache_subtitle
+import cinebox.composeapp.generated.resources.settings_advanced_discord_rich_presence
+import cinebox.composeapp.generated.resources.settings_advanced_discord_rich_presence_description
+import cinebox.composeapp.generated.resources.settings_advanced_opengl_renderer
+import cinebox.composeapp.generated.resources.settings_advanced_opengl_renderer_description
+import cinebox.composeapp.generated.resources.settings_advanced_opengl_renderer_external_description
+import cinebox.composeapp.generated.resources.settings_advanced_remember_last_profile
+import cinebox.composeapp.generated.resources.settings_advanced_remember_last_profile_description
+import cinebox.composeapp.generated.resources.settings_advanced_section_cache
+import cinebox.composeapp.generated.resources.settings_advanced_section_diagnostics
+import cinebox.composeapp.generated.resources.settings_advanced_section_discord
+import cinebox.composeapp.generated.resources.settings_advanced_section_startup
+import cinebox.composeapp.generated.resources.settings_advanced_section_windows_graphics
+import cinebox.composeapp.generated.resources.settings_advanced_sentry_reports
+import cinebox.composeapp.generated.resources.settings_advanced_sentry_reports_subtitle
+import cinebox.composeapp.generated.resources.settings_advanced_sentry_reports_subtitle_desktop
+import cinebox.composeapp.generated.resources.sentry_disable_dialog_subtitle
+import cinebox.composeapp.generated.resources.sentry_disable_dialog_subtitle_desktop
+import cinebox.composeapp.generated.resources.sentry_disable_dialog_title
+import cinebox.composeapp.generated.resources.sentry_enable_dialog_subtitle
+import cinebox.composeapp.generated.resources.sentry_enable_dialog_subtitle_desktop
+import cinebox.composeapp.generated.resources.sentry_enable_dialog_title
+import cinebox.composeapp.generated.resources.sentry_help_body
+import cinebox.composeapp.generated.resources.sentry_help_body_desktop
+import cinebox.composeapp.generated.resources.sentry_help_title
+import cinebox.composeapp.generated.resources.sentry_keep_enabled
+import cinebox.composeapp.generated.resources.sentry_not_sent_body
+import cinebox.composeapp.generated.resources.sentry_not_sent_title
+import cinebox.composeapp.generated.resources.sentry_sent_body
+import cinebox.composeapp.generated.resources.sentry_sent_body_desktop
+import cinebox.composeapp.generated.resources.sentry_sent_title
+import cinebox.composeapp.generated.resources.sentry_turn_off
+import cinebox.composeapp.generated.resources.sentry_turn_on
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.advancedSettingsContent(
@@ -222,7 +222,7 @@ private fun SentrySettingsDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     DialogSurface(
         onDismissRequest = onDismiss,
         title = stringResource(
@@ -311,7 +311,7 @@ private fun SentryInfoSection(
     title: String,
     body: String,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(
         verticalArrangement = Arrangement.spacedBy(CineboxTokens.Space.s4),
     ) {

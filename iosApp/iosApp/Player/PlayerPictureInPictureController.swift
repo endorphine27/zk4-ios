@@ -1,7 +1,7 @@
 import AVKit
 import CoreMedia
 
-let playerSceneDidActivateNotification = Notification.Name("NuvioPlayerSceneDidActivate")
+let playerSceneDidActivateNotification = Notification.Name("CineboxPlayerSceneDidActivate")
 
 /// PiP presents MPV's existing VideoToolbox buffers; MPV remains the audio and playback clock owner.
 final class PlayerPictureInPictureController: NSObject,
@@ -72,7 +72,7 @@ final class PlayerPictureInPictureController: NSObject,
             }
         }
         // Arm presentation feedback before allowing MPV's original Metal output.
-        metalLayer.nuvioPiPConsumesVideo = false
+        metalLayer.cineboxPiPConsumesVideo = false
     }
 
     var keepsPlaybackAlive: Bool { isStarting || isActive }
@@ -84,7 +84,7 @@ final class PlayerPictureInPictureController: NSObject,
         self.metalLayer = metalLayer
         if #available(iOS 17.0, *) {
             let renderer = layer.sampleBufferRenderer
-            frameQueue = DispatchQueue(label: "com.nuvio.pip.frames", qos: .userInitiated)
+            frameQueue = DispatchQueue(label: "com.cinebox.pip.frames", qos: .userInitiated)
             prepareFrameRenderer = {
                 if renderer.status == .failed { renderer.flush() }
                 return renderer.isReadyForMoreMediaData
@@ -214,7 +214,7 @@ final class PlayerPictureInPictureController: NSObject,
         shouldReturnToInline = false
         stopRequested = false
         // Never submit Metal work in the background, including during the PiP handoff.
-        metalLayer?.nuvioPiPConsumesVideo = true
+        metalLayer?.cineboxPiPConsumesVideo = true
         if !keepsPlaybackAlive, receivedFrame, owner?.isPlayerPlaying == true,
            controller?.isPictureInPicturePossible == true {
             // Automatic start can arrive after didEnterBackground. Keep MPV alive
@@ -242,7 +242,7 @@ final class PlayerPictureInPictureController: NSObject,
         // yet. Request inline restoration only after the player scene activates.
         if !isActive, !isStarting, controller?.isPictureInPictureActive != true {
             isStarting = false
-            metalLayer?.nuvioPiPConsumesVideo = false
+            metalLayer?.cineboxPiPConsumesVideo = false
         }
         // A closed PiP session returns through the original background video lifecycle,
         // while preserving the user's paused playback state.
@@ -269,7 +269,7 @@ final class PlayerPictureInPictureController: NSObject,
             // AVKit may already have finished a user-initiated enlargement.
             isActive = false
             shouldReturnToInline = false
-            metalLayer?.nuvioPiPConsumesVideo = false
+            metalLayer?.cineboxPiPConsumesVideo = false
         }
         // If PiP is still starting, didStart will complete this request.
     }
@@ -301,7 +301,7 @@ final class PlayerPictureInPictureController: NSObject,
     func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
         cancelInlinePresentationWait()
         isStarting = true
-        metalLayer?.nuvioPiPConsumesVideo = true
+        metalLayer?.cineboxPiPConsumesVideo = true
         updatePlaybackState()
     }
 
@@ -324,7 +324,7 @@ final class PlayerPictureInPictureController: NSObject,
         isActive = false
         stopRequested = false
         shouldReturnToInline = false
-        metalLayer?.nuvioPiPConsumesVideo = isBackground
+        metalLayer?.cineboxPiPConsumesVideo = isBackground
         if isBackground { owner?.pausePlayback() }
     }
 
@@ -347,7 +347,7 @@ final class PlayerPictureInPictureController: NSObject,
         isActive = false
         stopRequested = false
         shouldReturnToInline = false
-        metalLayer?.nuvioPiPConsumesVideo = isBackground
+        metalLayer?.cineboxPiPConsumesVideo = isBackground
         if isBackground { owner?.pauseBackgroundPlayback() }
     }
 

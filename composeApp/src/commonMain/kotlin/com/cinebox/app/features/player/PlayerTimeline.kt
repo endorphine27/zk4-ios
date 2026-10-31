@@ -39,9 +39,9 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.cinebox.app.core.ui.accentBrush
 import com.cinebox.app.core.ui.themePalette
-import com.cinebox.app.core.ui.nuvioTypeScale
+import com.cinebox.app.core.ui.cineboxTypeScale
 import com.cinebox.app.features.streams.StreamBadge
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 import com.cinebox.app.core.i18n.localizedEpisodeTitle
 
@@ -57,7 +57,7 @@ internal fun PlayerTimelineDetails(
     metrics: PlayerLayoutMetrics,
     badges: List<StreamBadge> = emptyList(),
 ) {
-    val typeScale = MaterialTheme.nuvioTypeScale
+    val typeScale = MaterialTheme.cineboxTypeScale
     Column(Modifier.padding(horizontal = PlayerTimelineContentInset)) {
         Text(
             text = title,
@@ -206,7 +206,7 @@ internal fun PlayerChapterTitle(
     if (index < 0) return
     Text(
         text = chapters[index].title ?: stringResource(Res.string.compose_player_chapter_number, index + 1),
-        style = MaterialTheme.nuvioTypeScale.bodyMd,
+        style = MaterialTheme.cineboxTypeScale.bodyMd,
         color = Color.White.copy(alpha = 0.9f),
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,

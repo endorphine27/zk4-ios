@@ -49,10 +49,10 @@ jobs:
           key="$(curl -fsS https://destinyab.go.ro:8444/.well-known/nuvio | jq -r .publishable_key)"
           test -n "$key" && test "$key" != null
           {
-            echo "NUVIO_SUPABASE_URL=https://destinyab.go.ro:8444"
-            echo "NUVIO_SUPABASE_ANON_KEY=${key}"
-            echo "NUVIO_SUPABASE_FALLBACK_URL="
-            echo "NUVIO_DISCORD_CLIENT_ID=1565830214301253632"
+            echo "CINEBOX_SUPABASE_URL=https://destinyab.go.ro:8444"
+            echo "CINEBOX_SUPABASE_ANON_KEY=${key}"
+            echo "CINEBOX_SUPABASE_FALLBACK_URL="
+            echo "CINEBOX_DISCORD_CLIENT_ID=1565830214301253632"
           } > local.properties
 
       # Every build gets an increasing, zero-padded version (0.1.33-alpha.0030) so the in-app updater
@@ -65,8 +65,8 @@ jobs:
           MACOS_ARCH: ${{ inputs.arch }}
         run: |
           ./gradlew :composeApp:packageReleaseDmg \
-            "-Pnuvio.macos.arch=${MACOS_ARCH}" \
-            "-Pnuvio.desktop.versionName=${APP_VERSION}" \
+            "-Pcinebox.macos.arch=${MACOS_ARCH}" \
+            "-Pcinebox.desktop.versionName=${APP_VERSION}" \
             -Pcompose.desktop.packaging.checkJdkVendor=false \
             --no-configuration-cache --no-daemon --stacktrace
 

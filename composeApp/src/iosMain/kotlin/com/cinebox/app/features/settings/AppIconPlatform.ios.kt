@@ -1,8 +1,8 @@
 package com.cinebox.app.features.settings
 
-import com.cinebox.app.nativebridge.NuvioIsCurrentAlternateAppIcon
-import com.cinebox.app.nativebridge.NuvioSetAlternateAppIconName
-import com.cinebox.app.nativebridge.NuvioSupportsAlternateAppIcons
+import com.cinebox.app.nativebridge.CineboxIsCurrentAlternateAppIcon
+import com.cinebox.app.nativebridge.CineboxSetAlternateAppIconName
+import com.cinebox.app.nativebridge.CineboxSupportsAlternateAppIcons
 import kotlinx.cinterop.CFunction
 import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.ExperimentalForeignApi
@@ -20,10 +20,10 @@ internal actual object AppIconPlatform {
 
     actual fun currentIconName(): String? = AppIconOption.entries
         .mapNotNull(AppIconOption::platformName)
-        .firstOrNull { name -> NuvioIsCurrentAlternateAppIcon(name) }
+        .firstOrNull { name -> CineboxIsCurrentAlternateAppIcon(name) }
 
     actual suspend fun activateIcon(name: String?): Boolean {
-        if (!NuvioSupportsAlternateAppIcons()) return false
+        if (!CineboxSupportsAlternateAppIcons()) return false
 
         return suspendCancellableCoroutine { continuation ->
             if (pendingChange != null) {
@@ -38,7 +38,7 @@ internal actual object AppIconPlatform {
                 }
             }
 
-            NuvioSetAlternateAppIconName(name, appIconCompletion)
+            CineboxSetAlternateAppIconName(name, appIconCompletion)
         }
     }
 

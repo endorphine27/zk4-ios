@@ -310,7 +310,7 @@
     <string name="compose_tracking_list_picker_loading">Φόρτωση λιστών…</string>
     <string name="compose_tracking_list_picker_subtitle">Επιλέξτε πού θα αποθηκευτεί αυτός ο τίτλος</string>
     <string name="action_donate">Δωρεά</string>
-    <string name="action_support_nuvio">Υποστηρίξτε το CINEBOX</string>
+    <string name="action_support_cinebox">Υποστηρίξτε το CINEBOX</string>
     <string name="cw_action_go_to_details">Μετάβαση στις λεπτομέρειες</string>
     <string name="cw_action_remove">Αφαίρεση</string>
     <string name="cw_action_start_from_beginning">Έναρξη από την αρχή</string>
@@ -832,10 +832,10 @@
     <string name="settings_simkl_disconnect_description">Αυτό αφαιρεί τον λογαριασμό Simkl και τα προσωρινά δεδομένα Simkl από αυτό το προφίλ.</string>
     <string name="settings_tracking_source_fallback">Το %1$s δεν είναι διαθέσιμο. Χρησιμοποιείται το %2$s έως ότου επανασυνδεθεί.</string>
     <string name="settings_tracking_progress_refresh_failed">Η πηγή άλλαξε, αλλά δεν ήταν δυνατή η ανανέωση της τελευταίας προόδου παρακολούθησης.</string>
-    <string name="settings_tracking_nuvio_library_description">Διατήρηση αποθηκευμένων τίτλων στη βιβλιοθήκη CINEBOX.</string>
+    <string name="settings_tracking_cinebox_library_description">Διατήρηση αποθηκευμένων τίτλων στη βιβλιοθήκη CINEBOX.</string>
     <string name="settings_tracking_trakt_library_description">Χρήση της λίστας παρακολούθησης και των προσωπικών λιστών Trakt.</string>
     <string name="settings_tracking_simkl_library_description">Χρήση των λιστών «Προγραμματισμένα για παρακολούθηση» και κατάστασης του Simkl.</string>
-    <string name="settings_tracking_nuvio_progress_description">Συνέχιση με πρόοδο που αποθηκεύεται από τον Συγχρονισμό CINEBOX.</string>
+    <string name="settings_tracking_cinebox_progress_description">Συνέχιση με πρόοδο που αποθηκεύεται από τον Συγχρονισμό CINEBOX.</string>
     <string name="settings_tracking_trakt_progress_description">Συνέχιση με πρόοδο αναπαραγωγής από το Trakt.</string>
     <string name="settings_tracking_trakt_progress_required">Διαθέσιμο όταν το Trakt είναι η πηγή προόδου παρακολούθησης</string>
     <string name="settings_tracking_simkl_progress_description">Συνέχιση με πρόοδο αναπαραγωγής από το Simkl.</string>
@@ -2061,9 +2061,9 @@
     <string name="settings_licenses_attributions_mpvkit_body">Χρησιμοποιείται για αναπαραγωγή σε εκδόσεις iOS.</string>
     <string name="settings_licenses_attributions_mpvkit_license">Ο πηγαίος κώδικας του MPVKit μόνο είναι αδειοδοτημένος υπό LGPL v3.0. Τα πακέτα MPVKit, συμπεριλαμβανομένων των βιβλιοθηκών libmpv και FFmpeg, είναι επίσης αδειοδοτημένα υπό LGPL v3.0.</string>
     <string name="settings_licenses_attributions_mpvkit_title">MPVKit</string>
-    <string name="settings_licenses_attributions_nuvio_body">Ο πηγαίος κώδικας και οι όροι αδειοδότησης είναι διαθέσιμοι στο αποθετήριο του έργου.</string>
-    <string name="settings_licenses_attributions_nuvio_license">Αδειοδοτείται υπό την GNU General Public License v3.0.</string>
-    <string name="settings_licenses_attributions_nuvio_title">CINEBOX Mobile</string>
+    <string name="settings_licenses_attributions_cinebox_body">Ο πηγαίος κώδικας και οι όροι αδειοδότησης είναι διαθέσιμοι στο αποθετήριο του έργου.</string>
+    <string name="settings_licenses_attributions_cinebox_license">Αδειοδοτείται υπό την GNU General Public License v3.0.</string>
+    <string name="settings_licenses_attributions_cinebox_title">CINEBOX Mobile</string>
     <string name="settings_licenses_attributions_premiumize_body">Το CINEBOX συνδέεται με το Premiumize για ταυτοποίηση λογαριασμού, πρόσβαση σε βιβλιοθήκη Cloud, ελέγχους προσωρινής μνήμης και λειτουργίες αναπαραγωγής από το Cloud. Το CINEBOX δεν σχετίζεται με το Premiumize ούτε έχει την υποστήριξή του.</string>
     <string name="settings_licenses_attributions_premiumize_title">Premiumize</string>
     <string name="settings_licenses_attributions_section_app">ΑΔΕΙΑ ΕΦΑΡΜΟΓΗΣ</string>
@@ -2291,8 +2291,8 @@
     <string name="trakt_error_request_failed">Το αίτημα Trakt απέτυχε</string>
     <string name="trakt_library_source_dialog_subtitle">Επιλέξτε την υπηρεσία από την οποία διαβάζει το CINEBOX τη Βιβλιοθήκη σας. Η αναπαραγωγή καταγράφεται σε κάθε συνδεδεμένη υπηρεσία.</string>
     <string name="trakt_library_source_dialog_title">Πηγή βιβλιοθήκης</string>
-    <string name="trakt_library_source_nuvio">Βιβλιοθήκη CINEBOX</string>
-    <string name="trakt_library_source_nuvio_selected">Επιλέχθηκε η βιβλιοθήκη CINEBOX</string>
+    <string name="trakt_library_source_cinebox">Βιβλιοθήκη CINEBOX</string>
+    <string name="trakt_library_source_cinebox_selected">Επιλέχθηκε η βιβλιοθήκη CINEBOX</string>
     <string name="trakt_library_source_subtitle">Επιλέξτε από ποια πηγή διαβάζει το CINEBOX τη Βιβλιοθήκη σας</string>
     <string name="trakt_library_source_title">Πηγή βιβλιοθήκης</string>
     <string name="trakt_library_source_trakt">Trakt</string>
@@ -2316,8 +2316,8 @@
     <string name="trakt_public_list_request_failed">Το αίτημα Trakt απέτυχε</string>
     <string name="trakt_watch_progress_dialog_subtitle">Επιλέξτε αν η συνέχιση και η Συνέχεια παρακολούθησης θα χρησιμοποιούν το Trakt ή το CINEBOX Sync, ενώ η αυτόματη καταγραφή του Trakt παραμένει ενεργή.</string>
     <string name="trakt_watch_progress_dialog_title">Πρόοδος παρακολούθησης</string>
-    <string name="trakt_watch_progress_nuvio_selected">Η πηγή προόδου παρακολούθησης ορίστηκε στον Συγχρονισμό CINEBOX</string>
-    <string name="trakt_watch_progress_source_nuvio">CINEBOX Sync</string>
+    <string name="trakt_watch_progress_cinebox_selected">Η πηγή προόδου παρακολούθησης ορίστηκε στον Συγχρονισμό CINEBOX</string>
+    <string name="trakt_watch_progress_source_cinebox">CINEBOX Sync</string>
     <string name="trakt_watch_progress_source_trakt">Trakt</string>
     <string name="trakt_watch_progress_subtitle">Επιλέξτε ποια πηγή προόδου τροφοδοτεί τη συνέχιση και τη Συνέχεια παρακολούθησης</string>
     <string name="trakt_watch_progress_title">Πρόοδος παρακολούθησης</string>

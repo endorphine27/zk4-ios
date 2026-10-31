@@ -33,13 +33,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cinebox.app.core.ui.SkeletonBlock
-import com.cinebox.app.core.ui.nuvioDesktopDragScroll
-import com.cinebox.app.core.ui.nuvio
-import com.cinebox.app.core.ui.nuvioHorizontalScrollBleed
+import com.cinebox.app.core.ui.cineboxDesktopDragScroll
+import com.cinebox.app.core.ui.cinebox
+import com.cinebox.app.core.ui.cineboxHorizontalScrollBleed
 import com.cinebox.app.core.ui.withDuplicateSafeLazyKeys
 import com.cinebox.app.features.trakt.TraktCommentReview
 import kotlinx.coroutines.flow.distinctUntilChanged
-import nuvio.composeapp.generated.resources.*
+import cinebox.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -83,9 +83,9 @@ fun DetailCommentsSection(
                 LazyRow(
                     state = loadingListState,
                     modifier = Modifier
-                        .nuvioHorizontalScrollBleed(horizontalScrollPadding)
+                        .cineboxHorizontalScrollBleed(horizontalScrollPadding)
                         .fillMaxWidth()
-                        .nuvioDesktopDragScroll(loadingListState),
+                        .cineboxDesktopDragScroll(loadingListState),
                     contentPadding = PaddingValues(horizontal = horizontalScrollPadding),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
@@ -126,9 +126,9 @@ fun DetailCommentsSection(
                 LazyRow(
                     state = listState,
                     modifier = Modifier
-                        .nuvioHorizontalScrollBleed(horizontalScrollPadding)
+                        .cineboxHorizontalScrollBleed(horizontalScrollPadding)
                         .fillMaxWidth()
-                        .nuvioDesktopDragScroll(listState),
+                        .cineboxDesktopDragScroll(listState),
                     contentPadding = PaddingValues(horizontal = horizontalScrollPadding),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
@@ -221,7 +221,7 @@ private fun CommentCard(
                     text = bodyText,
                     style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 20.sp),
                     color = if (review.hasSpoilerContent) {
-                        MaterialTheme.nuvio.colors.warning
+                        MaterialTheme.cinebox.colors.warning
                     } else {
                         MaterialTheme.colorScheme.onSurfaceVariant
                     },

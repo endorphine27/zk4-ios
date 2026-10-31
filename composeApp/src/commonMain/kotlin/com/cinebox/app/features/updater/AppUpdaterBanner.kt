@@ -58,23 +58,23 @@ import com.cinebox.app.core.ui.DialogSurface
 import com.cinebox.app.core.ui.themePalette
 import com.cinebox.app.core.ui.accentBrush
 import com.cinebox.app.core.ui.appTheme
-import com.cinebox.app.core.ui.nuvio
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_close
-import nuvio.composeapp.generated.resources.action_continue
-import nuvio.composeapp.generated.resources.action_install
-import nuvio.composeapp.generated.resources.action_later
-import nuvio.composeapp.generated.resources.action_retry
-import nuvio.composeapp.generated.resources.action_update
-import nuvio.composeapp.generated.resources.updates_debug_test_complete
-import nuvio.composeapp.generated.resources.updates_downloading_progress
-import nuvio.composeapp.generated.resources.updates_message_allow_installs
-import nuvio.composeapp.generated.resources.updates_message_ready
-import nuvio.composeapp.generated.resources.updates_no_release_notes
-import nuvio.composeapp.generated.resources.updates_preparing_download
-import nuvio.composeapp.generated.resources.updates_release_notes
-import nuvio.composeapp.generated.resources.updates_title_allow_installs
-import nuvio.composeapp.generated.resources.updates_title_available
+import com.cinebox.app.core.ui.cinebox
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_close
+import cinebox.composeapp.generated.resources.action_continue
+import cinebox.composeapp.generated.resources.action_install
+import cinebox.composeapp.generated.resources.action_later
+import cinebox.composeapp.generated.resources.action_retry
+import cinebox.composeapp.generated.resources.action_update
+import cinebox.composeapp.generated.resources.updates_debug_test_complete
+import cinebox.composeapp.generated.resources.updates_downloading_progress
+import cinebox.composeapp.generated.resources.updates_message_allow_installs
+import cinebox.composeapp.generated.resources.updates_message_ready
+import cinebox.composeapp.generated.resources.updates_no_release_notes
+import cinebox.composeapp.generated.resources.updates_preparing_download
+import cinebox.composeapp.generated.resources.updates_release_notes
+import cinebox.composeapp.generated.resources.updates_title_allow_installs
+import cinebox.composeapp.generated.resources.updates_title_available
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -165,7 +165,7 @@ private fun AppUpdateBanner(
     onShowReleaseNotes: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val targetProgress = when {
         state.isDownloading -> state.downloadProgress ?: 0f
         state.isDebugTest && !state.isUpdateAvailable -> 1f

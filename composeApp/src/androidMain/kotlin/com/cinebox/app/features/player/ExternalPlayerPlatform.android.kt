@@ -6,8 +6,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.core.content.FileProvider
 import kotlinx.coroutines.runBlocking
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.external_player_android_system
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.external_player_android_system
 import org.jetbrains.compose.resources.getString
 import java.io.File
 import java.net.URI

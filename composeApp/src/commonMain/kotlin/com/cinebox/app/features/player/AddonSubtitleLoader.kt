@@ -20,8 +20,8 @@ import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.player_addon_subtitle_display_format
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.player_addon_subtitle_display_format
 import org.jetbrains.compose.resources.getString
 
 @Serializable

@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 private const val FOREGROUND_PULL_DELAY_MS = 2500L
 private const val FOREGROUND_ACTIVITY_PULL_MIN_INTERVAL_MS = 2 * 60_000L
 private const val FULL_PULL_MIN_INTERVAL_MS = 10_000L
-private const val PERIODIC_NUVIO_SYNC_PULL_INTERVAL_MS = 15 * 60_000L
+private const val PERIODIC_CINEBOX_SYNC_PULL_INTERVAL_MS = 15 * 60_000L
 
 internal enum class ProfileSyncStep {
     Addons,
@@ -276,8 +276,8 @@ object SyncManager {
     private val pullStateLock = SynchronizedObject()
     private var foregroundPullJob: Job? = null
     private var foregroundPullProfileId: Int? = null
-    private var periodicNuvioSyncPullJob: Job? = null
-    private var periodicNuvioSyncProfileId: Int? = null
+    private var periodicCineboxSyncPullJob: Job? = null
+    private var periodicCineboxSyncProfileId: Int? = null
     private var activityPullFreshness = ProfilePullFreshness()
     private var fullPullFreshness = ProfilePullFreshness()
 
@@ -331,7 +331,7 @@ object SyncManager {
             }
         }
         foregroundJob?.cancel()
-        stopPeriodicNuvioSyncPull()
+        stopPeriodicCineboxSyncPull()
     }
 
     private fun accountScopeSnapshot(): CoroutineScope = synchronized(accountScopeLock) {
@@ -512,19 +512,19 @@ object SyncManager {
         }
     }
 
-    fun startPeriodicNuvioSyncPull(profileId: Int) {
+    fun startPeriodicCineboxSyncPull(profileId: Int) {
         val authState = AuthRepository.state.value
         if (authState !is AuthState.Authenticated || authState.isAnonymous) {
-            stopPeriodicNuvioSyncPull()
+            stopPeriodicCineboxSyncPull()
             return
         }
-        if (periodicNuvioSyncPullJob?.isActive == true && periodicNuvioSyncProfileId == profileId) return
+        if (periodicCineboxSyncPullJob?.isActive == true && periodicCineboxSyncProfileId == profileId) return
 
-        stopPeriodicNuvioSyncPull()
-        periodicNuvioSyncProfileId = profileId
-        periodicNuvioSyncPullJob = accountScopeSnapshot().launch {
+        stopPeriodicCineboxSyncPull()
+        periodicCineboxSyncProfileId = profileId
+        periodicCineboxSyncPullJob = accountScopeSnapshot().launch {
             while (isActive) {
-                delay(PERIODIC_NUVIO_SYNC_PULL_INTERVAL_MS)
+                delay(PERIODIC_CINEBOX_SYNC_PULL_INTERVAL_MS)
 
                 val currentAuthState = AuthRepository.state.value
                 if (currentAuthState !is AuthState.Authenticated || currentAuthState.isAnonymous) {
@@ -545,7 +545,7 @@ object SyncManager {
                 val shouldPullWatchProgress = effectiveWatchProgressSource(
                     requestedSource = settings.watchProgressSource,
                     isProviderAuthenticated = TrackingProviderRegistry::isAuthenticated,
-                ) == WatchProgressSource.NUVIO_SYNC
+                ) == WatchProgressSource.CINEBOX_SYNC
 
                 if (!shouldPullLibrary && !shouldPullWatchProgress) {
                     continue
@@ -561,10 +561,10 @@ object SyncManager {
         }
     }
 
-    fun stopPeriodicNuvioSyncPull() {
-        periodicNuvioSyncPullJob?.cancel()
-        periodicNuvioSyncPullJob = null
-        periodicNuvioSyncProfileId = null
+    fun stopPeriodicCineboxSyncPull() {
+        periodicCineboxSyncPullJob?.cancel()
+        periodicCineboxSyncPullJob = null
+        periodicCineboxSyncProfileId = null
     }
 
 }

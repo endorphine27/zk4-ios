@@ -247,7 +247,7 @@ class MediaBrowserRequestTest {
         assertEquals(HttpMethod.Post, auth.method)
         assertTrue(auth.text.contains("\"Pw\":\"pw\""))
         val header = auth.headers["X-Emby-Authorization"].orEmpty()
-        assertTrue(header.startsWith("MediaBrowser Client=\"Nuvio\""))
+        assertTrue(header.startsWith("MediaBrowser Client=\"Cinebox\""))
         assertFalse(header.contains("Token="))
         assertNull(auth.headers["Authorization"])
     }

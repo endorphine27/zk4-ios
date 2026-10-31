@@ -208,7 +208,7 @@ fun effectiveWatchProgressSource(
     ) {
         WatchProgressSource.TRAKT
     } else {
-        WatchProgressSource.NUVIO_SYNC
+        WatchProgressSource.CINEBOX_SYNC
     }
 
 fun effectiveLibrarySourceMode(

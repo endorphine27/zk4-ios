@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.cinebox.app.isDesktop
 import com.cinebox.app.isIos
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.compose_player_track_number
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.compose_player_track_number
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.roundToInt
 

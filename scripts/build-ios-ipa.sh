@@ -31,15 +31,15 @@ fi
 cd "${repository_root}"
 build_environment=(
     env
-    NUVIO_IOS_DISTRIBUTION=full
+    CINEBOX_IOS_DISTRIBUTION=full
     CLANG_MODULE_CACHE_PATH="${clang_module_cache}"
     SWIFTPM_MODULECACHE_OVERRIDE="${swiftpm_module_cache}"
 )
-if [[ -n "${NUVIO_GRADLE_JVMARGS:-}" ]]; then
-    build_environment+=("ORG_GRADLE_PROJECT_org.gradle.jvmargs=${NUVIO_GRADLE_JVMARGS}")
+if [[ -n "${CINEBOX_GRADLE_JVMARGS:-}" ]]; then
+    build_environment+=("ORG_GRADLE_PROJECT_org.gradle.jvmargs=${CINEBOX_GRADLE_JVMARGS}")
 fi
-if [[ -n "${NUVIO_KOTLIN_NATIVE_JVMARGS:-}" ]]; then
-    build_environment+=("ORG_GRADLE_PROJECT_kotlin.native.jvmArgs=${NUVIO_KOTLIN_NATIVE_JVMARGS}")
+if [[ -n "${CINEBOX_KOTLIN_NATIVE_JVMARGS:-}" ]]; then
+    build_environment+=("ORG_GRADLE_PROJECT_kotlin.native.jvmArgs=${CINEBOX_KOTLIN_NATIVE_JVMARGS}")
 fi
 "${build_environment[@]}" \
     xcodebuild \
@@ -99,13 +99,13 @@ fi
 
 mkdir -p "${output_directory}"
 output_directory="$(cd "${output_directory}" && pwd -P)"
-package_root="$(mktemp -d "${TMPDIR:-/tmp}/nuvio-ios-ipa.XXXXXX")"
+package_root="$(mktemp -d "${TMPDIR:-/tmp}/cinebox-ios-ipa.XXXXXX")"
 trap 'rm -rf "${package_root}"' EXIT
 mkdir -p "${package_root}/Payload"
 ditto "${app_path}" "${package_root}/Payload/CINEBOX.app"
 
-ipa_path="${output_directory}/nuvio-${version}-full-${configuration_slug}.ipa"
-temporary_ipa="${package_root}/nuvio-${version}-full-${configuration_slug}.ipa"
+ipa_path="${output_directory}/cinebox-${version}-full-${configuration_slug}.ipa"
+temporary_ipa="${package_root}/cinebox-${version}-full-${configuration_slug}.ipa"
 (
     cd "${package_root}"
     /usr/bin/zip -qry "${temporary_ipa}" Payload

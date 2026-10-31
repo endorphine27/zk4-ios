@@ -43,23 +43,23 @@ import com.cinebox.app.core.ui.CineboxInputField
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
 import com.cinebox.app.core.ui.CineboxPrimaryButton
 import com.cinebox.app.core.ui.CineboxTokens
-import com.cinebox.app.core.ui.dismissNuvioBottomSheet
+import com.cinebox.app.core.ui.dismissCineboxBottomSheet
 import com.cinebox.app.core.ui.formatHexColor
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.core.ui.parseHexColor
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_cancel
-import nuvio.composeapp.generated.resources.custom_theme_color_number
-import nuvio.composeapp.generated.resources.custom_theme_hex_error
-import nuvio.composeapp.generated.resources.custom_theme_hex_title
-import nuvio.composeapp.generated.resources.custom_theme_mode_gradient
-import nuvio.composeapp.generated.resources.custom_theme_mode_solid
-import nuvio.composeapp.generated.resources.custom_theme_save
-import nuvio.composeapp.generated.resources.custom_theme_solid_subtitle
-import nuvio.composeapp.generated.resources.custom_theme_solid_title
-import nuvio.composeapp.generated.resources.custom_theme_subtitle
-import nuvio.composeapp.generated.resources.custom_theme_title
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_cancel
+import cinebox.composeapp.generated.resources.custom_theme_color_number
+import cinebox.composeapp.generated.resources.custom_theme_hex_error
+import cinebox.composeapp.generated.resources.custom_theme_hex_title
+import cinebox.composeapp.generated.resources.custom_theme_mode_gradient
+import cinebox.composeapp.generated.resources.custom_theme_mode_solid
+import cinebox.composeapp.generated.resources.custom_theme_save
+import cinebox.composeapp.generated.resources.custom_theme_solid_subtitle
+import cinebox.composeapp.generated.resources.custom_theme_solid_title
+import cinebox.composeapp.generated.resources.custom_theme_subtitle
+import cinebox.composeapp.generated.resources.custom_theme_title
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -70,7 +70,7 @@ internal fun CustomThemeEditor(
     onSave: (CustomThemeColors) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
     var encodedColors by rememberSaveable(allowGradient) { mutableStateOf(initialColors.encode()) }
@@ -88,7 +88,7 @@ internal fun CustomThemeEditor(
         encodedColors = draftColors.withColor(if (gradientEnabled) selectedIndex else 1, color).encode()
     }
     fun dismiss() {
-        scope.launch { dismissNuvioBottomSheet(sheetState, onDismiss) }
+        scope.launch { dismissCineboxBottomSheet(sheetState, onDismiss) }
     }
 
     CineboxModalBottomSheet(
@@ -219,7 +219,7 @@ private fun ThemeColorSlot(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(
         modifier = modifier
             .clip(tokens.shapes.compactCard)

@@ -5,15 +5,15 @@ import com.cinebox.app.core.ui.Chip
 import com.cinebox.app.features.details.EpisodeRatingsVisibility
 import com.cinebox.app.features.details.MetaScreenSettingsRepository
 import com.cinebox.app.features.details.MetaScreenSettingsUiState
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.layout_episode_ratings
-import nuvio.composeapp.generated.resources.layout_episode_ratings_sub
-import nuvio.composeapp.generated.resources.layout_overall_ratings
-import nuvio.composeapp.generated.resources.layout_overall_ratings_sub_off
-import nuvio.composeapp.generated.resources.layout_overall_ratings_sub_on
-import nuvio.composeapp.generated.resources.layout_ratings_hide
-import nuvio.composeapp.generated.resources.layout_ratings_hide_unwatched
-import nuvio.composeapp.generated.resources.layout_ratings_show
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.layout_episode_ratings
+import cinebox.composeapp.generated.resources.layout_episode_ratings_sub
+import cinebox.composeapp.generated.resources.layout_overall_ratings
+import cinebox.composeapp.generated.resources.layout_overall_ratings_sub_off
+import cinebox.composeapp.generated.resources.layout_overall_ratings_sub_on
+import cinebox.composeapp.generated.resources.layout_ratings_hide
+import cinebox.composeapp.generated.resources.layout_ratings_hide_unwatched
+import cinebox.composeapp.generated.resources.layout_ratings_show
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

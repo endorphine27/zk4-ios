@@ -23,9 +23,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.settings_hide_secret
-import nuvio.composeapp.generated.resources.settings_show_secret
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.settings_hide_secret
+import cinebox.composeapp.generated.resources.settings_show_secret
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

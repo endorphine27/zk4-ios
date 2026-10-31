@@ -49,17 +49,17 @@ import androidx.compose.ui.unit.dp
 import com.cinebox.app.core.ui.CineboxLoadingIndicator
 import com.cinebox.app.core.ui.CineboxModalBottomSheet
 import com.cinebox.app.core.ui.CineboxStatusModal
-import com.cinebox.app.core.ui.dismissNuvioBottomSheet
-import com.cinebox.app.core.ui.nuvio
+import com.cinebox.app.core.ui.dismissCineboxBottomSheet
+import com.cinebox.app.core.ui.cinebox
 import com.cinebox.app.core.ui.SurfaceEdge
 import kotlinx.coroutines.launch
-import nuvio.composeapp.generated.resources.Res
-import nuvio.composeapp.generated.resources.action_cancel
-import nuvio.composeapp.generated.resources.action_ok
-import nuvio.composeapp.generated.resources.settings_appearance_app_icon_android_confirmation_message
-import nuvio.composeapp.generated.resources.settings_appearance_app_icon_android_confirmation_title
-import nuvio.composeapp.generated.resources.settings_appearance_app_icon_change_failed
-import nuvio.composeapp.generated.resources.settings_appearance_app_icon_sheet_title
+import cinebox.composeapp.generated.resources.Res
+import cinebox.composeapp.generated.resources.action_cancel
+import cinebox.composeapp.generated.resources.action_ok
+import cinebox.composeapp.generated.resources.settings_appearance_app_icon_android_confirmation_message
+import cinebox.composeapp.generated.resources.settings_appearance_app_icon_android_confirmation_title
+import cinebox.composeapp.generated.resources.settings_appearance_app_icon_change_failed
+import cinebox.composeapp.generated.resources.settings_appearance_app_icon_sheet_title
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -126,7 +126,7 @@ private fun AppIconPickerBottomSheet(
 
     fun dismiss() {
         scope.launch {
-            dismissNuvioBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
+            dismissCineboxBottomSheet(sheetState = sheetState, onDismiss = onDismiss)
         }
     }
 
@@ -150,7 +150,7 @@ private fun AppIconPickerDialog(
     onSelected: (AppIconOption) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     BasicAlertDialog(onDismissRequest = onDismiss) {
         Surface(
             modifier = Modifier
@@ -176,7 +176,7 @@ private fun AppIconPickerContent(
     onSelected: (AppIconOption) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val horizontalPadding = if (columns == 4) tokens.spacing.dialogPadding else tokens.spacing.screenHorizontal
     Column(
         modifier = modifier
@@ -243,7 +243,7 @@ private fun AppIconChoice(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     val label = stringResource(icon.labelResource)
     Surface(
         onClick = onClick,
@@ -314,7 +314,7 @@ internal fun AppIconThumbnail(
     contentDescription: String? = null,
     cornerRadius: Dp = 18.dp,
 ) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Image(
         painter = painterResource(icon.transparentPreviewResource),
         contentDescription = contentDescription,

@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.cinebox.app.core.storage.ProfileScopedKey
 
 actual object SeasonViewModeStorage {
-    private const val preferencesName = "nuvio_season_view_mode"
+    private const val preferencesName = "cinebox_season_view_mode"
     private const val key = "season_view_mode"
 
     private var preferences: SharedPreferences? = null

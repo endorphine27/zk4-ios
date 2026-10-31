@@ -25,9 +25,9 @@ fun CineboxTokenPreviewSurface(
     themes: List<AppTheme> = AppTheme.entries,
 ) {
     LazyColumn(
-        modifier = modifier.background(MaterialTheme.nuvio.colors.background),
-        contentPadding = PaddingValues(MaterialTheme.nuvio.spacing.screenHorizontal),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.nuvio.spacing.sectionGap),
+        modifier = modifier.background(MaterialTheme.cinebox.colors.background),
+        contentPadding = PaddingValues(MaterialTheme.cinebox.spacing.screenHorizontal),
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.cinebox.spacing.sectionGap),
     ) {
         items(themes.size) { index ->
             val theme = themes[index]
@@ -40,7 +40,7 @@ fun CineboxTokenPreviewSurface(
 
 @Composable
 private fun TokenPreviewThemeSection(theme: AppTheme) {
-    val tokens = MaterialTheme.nuvio
+    val tokens = MaterialTheme.cinebox
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -52,7 +52,7 @@ private fun TokenPreviewThemeSection(theme: AppTheme) {
     ) {
         Text(
             text = theme.name,
-            style = MaterialTheme.nuvioTypeScale.titleMd,
+            style = MaterialTheme.cineboxTypeScale.titleMd,
             color = tokens.colors.textPrimary,
         )
         Row(horizontalArrangement = Arrangement.spacedBy(tokens.spacing.controlGap)) {
