@@ -69,4 +69,4 @@ jobs:
           tag="v0.6.5-ios.$(printf '%04d' "${GITHUB_RUN_NUMBER}")"
           gh release create "$tag" build/ios-ipa/CINEBOX-iOS.ipa \
             --title "iOS build ${GITHUB_RUN_NUMBER}" --prerelease \
-            --notes "Unsigned CINEBOX IPA. Install with AltStore or Sideloadly."
+            --notes-file RELEASE_NOTES.md
