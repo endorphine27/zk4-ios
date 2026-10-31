@@ -398,8 +398,6 @@
     <string name="server_official_action">অফিসিয়াল সার্ভার ব্যবহার করুন</string>
     <string name="server_switching">পরিবর্তন করা হচ্ছে…</string>
     <string name="server_error_invalid_url">একটি বৈধ HTTP বা HTTPS ব্যাকএন্ড URL লিখুন।</string>
-    <string name="server_error_official_active">api.nuvio.tv অফিসিয়াল সার্ভার এবং ইতিমধ্যেই নির্বাচিত।</string>
-    <string name="server_error_official_available">api.nuvio.tv হল অফিসিয়াল সার্ভার। এই ডায়ালগটি বন্ধ করুন এবং ফিরে যেতে অফিসিয়াল সার্ভার ব্যবহার করুন নির্বাচন করুন।</string>
     <string name="server_error_connection">ডিসকভারি এন্ডপয়েন্টে পৌঁছানো যায়নি। URL এবং সার্ভারের প্রাপ্যতা যাচাই করুন।</string>
     <string name="server_error_http">ডিসকভারি এন্ডপয়েন্ট HTTP %1$d কোড ফেরত দিয়েছে।</string>
     <string name="server_error_response_too_large">ডিসকভারি ডকুমেন্টটি অনুমোদিত আকারের চেয়ে বড়।</string>

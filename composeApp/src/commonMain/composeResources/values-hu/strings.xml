@@ -2197,8 +2197,6 @@
     <string name="server_official_action">Hivatalos szerver használata</string>
     <string name="server_switching">Váltás...</string>
     <string name="server_error_invalid_url">Adj meg egy érvényes HTTP vagy HTTPS Backend URL-t.</string>
-    <string name="server_error_official_active">Az api.nuvio.tv a hivatalos szerver, és már ez van kiválasztva.</string>
-    <string name="server_error_official_available">Az api.nuvio.tv a hivatalos szerver. Zárd be ezt az ablakot, és válaszd a Hivatalos szerver használata opciót a visszaváltáshoz.</string>
     <string name="server_error_connection">Nem sikerült elérni a felderítési végpontot. Ellenőrizd az URL-t és a szerver elérhetőségét.</string>
     <string name="server_error_http">A felderítési végpont HTTP %1$d hibát adott vissza.</string>
     <string name="server_error_response_too_large">A felderítési dokumentum nagyobb a megengedettnél.</string>

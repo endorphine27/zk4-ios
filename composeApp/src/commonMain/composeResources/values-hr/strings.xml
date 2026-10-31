@@ -397,8 +397,6 @@
     <string name="server_official_action">Koristi službeni poslužitelj</string>
     <string name="server_switching">Prebacivanje…</string>
     <string name="server_error_invalid_url">Unesite valjani HTTP ili HTTPS pozadinski URL.</string>
-    <string name="server_error_official_active">api.nuvio.tv je službeni poslužitelj i već je odabran.</string>
-    <string name="server_error_official_available">api.nuvio.tv je službeni poslužitelj. Zatvorite ovaj prozor i odaberite „Koristi službeni poslužitelj” za povratak.</string>
     <string name="server_error_connection">Nije moguće dosegnuti krajnju točku otkrivanja. Provjerite URL i dostupnost poslužitelja.</string>
     <string name="server_error_http">Krajnja točka otkrivanja vratila je HTTP %1$d.</string>
     <string name="server_error_response_too_large">Dokument o otkrivanju veći je od dopuštenog.</string>

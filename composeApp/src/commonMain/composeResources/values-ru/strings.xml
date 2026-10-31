@@ -392,8 +392,6 @@
     <string name="server_official_action">Используйте официальный сервер</string>
     <string name="server_switching">Переключение…</string>
     <string name="server_error_invalid_url">Введите действительный HTTP или HTTPS Backend URL.</string>
-    <string name="server_error_official_active">api.nuvio.tv является официальным сервером и уже выбран.</string>
-    <string name="server_error_official_available">api.nuvio.tv — официальный сервер. Закройте это диалоговое окно и выберите «Использовать официальный сервер», чтобы вернуться обратно.</string>
     <string name="server_error_connection">Не удалось достичь конечной точки обнаружения. Проверьте URL и доступность сервера.</string>
     <string name="server_error_http">Конечная точка обнаружения вернула HTTP %1$d.</string>
     <string name="server_error_response_too_large">Размер документа обнаружения превышает допустимый.</string>

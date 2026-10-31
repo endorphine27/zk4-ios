@@ -1269,8 +1269,6 @@ Du bruker denne funksjonen helt på eget ansvar. P2P kan deaktiveres når som he
     <string name="server_error_invalid_url">Skriv inn en gyldig HTTP- eller HTTPS Backend-URL.</string>
     <string name="server_error_missing_configuration">Discovery-dokumentet mangler en gyldig Backend-URL eller publishable key.</string>
     <string name="server_error_not_self_hosted">Discovery-dokumentet identifiserer ikke en selvhostet server.</string>
-    <string name="server_error_official_active">api.nuvio.tv er den offisielle serveren og er allerede valgt.</string>
-    <string name="server_error_official_available">api.nuvio.tv er den offisielle serveren. Lukk denne dialogen og velg Bruk offisiell server for å bytte tilbake.</string>
     <string name="server_error_response_too_large">Discovery-dokumentet er større enn tillatt.</string>
     <string name="server_error_restart">Serveren ble lagret, men appen kunne ikke starte på nytt automatisk. Start den på nytt manuelt.</string>
     <string name="server_error_save">Kunne ikke lagre serverkonfigurasjonen.</string>

@@ -397,8 +397,6 @@
     <string name="server_official_action">Usar servidor oficial</string>
     <string name="server_switching">Alternando…</string>
     <string name="server_error_invalid_url">Insira uma URL de backend HTTP ou HTTPS válida.</string>
-    <string name="server_error_official_active">api.nuvio.tv é o servidor oficial e já está selecionado.</string>
-    <string name="server_error_official_available">api.nuvio.tv é o servidor oficial. Feche este diálogo e escolha Usar servidor oficial para retornar.</string>
     <string name="server_error_connection">Não foi possível alcançar o endpoint de descoberta. Verifique a URL e a disponibilidade do servidor.</string>
     <string name="server_error_http">O endpoint de descoberta retornou HTTP %1$d.</string>
     <string name="server_error_response_too_large">O documento de descoberta é maior do que o permitido.</string>

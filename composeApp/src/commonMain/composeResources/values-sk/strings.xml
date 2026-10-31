@@ -2210,8 +2210,6 @@
     <string name="server_official_action">Použiť oficiálny server</string>
     <string name="server_switching">Prepína sa…</string>
     <string name="server_error_invalid_url">Zadajte platnú URL adresu backendu začínajúcu na HTTP alebo HTTPS.</string>
-    <string name="server_error_official_active">api.nuvio.tv je oficiálny server a už je vybraný.</string>
-    <string name="server_error_official_available">api.nuvio.tv je oficiálny server. Zatvorte toto okno a vyberte možnosť Použiť oficiálny server pre návrat.</string>
     <string name="server_error_connection">Nepodarilo sa dosiahnuť koncový bod pre zistenie servera. Skontrolujte URL adresu a dostupnosť servera.</string>
     <string name="server_error_http">Koncový bod pre zistenie servera vrátil chybový kód HTTP %1$d.</string>
     <string name="server_error_response_too_large">Dokument pre zistenie servera je väčší, než je povolené.</string>

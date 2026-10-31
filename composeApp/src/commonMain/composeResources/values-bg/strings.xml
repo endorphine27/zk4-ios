@@ -392,8 +392,6 @@
     <string name="server_official_action">Използвай официалния сървър</string>
     <string name="server_switching">Превключване на сървъра…</string>
     <string name="server_error_invalid_url">Невалиден URL адрес на сървъра.</string>
-    <string name="server_error_official_active">Официалният сървър вече е активен.</string>
-    <string name="server_error_official_available">Официалният сървър не е наличен.</string>
     <string name="server_error_connection">Неуспешно свързване към сървъра.</string>
     <string name="server_error_http">Сървърът върна HTTP грешка.</string>
     <string name="server_error_response_too_large">Отговорът от сървъра е твърде голям.</string>

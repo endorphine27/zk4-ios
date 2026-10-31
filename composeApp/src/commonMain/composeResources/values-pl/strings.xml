@@ -2071,8 +2071,6 @@
     <string name="server_official_action">Użyj oficjalnego serwera</string>
     <string name="server_switching">Przełączanie…</string>
     <string name="server_error_invalid_url">Wpisz prawidłowy adres URL HTTP lub HTTPS backendu.</string>
-    <string name="server_error_official_active">api.nuvio.tv to oficjalny serwer i jest już wybrany.</string>
-    <string name="server_error_official_available">api.nuvio.tv to oficjalny serwer. Zamknij to okno i wybierz „Użyj oficjalnego serwera", aby przełączyć.</string>
     <string name="server_error_connection">Nie udało się połączyć z punktem konfiguracji. Sprawdź adres URL i dostępność serwera.</string>
     <string name="server_error_http">Punkt konfiguracji zwrócił HTTP %1$d.</string>
     <string name="server_error_response_too_large">Dokument konfiguracji jest większy niż dozwolony.</string>

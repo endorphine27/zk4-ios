@@ -397,8 +397,6 @@
     <string name="server_official_action">Sử dụng máy chủ chính thức</string>
     <string name="server_switching">Đang chuyển…</string>
     <string name="server_error_invalid_url">Nhập URL Backend HTTP hoặc HTTPS hợp lệ.</string>
-    <string name="server_error_official_active">api.nuvio.tv là máy chủ chính thức và đã được chọn.</string>
-    <string name="server_error_official_available">api.nuvio.tv là máy chủ chính thức. Vui lòng đóng hộp thoại này và chọn “Sử dụng máy chủ chính thức” để chuyển trở lại.</string>
     <string name="server_error_connection">Không thể tiếp cận điểm cuối phát hiện. Vui lòng kiểm tra lại URL và trạng thái hoạt động của máy chủ.</string>
     <string name="server_error_http">Điểm cuối phát hiện đã trả về HTTP %1$d.</string>
     <string name="server_error_response_too_large">Tài liệu khám phá có kích thước vượt quá giới hạn cho phép.</string>

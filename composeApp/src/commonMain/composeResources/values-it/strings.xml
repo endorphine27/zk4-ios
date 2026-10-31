@@ -2038,8 +2038,6 @@
     <string name="server_official_action">Usa il server ufficiale</string>
     <string name="server_switching">Cambio in corso\u2026</string>
     <string name="server_error_invalid_url">Inserisci un URL Backend HTTP o HTTPS valido.</string>
-    <string name="server_error_official_active">api.nuvio.tv è il server ufficiale ed è già selezionato.</string>
-    <string name="server_error_official_available">api.nuvio.tv è il server ufficiale. Chiudi questa finestra e scegli Usa il server ufficiale per tornare indietro.</string>
     <string name="server_error_connection">Impossibile raggiungere l'endpoint di discovery. Controlla l'URL e la disponibilità del server.</string>
     <string name="server_error_http">L'endpoint di discovery ha restituito HTTP %1$d.</string>
     <string name="server_error_response_too_large">Il documento di discovery è più grande del consentito.</string>

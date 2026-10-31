@@ -397,8 +397,6 @@
     <string name="server_official_action">Usar servidor oficial</string>
     <string name="server_switching">Cambiando…</string>
     <string name="server_error_invalid_url">Introduce una URL de Backend HTTP o HTTPS válida.</string>
-    <string name="server_error_official_active">api.nuvio.tv es el servidor oficial y ya está seleccionado.</string>
-    <string name="server_error_official_available">api.nuvio.tv es el servidor oficial. Cierra este diálogo y elige Usar servidor oficial para volver a él.</string>
     <string name="server_error_connection">No se pudo conectar con el endpoint de descubrimiento. Comprueba la URL y la disponibilidad del servidor.</string>
     <string name="server_error_http">El endpoint de descubrimiento devolvió HTTP %1$d.</string>
     <string name="server_error_response_too_large">El documento de descubrimiento es más grande de lo permitido.</string>

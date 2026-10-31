@@ -180,8 +180,6 @@
     <string name="server_official_action">Χρήση επίσημου διακομιστή</string>
     <string name="server_switching">Εναλλαγή…</string>
     <string name="server_error_invalid_url">Εισαγάγετε ένα έγκυρο URL διακομιστή HTTP ή HTTPS.</string>
-    <string name="server_error_official_active">Το api.nuvio.tv είναι ο επίσημος διακομιστής και είναι ήδη επιλεγμένο.</string>
-    <string name="server_error_official_available">Το api.nuvio.tv είναι ο επίσημος διακομιστής. Κλείστε αυτό το παράθυρο διαλόγου και επιλέξτε «Χρήση επίσημου διακομιστή» για να επιστρέψετε.</string>
     <string name="server_error_connection">Δεν ήταν δυνατή η πρόσβαση στο τελικό σημείο ανακάλυψης. Ελέγξτε το URL και τη διαθεσιμότητα του διακομιστή.</string>
     <string name="server_error_http">Το τελικό σημείο ανακάλυψης επέστρεψε HTTP %1$d.</string>
     <string name="server_error_response_too_large">Το έγγραφο ανακάλυψης είναι μεγαλύτερο από το επιτρεπόμενο.</string>
