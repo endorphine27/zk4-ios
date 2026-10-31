@@ -79,4 +79,4 @@ jobs:
           test -f "$dmg"
           ls -lh "$dmg"
           tag="v${APP_VERSION}"
-          gh release create "$tag" "$dmg" --title "Build ${GITHUB_RUN_NUMBER} (${MACOS_ARCH})" --notes-file RELEASE_NOTES.md --prerelease
+          gh release create "$tag" "$dmg" --title "Build ${GITHUB_RUN_NUMBER} (${MACOS_ARCH})" --notes "" --prerelease
