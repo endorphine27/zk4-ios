@@ -3,4 +3,3 @@ Ce se schimbă în această versiune:
 • Linkurile de tip cinebox:// se deschid în aplicație
 • Fără link către termenii și sponsorii Nuvio
 • Verificarea de actualizări caută în repo-ul corect pentru fiecare sistem
-• Windows: datele se mută automat în folderul CINEBOX
