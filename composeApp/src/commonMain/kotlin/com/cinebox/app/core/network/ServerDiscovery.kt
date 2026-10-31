@@ -47,8 +47,8 @@ private data class DiscoveryCapabilities(
 )
 
 internal object ServerDiscoveryPolicy {
-    private const val discoveryPath = "/.well-known/nuvio"
-    private const val canonicalOfficialBackend = "https://api.nuvio.tv"
+    private const val discoveryPath = "/.well-known/cinebox"
+    private const val canonicalOfficialBackend = "https://official.invalid"
     private val json = Json { ignoreUnknownKeys = true }
 
     fun discoveryUrl(input: String): String {
@@ -72,7 +72,7 @@ internal object ServerDiscoveryPolicy {
         if (payload.version != 1) {
             throw ServerDiscoveryException(ServerDiscoveryFailure.UnsupportedVersion)
         }
-        if (!payload.service.equals("nuvio", ignoreCase = true)) {
+        if (!payload.service.equals("cinebox", ignoreCase = true)) {
             throw ServerDiscoveryException(ServerDiscoveryFailure.WrongService)
         }
         if (!payload.selfHosted) {

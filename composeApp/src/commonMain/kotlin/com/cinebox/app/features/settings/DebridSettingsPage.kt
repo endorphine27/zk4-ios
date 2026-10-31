@@ -208,7 +208,7 @@ import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import kotlinx.coroutines.runBlocking
 
-private const val CLOUD_SERVICES_FAQ_URL = "https://nuvioapp.space/faq#common-cloud-library-and-cloud-services"
+private const val CLOUD_SERVICES_FAQ_URL = "https://cinebox.invalid/faq"
 
 // Upper bound for device-authorization polling when every redeem keeps throwing. Device codes
 // expire server-side within minutes (TorBox/Premiumize), so this is comfortably beyond any code's

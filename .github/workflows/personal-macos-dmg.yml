@@ -46,7 +46,7 @@ jobs:
       - name: Create local.properties
         shell: bash
         run: |
-          key="$(curl -fsS https://destinyab.go.ro:8444/.well-known/nuvio | jq -r .publishable_key)"
+          key="$(curl -fsS https://destinyab.go.ro:8444/.well-known/cinebox | jq -r .publishable_key)"
           test -n "$key" && test "$key" != null
           {
             echo "CINEBOX_SUPABASE_URL=https://destinyab.go.ro:8444"

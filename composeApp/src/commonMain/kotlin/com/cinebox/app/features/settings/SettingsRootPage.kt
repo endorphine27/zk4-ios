@@ -55,7 +55,6 @@ import cinebox.composeapp.generated.resources.about_supporters_contributors_subt
 import cinebox.composeapp.generated.resources.about_licenses_attributions_subtitle
 import org.jetbrains.compose.resources.stringResource
 
-private const val PRIVACY_POLICY_URL = "https://nuvio.tv/privacy-policy"
 
 internal fun LazyListScope.settingsRootContent(
     isTablet: Boolean,
