@@ -310,10 +310,10 @@ actual object P2pStreamingEngine {
         val stateDirectory = DesktopStorage.rootDir.resolve("nuvio-engine/state").toFile()
         val cacheDirectory = DesktopStorage.cacheDir.resolve("nuvio-engine").toFile()
         check(stateDirectory.mkdirs() || stateDirectory.isDirectory) {
-            "Could not create the Nuvio Engine state directory"
+            "Could not create the CINEBOX Engine state directory"
         }
         check(cacheDirectory.mkdirs() || cacheDirectory.isDirectory) {
-            "Could not create the Nuvio Engine cache directory"
+            "Could not create the CINEBOX Engine cache directory"
         }
         migrateNestedPayloadDirectory(cacheDirectory)
         val activeRuntime = runtime

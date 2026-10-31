@@ -459,7 +459,7 @@
     <string name="community_loading_contributors">Laster bidragsytere…</string>
     <string name="community_loading_donation_progress">Laster finansieringsfremdrift...</string>
     <string name="community_loading_supporters">Laster støttespillere…</string>
-    <string name="community_membership_connected_description">Ingen aktiv Nuvio-nivå ble funnet på denne Patreon-kontoen. Se tilgjengelige alternativer, eller oppdater etter at du har endret Patreon-medlemskapet.</string>
+    <string name="community_membership_connected_description">Ingen aktiv CINEBOX-nivå ble funnet på denne Patreon-kontoen. Se tilgjengelige alternativer, eller oppdater etter at du har endret Patreon-medlemskapet.</string>
     <string name="community_membership_connected_title">Patreon er tilkoblet</string>
     <string name="community_membership_description">Å støtte CINEBOX bidrar til infrastruktur og videreutvikling, samtidig som kjerneopplevelsen forblir gratis for alle.</string>
     <string name="community_membership_manage">Administrer medlemskap</string>

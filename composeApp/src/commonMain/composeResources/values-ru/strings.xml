@@ -963,7 +963,7 @@
     <string name="community_membership_thank_you">Спасибо.</string>
     <string name="community_membership_supporter_since">Сторонник с %1$s.</string>
     <string name="community_membership_connected_title">Patreon подключен</string>
-    <string name="community_membership_connected_description">В этой учетной записи Patreon не обнаружено активного уровня Nuvio. Просмотрите доступные параметры или обновите страницу после изменения членства в Patreon.</string>
+    <string name="community_membership_connected_description">В этой учетной записи Patreon не обнаружено активного уровня CINEBOX. Просмотрите доступные параметры или обновите страницу после изменения членства в Patreon.</string>
     <string name="community_membership_manage">Управление членством</string>
     <string name="community_membership_refresh">Обновить</string>
     <string name="community_membership_refreshing">Обновляется</string>

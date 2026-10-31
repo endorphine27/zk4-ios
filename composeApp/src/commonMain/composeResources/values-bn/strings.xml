@@ -606,7 +606,7 @@
     <string name="compose_tracking_list_picker_loading">তালিকা লোড হচ্ছে…</string>
     <string name="compose_tracking_list_picker_subtitle">এই শিরোনামটি কোথায় সেভ করবেন তা বাছুন</string>
     <string name="action_donate">দান করুন</string>
-    <string name="action_support_nuvio">Nuvio-কে সাপোর্ট করুন</string>
+    <string name="action_support_nuvio">CINEBOX-কে সাপোর্ট করুন</string>
     <string name="cw_action_go_to_details">বিস্তারিত দেখুন</string>
     <string name="cw_action_remove">সরান</string>
     <string name="cw_action_start_from_beginning">শুরু থেকে শুরু করুন</string>
@@ -996,7 +996,7 @@
     <string name="community_section_title">সম্প্রদায়</string>
     <string name="community_section_description">মোবাইল, টিভি এবং ওয়েব জুড়ে CINEBOX তৈরি এবং সমর্থনকারী লোকেদের দেখুন।</string>
     <string name="community_membership_title">CINEBOX সমর্থক মেম্বারশিপ</string>
-    <string name="community_membership_description">Nuvio-কে সাপোর্ট করলে পরিকাঠামো এবং চলমান উন্নয়নের খরচ মেটাতে সাহায্য হয় এবং মূল অভিজ্ঞতা সবার জন্য বিনামূল্যে রাখা যায়।</string>
+    <string name="community_membership_description">CINEBOX-কে সাপোর্ট করলে পরিকাঠামো এবং চলমান উন্নয়নের খরচ মেটাতে সাহায্য হয় এবং মূল অভিজ্ঞতা সবার জন্য বিনামূল্যে রাখা যায়।</string>
     <string name="community_view_supporter_membership">সমর্থক মেম্বারশিপ দেখুন</string>
     <string name="community_membership_you_are">আপনি একজন</string>
     <string name="community_membership_thank_you">ধন্যবাদ।</string>

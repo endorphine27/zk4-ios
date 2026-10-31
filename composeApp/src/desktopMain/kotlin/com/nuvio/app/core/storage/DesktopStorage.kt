@@ -173,7 +173,7 @@ internal object DesktopStorage {
         private fun persist() {
             Files.createDirectories(file.parent)
             Files.newOutputStream(file).use { output ->
-                properties.store(output, "Nuvio desktop preferences")
+                properties.store(output, "CINEBOX desktop preferences")
             }
         }
     }

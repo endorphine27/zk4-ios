@@ -157,7 +157,7 @@ private class DesktopKeepAwakeController : AutoCloseable {
                 "--dest=org.freedesktop.ScreenSaver",
                 "/org/freedesktop/ScreenSaver",
                 "org.freedesktop.ScreenSaver.Inhibit",
-                "string:Nuvio",
+                "string:CINEBOX",
                 "string:Media playback",
             )
             // --print-reply=literal still prefixes the value with its D-Bus type name (e.g.
@@ -205,7 +205,7 @@ private class DesktopKeepAwakeController : AutoCloseable {
             ProcessBuilder(
                 "systemd-inhibit",
                 "--what=idle:sleep",
-                "--who=Nuvio",
+                "--who=CINEBOX",
                 "--why=Media playback",
                 "--mode=block",
                 "sleep",

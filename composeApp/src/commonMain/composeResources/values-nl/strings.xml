@@ -956,14 +956,14 @@
     <string name="settings_notifications_test_title">Testmelding</string>
     <string name="community_section_title">Community</string>
     <string name="community_section_description">Bekijk de mensen die CINEBOX bouwen en ondersteunen op Mobiel, TV en Web.</string>
-    <string name="community_membership_title">Nuvio-ondersteunerslidmaatschap</string>
+    <string name="community_membership_title">CINEBOX-ondersteunerslidmaatschap</string>
     <string name="community_membership_description">CINEBOX steunen helpt de infrastructuur en doorlopende ontwikkeling te dekken, terwijl de kernervaring gratis blijft voor iedereen.</string>
     <string name="community_view_supporter_membership">Ondersteunerslidmaatschap bekijken</string>
     <string name="community_membership_you_are">Je bent een</string>
     <string name="community_membership_thank_you">Bedankt.</string>
     <string name="community_membership_supporter_since">Ondersteuner sinds %1$s.</string>
     <string name="community_membership_connected_title">Patreon is verbonden</string>
-    <string name="community_membership_connected_description">Er is geen actieve Nuvio-tier gevonden op dit Patreon-account. Bekijk de beschikbare opties of vernieuw nadat je je Patreon-lidmaatschap hebt gewijzigd.</string>
+    <string name="community_membership_connected_description">Er is geen actieve CINEBOX-tier gevonden op dit Patreon-account. Bekijk de beschikbare opties of vernieuw nadat je je Patreon-lidmaatschap hebt gewijzigd.</string>
     <string name="community_membership_manage">Lidmaatschap beheren</string>
     <string name="community_membership_refresh">Vernieuwen</string>
     <string name="community_membership_refreshing">Vernieuwen</string>

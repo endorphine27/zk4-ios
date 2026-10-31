@@ -2088,7 +2088,7 @@
     <string name="community_membership_thank_you">Děkujeme.</string>
     <string name="community_membership_supporter_since">Podporovatelem od %1$s.</string>
     <string name="community_membership_connected_title">Patreon je připojen</string>
-    <string name="community_membership_connected_description">Na tomto účtu Patreon nebyla nalezena žádná aktivní úroveň členství Nuvio. Zobrazte dostupné možnosti nebo po změně členství na Patreonu obnovte stav.</string>
+    <string name="community_membership_connected_description">Na tomto účtu Patreon nebyla nalezena žádná aktivní úroveň členství CINEBOX. Zobrazte dostupné možnosti nebo po změně členství na Patreonu obnovte stav.</string>
     <string name="community_membership_manage">Spravovat členství</string>
     <string name="community_membership_refresh">Obnovit</string>
     <string name="community_membership_refreshing">Obnovování</string>
