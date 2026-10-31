@@ -57,7 +57,7 @@ actual object AppUpdaterPlatform {
         repo = if (currentOs == DesktopUpdaterOs.WINDOWS) "zk4-win" else "zk4-utils",
         channelBranch = null,
         includePrereleases = true,
-        userAgent = "NuvioDesktop",
+        userAgent = "CINEBOXDesktop",
     )
 
     actual val assetSelector: AppUpdateAssetSelector
