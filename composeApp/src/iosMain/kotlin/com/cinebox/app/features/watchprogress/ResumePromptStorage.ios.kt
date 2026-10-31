@@ -1,11 +1,12 @@
 package com.cinebox.app.features.watchprogress
 
+import com.cinebox.app.core.storage.LEGACY_BRAND
 import com.cinebox.app.core.storage.ProfileScopedKey
 import platform.Foundation.NSUserDefaults
 
 actual object ResumePromptStorage {
-    private const val wasInPlayerKey = "cinebox_resume_prompt_was_in_player"
-    private const val lastPlayerVideoIdKey = "cinebox_resume_prompt_last_player_video_id"
+    private const val wasInPlayerKey = LEGACY_BRAND + "_resume_prompt_was_in_player"
+    private const val lastPlayerVideoIdKey = LEGACY_BRAND + "_resume_prompt_last_player_video_id"
 
     actual fun loadWasInPlayer(): Boolean =
         NSUserDefaults.standardUserDefaults.boolForKey(ProfileScopedKey.of(wasInPlayerKey))

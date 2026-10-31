@@ -1,9 +1,10 @@
 package com.cinebox.app.features.mdblist
 
+import com.cinebox.app.core.storage.LEGACY_BRAND
 import platform.Foundation.NSUserDefaults
 
 internal actual object PlatformMdbListSyncStorage : MdbListSyncStorage {
-    private const val suite = "cinebox_mdblist_sync"
+    private const val suite = LEGACY_BRAND + "_mdblist_sync"
     private val preferences = NSUserDefaults(suiteName = suite)
 
     actual override suspend fun load(profileId: Int): String? = preferences.stringForKey("profile.$profileId")

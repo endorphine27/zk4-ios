@@ -1,5 +1,6 @@
 package com.cinebox.app.features.downloads
 
+import com.cinebox.app.core.storage.LEGACY_BRAND
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.convert
@@ -396,7 +397,7 @@ private fun NSURLResponse?.toDownloadResult(): IosDownloadResult {
 @OptIn(ExperimentalForeignApi::class)
 private fun downloadsDirectoryPath(): String {
     val root = NSHomeDirectory().trimEnd('/')
-    val path = "$root/Documents/cinebox_downloads"
+    val path = "$root/Documents/${LEGACY_BRAND}_downloads"
     NSFileManager.defaultManager.createDirectoryAtPath(
         path = path,
         withIntermediateDirectories = true,

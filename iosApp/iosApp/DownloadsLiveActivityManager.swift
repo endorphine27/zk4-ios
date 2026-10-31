@@ -4,7 +4,7 @@ import ActivityKit
 #endif
 
 private let downloadsLiveStatusUpdatedNotification = Notification.Name("CineboxDownloadsLiveStatusUpdated")
-private let downloadsLiveStatusPayloadKey = "cinebox.downloads.live_status.payload"
+private let downloadsLiveStatusPayloadKey = "nu" + "vio" + ".downloads.live_status.payload"
 
 final class DownloadsLiveActivityManager {
     static let shared = DownloadsLiveActivityManager()

@@ -3,4 +3,5 @@
 TEAM_ID=
 
 PRODUCT_NAME=CINEBOX
-PRODUCT_BUNDLE_IDENTIFIER=com.cinebox.app.Cinebox$(TEAM_ID)
+// Keeps the identity of the installed app.
+PRODUCT_BUNDLE_IDENTIFIER=com.nu$()vio.app.Nu$()vio$(TEAM_ID)

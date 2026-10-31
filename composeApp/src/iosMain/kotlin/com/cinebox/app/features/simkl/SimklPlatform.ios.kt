@@ -1,5 +1,6 @@
 package com.cinebox.app.features.simkl
 
+import com.cinebox.app.core.storage.LEGACY_BRAND
 import com.cinebox.app.core.storage.ProfileScopedKey
 import com.cinebox.app.features.plugins.cryptointerop.CC_SHA256
 import com.cinebox.app.features.plugins.cryptointerop.CC_SHA256_DIGEST_LENGTH
@@ -69,7 +70,7 @@ internal actual object SimklAuthStorage {
     private const val METADATA_KEY = "simkl_auth_metadata"
     private const val ACCESS_TOKEN_KEY = "simkl_access_token"
     private const val CODE_VERIFIER_KEY = "simkl_code_verifier"
-    private const val KEYCHAIN_SERVICE = "com.cinebox.media.simkl"
+    private const val KEYCHAIN_SERVICE = "com.$LEGACY_BRAND.media.simkl"
 
     actual fun loadMetadataPayload(): String? =
         NSUserDefaults.standardUserDefaults.stringForKey(ProfileScopedKey.of(METADATA_KEY))

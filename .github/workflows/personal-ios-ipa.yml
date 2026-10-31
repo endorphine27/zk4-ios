@@ -15,8 +15,8 @@ jobs:
       GRADLE_OPTS: -Dfile.encoding=UTF-8
       IOS_CONFIGURATION: Release
       KOTLIN_DAEMON_JVMARGS: -Xmx2048M
-      NUVIO_GRADLE_JVMARGS: -Xmx4608M -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=768M
-      NUVIO_KOTLIN_NATIVE_JVMARGS: -Xmx4608M
+      CINEBOX_GRADLE_JVMARGS: -Xmx4608M -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=768M
+      CINEBOX_KOTLIN_NATIVE_JVMARGS: -Xmx4608M
     steps:
       - uses: actions/checkout@v6
         with:
@@ -48,9 +48,9 @@ jobs:
           key="$(curl -fsS https://destinyab.go.ro:8444/.well-known/nuvio | jq -r .publishable_key)"
           test -n "$key" && test "$key" != null
           {
-            echo "NUVIO_SUPABASE_URL=https://destinyab.go.ro:8444"
-            echo "NUVIO_SUPABASE_ANON_KEY=${key}"
-            echo "NUVIO_SUPABASE_FALLBACK_URL="
+            echo "CINEBOX_SUPABASE_URL=https://destinyab.go.ro:8444"
+            echo "CINEBOX_SUPABASE_ANON_KEY=${key}"
+            echo "CINEBOX_SUPABASE_FALLBACK_URL="
           } > local.properties
 
       - name: Prepare iOS dependencies

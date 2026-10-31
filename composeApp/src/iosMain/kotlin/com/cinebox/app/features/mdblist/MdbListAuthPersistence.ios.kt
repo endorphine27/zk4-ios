@@ -1,5 +1,6 @@
 package com.cinebox.app.features.mdblist
 
+import com.cinebox.app.core.storage.LEGACY_BRAND
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.alloc
 import kotlinx.cinterop.get
@@ -68,7 +69,7 @@ internal actual object PlatformMdbListAuthPersistence : MdbListAuthPersistence {
         CFDictionaryCreateMutable(null, 0L, kCFTypeDictionaryKeyCallBacks.ptr, kCFTypeDictionaryValueCallBacks.ptr) ?: error("Unable to create credential query")
 
     private inline fun <T> query(profileId: Int?, block: (CFMutableDictionaryRef) -> T): T {
-        val service = CFStringCreateWithCString(null, "com.cinebox.media.mdblist", kCFStringEncodingUTF8)
+        val service = CFStringCreateWithCString(null, "com.$LEGACY_BRAND.media.mdblist", kCFStringEncodingUTF8)
             ?: error("Unable to encode credential service")
         val account = profileId?.let { CFStringCreateWithCString(null, "profile.$it", kCFStringEncodingUTF8) }
         val query = dictionary()

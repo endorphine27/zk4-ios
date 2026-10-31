@@ -1,5 +1,6 @@
 package com.cinebox.app.features.downloads
 
+import com.cinebox.app.core.storage.LEGACY_BRAND
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -8,7 +9,7 @@ import platform.Foundation.NSUserDefaults
 
 internal actual object DownloadsLiveStatusPlatform {
     private const val notificationName = "CineboxDownloadsLiveStatusUpdated"
-    private const val userDefaultsPayloadKey = "cinebox.downloads.live_status.payload"
+    private const val userDefaultsPayloadKey = LEGACY_BRAND + ".downloads.live_status.payload"
 
     private val json = Json {
         encodeDefaults = true
