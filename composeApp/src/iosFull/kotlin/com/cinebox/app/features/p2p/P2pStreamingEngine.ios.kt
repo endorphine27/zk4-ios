@@ -3,18 +3,18 @@
 package com.cinebox.app.features.p2p
 
 import cnames.structs.nuvio_engine
-import com.cinebox.app.features.p2p.native.CINEBOX_ENGINE_EVENT_DISK_CACHE_RECLAIMED
-import com.cinebox.app.features.p2p.native.CINEBOX_ENGINE_EVENT_STREAM_PREPARED
-import com.cinebox.app.features.p2p.native.CINEBOX_ENGINE_EVENT_STREAM_STOPPED
-import com.cinebox.app.features.p2p.native.CINEBOX_ENGINE_EVENT_TORRENT_ERROR
-import com.cinebox.app.features.p2p.native.CINEBOX_ENGINE_EVENT_TORRENT_METADATA_READY
-import com.cinebox.app.features.p2p.native.CINEBOX_ENGINE_STATUS_NO_EVENT
-import com.cinebox.app.features.p2p.native.CINEBOX_ENGINE_STATUS_OK
-import com.cinebox.app.features.p2p.native.CINEBOX_ENGINE_TORRENT_PROFILE_BALANCED
-import com.cinebox.app.features.p2p.native.CINEBOX_ENGINE_TORRENT_PROFILE_FAST
-import com.cinebox.app.features.p2p.native.CINEBOX_ENGINE_TORRENT_PROFILE_SOFT
-import com.cinebox.app.features.p2p.native.CINEBOX_ENGINE_UPLOAD_DISABLED
-import com.cinebox.app.features.p2p.native.CINEBOX_ENGINE_UPLOAD_UNLIMITED
+import com.cinebox.app.features.p2p.native.NUVIO_ENGINE_EVENT_DISK_CACHE_RECLAIMED
+import com.cinebox.app.features.p2p.native.NUVIO_ENGINE_EVENT_STREAM_PREPARED
+import com.cinebox.app.features.p2p.native.NUVIO_ENGINE_EVENT_STREAM_STOPPED
+import com.cinebox.app.features.p2p.native.NUVIO_ENGINE_EVENT_TORRENT_ERROR
+import com.cinebox.app.features.p2p.native.NUVIO_ENGINE_EVENT_TORRENT_METADATA_READY
+import com.cinebox.app.features.p2p.native.NUVIO_ENGINE_STATUS_NO_EVENT
+import com.cinebox.app.features.p2p.native.NUVIO_ENGINE_STATUS_OK
+import com.cinebox.app.features.p2p.native.NUVIO_ENGINE_TORRENT_PROFILE_BALANCED
+import com.cinebox.app.features.p2p.native.NUVIO_ENGINE_TORRENT_PROFILE_FAST
+import com.cinebox.app.features.p2p.native.NUVIO_ENGINE_TORRENT_PROFILE_SOFT
+import com.cinebox.app.features.p2p.native.NUVIO_ENGINE_UPLOAD_DISABLED
+import com.cinebox.app.features.p2p.native.NUVIO_ENGINE_UPLOAD_UNLIMITED
 import com.cinebox.app.features.p2p.native.nuvio_engine_add_torrent
 import com.cinebox.app.features.p2p.native.nuvio_engine_config
 import com.cinebox.app.features.p2p.native.nuvio_engine_config_init_sized
@@ -340,18 +340,18 @@ actual object P2pStreamingEngine {
             config.memory_cache_capacity_bytes = MemoryCacheCapacityBytes.toULong()
             config.disk_cache_capacity_bytes = configuration.diskCacheCapacityBytes.toULong()
             config.upload_mode = if (configuration.uploadEnabled) {
-                CINEBOX_ENGINE_UPLOAD_UNLIMITED
+                NUVIO_ENGINE_UPLOAD_UNLIMITED
             } else {
-                CINEBOX_ENGINE_UPLOAD_DISABLED
+                NUVIO_ENGINE_UPLOAD_DISABLED
             }
             config.upload_limit_bytes_per_second = 0uL
             config.stream_inactivity_timeout_milliseconds = 0u
             config.warm_torrent_timeout_milliseconds = 60_000u
             config.tls_ca_bundle_path = null
             config.torrent_profile = when (configuration.torrentProfile) {
-                P2pTorrentProfile.SOFT -> CINEBOX_ENGINE_TORRENT_PROFILE_SOFT
-                P2pTorrentProfile.BALANCED -> CINEBOX_ENGINE_TORRENT_PROFILE_BALANCED
-                P2pTorrentProfile.FAST -> CINEBOX_ENGINE_TORRENT_PROFILE_FAST
+                P2pTorrentProfile.SOFT -> NUVIO_ENGINE_TORRENT_PROFILE_SOFT
+                P2pTorrentProfile.BALANCED -> NUVIO_ENGINE_TORRENT_PROFILE_BALANCED
+                P2pTorrentProfile.FAST -> NUVIO_ENGINE_TORRENT_PROFILE_FAST
             }
             val output = alloc<CPointerVar<nuvio_engine>>()
             checkStatus(nuvio_engine_create(config.ptr, output.ptr))
@@ -397,7 +397,7 @@ actual object P2pStreamingEngine {
             checkStatus(nuvio_engine_add_torrent(activeEngine, request.ptr, output.ptr))
             output.value
         }
-        return awaitEvent(activeEngine, requestId, CINEBOX_ENGINE_EVENT_TORRENT_METADATA_READY)
+        return awaitEvent(activeEngine, requestId, NUVIO_ENGINE_EVENT_TORRENT_METADATA_READY)
             .torrentId
             ?: throw P2pStreamingException("Torrent metadata event omitted its identifier")
     }
@@ -421,7 +421,7 @@ actual object P2pStreamingEngine {
             checkStatus(nuvio_engine_prepare_stream(activeEngine, request.ptr, output.ptr))
             output.value
         }
-        val event = awaitEvent(activeEngine, requestId, CINEBOX_ENGINE_EVENT_STREAM_PREPARED)
+        val event = awaitEvent(activeEngine, requestId, NUVIO_ENGINE_EVENT_STREAM_PREPARED)
         return NativeStream(
             id = event.streamId
                 ?: throw P2pStreamingException("Stream event omitted its identifier"),
@@ -440,7 +440,7 @@ actual object P2pStreamingEngine {
             checkStatus(nuvio_engine_stop_stream(activeEngine, streamId, output.ptr))
             output.value
         }
-        awaitEvent(activeEngine, requestId, CINEBOX_ENGINE_EVENT_STREAM_STOPPED)
+        awaitEvent(activeEngine, requestId, NUVIO_ENGINE_EVENT_STREAM_STOPPED)
     }
 
     private suspend fun reclaimDiskCache(activeEngine: CPointer<nuvio_engine>) {
@@ -449,7 +449,7 @@ actual object P2pStreamingEngine {
             checkStatus(nuvio_engine_reclaim_disk_cache(activeEngine, 0uL, output.ptr))
             output.value
         }
-        awaitEvent(activeEngine, requestId, CINEBOX_ENGINE_EVENT_DISK_CACHE_RECLAIMED)
+        awaitEvent(activeEngine, requestId, NUVIO_ENGINE_EVENT_DISK_CACHE_RECLAIMED)
     }
 
     private suspend fun awaitEvent(
@@ -462,7 +462,7 @@ actual object P2pStreamingEngine {
             when (val event = pollEvent(activeEngine)) {
                 null -> delay(20L)
                 else -> {
-                    if (event.requestId == requestId && event.type == CINEBOX_ENGINE_EVENT_TORRENT_ERROR) {
+                    if (event.requestId == requestId && event.type == NUVIO_ENGINE_EVENT_TORRENT_ERROR) {
                         throw P2pStreamingException(event.message ?: "Torrent engine command failed")
                     }
                     if (event.requestId == requestId && event.type == expectedType) return event
@@ -475,7 +475,7 @@ actual object P2pStreamingEngine {
         val event = alloc<nuvio_engine_event>()
         nuvio_engine_event_init_sized(event.ptr, sizeOf<nuvio_engine_event>().toUInt())
         val status = nuvio_engine_poll_event(activeEngine, event.ptr)
-        if (status == CINEBOX_ENGINE_STATUS_NO_EVENT) return@memScoped null
+        if (status == NUVIO_ENGINE_STATUS_NO_EVENT) return@memScoped null
         checkStatus(status)
         NativeEvent(
             type = event.type,
@@ -532,7 +532,7 @@ actual object P2pStreamingEngine {
     }
 
     private fun checkStatus(status: UInt) {
-        if (status == CINEBOX_ENGINE_STATUS_OK) return
+        if (status == NUVIO_ENGINE_STATUS_OK) return
         val message = nuvio_engine_status_message(status)?.toKString()
             ?: "CINEBOX Engine status $status"
         throw P2pStreamingException(message)
