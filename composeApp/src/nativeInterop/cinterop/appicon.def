@@ -1,2 +1,2 @@
 headers = AppIconBridge.h
-package = com.nuvio.app.nativebridge
+package = com.cinebox.app.nativebridge

@@ -15,14 +15,14 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.nuvio.app.MainActivity
-import com.nuvio.app.core.ui.NuvioTheme
-import com.nuvio.app.features.mdblist.MdbListTracker
-import com.nuvio.app.features.library.LibrarySourceMode
-import com.nuvio.app.features.tracking.TrackingSettingsRepository
-import com.nuvio.app.features.tracking.WatchProgressSource
+import com.cinebox.app.MainActivity
+import com.cinebox.app.core.ui.CineboxTheme
+import com.cinebox.app.features.mdblist.MdbListTracker
+import com.cinebox.app.features.library.LibrarySourceMode
+import com.cinebox.app.features.tracking.TrackingSettingsRepository
+import com.cinebox.app.features.tracking.WatchProgressSource
 import org.junit.Assert.assertEquals
-import com.nuvio.app.features.settings.SettingsScreen
+import com.cinebox.app.features.settings.SettingsScreen
 import java.io.File
 import org.junit.Assume.assumeTrue
 import org.junit.Rule
@@ -38,7 +38,7 @@ class MdbListSettingsUiTest {
         assumeTrue(InstrumentationRegistry.getArguments().getString("mdblistLive") == "true")
         assumeTrue(MdbListTracker.auth.state.value.isAuthenticated)
         compose.runOnUiThread {
-            compose.activity.setContent { NuvioTheme { SettingsScreen(initialPageName = "TraktAuthentication") } }
+            compose.activity.setContent { CineboxTheme { SettingsScreen(initialPageName = "TraktAuthentication") } }
         }
         compose.onAllNodesWithText("MDBList").onFirst().performScrollTo().performClick()
         compose.onNodeWithText("Sync watched history and playback progress across devices").performScrollTo().assertIsDisplayed()
@@ -57,7 +57,7 @@ class MdbListSettingsUiTest {
         val profile = MdbListTracker.auth.state.value.scope.profileId
         val original = TrackingSettingsRepository.uiState.value
         compose.runOnUiThread {
-            compose.activity.setContent { NuvioTheme { SettingsScreen(initialPageName = "TraktAuthentication") } }
+            compose.activity.setContent { CineboxTheme { SettingsScreen(initialPageName = "TraktAuthentication") } }
         }
         try {
             compose.onNode(hasScrollToIndexAction()).performScrollToNode(hasText("Library Source"))

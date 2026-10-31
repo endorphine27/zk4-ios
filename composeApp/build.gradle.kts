@@ -72,11 +72,11 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
         localPropertiesFile.asFile.orNull?.takeIf { it.exists() }?.inputStream()?.use { props.load(it) }
 
         val outDir = outputDir.get().asFile
-        outDir.resolve("com/nuvio/app/core/network").apply {
+        outDir.resolve("com/cinebox/app/core/network").apply {
             mkdirs()
             resolve("SupabaseConfig.kt").writeText(
                 """
-                |package com.nuvio.app.core.network
+                |package com.cinebox.app.core.network
                 |
                 |object SupabaseConfig {
                 |    const val URL = "${supabaseUrl.get()}"
@@ -87,11 +87,11 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
             )
         }
 
-        outDir.resolve("com/nuvio/app/core/diagnostics").apply {
+        outDir.resolve("com/cinebox/app/core/diagnostics").apply {
             mkdirs()
             resolve("SentryConfig.kt").writeText(
                 """
-                |package com.nuvio.app.core.diagnostics
+                |package com.cinebox.app.core.diagnostics
                 |
                 |object SentryConfig {
                 |    const val DSN = "${sentryDsn.get()}"
@@ -102,11 +102,11 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
             )
         }
 
-        outDir.resolve("com/nuvio/app/features/tmdb").apply {
+        outDir.resolve("com/cinebox/app/features/tmdb").apply {
             mkdirs()
             resolve("TmdbConfig.kt").writeText(
                 """
-                |package com.nuvio.app.features.tmdb
+                |package com.cinebox.app.features.tmdb
                 |
                 |object TmdbConfig {
                 |    const val API_KEY = "${tmdbApiKey.get()}"
@@ -115,11 +115,11 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
             )
         }
 
-        outDir.resolve("com/nuvio/app/features/trakt").apply {
+        outDir.resolve("com/cinebox/app/features/trakt").apply {
             mkdirs()
             resolve("TraktConfig.kt").writeText(
                 """
-                |package com.nuvio.app.features.trakt
+                |package com.cinebox.app.features.trakt
                 |
                 |object TraktConfig {
                 |    const val CLIENT_ID = "${props.getProperty("TRAKT_CLIENT_ID", "")}" 
@@ -130,11 +130,11 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
             )
         }
 
-        outDir.resolve("com/nuvio/app/features/simkl").apply {
+        outDir.resolve("com/cinebox/app/features/simkl").apply {
             mkdirs()
             resolve("SimklConfig.kt").writeText(
                 """
-                |package com.nuvio.app.features.simkl
+                |package com.cinebox.app.features.simkl
                 |
                 |object SimklConfig {
                 |    const val CLIENT_ID = "${props.getProperty("SIMKL_CLIENT_ID", "")}"
@@ -145,11 +145,11 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
             )
         }
 
-        outDir.resolve("com/nuvio/app/features/discordrpc").apply {
+        outDir.resolve("com/cinebox/app/features/discordrpc").apply {
             mkdirs()
             resolve("DiscordConfig.kt").writeText(
                 """
-                |package com.nuvio.app.features.discordrpc
+                |package com.cinebox.app.features.discordrpc
                 |
                 |object DiscordConfig {
                 |    const val CLIENT_ID = "${props.getProperty("NUVIO_DISCORD_CLIENT_ID", "1538974392376369212")}" 
@@ -158,11 +158,11 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
             )
         }
 
-        outDir.resolve("com/nuvio/app/features/mdblist").apply {
+        outDir.resolve("com/cinebox/app/features/mdblist").apply {
             mkdirs()
             resolve("MdbListConfig.kt").writeText(
                 """
-                |package com.nuvio.app.features.mdblist
+                |package com.cinebox.app.features.mdblist
                 |
                 |object MdbListConfig {
                 |    const val CLIENT_ID = "${props.getProperty("MDBLIST_CLIENT_ID", "")}" 
@@ -171,11 +171,11 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
             )
         }
 
-        outDir.resolve("com/nuvio/app/features/player/skip").apply {
+        outDir.resolve("com/cinebox/app/features/player/skip").apply {
             mkdirs()
             resolve("IntroDbConfig.kt").writeText(
                 """
-                |package com.nuvio.app.features.player.skip
+                |package com.cinebox.app.features.player.skip
                 |
                 |object IntroDbConfig {
                 |    const val URL = "${props.getProperty("INTRODB_API_URL", "")}" 
@@ -184,11 +184,11 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
             )
         }
 
-        outDir.resolve("com/nuvio/app/features/details").apply {
+        outDir.resolve("com/cinebox/app/features/details").apply {
             mkdirs()
             resolve("ImdbEpisodeRatingsConfig.kt").writeText(
                 """
-                |package com.nuvio.app.features.details
+                |package com.cinebox.app.features.details
                 |
                 |object ImdbEpisodeRatingsConfig {
                 |    const val IMDB_RATINGS_API_BASE_URL = "${props.getProperty("IMDB_RATINGS_API_BASE_URL", "")}" 
@@ -198,11 +198,11 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
             )
         }
 
-        outDir.resolve("com/nuvio/app/features/debrid").apply {
+        outDir.resolve("com/cinebox/app/features/debrid").apply {
             mkdirs()
             resolve("PremiumizeConfig.kt").writeText(
                 """
-                |package com.nuvio.app.features.debrid
+                |package com.cinebox.app.features.debrid
                 |
                 |object PremiumizeConfig {
                 |    const val CLIENT_ID = "${props.getProperty("PREMIUMIZE_CLIENT_ID", "")}"
@@ -211,11 +211,11 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
             )
         }
 
-        outDir.resolve("com/nuvio/app/core/build").apply {
+        outDir.resolve("com/cinebox/app/core/build").apply {
             mkdirs()
             resolve("AppVersionConfig.kt").writeText(
                 """
-                |package com.nuvio.app.core.build
+                |package com.cinebox.app.core.build
                 |
                 |object AppVersionConfig {
                 |    const val VERSION_NAME = "${appVersionName.get()}"
@@ -227,11 +227,11 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
             )
         }
 
-        outDir.resolve("com/nuvio/app/features/settings").apply {
+        outDir.resolve("com/cinebox/app/features/settings").apply {
             mkdirs()
             resolve("CommunityConfig.kt").writeText(
                 """
-                |package com.nuvio.app.features.settings
+                |package com.cinebox.app.features.settings
                 |
                 |object CommunityConfig {
                 |    const val CONTRIBUTIONS_URL = "${props.getProperty("CONTRIBUTIONS_URL", "")}" 
@@ -496,8 +496,8 @@ val iosDistributionSourceDir = if (iosDistribution == "full") {
 val iosFrameworkBundleId = "com.nuvio.media"
 val nuvioEngineAppleFramework = rootProject.file("../nuvio-engine/platform/apple/NuvioEngine.xcframework")
 val fullCommonSourceDir = project.file("src/fullCommonMain/kotlin")
-val fullPluginSourceDir = fullCommonSourceDir.resolve("com/nuvio/app/features/plugins")
-val fullTrailerSourceDir = fullCommonSourceDir.resolve("com/nuvio/app/features/trailer")
+val fullPluginSourceDir = fullCommonSourceDir.resolve("com/cinebox/app/features/plugins")
+val fullTrailerSourceDir = fullCommonSourceDir.resolve("com/cinebox/app/features/trailer")
 val generatedRuntimeConfigDir = layout.buildDirectory.dir("generated/runtime-config/kotlin")
 val desktopSentryResourceDir = rootProject.layout.projectDirectory.dir("desktopSentry/build/generated/sentry")
 val requestedGradleTasks = gradle.startParameter.taskNames.map { taskName ->
@@ -1023,7 +1023,7 @@ tasks.withType<KotlinCompilationTask<*>>().configureEach {
 
 kotlin {
     android {
-        namespace = "com.nuvio.app"
+        namespace = "com.cinebox.app"
         compileSdk {
             version = release(libs.versions.android.compileSdk.get().toInt()) {
                 minorApiLevel = libs.versions.android.compileSdkMinor.get().toInt()
@@ -1261,7 +1261,7 @@ tasks.matching {
 
 compose.desktop {
     application {
-        mainClass = "com.nuvio.app.MainKt"
+        mainClass = "com.cinebox.app.MainKt"
         val smokePlayerUrl = providers.gradleProperty("nuvio.desktop.smokePlayerUrl").orNull
             ?: System.getenv("NUVIO_DESKTOP_SMOKE_PLAYER_URL")
         jvmArgs += listOfNotNull(

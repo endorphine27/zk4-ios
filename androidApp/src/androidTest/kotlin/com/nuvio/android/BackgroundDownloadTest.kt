@@ -4,9 +4,9 @@ import android.content.Intent
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.nuvio.app.MainActivity
-import com.nuvio.app.features.downloads.DownloadStatus
-import com.nuvio.app.features.downloads.DownloadsRepository
+import com.cinebox.app.MainActivity
+import com.cinebox.app.features.downloads.DownloadStatus
+import com.cinebox.app.features.downloads.DownloadsRepository
 import java.io.File
 import java.net.URI
 import java.security.MessageDigest

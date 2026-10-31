@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
 
     <application
-        android:name="com.nuvio.app.NuvioApplication"
+        android:name="com.cinebox.app.CineboxApplication"
         android:allowBackup="false"
         android:enableOnBackInvokedCallback="false"
         android:icon="@mipmap/ic_launcher"
@@ -27,13 +27,13 @@
 
         <activity
             android:exported="true"
-            android:name="com.nuvio.app.MainActivity"
+            android:name="com.cinebox.app.MainActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:supportsPictureInPicture="true"
             android:theme="@style/Theme.Nuvio.Splash" />
 
         <activity
-            android:name="com.nuvio.app.LinkActivity"
+            android:name="com.cinebox.app.LinkActivity"
             android:excludeFromRecents="true"
             android:exported="true"
             android:noHistory="true"
@@ -91,7 +91,7 @@
         </activity>
 
         <activity
-            android:name="com.nuvio.app.launcher.AppIconDefault"
+            android:name="com.cinebox.app.launcher.AppIconDefault"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:enabled="true"
             android:exported="true"
@@ -106,7 +106,7 @@
         </activity>
 
         <activity
-            android:name="com.nuvio.app.launcher.AppIconArcticBlue"
+            android:name="com.cinebox.app.launcher.AppIconArcticBlue"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:enabled="false"
             android:exported="true"
@@ -121,7 +121,7 @@
         </activity>
 
         <activity
-            android:name="com.nuvio.app.launcher.AppIconEmerald"
+            android:name="com.cinebox.app.launcher.AppIconEmerald"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:enabled="false"
             android:exported="true"
@@ -136,7 +136,7 @@
         </activity>
 
         <activity
-            android:name="com.nuvio.app.launcher.AppIconRoseGold"
+            android:name="com.cinebox.app.launcher.AppIconRoseGold"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:enabled="false"
             android:exported="true"
@@ -151,7 +151,7 @@
         </activity>
 
         <activity
-            android:name="com.nuvio.app.launcher.AppIconCopper"
+            android:name="com.cinebox.app.launcher.AppIconCopper"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:enabled="false"
             android:exported="true"
@@ -166,7 +166,7 @@
         </activity>
 
         <activity
-            android:name="com.nuvio.app.launcher.AppIconGraphite"
+            android:name="com.cinebox.app.launcher.AppIconGraphite"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:enabled="false"
             android:exported="true"
@@ -181,17 +181,17 @@
         </activity>
 
         <service
-            android:name="com.nuvio.app.features.player.PlayerNowPlayingService"
+            android:name="com.cinebox.app.features.player.PlayerNowPlayingService"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback"
             android:stopWithTask="false" />
 
         <receiver
-            android:name="com.nuvio.app.features.player.PlayerNowPlayingActionReceiver"
+            android:name="com.cinebox.app.features.player.PlayerNowPlayingActionReceiver"
             android:exported="false" />
 
         <receiver
-            android:name="com.nuvio.app.features.downloads.DownloadsNotificationActionReceiver"
+            android:name="com.cinebox.app.features.downloads.DownloadsNotificationActionReceiver"
             android:exported="false" />
 
         <provider

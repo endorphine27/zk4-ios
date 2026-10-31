@@ -1518,7 +1518,7 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *) {
 extern "C" {
 
 #define NP(name) \
-    Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_##name
+    Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_##name
 
 // Initialize GTK before AWT/Compose/Skia (called as the first statement of
 // main() on Linux). On some JDK builds (Ubuntu's OpenJDK) AWT/Skiko partially

@@ -1,0 +1,20 @@
+package com.cinebox.app.core.ui
+
+import android.os.Build
+import coil3.ComponentRegistry
+import coil3.ImageLoader
+import coil3.gif.AnimatedImageDecoder
+import coil3.gif.GifDecoder
+
+internal actual fun ImageLoader.Builder.configurePlatformImageLoader(): ImageLoader.Builder =
+    components {
+        if (Build.VERSION.SDK_INT >= 28) {
+            add(AnimatedImageDecoder.Factory())
+        } else {
+            add(GifDecoder.Factory())
+        }
+    }
+
+internal actual fun ComponentRegistry.Builder.addPlatformDecoders() = Unit
+
+internal actual val platformProvidesImageLoader: Boolean = true

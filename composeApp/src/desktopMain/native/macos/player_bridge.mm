@@ -3198,7 +3198,7 @@ static NSArray<NSString *> *jstringArrayToNSArray(JNIEnv *env, jobjectArray valu
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setMacosWindowFullscreen(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setMacosWindowFullscreen(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong windowViewPtr,
@@ -3218,7 +3218,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setMacosWindowFull
 }
 
 extern "C" JNIEXPORT jlong JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_create(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_create(
     JNIEnv *env,
     jobject /* bridge */,
     jlong hostViewPtr,
@@ -3290,7 +3290,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_create(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_dispose(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_dispose(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle
@@ -3303,7 +3303,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_dispose(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_updateControls(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_updateControls(
     JNIEnv *env,
     jobject /* bridge */,
     jlong handle,
@@ -3318,7 +3318,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_updateControls(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setNowPlayingMetadata(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setNowPlayingMetadata(
     JNIEnv *env,
     jobject /* bridge */,
     jlong handle,
@@ -3339,7 +3339,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setNowPlayingMetad
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_requestFocus(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_requestFocus(
     JNIEnv *,
     jobject,
     jlong handle
@@ -3352,20 +3352,20 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_requestFocus(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_beginWindowDrag(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_beginWindowDrag(
     JNIEnv *, jobject, jlong handle
 ) {
     if (handle == 0) return;
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setWindowResizable(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setWindowResizable(
     JNIEnv *, jobject, jlong, jboolean
 ) {
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setWindowAspectRatio(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setWindowAspectRatio(
     JNIEnv *, jobject, jlong windowViewPtr, jfloat ratio
 ) {
     if (windowViewPtr == 0 || !(ratio > 0.0f)) return;
@@ -3376,13 +3376,13 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setWindowAspectRat
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_layoutNativeSubviews(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_layoutNativeSubviews(
     JNIEnv *, jobject, jlong
 ) {
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_reparentSurfaceNative(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_reparentSurfaceNative(
     JNIEnv *, jobject, jlong handle, jlong hostViewPtr
 ) {
     if (handle == 0 || hostViewPtr == 0) return;
@@ -3399,7 +3399,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_reparentSurfaceNat
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setPaused(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setPaused(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle,
@@ -3413,7 +3413,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setPaused(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_seekTo(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_seekTo(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle,
@@ -3427,7 +3427,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_seekTo(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_seekBy(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_seekBy(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle,
@@ -3441,7 +3441,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_seekBy(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setSpeed(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setSpeed(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle,
@@ -3455,7 +3455,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setSpeed(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_adjustVolume(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_adjustVolume(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle,
@@ -3469,7 +3469,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_adjustVolume(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setVolume(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setVolume(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle,
@@ -3483,7 +3483,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setVolume(
 }
 
 extern "C" JNIEXPORT jlong JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_durationMs(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_durationMs(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle
@@ -3494,7 +3494,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_durationMs(
 }
 
 extern "C" JNIEXPORT jlong JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_positionMs(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_positionMs(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle
@@ -3505,7 +3505,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_positionMs(
 }
 
 extern "C" JNIEXPORT jlong JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_bufferedPositionMs(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_bufferedPositionMs(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle
@@ -3516,7 +3516,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_bufferedPositionMs
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_isLoading(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_isLoading(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle
@@ -3527,7 +3527,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_isLoading(
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_isEnded(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_isEnded(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle
@@ -3538,7 +3538,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_isEnded(
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_isPaused(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_isPaused(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle
@@ -3549,7 +3549,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_isPaused(
 }
 
 extern "C" JNIEXPORT jfloat JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_speed(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_speed(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle
@@ -3560,7 +3560,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_speed(
 }
 
 extern "C" JNIEXPORT jfloat JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_volume(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_volume(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle
@@ -3571,7 +3571,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_volume(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setResizeMode(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setResizeMode(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle,
@@ -3585,7 +3585,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setResizeMode(
 }
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_audioTracksJson(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_audioTracksJson(
     JNIEnv *env,
     jobject /* bridge */,
     jlong handle
@@ -3597,7 +3597,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_audioTracksJson(
 }
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_stringProperty(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_stringProperty(
     JNIEnv *env,
     jobject /* bridge */,
     jlong handle,
@@ -3612,7 +3612,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_stringProperty(
 }
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_subtitleTracksJson(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_subtitleTracksJson(
     JNIEnv *env,
     jobject /* bridge */,
     jlong handle
@@ -3624,7 +3624,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_subtitleTracksJson
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_selectAudioTrack(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_selectAudioTrack(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle,
@@ -3638,7 +3638,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_selectAudioTrack(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setAudioLanguages(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setAudioLanguages(
     JNIEnv *env,
     jobject /* bridge */,
     jlong handle,
@@ -3653,7 +3653,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setAudioLanguages(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_selectSubtitleTrack(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_selectSubtitleTrack(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle,
@@ -3667,7 +3667,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_selectSubtitleTrac
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_addSubtitleUrl(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_addSubtitleUrl(
     JNIEnv *env,
     jobject /* bridge */,
     jlong handle,
@@ -3682,7 +3682,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_addSubtitleUrl(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_clearExternalSubtitles(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_clearExternalSubtitles(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle
@@ -3695,7 +3695,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_clearExternalSubti
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_clearExternalSubtitlesAndSelect(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_clearExternalSubtitlesAndSelect(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle,
@@ -3709,7 +3709,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_clearExternalSubti
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setSubtitleDelayMs(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setSubtitleDelayMs(
     JNIEnv * /* env */,
     jobject /* bridge */,
     jlong handle,
@@ -3723,7 +3723,7 @@ Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_setSubtitleDelayMs
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_nuvio_app_features_player_desktop_NativePlayerBridge_applySubtitleStyle(
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_applySubtitleStyle(
     JNIEnv *env,
     jobject /* bridge */,
     jlong handle,

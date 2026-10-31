@@ -1,0 +1,71 @@
+package com.cinebox.app.features.streams
+
+import com.cinebox.app.core.storage.DesktopStorage
+import com.cinebox.app.core.storage.ProfileScopedKey
+import com.cinebox.app.core.sync.decodeSyncBoolean
+import com.cinebox.app.core.sync.decodeSyncString
+import com.cinebox.app.core.sync.encodeSyncBoolean
+import com.cinebox.app.core.sync.encodeSyncString
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
+
+internal actual object StreamBadgeSettingsStorage {
+    private const val streamBadgeRulesKey = "stream_badge_rules"
+    private const val showFileSizeBadgesKey = "show_file_size_badges"
+    private const val showAddonLogoKey = "show_addon_logo"
+    private const val showInPlayerKey = "show_badges_in_player"
+    private const val playerBadgeSourceKey = "player_badge_source"
+    private const val streamBackgroundModeKey = "stream_background_mode"
+    private const val streamBadgePlacementKey = "stream_badge_placement"
+    private const val legacyDebridStreamBadgeRulesKey = "debrid_stream_badge_rules"
+    private val syncKeys = listOf(streamBadgeRulesKey, showFileSizeBadgesKey, showInPlayerKey, playerBadgeSourceKey, streamBadgePlacementKey, streamBackgroundModeKey)
+    private val store = DesktopStorage.store("cinebox_stream_badge_settings")
+    private val legacyDebridStore = DesktopStorage.store("cinebox_debrid_settings")
+
+    actual fun loadStreamBadgeRules(): String? = loadString(streamBadgeRulesKey)
+    actual fun saveStreamBadgeRules(rules: String) = saveString(streamBadgeRulesKey, rules)
+    actual fun loadShowFileSizeBadges(): Boolean? = loadBoolean(showFileSizeBadgesKey)
+    actual fun saveShowFileSizeBadges(enabled: Boolean) = saveBoolean(showFileSizeBadgesKey, enabled)
+    actual fun loadShowAddonLogo(): Boolean? = loadBoolean(showAddonLogoKey)
+    actual fun saveShowAddonLogo(enabled: Boolean) = saveBoolean(showAddonLogoKey, enabled)
+    actual fun loadShowInPlayer(): Boolean? = loadBoolean(showInPlayerKey)
+    actual fun saveShowInPlayer(enabled: Boolean) = saveBoolean(showInPlayerKey, enabled)
+    actual fun loadPlayerBadgeSource(): String? = loadString(playerBadgeSourceKey)
+    actual fun savePlayerBadgeSource(source: String) = saveString(playerBadgeSourceKey, source)
+    actual fun loadStreamBackgroundMode(): String? = loadString(streamBackgroundModeKey)
+    actual fun saveStreamBackgroundMode(mode: String) = saveString(streamBackgroundModeKey, mode)
+    actual fun loadStreamBadgePlacement(): String? = loadString(streamBadgePlacementKey)
+    actual fun saveStreamBadgePlacement(placement: String) = saveString(streamBadgePlacementKey, placement)
+
+    actual fun loadLegacyDebridStreamBadgeRules(): String? =
+        legacyDebridStore.getString(ProfileScopedKey.of(legacyDebridStreamBadgeRulesKey))
+
+    actual fun clearLegacyDebridStreamBadgeRules() {
+        legacyDebridStore.remove(ProfileScopedKey.of(legacyDebridStreamBadgeRulesKey))
+    }
+
+    private fun loadString(key: String): String? = store.getString(ProfileScopedKey.of(key))
+    private fun saveString(key: String, value: String) = store.putString(ProfileScopedKey.of(key), value)
+    private fun loadBoolean(key: String): Boolean? = store.getBoolean(ProfileScopedKey.of(key))
+    private fun saveBoolean(key: String, value: Boolean) = store.putBoolean(ProfileScopedKey.of(key), value)
+
+    actual fun exportToSyncPayload(): JsonObject = buildJsonObject {
+        loadStreamBadgeRules()?.let { put(streamBadgeRulesKey, encodeSyncString(it)) }
+        loadShowFileSizeBadges()?.let { put(showFileSizeBadgesKey, encodeSyncBoolean(it)) }
+        loadShowInPlayer()?.let { put(showInPlayerKey, encodeSyncBoolean(it)) }
+        loadPlayerBadgeSource()?.let { put(playerBadgeSourceKey, encodeSyncString(it)) }
+        loadStreamBackgroundMode()?.let { put(streamBackgroundModeKey, encodeSyncString(it)) }
+        loadStreamBadgePlacement()?.let { put(streamBadgePlacementKey, encodeSyncString(it)) }
+    }
+
+    actual fun replaceFromSyncPayload(payload: JsonObject) {
+        store.removeAll(syncKeys.map(ProfileScopedKey::of))
+        payload.decodeSyncString(streamBadgeRulesKey)?.let(::saveStreamBadgeRules)
+        payload.decodeSyncBoolean(showFileSizeBadgesKey)?.let(::saveShowFileSizeBadges)
+        payload.decodeSyncBoolean(showInPlayerKey)?.let(::saveShowInPlayer)
+        payload.decodeSyncString(playerBadgeSourceKey)?.let(::savePlayerBadgeSource)
+        payload.decodeSyncString(streamBackgroundModeKey)?.let(::saveStreamBackgroundMode)
+        payload.decodeSyncString(streamBadgePlacementKey)?.let(::saveStreamBadgePlacement)
+    }
+}

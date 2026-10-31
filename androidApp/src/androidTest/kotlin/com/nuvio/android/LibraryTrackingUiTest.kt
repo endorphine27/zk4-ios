@@ -15,20 +15,20 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.nuvio.app.core.ui.NuvioTheme
-import com.nuvio.app.core.ui.TrackingListPickerDialog
-import com.nuvio.app.features.library.LibraryListDialogMode
-import com.nuvio.app.features.library.LibraryListDialogState
-import com.nuvio.app.features.library.LibraryListManagementController
-import com.nuvio.app.features.library.LibraryListManagementDialog
-import com.nuvio.app.features.library.LibraryManagementContext
-import com.nuvio.app.features.library.LibrarySourceMode
-import com.nuvio.app.features.tracking.LibraryListPrivacy
-import com.nuvio.app.features.tracking.TrackingLibraryTab
-import com.nuvio.app.features.tracking.TrackingLibraryTabKind
-import com.nuvio.app.features.tracking.TrackingListManagementCapabilities
-import com.nuvio.app.features.tracking.TrackingListManager
-import com.nuvio.app.features.tracking.TrackingProviderId
+import com.cinebox.app.core.ui.CineboxTheme
+import com.cinebox.app.core.ui.TrackingListPickerDialog
+import com.cinebox.app.features.library.LibraryListDialogMode
+import com.cinebox.app.features.library.LibraryListDialogState
+import com.cinebox.app.features.library.LibraryListManagementController
+import com.cinebox.app.features.library.LibraryListManagementDialog
+import com.cinebox.app.features.library.LibraryManagementContext
+import com.cinebox.app.features.library.LibrarySourceMode
+import com.cinebox.app.features.tracking.LibraryListPrivacy
+import com.cinebox.app.features.tracking.TrackingLibraryTab
+import com.cinebox.app.features.tracking.TrackingLibraryTabKind
+import com.cinebox.app.features.tracking.TrackingListManagementCapabilities
+import com.cinebox.app.features.tracking.TrackingListManager
+import com.cinebox.app.features.tracking.TrackingProviderId
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Rule
@@ -54,7 +54,7 @@ class LibraryTrackingUiTest {
         val controller = LibraryListManagementController({ context }, { manager })
         controller.open()
         compose.setContent {
-            NuvioTheme {
+            CineboxTheme {
                 val state by controller.state.collectAsState()
                 state?.let {
                     LibraryListManagementDialog(it, listOf(movies), capabilities, controller::create, controller::edit,
@@ -93,7 +93,7 @@ class LibraryTrackingUiTest {
     @Test
     fun pendingMutationDisablesEditorAndShowsTvStatusCopy() {
         compose.setContent {
-            NuvioTheme {
+            CineboxTheme {
                 LibraryListManagementDialog(LibraryListDialogState(context, 1, LibraryListDialogMode.EDIT, name = "Weekend", isPending = true),
                     emptyList(), capabilities, {}, {}, {}, {}, {}, {}, {}, {}, {})
             }
@@ -111,7 +111,7 @@ class LibraryTrackingUiTest {
         var saved = false
         val tabs = listOf(movies, movies.copy(key = "trakt:list:42", providerId = TrackingProviderId.TRAKT))
         compose.setContent {
-            NuvioTheme {
+            CineboxTheme {
                 TrackingListPickerDialog(true, "Save to lists", tabs, membership.value, false, null,
                     { key -> membership.value = membership.value + (key to (membership.value[key] != true)) }, { saved = true }, {})
             }
@@ -128,7 +128,7 @@ class LibraryTrackingUiTest {
     @Test
     fun errorKeepsEditorAvailableWithoutExposingBackendText() {
         compose.setContent {
-            NuvioTheme {
+            CineboxTheme {
                 LibraryListManagementDialog(LibraryListDialogState(context, 1, LibraryListDialogMode.EDIT,
                     name = "Weekend", error = IllegalStateException("internal backend body")),
                     emptyList(), capabilities, {}, {}, {}, {}, {}, {}, {}, {}, {})

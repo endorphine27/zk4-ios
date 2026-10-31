@@ -3,11 +3,11 @@ package com.nuvio.android
 import android.app.job.JobScheduler
 import android.net.Uri
 import android.os.Build
-import com.nuvio.app.MainActivity
-import com.nuvio.app.features.downloads.DownloadEnqueueResult
-import com.nuvio.app.features.downloads.DownloadStatus
-import com.nuvio.app.features.downloads.DownloadsRepository
-import com.nuvio.app.features.streams.StreamItem
+import com.cinebox.app.MainActivity
+import com.cinebox.app.features.downloads.DownloadEnqueueResult
+import com.cinebox.app.features.downloads.DownloadStatus
+import com.cinebox.app.features.downloads.DownloadsRepository
+import com.cinebox.app.features.streams.StreamItem
 import java.io.File
 
 /** Debug-only launcher: instrumentation force-stops its app when it ends or is killed. */
