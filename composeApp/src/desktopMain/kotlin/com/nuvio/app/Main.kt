@@ -284,4 +284,5 @@ private fun handleDesktopLaunchArgs(args: Array<String>) {
 
 private fun isDesktopAppUrl(value: String): Boolean =
     value.startsWith("nuvio://", ignoreCase = true) ||
+        value.startsWith("cinebox://", ignoreCase = true) ||
         value.startsWith("stremio://", ignoreCase = true)

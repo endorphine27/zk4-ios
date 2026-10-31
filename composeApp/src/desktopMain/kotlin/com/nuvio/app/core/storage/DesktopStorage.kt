@@ -47,7 +47,9 @@ internal object DesktopStorage {
             osName.contains("mac") -> userHome.resolve("Library/Application Support/Cinebox")
             osName.contains("win") -> {
                 val appData = System.getenv("APPDATA")?.takeIf { it.isNotBlank() }
-                (appData?.let(Paths::get) ?: userHome.resolve("AppData/Roaming")).resolve("Nuvio")
+                val base = appData?.let(Paths::get) ?: userHome.resolve("AppData/Roaming")
+                // Keep existing settings/login: move the old folder, or keep using it if the move fails.
+                migrateDir(base.resolve("Nuvio"), base.resolve("CINEBOX"))
             }
             else -> {
                 val xdgConfig = System.getenv("XDG_CONFIG_HOME")?.takeIf { it.isNotBlank() }
@@ -56,14 +58,22 @@ internal object DesktopStorage {
         }
     }
 
+    private fun migrateDir(old: Path, new: Path): Path {
+        if (Files.exists(new) || !Files.exists(old)) return new
+        return runCatching {
+            Files.move(old, new)
+            new
+        }.getOrDefault(old)
+    }
+
     private fun resolveCacheDir(): Path {
         val osName = System.getProperty("os.name").orEmpty().lowercase(Locale.ROOT)
         val userHome = Paths.get(System.getProperty("user.home").orEmpty())
         return when {
-            osName.contains("mac") -> userHome.resolve("Library/Caches/Nuvio")
+            osName.contains("mac") -> userHome.resolve("Library/Caches/CINEBOX")
             osName.contains("win") -> {
                 val localAppData = System.getenv("LOCALAPPDATA")?.takeIf { it.isNotBlank() }
-                (localAppData?.let(Paths::get) ?: userHome.resolve("AppData/Local")).resolve("Nuvio/Cache")
+                (localAppData?.let(Paths::get) ?: userHome.resolve("AppData/Local")).resolve("CINEBOX/Cache")
             }
             else -> {
                 val xdgCache = System.getenv("XDG_CACHE_HOME")?.takeIf { it.isNotBlank() }
