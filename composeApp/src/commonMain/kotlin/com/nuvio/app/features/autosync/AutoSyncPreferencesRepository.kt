@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
  * AutoSync-owned preference state.
  *
  * Persistence is injected by the platform so this feature does not add fields or methods to
- * Nuvio's general PlayerSettingsRepository/PlayerSettingsStorage architecture.
+ * CINEBOX's general PlayerSettingsRepository/PlayerSettingsStorage architecture.
  */
 internal object AutoSyncPreferencesRepository {
     private val _preferredSubtitleAutoSyncOnStart = MutableStateFlow(false)

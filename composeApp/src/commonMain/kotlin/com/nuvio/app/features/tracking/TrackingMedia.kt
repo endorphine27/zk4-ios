@@ -92,7 +92,7 @@ data class TrackingMediaReference(
 }
 
 /**
- * Parses the canonical IDs Nuvio receives from addons and tracker-backed lists.
+ * Parses the canonical IDs CINEBOX receives from addons and tracker-backed lists.
  * An unprefixed number retains its legacy Trakt meaning; it is never guessed to
  * be a Simkl ID.
  */

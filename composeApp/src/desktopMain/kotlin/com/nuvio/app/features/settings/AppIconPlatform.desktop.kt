@@ -47,7 +47,7 @@ internal actual object AppIconPlatform {
                 ProcessBuilder(launcher.toString()).start()
                 exitProcess(0)
             }
-        }, "Nuvio Windows app restart").apply {
+        }, "CINEBOX Windows app restart").apply {
             isDaemon = false
             start()
         }

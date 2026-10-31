@@ -1,4 +1,4 @@
-// Linux player bridge for Nuvio Desktop.
+// Linux player bridge for CINEBOX Desktop.
 //
 // Phase 1: embed libmpv into the host AWT Canvas's X11 window (via mpv's
 // "wid" option) and implement the playback/track/subtitle JNI surface the
@@ -270,7 +270,7 @@ void mpvSetFlag(mpv_handle *mpv, const char *name, bool value) {
 }
 
 // "Loading" for the UI, mirroring the macOS bridge (rawLoadingWithPaused). Stays
-// true through the whole file-open phase (no duration/tracks yet) so Nuvio keeps
+// true through the whole file-open phase (no duration/tracks yet) so CINEBOX keeps
 // its loading screen up instead of revealing mpv's black frame — e.g. while a
 // non-faststart MP4 fetches its moov and seeks to the resume point.
 bool computeLoading(mpv_handle *mpv) {
@@ -285,7 +285,7 @@ bool computeLoading(mpv_handle *mpv) {
 }
 
 // Loading for the whole initial open: stay true until the FIRST FRAME is actually
-// shown, so Nuvio's opening overlay (dismissed the first time isLoading is false,
+// shown, so CINEBOX's opening overlay (dismissed the first time isLoading is false,
 // a one-way latch) survives mpv's flag flicker during open + resume-seek. After
 // the first frame, fall back to computeLoading so mid-playback rebuffers still show.
 bool playerLoading(Player *p) {
@@ -600,7 +600,7 @@ void compositeOverlay(Player *player) {
     if (!gw) return;
     Display *dpy = GDK_WINDOW_XDISPLAY(gw);
     // Also composite while loading (before the first frame, or during a rebuffer)
-    // so Nuvio's loading screen — poster, title, spinner — shows over mpv's black
+    // so CINEBOX's loading screen — poster, title, spinner — shows over mpv's black
     // instead of a bare black screen. mpv is not decoding then, so it is free.
     bool loading = playerLoading(player);
     // Also composite while paused: the "You're watching" pause overlay only shows
@@ -1587,7 +1587,7 @@ JNIEXPORT jlong JNICALL NP(create)(
         // Embed into the host AWT Canvas's X11 window.
         if (!wid.empty()) mpv_set_option_string(m, "wid", wid.c_str());
 
-        // Nuvio renders its own controls; keep mpv silent and non-interactive.
+        // CINEBOX renders its own controls; keep mpv silent and non-interactive.
         mpv_set_option_string(m, "osc", "no");
         mpv_set_option_string(m, "osd-level", "0");
         mpv_set_option_string(m, "input-default-bindings", "no");
@@ -1608,7 +1608,7 @@ JNIEXPORT jlong JNICALL NP(create)(
         // "wid". Under a Wayland session mpv would otherwise pick its native
         // Wayland backend, which cannot embed into a foreign surface and opens
         // a separate window instead. The host AWT window is X11 (XWayland), so
-        // X11 embedding composites correctly inside the Nuvio window.
+        // X11 embedding composites correctly inside the CINEBOX window.
         mpv_set_option_string(m, "gpu-context", gpuCtx);
         mpv_set_option_string(m, "force-seekable", "yes");
 
@@ -1845,7 +1845,7 @@ JNIEXPORT jboolean JNICALL NP(isEnded)(JNIEnv *, jobject, jlong handle) {
     if (!p) return JNI_FALSE;
     // keep-open=yes makes mpv PAUSE at EOF instead of unloading, so
     // MPV_EVENT_END_FILE never fires — the `eof-reached` property is what flips.
-    // Mirror the macOS bridge (rawIsEnded reads eof-reached) so Nuvio's
+    // Mirror the macOS bridge (rawIsEnded reads eof-reached) so CINEBOX's
     // next-episode / autoplay logic actually triggers at the end of a file.
     return (mpvGetFlag(p->mpv, "eof-reached") || p->ended.load()) ? JNI_TRUE : JNI_FALSE;
 }

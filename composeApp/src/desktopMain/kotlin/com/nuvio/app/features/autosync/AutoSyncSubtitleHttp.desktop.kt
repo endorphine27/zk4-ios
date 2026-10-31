@@ -15,9 +15,9 @@ import java.io.IOException
 /**
  * AutoSync-only subtitle HTTP path.
  *
- * Reuses Nuvio's existing OkHttp client and connection pool, but uses OkHttp's
+ * Reuses CINEBOX's existing OkHttp client and connection pool, but uses OkHttp's
  * asynchronous API so cancelling an AutoSync coroutine immediately cancels the
- * underlying network call. This deliberately does not modify Nuvio's shared
+ * underlying network call. This deliberately does not modify CINEBOX's shared
  * httpRequestRaw() behavior used by plugins and other features.
  */
 internal object AutoSyncSubtitleHttp {
@@ -36,7 +36,7 @@ internal object AutoSyncSubtitleHttp {
             .get()
 
         headers.forEach { (name, value) ->
-            // Preserve Nuvio's raw-HTTP behavior: let OkHttp negotiate transparent
+            // Preserve CINEBOX's raw-HTTP behavior: let OkHttp negotiate transparent
             // compression instead of forwarding caller-provided Accept-Encoding.
             if (!name.equals("Accept-Encoding", ignoreCase = true)) {
                 requestBuilder.header(name, value)

@@ -290,7 +290,7 @@ actual object P2pStreamingEngine {
         } catch (cancellation: CancellationException) {
             throw cancellation
         } catch (error: Exception) {
-            log.w(error) { "Error stopping Nuvio Engine stream route" }
+            log.w(error) { "Error stopping CINEBOX Engine stream route" }
         }
     }
 
@@ -329,7 +329,7 @@ actual object P2pStreamingEngine {
             engine = created
             engineConfigurationKey = configurationKey
             observeEngineEvents(created)
-            log.i { "Using Nuvio Engine ${activeRuntime.version} (${activeRuntime.protocolBackendVersion})" }
+            log.i { "Using CINEBOX Engine ${activeRuntime.version} (${activeRuntime.protocolBackendVersion})" }
         }
     }
 
@@ -346,7 +346,7 @@ actual object P2pStreamingEngine {
             try {
                 target.shutdown()
             } catch (error: Exception) {
-                log.w(error) { "Error shutting down Nuvio Engine" }
+                log.w(error) { "Error shutting down CINEBOX Engine" }
             }
         }
     }
@@ -428,7 +428,7 @@ actual object P2pStreamingEngine {
                     } catch (cancellation: CancellationException) {
                         throw cancellation
                     } catch (error: Exception) {
-                        log.w(error) { "Error sampling Nuvio Engine stream progress" }
+                        log.w(error) { "Error sampling CINEBOX Engine stream progress" }
                         null
                     }
                     val aggregate = activeEngine.stats.value

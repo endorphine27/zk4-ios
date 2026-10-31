@@ -20,8 +20,8 @@ private class DiscordDisconnected : Exception()
 private const val ReconnectDelayMs = 15_000L
 
 // Discord activity type: 0 = Playing, 2 = Listening, 3 = Watching, 5 = Competing.
-// Nuvio is a media app, so every presence it publishes is a Watching one -- including the menus,
-// where Discord renders "Watching Nuvio" instead of the default "Playing Nuvio" (a game).
+// CINEBOX is a media app, so every presence it publishes is a Watching one -- including the menus,
+// where Discord renders "Watching CINEBOX" instead of the default "Playing CINEBOX" (a game).
 private const val WatchingActivityType = 3
 
 internal object DiscordPresenceManager {
@@ -81,7 +81,7 @@ internal object DiscordPresenceManager {
     }
 }
 
-// Shown when nothing has been published yet, so the profile still reads "Watching Nuvio".
+// Shown when nothing has been published yet, so the profile still reads "Watching CINEBOX".
 private val IdleActivity = DiscordActivity(
     type = WatchingActivityType,
     details = "Browsing CINEBOX",

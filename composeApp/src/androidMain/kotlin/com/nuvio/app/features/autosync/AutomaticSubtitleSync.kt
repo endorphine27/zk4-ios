@@ -485,7 +485,7 @@ internal object AutomaticSubtitleSync {
                 }
             }
 
-            // The Nuvio-selected subtitle is usually automatic, so treat it as one timing
+            // The CINEBOX-selected subtitle is usually automatic, so treat it as one timing
             // candidate rather than giving it expensive V2 priority. Consume any completion
             // that occurred while reference preparation was running before refreshing providers.
             consumeSelectedIfCompleted()
@@ -500,7 +500,7 @@ internal object AutomaticSubtitleSync {
                     )
 
             // Put the selected subtitle into the same pool. It remains eligible, but is no
-            // longer privileged merely because Nuvio auto-selected it.
+            // longer privileged merely because CINEBOX auto-selected it.
             alternatives = (alternatives + selectedCandidateMetadata)
                 .distinctBy { it.url }
 

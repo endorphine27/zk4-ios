@@ -355,7 +355,7 @@ actual object P2pStreamingEngine {
             }
             val output = alloc<CPointerVar<nuvio_engine>>()
             checkStatus(nuvio_engine_create(config.ptr, output.ptr))
-            output.value ?: throw P2pStreamingException("Nuvio Engine returned an empty handle")
+            output.value ?: throw P2pStreamingException("CINEBOX Engine returned an empty handle")
         }
         engine = created
         engineConfigurationKey = configuration
@@ -534,7 +534,7 @@ actual object P2pStreamingEngine {
     private fun checkStatus(status: UInt) {
         if (status == NUVIO_ENGINE_STATUS_OK) return
         val message = nuvio_engine_status_message(status)?.toKString()
-            ?: "Nuvio Engine status $status"
+            ?: "CINEBOX Engine status $status"
         throw P2pStreamingException(message)
     }
 
@@ -545,7 +545,7 @@ actual object P2pStreamingEngine {
             withIntermediateDirectories = true,
             attributes = null,
             error = null,
-        )) { "Could not create Nuvio Engine directory" }
+        )) { "Could not create CINEBOX Engine directory" }
     }
 
     private fun migrateNestedPayloadDirectory(cacheDirectory: String) {

@@ -290,7 +290,7 @@ actual object P2pStreamingEngine {
                 )) {
                 throw CancellationException("P2P stream start was cancelled")
             }
-            Log.i(TAG, "Nuvio Engine stream ready: ${stream.url}")
+            Log.i(TAG, "CINEBOX Engine stream ready: ${stream.url}")
             Log.i(
                 DIAGNOSTIC_TAG,
                 "start request=$requestSequence phase=route_ready elapsedMs=${elapsedSince(startedAtMs)} " +
@@ -443,7 +443,7 @@ actual object P2pStreamingEngine {
         } catch (cancellation: CancellationException) {
             throw cancellation
         } catch (error: Exception) {
-            Log.w(TAG, "Error stopping Nuvio Engine stream route", error)
+            Log.w(TAG, "Error stopping CINEBOX Engine stream route", error)
         }
     }
 
@@ -474,10 +474,10 @@ actual object P2pStreamingEngine {
         val stateDirectory = File(context.noBackupFilesDir, "nuvio-engine/state")
         val cacheDirectory = File(context.cacheDir, "nuvio-engine")
         check(stateDirectory.mkdirs() || stateDirectory.isDirectory) {
-            "Could not create the Nuvio Engine state directory"
+            "Could not create the CINEBOX Engine state directory"
         }
         check(cacheDirectory.mkdirs() || cacheDirectory.isDirectory) {
-            "Could not create the Nuvio Engine cache directory"
+            "Could not create the CINEBOX Engine cache directory"
         }
         migrateNestedPayloadDirectory(cacheDirectory)
         return NuvioEngine.create(
@@ -494,7 +494,7 @@ actual object P2pStreamingEngine {
             observeEngineEvents(created)
             Log.i(
                 TAG,
-                "Using Nuvio Engine ${NuvioEngine.version} (${NuvioEngine.protocolBackendVersion})"
+                "Using CINEBOX Engine ${NuvioEngine.version} (${NuvioEngine.protocolBackendVersion})"
             )
             Log.i(
                 DIAGNOSTIC_TAG,
@@ -519,7 +519,7 @@ actual object P2pStreamingEngine {
             try {
                 target.shutdown()
             } catch (error: Exception) {
-                Log.w(TAG, "Error shutting down Nuvio Engine", error)
+                Log.w(TAG, "Error shutting down CINEBOX Engine", error)
             }
         }
         Log.i(
@@ -611,7 +611,7 @@ actual object P2pStreamingEngine {
                     } catch (cancellation: CancellationException) {
                         throw cancellation
                     } catch (error: Exception) {
-                        Log.w(TAG, "Error sampling Nuvio Engine stream progress", error)
+                        Log.w(TAG, "Error sampling CINEBOX Engine stream progress", error)
                         null
                     }
                     val aggregate = activeEngine.stats.value

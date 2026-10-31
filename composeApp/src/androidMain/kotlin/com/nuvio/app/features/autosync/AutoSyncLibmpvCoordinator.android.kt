@@ -227,7 +227,7 @@ internal class LibmpvAutoSyncCoordinator(
 }
 
 /**
- * Nuvio's libmpv controller with AutoSync layered on top. Every call is forwarded to [base]
+ * CINEBOX's libmpv controller with AutoSync layered on top. Every call is forwarded to [base]
  * unchanged; subtitle changes first stop any AutoSync run that still targets the old subtitle.
  */
 private class AutoSyncLibmpvEngineController(

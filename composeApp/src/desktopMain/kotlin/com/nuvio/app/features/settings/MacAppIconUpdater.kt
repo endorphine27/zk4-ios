@@ -14,7 +14,7 @@ internal object MacAppIconUpdater {
             } finally {
                 onComplete()
             }
-        }, "Nuvio macOS app icon updater").apply { isDaemon = false }.start()
+        }, "CINEBOX macOS app icon updater").apply { isDaemon = false }.start()
     }
 
     private fun update(icon: AppIconOption) {
@@ -37,7 +37,7 @@ internal object MacAppIconUpdater {
                 ProcessBuilder("open", appBundle.toString()).start()
                 kotlin.system.exitProcess(0)
             }
-        }, "Nuvio macOS app restart").apply {
+        }, "CINEBOX macOS app restart").apply {
             isDaemon = false
             start()
         }

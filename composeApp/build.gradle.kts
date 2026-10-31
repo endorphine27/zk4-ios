@@ -1068,7 +1068,7 @@ kotlin {
                 }
                 if (iosDistribution == "full") {
                     check(nuvioEngineSliceDirectory.resolve("libCNuvioEngine.a").isFile) {
-                        "Build the local Nuvio Engine Apple XCFramework before compiling iOS Full."
+                        "Build the local CINEBOX Engine Apple XCFramework before compiling iOS Full."
                     }
                     create("nuvioengine") {
                         defFile(project.file("src/nativeInterop/cinterop/nuvioengine.def"))
@@ -1295,7 +1295,7 @@ compose.desktop {
             )
             macOS {
                 bundleID = "com.cinebox.desktop"
-                iconFile.set(project.file("src/desktopMain/resources/icons/nuvio-app-icon-transparent.icns"))
+                iconFile.set(project.file("src/desktopMain/resources/icons/cinebox-app-icon-transparent.icns"))
                 infoPlist {
                     extraKeysRawXml = """
                         <key>CFBundleURLTypes</key>
@@ -1332,14 +1332,14 @@ compose.desktop {
                 }
             }
             windows {
-                iconFile.set(project.file("src/desktopMain/resources/icons/nuvio-app-icon-transparent.ico"))
+                iconFile.set(project.file("src/desktopMain/resources/icons/cinebox-app-icon-transparent.ico"))
                 upgradeUuid = windowsMsiUpgradeUuid
                 shortcut = true
                 menu = true
                 menuGroup = "CINEBOX"
             }
             linux {
-                iconFile.set(project.file("src/desktopMain/resources/icons/nuvio-app-icon-transparent.png"))
+                iconFile.set(project.file("src/desktopMain/resources/icons/cinebox-app-icon-transparent.png"))
                 debMaintainer = "contact@nuvio.tv"
                 shortcut = true
                 menuGroup = "CINEBOX"
@@ -1554,7 +1554,7 @@ if (isLinuxHost) {
             ?: System.getenv("APPIMAGE_WEBSITE_URL")?.takeIf { it.isNotBlank() }
 
         val distributionName = if (release) "main-release" else "main"
-        val appImageName = "Nuvio-Linux-$linuxAppImageArch-$desktopReleaseVersionName.AppImage"
+        val appImageName = "CINEBOX-Linux-$linuxAppImageArch-$desktopReleaseVersionName.AppImage"
         val outputAppImage = layout.buildDirectory
             .dir("compose/binaries/$distributionName/app")
             .get()

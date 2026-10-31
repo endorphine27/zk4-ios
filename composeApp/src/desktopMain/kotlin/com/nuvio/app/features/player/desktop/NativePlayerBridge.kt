@@ -329,21 +329,21 @@ internal object NativePlayerBridge {
     private fun nativePlayerFontFaces(): String =
         """
             @font-face {
-              font-family: "Nuvio JetBrains Sans";
+              font-family: "CINEBOX JetBrains Sans";
               src: url("fonts/jetbrains_sans_regular.ttf") format("truetype");
               font-weight: 400;
               font-style: normal;
               font-display: block;
             }
             @font-face {
-              font-family: "Nuvio JetBrains Sans";
+              font-family: "CINEBOX JetBrains Sans";
               src: url("fonts/jetbrains_sans_semibold.ttf") format("truetype");
               font-weight: 600;
               font-style: normal;
               font-display: block;
             }
             @font-face {
-              font-family: "Nuvio JetBrains Sans";
+              font-family: "CINEBOX JetBrains Sans";
               src: url("fonts/jetbrains_sans_bold.ttf") format("truetype");
               font-weight: 700 900;
               font-style: normal;

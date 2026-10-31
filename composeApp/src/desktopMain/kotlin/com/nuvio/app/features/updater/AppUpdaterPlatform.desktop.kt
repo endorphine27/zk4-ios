@@ -309,7 +309,7 @@ private fun linuxLauncherPath(): String? = linuxLauncherPathFrom(
 // jpackage records the launcher it started, which is the only path that belongs
 // to this app's package. Without it the process command is the JVM itself, and
 // the JVM belongs to the distribution's own java package -- asking rpm or dpkg
-// who owns that would report a packaged install that is not Nuvio, so a source
+// who owns that would report a packaged install that is not CINEBOX, so a source
 // or tarball run is left unresolved instead.
 internal fun linuxLauncherPathFrom(
     jpackageAppPath: String?,

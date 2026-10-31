@@ -479,11 +479,11 @@ std::wstring localAppDataDirectory(const wchar_t *name) {
     }
     std::wstring directory(localAppData);
     CoTaskMemFree(localAppData);
-    directory += L"\\Nuvio\\";
+    directory += L"\\CINEBOX\\";
     directory += name;
     int createResult = SHCreateDirectoryExW(nullptr, directory.c_str(), nullptr);
     if (createResult != ERROR_SUCCESS && createResult != ERROR_ALREADY_EXISTS && createResult != ERROR_FILE_EXISTS) {
-        throw std::runtime_error("Failed to create Nuvio local data directory");
+        throw std::runtime_error("Failed to create CINEBOX local data directory");
     }
     return directory;
 }
@@ -574,7 +574,7 @@ struct MpvApi {
             candidates.push_back(moduleDir + L"\\libmpv-2.dll");
         }
         candidates.push_back(L"libmpv-2.dll");
-        candidates.push_back(L"C:\\Program Files (x86)\\Nuvio\\app\\native\\libmpv-2.dll");
+        candidates.push_back(L"C:\\Program Files (x86)\\CINEBOX\\app\\native\\libmpv-2.dll");
         candidates.push_back(L"C:\\msys64\\ucrt64\\bin\\libmpv-2.dll");
 
         for (const std::wstring &candidate : candidates) {

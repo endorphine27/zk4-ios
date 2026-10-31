@@ -50,12 +50,12 @@ internal fun PlayerScreenRuntime.configureAutoSyncController(
 internal fun PlayerScreenRuntime.BindAutoSyncRuntimeEffects() {
     val activeController = playerController
     DisposableEffect(activeController) {
-        // Runs once playerController is set, which Nuvio only does for the live playback key.
+        // Runs once playerController is set, which CINEBOX only does for the live playback key.
         activeController?.let { configureAutoSyncController(it) }
         onDispose { activeController?.setAutoSyncAppliedListener(null) }
     }
     LaunchedEffect(playerController, playbackSnapshot.isLoading, isLoadingAddonSubtitles, addonSubtitles) {
-        // Add-ons can finish after Nuvio has completed its first track scan with no subtitle.
+        // Add-ons can finish after CINEBOX has completed its first track scan with no subtitle.
         // Retry that automatic pick only for AutoSync, while the user still has no selection.
         if (playerController !is AutoSyncPlayerController || playbackSnapshot.isLoading) return@LaunchedEffect
         if (!AutoSyncPreferencesRepository.preferredSubtitleAutoSyncOnStart.value) return@LaunchedEffect

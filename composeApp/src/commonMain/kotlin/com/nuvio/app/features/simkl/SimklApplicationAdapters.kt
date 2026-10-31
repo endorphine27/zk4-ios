@@ -45,7 +45,7 @@ object SimklWatchedSyncAdapter : TrackingWatchedProvider {
     }
 
     override suspend fun pullFullyWatchedSeriesKeys(profileId: Int): Set<String>? {
-        // Simkl "completed" = all episodes watched; Nuvio "completed" = all
+        // Simkl "completed" = all episodes watched; CINEBOX "completed" = all
         // *available* episodes watched. Let local revalidation decide.
         return null
     }

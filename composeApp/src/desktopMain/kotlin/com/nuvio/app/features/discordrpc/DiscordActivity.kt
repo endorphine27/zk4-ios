@@ -9,7 +9,7 @@ internal data class DiscordActivity(
     // Sending 3 makes Discord show "Watching …" instead of the default "Playing …".
     val type: Int = 0,
     // Top line rendered under the username ("<verb> <name>"). When omitted, Discord uses the
-    // name of the application registered to the client id ("Nuvio"). Recent Discord clients honor
+    // name of the application registered to the client id ("CINEBOX"). Recent Discord clients honor
     // a custom name here so the media title shows directly under the pseudo; older clients ignore
     // it and fall back to the app name (that is why the title is also kept in `details`).
     val name: String? = null,

@@ -551,7 +551,7 @@ object WatchProgressRepository {
             } catch (error: CancellationException) {
                 throw error
             } catch (error: Throwable) {
-                log.e(error) { "Failed to refresh Nuvio watch progress" }
+                log.e(error) { "Failed to refresh CINEBOX watch progress" }
                 false
             }
         }

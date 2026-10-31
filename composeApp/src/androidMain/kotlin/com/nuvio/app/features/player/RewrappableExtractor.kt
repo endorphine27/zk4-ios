@@ -6,7 +6,7 @@ import androidx.media3.extractor.Extractor
 
 /**
  * An AutoSync extractor wrapper that forwards everything
- * to [wrappedExtractor] and can be rebuilt around a different inner extractor. Lets Nuvio swap in
+ * to [wrappedExtractor] and can be rebuilt around a different inner extractor. Lets CINEBOX swap in
  * the libass Matroska extractor underneath the wrappers, where it would otherwise not see it.
  */
 internal interface RewrappableExtractor : Extractor {

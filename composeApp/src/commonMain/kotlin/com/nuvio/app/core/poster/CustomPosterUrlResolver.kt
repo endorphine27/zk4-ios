@@ -9,8 +9,8 @@ import kotlinx.atomicfu.locks.synchronized
  *
  * Supported placeholders:
  *
- * **Nuvio native (recommended for new integrations):**
- * - `{id}`        - full Nuvio meta ID (e.g. "tt0137523", "tmdb:1396", "kitsu:7442")
+ * **CINEBOX native (recommended for new integrations):**
+ * - `{id}`        - full CINEBOX meta ID (e.g. "tt0137523", "tmdb:1396", "kitsu:7442")
  * - `{id_type}`   - ID namespace: "imdb", "tmdb", "kitsu", "anilist", "mal", "tvdb", "anidb"
  * - `{typed_id}`  - ID formatted for RPDB-style services without namespace prefix: "tt0137523" for IMDb,
  *                   "movie-1396" / "series-1396" for TMDB/TVDB/etc.
@@ -82,7 +82,7 @@ object CustomPosterUrlResolver {
     }
 
     /**
-     * Extract [ContentIds] from a Nuvio meta ID and optional explicit imdbId field.
+     * Extract [ContentIds] from a CINEBOX meta ID and optional explicit imdbId field.
      *
      * Examples:
      * - `"tt0137523"` -> imdbId = "tt0137523"
@@ -285,7 +285,7 @@ object CustomPosterUrlResolver {
 
     /**
      * Extracts the raw ID (without namespace prefix) and the ID type string.
-     * For `{id}` placeholder we strip the prefix so that Nuvio-native URLs get a clean numeric ID,
+     * For `{id}` placeholder we strip the prefix so that CINEBOX-native URLs get a clean numeric ID,
      * while `{id}` preserves the full string for backward compatibility.
      */
     private fun extractRawIdAndType(ids: ContentIds): Pair<String, String> {

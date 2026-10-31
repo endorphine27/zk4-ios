@@ -386,7 +386,7 @@ object WatchedRepository {
         if (effectiveSource.providerId == null) {
             val authState = AuthRepository.state.value
             if (authState !is AuthState.Authenticated || authState.isAnonymous) {
-                // Local watched state is authoritative when this account has no Nuvio upstream.
+                // Local watched state is authoritative when this account has no CINEBOX upstream.
                 nuvioHasLoaded = true
                 nuvioHasLoadedRemote = true
                 publish()
@@ -1293,7 +1293,7 @@ object WatchedRepository {
             } catch (error: CancellationException) {
                 throw error
             } catch (error: Throwable) {
-                log.e(error) { "Failed to push watched items to Nuvio Sync" }
+                log.e(error) { "Failed to push watched items to CINEBOX Sync" }
             }
         }
 
@@ -1329,7 +1329,7 @@ object WatchedRepository {
             } catch (error: CancellationException) {
                 throw error
             } catch (error: Throwable) {
-                log.e(error) { "Failed to delete watched items from Nuvio Sync" }
+                log.e(error) { "Failed to delete watched items from CINEBOX Sync" }
             }
         }
 

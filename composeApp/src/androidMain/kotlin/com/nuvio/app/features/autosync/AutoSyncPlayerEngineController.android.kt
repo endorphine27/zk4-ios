@@ -60,7 +60,7 @@ internal fun rememberAutoSyncCoordinator(
 }
 
 /**
- * Nuvio's ExoPlayer controller with AutoSync layered on top. Every call is forwarded to [base]
+ * CINEBOX's ExoPlayer controller with AutoSync layered on top. Every call is forwarded to [base]
  * unchanged; subtitle changes first stop any AutoSync run that still targets the old subtitle.
  */
 internal class AutoSyncPlayerEngineController(

@@ -18,7 +18,7 @@ internal const val MDBLIST_LIKED_LIST_KEY_PREFIX = "mdblist:liked:"
 /** Bumped when list items are requested in a different order, so cached lists are downloaded again. */
 internal const val MDBLIST_ITEMS_ORDER = 1
 
-/** A list Nuvio only reads, synced on its own so a failure keeps the cached copy. */
+/** A list CINEBOX only reads, synced on its own so a failure keeps the cached copy. */
 interface MdbListReadOnlyList {
     val key: String
     val updatedAt: String?
@@ -145,7 +145,7 @@ data class MdbListLibrarySnapshot(
     val dynamicLists: List<MdbListDynamicList> = emptyList(),
     val likedLists: List<MdbListLikedList> = emptyList()
 ) {
-    /** Tabs shown in Nuvio: lists the user hid in MDBList settings are left out. */
+    /** Tabs shown in CINEBOX: lists the user hid in MDBList settings are left out. */
     fun visibleTabs(): List<TrackingLibraryTab> = tabs().filterNot { it.key in hiddenListKeys }
 
     /** Items of the visible lists only. */

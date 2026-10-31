@@ -3102,7 +3102,7 @@ static void nuvioMpvWakeup(void *ctx) {
     _lastNowPlayingPushedAt = now;
     NSMutableDictionary *nowPlaying = [NSMutableDictionary dictionary];
     nowPlaying[MPNowPlayingInfoPropertyMediaType] = @(MPNowPlayingInfoMediaTypeVideo);
-    nowPlaying[MPMediaItemPropertyTitle] = (displayTitle.length > 0) ? displayTitle : @"Nuvio";
+    nowPlaying[MPMediaItemPropertyTitle] = (displayTitle.length > 0) ? displayTitle : @"CINEBOX";
     if (_nowPlayingSubtitle.length > 0) {
         nowPlaying[MPMediaItemPropertyArtist] = _nowPlayingSubtitle;
     }
