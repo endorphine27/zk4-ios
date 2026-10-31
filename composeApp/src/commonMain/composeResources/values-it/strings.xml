@@ -2276,7 +2276,7 @@
     <string name="compose_auth_link_code_expired">Questo codice è scaduto.</string>
     <string name="compose_auth_link_creating_code">Generazione del codice…</string>
     <string name="compose_auth_link_failed">Accesso tramite link non riuscito.</string>
-    <string name="compose_auth_link_open">Apri nuvio.tv/link</string>
+    <string name="compose_auth_link_open">Apri CINEBOX</string>
     <string name="compose_auth_link_open_failed">Impossibile aprire il link.</string>
     <string name="compose_auth_link_sign_in">Accedi tramite link</string>
     <string name="compose_auth_link_try_again">Riprova</string>

@@ -354,7 +354,7 @@
     <string name="compose_auth_link_code_expired">Este código ha caducado.</string>
     <string name="compose_auth_link_creating_code">Creando código…</string>
     <string name="compose_auth_link_failed">Error al iniciar sesión mediante enlace.</string>
-    <string name="compose_auth_link_open">Abrir nuvio.tv/link</string>
+    <string name="compose_auth_link_open">Abrir CINEBOX</string>
     <string name="compose_auth_link_open_failed">No se pudo abrir el enlace.</string>
     <string name="compose_auth_link_sign_in">Iniciar sesión con enlace</string>
     <string name="compose_auth_link_signing_in">Iniciando sesión…</string>

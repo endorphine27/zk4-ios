@@ -353,8 +353,7 @@ internal fun LazyListScope.debridSettingsContent(
     }
 
     if (!settings.canResolvePlayableLinks) {
-        debridLearnMoreFooterItem(isTablet)
-        return
+            return
     }
 
     item {

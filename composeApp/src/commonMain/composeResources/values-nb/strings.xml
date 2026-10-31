@@ -508,7 +508,7 @@
     <string name="compose_auth_link_code_expired">Denne koden er utløpt.</string>
     <string name="compose_auth_link_creating_code">Oppretter kode…</string>
     <string name="compose_auth_link_failed">Innlogging med lenke mislyktes.</string>
-    <string name="compose_auth_link_open">Åpne nuvio.tv/link</string>
+    <string name="compose_auth_link_open">Åpne CINEBOX</string>
     <string name="compose_auth_link_open_failed">Kunne ikke åpne lenken.</string>
     <string name="compose_auth_link_sign_in">Logg inn med lenke</string>
     <string name="compose_auth_link_signing_in">Logger inn…</string>

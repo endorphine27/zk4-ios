@@ -354,7 +354,7 @@
     <string name="compose_auth_link_code_expired">Este código expirou.</string>
     <string name="compose_auth_link_creating_code">Criando código…</string>
     <string name="compose_auth_link_failed">Falha ao entrar com link.</string>
-    <string name="compose_auth_link_open">Abrir nuvio.tv/link</string>
+    <string name="compose_auth_link_open">Abrir CINEBOX</string>
     <string name="compose_auth_link_open_failed">Não foi possível abrir o link.</string>
     <string name="compose_auth_link_sign_in">Entrar com link</string>
     <string name="compose_auth_link_signing_in">Entrando…</string>

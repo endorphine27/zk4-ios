@@ -1944,7 +1944,7 @@
     <string name="compose_auth_link_code_expired">Platnost tohoto kódu vypršela.</string>
     <string name="compose_auth_link_creating_code">Vytváření kódu…</string>
     <string name="compose_auth_link_failed">Přihlášení pomocí odkazu se nezdařilo.</string>
-    <string name="compose_auth_link_open">Otevřít nuvio.tv/link</string>
+    <string name="compose_auth_link_open">Otevřít CINEBOX</string>
     <string name="compose_auth_link_open_failed">Odkaz se nepodařilo otevřít.</string>
     <string name="compose_auth_link_sign_in">Přihlásit se pomocí odkazu</string>
     <string name="compose_auth_link_signing_in">Přihlašování…</string>

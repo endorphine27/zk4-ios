@@ -354,7 +354,7 @@
     <string name="compose_auth_link_code_expired">Mã này đã hết hạn.</string>
     <string name="compose_auth_link_creating_code">Đang tạo mã…</string>
     <string name="compose_auth_link_failed">Đăng nhập bằng liên kết không thành công.</string>
-    <string name="compose_auth_link_open">Mở nuvio.tv/link</string>
+    <string name="compose_auth_link_open">Mở CINEBOX</string>
     <string name="compose_auth_link_open_failed">Không thể mở liên kết.</string>
     <string name="compose_auth_link_sign_in">Đăng nhập bằng liên kết</string>
     <string name="compose_auth_link_signing_in">Đang đăng nhập…</string>

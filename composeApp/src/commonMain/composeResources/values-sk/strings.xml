@@ -2178,7 +2178,7 @@
     <string name="compose_auth_link_code_expired">Platnosť tohto kódu vypršala.</string>
     <string name="compose_auth_link_creating_code">Vytvára sa kód…</string>
     <string name="compose_auth_link_failed">Prihlásenie pomocou prepojenia zlyhalo.</string>
-    <string name="compose_auth_link_open">Otvorte nuvio.tv/link</string>
+    <string name="compose_auth_link_open">Otvorte CINEBOX</string>
     <string name="compose_auth_link_open_failed">Nepodarilo sa otvoriť odkaz.</string>
     <string name="compose_auth_link_sign_in">Prihlásiť sa pomocou kódového prepojenia</string>
     <string name="compose_auth_link_signing_in">Prihlasuje sa…</string>

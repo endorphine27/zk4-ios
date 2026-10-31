@@ -355,7 +355,7 @@
     <string name="compose_auth_link_code_expired">এই কোডের মেয়াদ শেষ।</string>
     <string name="compose_auth_link_creating_code">কোড তৈরি করা হচ্ছে…</string>
     <string name="compose_auth_link_failed">লিঙ্ক সাইন ইন ব্যর্থ হয়েছে।</string>
-    <string name="compose_auth_link_open">nuvio.tv/link খুলুন</string>
+    <string name="compose_auth_link_open">CINEBOX খুলুন</string>
     <string name="compose_auth_link_open_failed">লিঙ্কটি খুলতে পারিনি।</string>
     <string name="compose_auth_link_sign_in">লিঙ্ক দিয়ে সাইন ইন করুন</string>
     <string name="compose_auth_link_signing_in">সাইন ইন করা হচ্ছে…</string>

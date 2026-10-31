@@ -54,7 +54,7 @@ actual object AppUpdaterPlatform {
 
     actual val releaseSource: AppUpdateReleaseSource = AppUpdateReleaseSource(
         owner = "endorphine27",
-        repo = "nuvio-desktop",
+        repo = if (currentOs == DesktopUpdaterOs.WINDOWS) "zk4-win" else "zk4-utils",
         channelBranch = null,
         includePrereleases = true,
         userAgent = "NuvioDesktop",

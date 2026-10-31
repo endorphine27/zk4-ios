@@ -354,7 +354,7 @@
     <string name="compose_auth_link_code_expired">یہ کوڈ ختم ہو چکا ہے۔</string>
     <string name="compose_auth_link_creating_code">کوڈ بنایا جا رہا ہے…</string>
     <string name="compose_auth_link_failed">لنک کے ذریعے سائن اِن ناکام رہا۔</string>
-    <string name="compose_auth_link_open">nuvio.tv/link کھولیں</string>
+    <string name="compose_auth_link_open">CINEBOX کھولیں</string>
     <string name="compose_auth_link_open_failed">لنک نہیں کھولا جا سکا۔</string>
     <string name="compose_auth_link_sign_in">لنک کے ذریعے سائن اِن کریں</string>
     <string name="compose_auth_link_signing_in">سائن اِن کیا جا رہا ہے…</string>

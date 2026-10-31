@@ -1988,7 +1988,7 @@
     <string name="compose_auth_link_code_expired">Acest cod a expirat.</string>
     <string name="compose_auth_link_creating_code">Se creează codul…</string>
     <string name="compose_auth_link_failed">Autentificarea prin link a eșuat.</string>
-    <string name="compose_auth_link_open">Deschide nuvio.tv/link</string>
+    <string name="compose_auth_link_open">Deschide pagina de conectare</string>
     <string name="compose_auth_link_open_failed">Nu s-a putut deschide linkul.</string>
     <string name="compose_auth_link_sign_in">Autentifică-te cu link</string>
     <string name="compose_auth_link_signing_in">Se autentifică…</string>
@@ -2020,8 +2020,8 @@
     <string name="server_official_action">Folosește serverul oficial</string>
     <string name="server_switching">Se schimbă…</string>
     <string name="server_error_invalid_url">Introdu o adresă Backend HTTP sau HTTPS validă.</string>
-    <string name="server_error_official_active">api.nuvio.tv este serverul oficial și este deja selectat.</string>
-    <string name="server_error_official_available">api.nuvio.tv este serverul oficial. Închide această fereastră și alege „Folosește serverul oficial” ca să revii.</string>
+    <string name="server_error_official_active">Această adresă aparține altui serviciu și este deja selectată.</string>
+    <string name="server_error_official_available">Această adresă aparține altui serviciu. Închide această fereastră și alege „Folosește serverul oficial” ca să revii.</string>
     <string name="server_error_connection">Nu s-a putut ajunge la punctul de descoperire. Verifică adresa și disponibilitatea serverului.</string>
     <string name="server_error_http">Punctul de descoperire a returnat HTTP %1$d.</string>
     <string name="server_error_response_too_large">Documentul de descoperire este mai mare decât este permis.</string>

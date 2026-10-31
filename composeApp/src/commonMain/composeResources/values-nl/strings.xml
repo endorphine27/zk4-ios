@@ -349,7 +349,7 @@
     <string name="compose_auth_link_code_expired">Deze code is verlopen.</string>
     <string name="compose_auth_link_creating_code">Code aanmaken...</string>
     <string name="compose_auth_link_failed">Inloggen via link is mislukt.</string>
-    <string name="compose_auth_link_open">nuvio.tv/link openen</string>
+    <string name="compose_auth_link_open">CINEBOX openen</string>
     <string name="compose_auth_link_open_failed">Kon de link niet openen.</string>
     <string name="compose_auth_link_sign_in">Inloggen met link</string>
     <string name="compose_auth_link_signing_in">Bezig met inloggen...</string>

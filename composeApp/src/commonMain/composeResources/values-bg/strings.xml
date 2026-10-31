@@ -349,7 +349,7 @@
     <string name="compose_auth_link_code_expired">Срокът на валидност на този код изтече.</string>
     <string name="compose_auth_link_creating_code">Създаване на код…</string>
     <string name="compose_auth_link_failed">Влизането чрез линка се провали. </string>
-    <string name="compose_auth_link_open">Отвори nuvio.tv/link</string>
+    <string name="compose_auth_link_open">Отвори CINEBOX</string>
     <string name="compose_auth_link_open_failed">Линкът не може да се отвори.</string>
     <string name="compose_auth_link_sign_in">Влез чрез линк</string>
     <string name="compose_auth_link_signing_in">Влизане…</string>
