@@ -20,19 +20,18 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      # Native macOS runtime (.dylib) lives in Git LFS on the upstream repo only
-      - name: Fetch macOS runtime from upstream LFS
+      # Native macOS runtime (.dylib), kept as a release asset in zk4-deps
+      - name: Fetch macOS runtime
         env:
           MACOS_ARCH: ${{ inputs.arch }}
         run: |
           RT="composeApp/src/desktopMain/native/macos/runtime/${MACOS_ARCH}"
-          git lfs install --local
-          # Objects exist only on upstream's LFS server, so point LFS there
-          git config lfs.url https://github.com/NuvioMedia/NuvioDesktop.git/info/lfs
-          git lfs pull --include="${RT}/**"
-          ls -la "${RT}"
-          file "${RT}/libmpv.2.dylib"
-          file "${RT}/libmpv.2.dylib" | grep -q "Mach-O" || { echo "LFS runtime not downloaded" >&2; head -c 200 "${RT}/libmpv.2.dylib"; exit 1; }
+          curl --fail --location --retry 5 --silent --show-error -o runtime.zip \
+            "https://github.com/endorphine27/zk4-deps/releases/download/runtime-v1/runtime-macos-${MACOS_ARCH}.zip"
+          unzip -qo runtime.zip -d "${RT}"
+          rm runtime.zip
+          ls -la "${RT}" | head -5
+          file "${RT}/libmpv.2.dylib" | grep -q "Mach-O" || { echo "runtime not downloaded" >&2; exit 1; }
 
       - uses: actions/setup-java@v5
         with:

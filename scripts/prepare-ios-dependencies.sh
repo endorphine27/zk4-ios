@@ -22,7 +22,7 @@ trap 'rm -rf "${temporary_directory}"' EXIT
 archive="${temporary_directory}/nuvio-engine-apple-${engine_version}.zip"
 curl --fail --location --retry 5 --retry-all-errors --silent --show-error \
     --output "${archive}" \
-    "https://github.com/NuvioMedia/nuvio-engine/releases/download/v${engine_version}/nuvio-engine-apple-${engine_version}.zip"
+    "https://github.com/endorphine27/zk4-deps/releases/download/runtime-v1/engine-apple-${engine_version}.zip"
 
 actual_checksum="$(shasum -a 256 "${archive}" | awk '{print $1}')"
 if [[ "${actual_checksum}" != "${engine_checksum}" ]]; then
