@@ -1,2 +1,2 @@
 Ce se schimbă în această versiune:
-• Extensii: secțiune nouă „Conectează Trakt" care deschide MyTrakt, ca să-ți vezi cataloagele Trakt
+• Integrări: revine câmpul „Client ID Trakt" (creezi o aplicație pe developer.trakt.tv) și intrarea „Urmărire"

@@ -2525,7 +2525,8 @@
         <item quantity="few">%1$d sezoane</item>
         <item quantity="other">%1$d de sezoane</item>
     </plurals>
-    <string name="addons_trakt_title">Conectează Trakt</string>
-    <string name="addons_trakt_description">Deschide MyTrakt, conectează-te cu Trakt și copiază linkul primit. Lipește-l mai sus, în câmpul de adăugare a extensiei, ca să vezi cataloagele tale Trakt aici.</string>
-    <string name="addons_trakt_button">Conectează Trakt</string>
+    <string name="settings_trakt_client_id_title">Client ID Trakt</string>
+    <string name="settings_trakt_client_id_description">Creează o aplicație gratuită pe developer.trakt.tv și lipește aici Client ID-ul. Apoi Trakt apare la Urmărire.</string>
+    <string name="settings_trakt_client_id_label">Client ID</string>
+    <string name="settings_integrations_tracking_description">Conturi și surse Trakt, Simkl, MDBList</string>
 </resources>

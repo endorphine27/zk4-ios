@@ -140,20 +140,6 @@ internal fun AddonsSettingsPageContent(
             },
         )
 
-        SectionHeader(stringResource(Res.string.addons_trakt_title))
-        CineboxSurfaceCard {
-            Text(
-                text = stringResource(Res.string.addons_trakt_description),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Spacer(modifier = Modifier.height(14.dp))
-            CineboxPrimaryButton(
-                text = stringResource(Res.string.addons_trakt_button),
-                onClick = { uriHandler.openUri("https://mytrakt.elfhosted.com/setup") },
-            )
-        }
-
         SectionHeader(stringResource(Res.string.addons_section_installed))
         if (uiState.addons.isEmpty()) {
             EmptyStateCard(usePersonalMediaCopy = usePersonalMediaCopy)
