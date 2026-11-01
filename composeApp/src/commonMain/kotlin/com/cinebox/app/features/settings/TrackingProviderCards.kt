@@ -192,15 +192,20 @@ internal fun TrackingProviderCards(
             uiState = traktUiState,
             modifier = Modifier.fillMaxWidth(),
         )
-        SimklProviderCard(
-            uiState = simklUiState,
-            isSyncing = syncState.isLoading,
-            syncErrorMessage = syncState.errorMessage,
-            onSyncRequested = onSimklSyncRequested,
-            onInfoRequested = { showSyncInfo = true },
-            modifier = Modifier.fillMaxWidth(),
-        )
-        MdbListProviderCard(Modifier.fillMaxWidth())
+        // Providers without keys in this build are hidden instead of showing a "missing key" error.
+        if (simklUiState.credentialsConfigured) {
+            SimklProviderCard(
+                uiState = simklUiState,
+                isSyncing = syncState.isLoading,
+                syncErrorMessage = syncState.errorMessage,
+                onSyncRequested = onSimklSyncRequested,
+                onInfoRequested = { showSyncInfo = true },
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+        if (com.cinebox.app.features.mdblist.MdbListTracker.auth.hasRequiredCredentials()) {
+            MdbListProviderCard(Modifier.fillMaxWidth())
+        }
     }
 
     if (showSyncInfo) {

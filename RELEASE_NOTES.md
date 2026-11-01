@@ -1,4 +1,3 @@
 Ce se schimbă în această versiune:
-• Integrări: rând nou „Urmărire” pentru conturile Trakt, Simkl și MDBList
-• Integrări: câmp „Client ID Trakt”; după ce îl pui, te poți conecta la Trakt cu codul afișat pe ecran
-• Trakt funcționează acum cu o aplicație Trakt fără Client Secret
+• Urmărire: cardurile Simkl și MDBList nu mai apar cât timp nu sunt configurate, fără mesaje de eroare
+• Urmărire: mesaj clar la Trakt, „Adaugă Client ID-ul Trakt în Setări → Integrări”
