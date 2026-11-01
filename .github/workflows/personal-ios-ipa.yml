@@ -51,6 +51,8 @@ jobs:
             echo "CINEBOX_SUPABASE_URL=https://destinyab.go.ro:8444"
             echo "CINEBOX_SUPABASE_ANON_KEY=${key}"
             echo "CINEBOX_SUPABASE_FALLBACK_URL="
+            echo "TRAKT_CLIENT_ID=${{ secrets.TRAKT_CLIENT_ID }}"
+            echo "TRAKT_CLIENT_SECRET=${{ secrets.TRAKT_CLIENT_SECRET }}"
           } > local.properties
 
       - name: Prepare iOS dependencies
