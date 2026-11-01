@@ -2557,4 +2557,7 @@
     <string name="stream_info_subtitle_source_embedded">Embedded</string>
     <string name="stream_info_player_engine">Player Engine</string>
     <string name="stream_info_server">Server</string>
+    <string name="addons_trakt_title">Connect Trakt</string>
+    <string name="addons_trakt_description">Open MyTrakt, sign in with Trakt and copy the link it gives you. Paste it above in the add addon field to see your Trakt catalogs here.</string>
+    <string name="addons_trakt_button">Connect Trakt</string>
 </resources>
