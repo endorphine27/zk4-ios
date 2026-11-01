@@ -1,2 +1,2 @@
 Ce se schimbă în această versiune:
-• Integrări: câmpul „Client ID Trakt" și intrarea „Urmărire"; recomandările trec la TMDB dacă Trakt/Simkl nu dau nimic
+• Trakt: Client ID-ul se salvează în cont și apare automat pe celelalte dispozitive (de exemplu pe TV)
