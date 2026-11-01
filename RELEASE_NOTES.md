@@ -1,2 +1,2 @@
 Ce se schimbă în această versiune:
-• Integrări: revine câmpul „Client ID Trakt" (creezi o aplicație pe developer.trakt.tv) și intrarea „Urmărire"
+• Trakt: Client ID-ul se salvează în cont și apare automat pe celelalte dispozitive (de exemplu pe TV)

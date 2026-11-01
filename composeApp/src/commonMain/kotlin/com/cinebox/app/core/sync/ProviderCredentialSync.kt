@@ -14,6 +14,7 @@ import com.cinebox.app.features.player.PlayerSettingsUiState
 import com.cinebox.app.features.profiles.ProfileRepository
 import com.cinebox.app.features.tmdb.TmdbSettings
 import com.cinebox.app.features.tmdb.TmdbSettingsRepository
+import com.cinebox.app.features.trakt.TraktSettingsRepository
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.rpc
 import kotlinx.atomicfu.locks.SynchronizedObject
@@ -164,7 +165,18 @@ object ProviderCredentialSync {
             mdbList = mdbList,
             player = player,
         )
+    }.combine(TraktSettingsRepository.uiState) { snapshot, trakt ->
+        snapshot.withTraktClientId(trakt.clientId)
     }
+
+    private fun ProviderCredentialSnapshot.withTraktClientId(clientId: String): ProviderCredentialSnapshot =
+        copy(
+            values = values + ProviderCredentialValue(
+                ProviderCredentialIds.TRAKT,
+                PROVIDER_CLIENT_ID_FIELD,
+                clientId.trim(),
+            ),
+        )
 
     private fun currentSnapshot(profileId: Int): ProviderCredentialSnapshot {
         check(ProfileRepository.activeProfileId == profileId)
@@ -174,7 +186,7 @@ object ProviderCredentialSync {
             tmdb = TmdbSettingsRepository.snapshot(),
             mdbList = MdbListSettingsRepository.snapshot(),
             player = PlayerSettingsRepository.uiState.value,
-        )
+        ).withTraktClientId(TraktSettingsRepository.uiState.value.clientId)
         check(ProfileRepository.activeProfileId == profileId)
         return snapshot
     }
@@ -241,6 +253,12 @@ object ProviderCredentialSync {
                 credential.provider == ProviderCredentialIds.INTRODB -> {
                     PlayerSettingsRepository.setIntroDbApiKey(credential.value)
                 }
+                credential.provider == ProviderCredentialIds.TRAKT -> {
+                    // Never wipe a Client ID typed here just because no other device has one yet.
+                    if (credential.value.isNotBlank()) {
+                        TraktSettingsRepository.setClientId(credential.value)
+                    }
+                }
             }
         }
     }
@@ -299,5 +317,6 @@ object ProviderCredentialSync {
         TmdbSettingsRepository.ensureLoaded()
         MdbListSettingsRepository.ensureLoaded()
         PlayerSettingsRepository.ensureLoaded()
+        TraktSettingsRepository.ensureLoaded()
     }
 }
