@@ -18,6 +18,7 @@ data class TraktAuthState(
     val pendingDeviceVerificationUrl: String? = null,
     val pendingDeviceIntervalSeconds: Int? = null,
     val pendingDeviceExpiresAtMillis: Long? = null,
+    val disconnectedAtMillis: Long? = null,
 ) {
     val isAuthenticated: Boolean
         get() = !accessToken.isNullOrBlank() && !refreshToken.isNullOrBlank()

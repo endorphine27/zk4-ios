@@ -1,2 +1,2 @@
 Ce se schimbă în această versiune:
-• Trakt: Client ID-ul se salvează în cont și apare automat pe celelalte dispozitive (de exemplu pe TV)
+• Trakt: conectarea la Trakt se sincronizează între dispozitive; ce conectezi pe un dispozitiv apare conectat și pe celelalte
