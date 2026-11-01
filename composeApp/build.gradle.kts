@@ -122,9 +122,15 @@ abstract class GenerateRuntimeConfigsTask : DefaultTask() {
                 |package com.cinebox.app.features.trakt
                 |
                 |object TraktConfig {
-                |    const val CLIENT_ID = "${props.getProperty("TRAKT_CLIENT_ID", "")}" 
-                |    const val CLIENT_SECRET = "${props.getProperty("TRAKT_CLIENT_SECRET", "")}" 
-                |    const val REDIRECT_URI = "${props.getProperty("TRAKT_REDIRECT_URI", "cinebox://auth/trakt")}" 
+                |    private const val BUILD_CLIENT_ID = "${props.getProperty("TRAKT_CLIENT_ID", "")}"
+                |    private const val BUILD_CLIENT_SECRET = "${props.getProperty("TRAKT_CLIENT_SECRET", "")}"
+                |
+                |    /** Client ID the user entered in Settings; it wins over the build-time one. */
+                |    var userClientId: String = ""
+                |
+                |    val CLIENT_ID: String get() = userClientId.trim().ifBlank { BUILD_CLIENT_ID }
+                |    val CLIENT_SECRET: String get() = if (userClientId.isNotBlank()) "" else BUILD_CLIENT_SECRET
+                |    val REDIRECT_URI: String = "${props.getProperty("TRAKT_REDIRECT_URI", "cinebox://auth/trakt")}"
                 |}
                 """.trimMargin()
             )

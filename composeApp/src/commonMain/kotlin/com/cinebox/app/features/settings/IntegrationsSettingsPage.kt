@@ -5,6 +5,8 @@ import cinebox.composeapp.generated.resources.compose_settings_page_debrid
 import cinebox.composeapp.generated.resources.Res
 import cinebox.composeapp.generated.resources.compose_settings_page_mdblist_ratings
 import cinebox.composeapp.generated.resources.compose_settings_page_tmdb_enrichment
+import cinebox.composeapp.generated.resources.compose_settings_page_tracking
+import cinebox.composeapp.generated.resources.settings_integrations_tracking_description
 import cinebox.composeapp.generated.resources.settings_integrations_mdblist_description
 import cinebox.composeapp.generated.resources.settings_integrations_debrid_description
 import cinebox.composeapp.generated.resources.settings_integrations_section_title
@@ -16,6 +18,7 @@ internal fun LazyListScope.integrationsContent(
     onTmdbClick: () -> Unit,
     onMdbListClick: () -> Unit,
     onDebridClick: () -> Unit,
+    onTrackingClick: () -> Unit,
 ) {
     item {
         SettingsSection(
@@ -38,6 +41,16 @@ internal fun LazyListScope.integrationsContent(
                     isTablet = isTablet,
                     onClick = onMdbListClick,
                 )
+                SettingsGroupDivider(isTablet = isTablet)
+                SettingsNavigationRow(
+                    title = stringResource(Res.string.compose_settings_page_tracking),
+                    description = stringResource(Res.string.settings_integrations_tracking_description),
+                    iconPainter = integrationLogoPainter(IntegrationLogo.Trakt),
+                    isTablet = isTablet,
+                    onClick = onTrackingClick,
+                )
+                SettingsGroupDivider(isTablet = isTablet)
+                TraktClientIdRow(isTablet = isTablet)
             }
         }
     }

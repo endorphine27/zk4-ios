@@ -1371,7 +1371,7 @@
     <string name="settings_trakt_features">FEATURES</string>
     <string name="settings_trakt_finish_sign_in">Finish connection approval</string>
     <string name="settings_trakt_intro_description">Sync your watchlist, watch progress, continue watching, scrobbles, and personal lists with Trakt.</string>
-    <string name="settings_trakt_missing_credentials">Missing Trakt credentials in local.properties (TRAKT_CLIENT_ID / TRAKT_CLIENT_SECRET).</string>
+    <string name="settings_trakt_missing_credentials">Add your Trakt Client ID in Settings → Integrations.</string>
     <string name="settings_trakt_open_activation">Open Trakt Activate</string>
     <string name="settings_trakt_open_login">Open Trakt Login</string>
     <string name="settings_trakt_save_actions_description">Sync your watchlist, watch progress, continue watching, scrobbles, and personal lists with Trakt.</string>
@@ -2557,4 +2557,8 @@
     <string name="stream_info_subtitle_source_embedded">Embedded</string>
     <string name="stream_info_player_engine">Player Engine</string>
     <string name="stream_info_server">Server</string>
+    <string name="settings_trakt_client_id_title">Trakt Client ID</string>
+    <string name="settings_trakt_client_id_description">Create a free app at trakt.tv/oauth/applications (or developer.trakt.tv) and paste its Client ID here. Trakt then appears under Tracking.</string>
+    <string name="settings_trakt_client_id_label">Client ID</string>
+    <string name="settings_integrations_tracking_description">Trakt, Simkl and MDBList accounts and sources</string>
 </resources>

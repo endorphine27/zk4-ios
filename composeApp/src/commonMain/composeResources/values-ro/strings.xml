@@ -1057,7 +1057,7 @@
     <string name="settings_trakt_features">CARACTERISTICI</string>
     <string name="settings_trakt_finish_sign_in">Finalizează autentificarea Trakt în browser</string>
     <string name="settings_trakt_intro_description">Sincronizează-ți lista de urmărire, progresul, istoricul, scrobble-urile și listele personale cu Trakt.</string>
-    <string name="settings_trakt_missing_credentials">Lipsesc credențialele Trakt în local.properties (TRAKT_CLIENT_ID / TRAKT_CLIENT_SECRET).</string>
+    <string name="settings_trakt_missing_credentials">Adaugă Client ID-ul Trakt în Setări → Integrări.</string>
     <string name="settings_trakt_open_login">Deschide autentificarea Trakt</string>
     <string name="settings_trakt_save_actions_description">Acțiunile tale de salvare pot viza acum lista de urmărire Trakt (watchlist) și listele personale.</string>
     <string name="settings_trakt_sign_in_description">Autentifică-te cu Trakt pentru a activa salvarea bazată pe liste și modul de bibliotecă Trakt.</string>
@@ -2525,4 +2525,8 @@
         <item quantity="few">%1$d sezoane</item>
         <item quantity="other">%1$d de sezoane</item>
     </plurals>
+    <string name="settings_trakt_client_id_title">Client ID Trakt</string>
+    <string name="settings_trakt_client_id_description">Creează o aplicație gratuită pe developer.trakt.tv și lipește aici Client ID-ul. Apoi Trakt apare la Urmărire.</string>
+    <string name="settings_trakt_client_id_label">Client ID</string>
+    <string name="settings_integrations_tracking_description">Conturi și surse Trakt, Simkl, MDBList</string>
 </resources>
