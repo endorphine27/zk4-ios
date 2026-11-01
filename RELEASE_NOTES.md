@@ -1,2 +1,2 @@
 Ce se schimbă în această versiune:
-• Trakt: conectarea la Trakt se sincronizează între dispozitive; ce conectezi pe un dispozitiv apare conectat și pe celelalte
+• Trakt: conectarea existentă se trimite acum în cont la prima sincronizare, ca să apară și pe celelalte dispozitive

@@ -96,6 +96,10 @@ object ProviderCredentialSync {
             val localSnapshot = currentSnapshot(profileId)
             val rows = pullRows(profileId)
             requireCurrentScope(credentialScope)
+            val missingRemotely = localSnapshot.valuesMissingRemotely(
+                rows,
+                setOf(ProviderCredentialIds.TRAKT, ProviderCredentialIds.TRAKT_AUTH),
+            )
             val remoteSnapshot = localSnapshot.mergeRemote(rows)
             val applied = remoteSnapshot != localSnapshot
             if (applied) {
@@ -107,6 +111,9 @@ object ProviderCredentialSync {
                 }
             }
             requireCurrentScope(credentialScope)
+            if (missingRemotely.isNotEmpty()) {
+                pushSnapshot(localSnapshot.copy(values = missingRemotely))
+            }
             synchronized(stateLock) {
                 observedSnapshots[profileId] = remoteSnapshot
                 baselineSnapshots[credentialScope] = remoteSnapshot
