@@ -774,7 +774,7 @@ object TraktAuthRepository : TrackingAuthProvider {
             else -> TraktConnectionMode.DISCONNECTED
         }
 
-        _isAuthenticated.value = authState.isAuthenticated
+        _isAuthenticated.value = authState.isAuthenticated && hasRequiredCredentials()
         _uiState.value = TraktAuthUiState(
             mode = mode,
             credentialsConfigured = hasRequiredCredentials(),
