@@ -26,7 +26,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
@@ -45,11 +44,9 @@ object TraktAuthRepository : TrackingAuthProvider {
     private const val API_VERSION = "2"
 
     private val log = Logger.withTag("TraktAuth")
-    @OptIn(ExperimentalSerializationApi::class)
     private val json = Json {
         ignoreUnknownKeys = true
         encodeDefaults = true
-        explicitNulls = false
     }
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val refreshMutex = Mutex()
@@ -96,7 +93,6 @@ object TraktAuthRepository : TrackingAuthProvider {
     }
 
     fun ensureLoaded(profileId: Int) {
-        TraktSettingsRepository.ensureLoaded()
         if (hasLoaded && currentProfileId == profileId) return
         loadFromDisk(profileId)
     }
@@ -126,10 +122,7 @@ object TraktAuthRepository : TrackingAuthProvider {
     }
 
     fun hasRequiredCredentials(): Boolean =
-        TraktConfig.CLIENT_ID.isNotBlank()
-
-    // Trakt apps without a client secret can only sign in with the device code flow here.
-    private fun usesDeviceCodeFlow(): Boolean = isDesktop || TraktConfig.CLIENT_SECRET.isBlank()
+        TraktConfig.CLIENT_ID.isNotBlank() && TraktConfig.CLIENT_SECRET.isNotBlank()
 
     fun onConnectRequested(profileId: Int = ProfileRepository.activeProfileId): String? {
         ensureLoaded(profileId)
@@ -138,7 +131,7 @@ object TraktAuthRepository : TrackingAuthProvider {
             return null
         }
 
-        if (usesDeviceCodeFlow()) {
+        if (isDesktop) {
             return startDeviceAuthorization(profileId)
         }
 
@@ -158,7 +151,7 @@ object TraktAuthRepository : TrackingAuthProvider {
 
     fun pendingAuthorizationUrl(profileId: Int = ProfileRepository.activeProfileId): String? {
         ensureLoaded(profileId)
-        if (usesDeviceCodeFlow()) {
+        if (isDesktop) {
             return authState.pendingDeviceVerificationUrl
                 ?.takeUnless { isDeviceAuthorizationExpired(authState) }
         }
@@ -185,7 +178,7 @@ object TraktAuthRepository : TrackingAuthProvider {
     fun onAuthCallbackReceived(callbackUrl: String) {
         val profileId = ProfileRepository.activeProfileId
         ensureLoaded(profileId)
-        if (usesDeviceCodeFlow()) return
+        if (isDesktop) return
         if (!callbackUrl.startsWith("${TraktConfig.REDIRECT_URI}?", ignoreCase = true) &&
             !callbackUrl.equals(TraktConfig.REDIRECT_URI, ignoreCase = true)
         ) {
@@ -339,7 +332,7 @@ object TraktAuthRepository : TrackingAuthProvider {
 
     private fun startDevicePollingIfNeeded(profileId: Int = currentProfileId) {
         if (currentProfileId != profileId) return
-        if (!usesDeviceCodeFlow() || !authState.hasPendingDeviceAuthorization) return
+        if (!isDesktop || !authState.hasPendingDeviceAuthorization) return
         if (isDeviceAuthorizationExpired(authState)) {
             clearPendingAuthorization()
             persist(profileId)
@@ -367,7 +360,7 @@ object TraktAuthRepository : TrackingAuthProvider {
         while (true) {
             if (currentProfileId != profileId ||
                 profileGeneration != generation ||
-                !usesDeviceCodeFlow() ||
+                !isDesktop ||
                 authState.pendingDeviceCode != deviceCode ||
                 authState.isAuthenticated
             ) {
@@ -461,7 +454,7 @@ object TraktAuthRepository : TrackingAuthProvider {
             TraktDeviceTokenRequest(
                 code = deviceCode,
                 clientId = TraktConfig.CLIENT_ID,
-                clientSecret = TraktConfig.CLIENT_SECRET.ifBlank { null },
+                clientSecret = TraktConfig.CLIENT_SECRET,
             ),
         )
         val response = postTraktJson<TraktTokenResponse>(
@@ -556,7 +549,7 @@ object TraktAuthRepository : TrackingAuthProvider {
             TraktAuthorizationCodeRequest(
                 code = code,
                 clientId = TraktConfig.CLIENT_ID,
-                clientSecret = TraktConfig.CLIENT_SECRET.ifBlank { null },
+                clientSecret = TraktConfig.CLIENT_SECRET,
                 redirectUri = TraktConfig.REDIRECT_URI,
             ),
         )
@@ -625,7 +618,7 @@ object TraktAuthRepository : TrackingAuthProvider {
                 TraktRevokeRequest(
                     token = token,
                     clientId = TraktConfig.CLIENT_ID,
-                    clientSecret = TraktConfig.CLIENT_SECRET.ifBlank { null },
+                    clientSecret = TraktConfig.CLIENT_SECRET,
                 ),
             )
             runCatching {
@@ -665,7 +658,7 @@ object TraktAuthRepository : TrackingAuthProvider {
             TraktRefreshTokenRequest(
                 refreshToken = refreshToken,
                 clientId = TraktConfig.CLIENT_ID,
-                clientSecret = TraktConfig.CLIENT_SECRET.ifBlank { null },
+                clientSecret = TraktConfig.CLIENT_SECRET,
                 redirectUri = TraktConfig.REDIRECT_URI,
             ),
         )
@@ -789,7 +782,7 @@ object TraktAuthRepository : TrackingAuthProvider {
             username = authState.username,
             tokenExpiresAtMillis = tokenExpiresAtMillis,
             pendingAuthorizationStartedAtMillis = authState.pendingAuthorizationStartedAtMillis,
-            usesDeviceCodeFlow = usesDeviceCodeFlow(),
+            usesDeviceCodeFlow = isDesktop,
             pendingDeviceUserCode = authState.pendingDeviceUserCode,
             pendingDeviceVerificationUrl = authState.pendingDeviceVerificationUrl,
             pendingDeviceExpiresAtMillis = authState.pendingDeviceExpiresAtMillis,
@@ -896,7 +889,7 @@ private sealed interface TraktDeviceTokenResult {
 private data class TraktAuthorizationCodeRequest(
     @SerialName("code") val code: String,
     @SerialName("client_id") val clientId: String,
-    @SerialName("client_secret") val clientSecret: String? = null,
+    @SerialName("client_secret") val clientSecret: String,
     @SerialName("redirect_uri") val redirectUri: String,
     @SerialName("grant_type") val grantType: String = "authorization_code",
 )
@@ -920,7 +913,7 @@ private data class TraktDeviceCodeResponse(
 private data class TraktDeviceTokenRequest(
     val code: String,
     @SerialName("client_id") val clientId: String,
-    @SerialName("client_secret") val clientSecret: String? = null,
+    @SerialName("client_secret") val clientSecret: String,
 )
 
 @Serializable
@@ -933,7 +926,7 @@ private data class TraktOAuthErrorResponse(
 private data class TraktRefreshTokenRequest(
     @SerialName("refresh_token") val refreshToken: String,
     @SerialName("client_id") val clientId: String,
-    @SerialName("client_secret") val clientSecret: String? = null,
+    @SerialName("client_secret") val clientSecret: String,
     @SerialName("redirect_uri") val redirectUri: String,
     @SerialName("grant_type") val grantType: String = "refresh_token",
 )
@@ -942,7 +935,7 @@ private data class TraktRefreshTokenRequest(
 private data class TraktRevokeRequest(
     @SerialName("token") val token: String,
     @SerialName("client_id") val clientId: String,
-    @SerialName("client_secret") val clientSecret: String? = null,
+    @SerialName("client_secret") val clientSecret: String,
 )
 
 @Serializable

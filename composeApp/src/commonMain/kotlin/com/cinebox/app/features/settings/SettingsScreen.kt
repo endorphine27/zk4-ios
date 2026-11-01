@@ -846,7 +846,6 @@ private fun MobileSettingsScreen(
                     onTmdbClick = { onPageChange(SettingsPage.TmdbEnrichment) },
                     onMdbListClick = { onPageChange(SettingsPage.MdbListRatings) },
                     onDebridClick = { onPageChange(SettingsPage.Debrid) },
-                    onTrackingClick = { onPageChange(SettingsPage.TraktAuthentication) },
                 )
                 SettingsPage.TmdbEnrichment -> tmdbSettingsContent(
                     isTablet = false,
@@ -1326,7 +1325,6 @@ private fun TabletSettingsScreen(
                                 onTmdbClick = { onPageChange(SettingsPage.TmdbEnrichment) },
                                 onMdbListClick = { onPageChange(SettingsPage.MdbListRatings) },
                                 onDebridClick = { onPageChange(SettingsPage.Debrid) },
-                                onTrackingClick = { onPageChange(SettingsPage.TraktAuthentication) },
                             )
                             SettingsPage.TmdbEnrichment -> tmdbSettingsContent(
                                 isTablet = true,

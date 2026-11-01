@@ -477,10 +477,13 @@ object MetaDetailsRepository {
                 log.w { "Failed to load Simkl related titles for ${meta.id}: ${error.message}" }
             }.getOrDefault(emptyList())
 
-            return meta.copy(
-                moreLikeThis = items,
-                moreLikeThisSource = MoreLikeThisSource.SIMKL.takeIf { items.isNotEmpty() },
-            )
+            // Empty answer (not connected, no keys, request failed): fall through to the next source.
+            if (items.isNotEmpty()) {
+                return meta.copy(
+                    moreLikeThis = items,
+                    moreLikeThisSource = MoreLikeThisSource.SIMKL,
+                )
+            }
         }
 
         // Trakt source
@@ -500,10 +503,12 @@ object MetaDetailsRepository {
                 log.w { "Failed to load Trakt related titles for ${meta.id}: ${error.message}" }
             }.getOrDefault(emptyList())
 
-            return meta.copy(
-                moreLikeThis = items,
-                moreLikeThisSource = MoreLikeThisSource.TRAKT.takeIf { items.isNotEmpty() },
-            )
+            if (items.isNotEmpty()) {
+                return meta.copy(
+                    moreLikeThis = items,
+                    moreLikeThisSource = MoreLikeThisSource.TRAKT,
+                )
+            }
         }
 
         val tmdbSettings = TmdbSettingsRepository.snapshot()

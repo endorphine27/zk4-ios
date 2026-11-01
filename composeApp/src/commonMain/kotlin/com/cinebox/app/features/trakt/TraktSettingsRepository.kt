@@ -59,7 +59,6 @@ data class TraktSettingsUiState(
     val librarySourceMode: LibrarySourceMode = DEFAULT_LIBRARY_SOURCE_MODE,
     val moreLikeThisSource: MoreLikeThisSourcePreference = DEFAULT_MORE_LIKE_THIS_SOURCE,
     val simklAnimeIdPreference: SimklAnimeIdPreference = DEFAULT_SIMKL_ANIME_ID_PREFERENCE,
-    val clientId: String = "",
 )
 
 @Serializable
@@ -69,7 +68,6 @@ private data class StoredTraktSettings(
     val librarySourceMode: String? = null,
     val moreLikeThisSource: String? = null,
     val simklAnimeIdPreference: String? = null,
-    val clientId: String = "",
 )
 
 object TraktSettingsRepository {
@@ -138,16 +136,6 @@ object TraktSettingsRepository {
         persist()
     }
 
-    /** The user's own Trakt app Client ID; empty falls back to the build-time one. */
-    fun setClientId(value: String) {
-        ensureLoaded()
-        val normalized = value.trim()
-        if (_uiState.value.clientId == normalized) return
-        _uiState.value = _uiState.value.copy(clientId = normalized)
-        TraktConfig.userClientId = normalized
-        persist()
-    }
-
     fun setSimklAnimeIdPreference(preference: SimklAnimeIdPreference) {
         ensureLoaded()
         if (_uiState.value.simklAnimeIdPreference == preference) return
@@ -162,7 +150,6 @@ object TraktSettingsRepository {
         val payload = TraktSettingsStorage.loadPayload().orEmpty().trim()
         if (payload.isEmpty()) {
             _uiState.value = TraktSettingsUiState()
-            TraktConfig.userClientId = ""
             return
         }
 
@@ -177,12 +164,10 @@ object TraktSettingsRepository {
                 librarySourceMode = librarySourceModeFromStorage(stored.librarySourceMode),
                 moreLikeThisSource = MoreLikeThisSourcePreference.fromStorage(stored.moreLikeThisSource),
                 simklAnimeIdPreference = SimklAnimeIdPreference.fromStorage(stored.simklAnimeIdPreference),
-                clientId = stored.clientId.trim(),
             )
         } else {
             TraktSettingsUiState()
         }
-        TraktConfig.userClientId = _uiState.value.clientId
     }
 
     private fun persist(state: TraktSettingsUiState = _uiState.value) {
@@ -194,7 +179,6 @@ object TraktSettingsRepository {
                     librarySourceMode = state.librarySourceMode.name,
                     moreLikeThisSource = state.moreLikeThisSource.name,
                     simklAnimeIdPreference = state.simklAnimeIdPreference.name,
-                    clientId = state.clientId,
                 ),
             ),
         )
