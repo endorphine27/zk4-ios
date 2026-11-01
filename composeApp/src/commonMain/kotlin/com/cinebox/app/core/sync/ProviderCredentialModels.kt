@@ -12,6 +12,9 @@ internal const val PROVIDER_API_KEY_FIELD = "api_key"
 internal const val PROVIDER_CLIENT_ID_FIELD = "client_id"
 internal const val PROVIDER_AUTH_JSON_FIELD = "auth_json"
 
+/** Trakt values added later: a server row that does not exist yet must not wipe what is set here. */
+private val KEEP_LOCAL_WHEN_REMOTE_MISSING = setOf("trakt", "trakt_auth")
+
 internal object ProviderCredentialIds {
     const val TMDB = "tmdb"
     const val MDBLIST = "mdblist"
@@ -33,6 +36,21 @@ internal data class ProviderCredentialValue(
     }
 }
 
+/** Values set here that the server has no usable copy of yet (missing or blank row). */
+internal fun ProviderCredentialSnapshot.valuesMissingRemotely(
+    rows: List<SupabaseProviderCredential>,
+    providers: Set<String>,
+): List<ProviderCredentialValue> {
+    val remoteByProvider = rows.associateBy { it.provider.lowercase() }
+    return values.filter { local ->
+        local.provider in providers && local.value.isNotBlank() && run {
+            val remote = remoteByProvider[local.provider.lowercase()]
+            val remoteValue = (remote?.credentialJson?.get(local.field) as? JsonPrimitive)?.contentOrNull
+            remoteValue.isNullOrBlank()
+        }
+    }
+}
+
 internal data class ProviderCredentialSnapshot(
     val profileId: Int,
     val values: List<ProviderCredentialValue>,
@@ -45,7 +63,8 @@ internal data class ProviderCredentialSnapshot(
         val remoteByProvider = rows.associateBy { it.provider.lowercase() }
         return copy(
             values = values.map { local ->
-                val remote = remoteByProvider[local.provider.lowercase()] ?: return@map local.copy(value = "")
+                val remote = remoteByProvider[local.provider.lowercase()]
+                    ?: return@map if (local.provider in KEEP_LOCAL_WHEN_REMOTE_MISSING) local else local.copy(value = "")
                 val element = remote.credentialJson[local.field] as? JsonPrimitive
                     ?: error("Invalid credential payload for ${local.provider}")
                 val value = element.contentOrNull
