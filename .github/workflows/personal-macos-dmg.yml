@@ -52,6 +52,8 @@ jobs:
             echo "CINEBOX_SUPABASE_ANON_KEY=${key}"
             echo "CINEBOX_SUPABASE_FALLBACK_URL="
             echo "CINEBOX_DISCORD_CLIENT_ID=1565830214301253632"
+            echo "TRAKT_CLIENT_ID=${{ secrets.TRAKT_CLIENT_ID }}"
+            echo "TRAKT_CLIENT_SECRET=${{ secrets.TRAKT_CLIENT_SECRET }}"
           } > local.properties
 
       # Every build gets an increasing, zero-padded version (0.1.33-alpha.0030) so the in-app updater
