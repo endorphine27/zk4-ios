@@ -4,6 +4,8 @@ import co.touchlab.kermit.Logger
 import com.cinebox.app.features.addons.httpGetTextWithHeaders
 import com.cinebox.app.features.addons.httpPostJsonWithHeaders
 import com.cinebox.app.features.addons.httpRequestRaw
+import com.cinebox.app.core.sync.SyncedTraktAuth
+import com.cinebox.app.core.sync.TraktAuthSyncCodec
 import com.cinebox.app.isDesktop
 import com.cinebox.app.features.profiles.ProfileRepository
 import com.cinebox.app.features.tracking.TrackingAuthProvider
@@ -605,6 +607,7 @@ object TraktAuthRepository : TrackingAuthProvider {
             tokenType = parsed.tokenType,
             createdAt = parsed.createdAt,
             expiresIn = parsed.expiresIn,
+            disconnectedAtMillis = null,
         )
         persist(profileId)
         refreshUserSettings(profileId)
@@ -640,7 +643,7 @@ object TraktAuthRepository : TrackingAuthProvider {
             }
         }
 
-        authState = TraktAuthState()
+        authState = TraktAuthState(disconnectedAtMillis = TraktPlatformClock.nowEpochMs())
         persist(profileId)
         publish(
             isLoading = false,
@@ -718,6 +721,50 @@ object TraktAuthRepository : TrackingAuthProvider {
         persist(profileId)
         publish()
         true
+    }
+
+    @Volatile
+    private var lastSyncedPayload: String = ""
+
+    /** The Trakt login as shared between this account's devices (see TraktAuthSyncCodec). */
+    fun syncPayload(): String = TraktAuthSyncCodec.encode(authState, lastSyncedPayload)
+
+    /** Adopts, or follows a disconnect of, a Trakt login made on another device. */
+    fun applySyncedAuth(payload: String, profileId: Int = currentProfileId) {
+        val remote = TraktAuthSyncCodec.decode(payload) ?: return
+        if (currentProfileId != profileId) return
+        lastSyncedPayload = payload
+        when (remote) {
+            is SyncedTraktAuth.Login -> {
+                val local = authState
+                val adopt = !local.isAuthenticated || remote.createdAt > (local.createdAt ?: 0L)
+                // A device that disconnected after this login was issued must not be logged back in.
+                val disconnectedLater = (local.disconnectedAtMillis ?: 0L) > remote.createdAt * 1_000L
+                if (adopt && !disconnectedLater) {
+                    authState = local.copy(
+                        accessToken = remote.accessToken,
+                        refreshToken = remote.refreshToken,
+                        tokenType = remote.tokenType,
+                        createdAt = remote.createdAt,
+                        expiresIn = remote.expiresIn,
+                        username = remote.username ?: local.username,
+                        userSlug = remote.userSlug ?: local.userSlug,
+                        disconnectedAtMillis = null,
+                    )
+                    clearPendingAuthorization()
+                    persist(profileId)
+                    publish(isLoading = false, statusMessage = null, errorMessage = null)
+                }
+            }
+            is SyncedTraktAuth.Disconnected -> {
+                val local = authState
+                if (local.isAuthenticated && (local.createdAt ?: 0L) * 1_000L < remote.atMillis) {
+                    authState = TraktAuthState(disconnectedAtMillis = remote.atMillis)
+                    persist(profileId)
+                    publish(isLoading = false, statusMessage = null, errorMessage = null)
+                }
+            }
+        }
     }
 
     private fun invalidateCredentials(profileId: Int) {
