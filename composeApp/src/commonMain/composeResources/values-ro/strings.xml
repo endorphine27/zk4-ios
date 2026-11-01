@@ -2525,4 +2525,8 @@
         <item quantity="few">%1$d sezoane</item>
         <item quantity="other">%1$d de sezoane</item>
     </plurals>
+    <string name="settings_trakt_client_id_title">Client ID Trakt</string>
+    <string name="settings_trakt_client_id_description">Creează o aplicație gratuită pe developer.trakt.tv și lipește aici Client ID-ul. Apoi Trakt apare la Urmărire.</string>
+    <string name="settings_trakt_client_id_label">Client ID</string>
+    <string name="settings_integrations_tracking_description">Conturi și surse Trakt, Simkl, MDBList</string>
 </resources>
