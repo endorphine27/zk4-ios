@@ -53,6 +53,7 @@ jobs:
             echo "CINEBOX_SUPABASE_FALLBACK_URL="
             echo "TRAKT_CLIENT_ID=${{ secrets.TRAKT_CLIENT_ID }}"
             echo "TRAKT_CLIENT_SECRET=${{ secrets.TRAKT_CLIENT_SECRET }}"
+            echo "MDBLIST_CLIENT_ID=DEfmtwtcBAsDobyLMc9sg2MakFhlnxwOMo8c36Lk"
           } > local.properties
 
       - name: Stamp build number
