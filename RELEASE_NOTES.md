@@ -1,2 +1,2 @@
 Ce se schimbă în această versiune:
-• Trakt: conectarea Trakt se sincronizează acum și pe iPhone
+• MDBList: conectare cu cont MDBList (istoric și progres), disponibilă din Setări → Urmărire
