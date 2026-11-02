@@ -723,7 +723,6 @@ object TraktAuthRepository : TrackingAuthProvider {
         true
     }
 
-    @Volatile
     private var lastSyncedPayload: String = ""
 
     /** The Trakt login as shared between this account's devices (see TraktAuthSyncCodec). */
