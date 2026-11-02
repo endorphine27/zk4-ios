@@ -1,2 +1,2 @@
 Ce se schimbă în această versiune:
-• Trakt: conectarea Trakt se sincronizează acum și pe iPhone
+• Setări: numărul din paranteză de la versiune arată acum numărul build-ului (1000 + numărul build-ului)

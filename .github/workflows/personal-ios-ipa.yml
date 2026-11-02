@@ -55,6 +55,9 @@ jobs:
             echo "TRAKT_CLIENT_SECRET=${{ secrets.TRAKT_CLIENT_SECRET }}"
           } > local.properties
 
+      - name: Stamp build number
+        run: sed -i "s/^CURRENT_PROJECT_VERSION=.*/CURRENT_PROJECT_VERSION=$((1000 + GITHUB_RUN_NUMBER))/" iosApp/Configuration/Version.xcconfig
+
       - name: Prepare iOS dependencies
         run: ./scripts/prepare-ios-dependencies.sh
 
