@@ -23,6 +23,7 @@ import com.cinebox.app.features.streams.StreamBadgeSettingsRepository
 import com.cinebox.app.features.streams.StreamItem
 import com.cinebox.app.features.streams.StreamLoadCompletion
 import com.cinebox.app.features.streams.StreamParser
+import com.cinebox.app.features.streams.StreamQuality
 import com.cinebox.app.features.streams.StreamsUiState
 import com.cinebox.app.features.streams.runCatchingUnlessCancelled
 import com.cinebox.app.features.streams.sortedForGroupedDisplay
@@ -422,7 +423,7 @@ object PlayerStreamsRepository {
                             addonName = displayName,
                             addonId = addon.addonId,
                             addonLogo = addon.manifest.logoUrl,
-                        )
+                        ).let(StreamQuality::sortedByVideoQuality)
                     }.fold(
                         onSuccess = { streams ->
                             log.d { "fetched $panelName request=$requestKey addon=$displayName streams=${streams.size}" }

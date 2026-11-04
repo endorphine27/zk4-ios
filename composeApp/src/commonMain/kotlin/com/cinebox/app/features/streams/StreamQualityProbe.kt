@@ -82,24 +82,5 @@ object StreamQualityProbe {
         return badges
     }
 
-    internal fun qualityScore(stream: StreamItem): Int {
-        val text = listOfNotNull(stream.name, stream.title, stream.description).joinToString(" ").lowercase()
-        var score = when {
-            Regex("""2160p|\b4k\b|\buhd\b""").containsMatchIn(text) -> 400
-            Regex("""1440p""").containsMatchIn(text) -> 300
-            Regex("""1080p""").containsMatchIn(text) -> 200
-            Regex("""720p""").containsMatchIn(text) -> 100
-            else -> 0
-        }
-        if (Regex("""dolby[ ._-]?vision|\bdv\b|\bdovi\b""").containsMatchIn(text)) score += 30
-        else if (Regex("""hdr10\+""").containsMatchIn(text)) score += 25
-        else if (Regex("""\bhdr""").containsMatchIn(text)) score += 20
-        if (text.contains("atmos")) score += 12
-        else if (Regex("""truehd|dts[ -]?(x|hd)""").containsMatchIn(text)) score += 9
-        else if (Regex("""dd\+|e-?ac-?3|ddp""").containsMatchIn(text)) score += 6
-        if (text.contains("remux")) score += 5
-        // A cached debrid link starts right away, so it beats an uncached one of the same quality.
-        if (text.contains("[rd+]") || text.contains("[tb+]") || text.contains("[pm+]") || text.contains("[ad+]") || text.contains("⚡")) score += 3
-        return score
-    }
+    internal fun qualityScore(stream: StreamItem): Int = StreamQuality.score(stream)
 }
