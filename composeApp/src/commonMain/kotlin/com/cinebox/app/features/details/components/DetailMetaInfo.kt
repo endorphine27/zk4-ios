@@ -144,27 +144,7 @@ fun DetailMetaInfo(
             }
         }
 
-        if (StreamBadgeSettingsRepository.snapshot().hasImport) {
-            // Series have no streams of their own, so the first regular episode stands in for the show.
-            val probeVideoId = remember(meta.id, meta.videos) {
-                meta.videos
-                    .filter { (it.season ?: 0) > 0 && it.available }
-                    .minWithOrNull(compareBy({ it.season ?: 0 }, { it.episode ?: 0 }))
-                    ?.id
-                    ?: meta.id
-            }
-            val bestBadges by produceState(emptyList<StreamBadge>(), meta.type, probeVideoId) {
-                value = StreamQualityProbe.bestBadges(meta.type, probeVideoId)
-            }
-            if (bestBadges.isNotEmpty()) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    bestBadges.forEach { badge -> StreamBadgeImage(badge) }
-                }
-            }
-        }
+        BestStreamBadgesRow(meta)
 
         AnimatedVisibility(
             visible = isMdbListActive && meta.externalRatings.isNotEmpty(),
@@ -456,3 +436,29 @@ private fun formatOneDecimal(value: Double): String {
 private fun formatWhole(value: Double): String = value.roundToInt().toString()
 
 private fun formatPercent(value: Double): String = "${value.roundToInt()}%"
+
+/** Badges of the best stream addons offer for the title; shows nothing until badge rules are imported. */
+@Composable
+internal fun BestStreamBadgesRow(meta: MetaDetails, modifier: Modifier = Modifier) {
+    if (!StreamBadgeSettingsRepository.snapshot().hasImport) return
+    // Series have no streams of their own, so the first regular episode stands in for the show.
+    val probeVideoId = remember(meta.id, meta.videos) {
+        meta.videos
+            .filter { (it.season ?: 0) > 0 && it.available }
+            .minWithOrNull(compareBy({ it.season ?: 0 }, { it.episode ?: 0 }))
+            ?.id
+            ?: meta.id
+    }
+    val bestBadges by produceState(emptyList<StreamBadge>(), meta.type, probeVideoId) {
+        value = StreamQualityProbe.bestBadges(meta.type, probeVideoId)
+    }
+    if (bestBadges.isNotEmpty()) {
+        Row(
+            modifier = modifier,
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            bestBadges.forEach { badge -> StreamBadgeImage(badge) }
+        }
+    }
+}
