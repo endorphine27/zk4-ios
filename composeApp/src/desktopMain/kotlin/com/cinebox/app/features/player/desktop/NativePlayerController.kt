@@ -1268,6 +1268,7 @@ private fun String.toPlayerControlsAction(): PlayerControlsAction? =
         "external" -> PlayerControlsAction.OpenExternalPlayer
         "submitIntro" -> PlayerControlsAction.SubmitIntro
         "videoSettings" -> PlayerControlsAction.VideoSettings
+        "cast" -> PlayerControlsAction.Cast
         else -> null
     }
 
@@ -1337,6 +1338,7 @@ private fun PlayerControlsState.toControlsJson(isFullscreen: Boolean, onImageRea
         appendJsonField("submitIntroLabel", submitIntroLabel)
         append(',')
         appendJsonField("videoSettingsLabel", videoSettingsLabel)
+        appendJsonField("castLabel", castLabel)
         append(',')
         appendJsonField("playbackErrorTitle", playbackErrorTitle)
         append(',')
@@ -1562,6 +1564,7 @@ private fun PlayerControlsState.toControlsJson(isFullscreen: Boolean, onImageRea
         appendJsonField("showSubmitIntro", showSubmitIntro)
         append(',')
         appendJsonField("showVideoSettings", showVideoSettings)
+        appendJsonField("showCast", showCast)
         append(',')
         appendJsonField("showSources", showSources)
         append(',')

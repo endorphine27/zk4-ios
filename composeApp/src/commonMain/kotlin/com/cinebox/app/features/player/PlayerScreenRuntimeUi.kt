@@ -319,6 +319,7 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
         unlockLabel = stringResource(Res.string.compose_player_unlock_controls),
         submitIntroLabel = stringResource(Res.string.submit_intro_action),
         videoSettingsLabel = stringResource(Res.string.player_action_video_settings),
+        castLabel = stringResource(Res.string.cast_dialog_title),
         tapToUnlockLabel = stringResource(Res.string.compose_player_tap_to_unlock),
         pipLabel = stringResource(Res.string.compose_player_picture_in_picture),
         pipPlaceholderTitle = stringResource(Res.string.compose_player_pip_placeholder_title),
@@ -417,6 +418,7 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
             playerSettingsUiState.introDbApiKey.isNotBlank() &&
             !activeSubmitIntroImdbId().isNullOrBlank(),
         showVideoSettings = isIos,
+        showCast = com.cinebox.app.features.cast.platformCastBackend() != null,
         showSources = activeVideoId != null,
         showEpisodes = isSeries,
         showExternalPlayer = args.onOpenInExternalPlayer != null,
@@ -970,6 +972,10 @@ private fun PlayerScreenRuntime.handlePlayerControlsAction(action: PlayerControl
         }
         PlayerControlsAction.PictureInPicture -> {
             togglePlayerPictureInPicture()
+        }
+        PlayerControlsAction.Cast -> {
+            showCastDialog = true
+            controlsVisible = true
         }
         PlayerControlsAction.DoubleTapSeekBack -> {
             prepareDoubleTapSeekForNativeFallback(PlayerSeekDirection.Backward)

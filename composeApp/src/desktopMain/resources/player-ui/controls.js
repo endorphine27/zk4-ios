@@ -42,6 +42,7 @@ const sourcesLabel = document.getElementById("sourcesLabel");
 const episodesLabel = document.getElementById("episodesLabel");
 const submitIntroButton = document.getElementById("submitIntroButton");
 const videoSettingsButton = document.getElementById("videoSettingsButton");
+const castButton = document.getElementById("castButton");
 const backButton = document.getElementById("backButton");
 const openingOverlay = document.getElementById("openingOverlay");
 const openingArtwork = document.getElementById("openingArtwork");
@@ -315,6 +316,8 @@ let state = {
   nextEpisodePlayable: false,
   showSubmitIntro: false,
   showVideoSettings: false,
+  showCast: false,
+  castLabel: "Cast",
   showSources: false,
   showEpisodes: false,
   showExternalPlayer: false,
@@ -2684,6 +2687,11 @@ const renderChrome = () => {
 
   setVisible(submitIntroButton, Boolean(state.showSubmitIntro));
   setVisible(videoSettingsButton, Boolean(state.showVideoSettings));
+  if (castButton) {
+    setVisible(castButton, Boolean(state.showCast));
+    castButton.setAttribute("aria-label", state.castLabel || "Cast");
+    castButton.setAttribute("title", state.castLabel || "Cast");
+  }
   setVisible(sourcesButton, Boolean(state.showSources));
   setVisible(episodesButton, Boolean(state.showEpisodes));
   const hasChapters = Array.isArray(state.chapters) && state.chapters.length > 0;
