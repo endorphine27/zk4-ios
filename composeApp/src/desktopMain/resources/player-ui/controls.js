@@ -88,6 +88,9 @@ const chaptersPanelTitle = document.getElementById("chaptersPanelTitle");
 const chaptersCloseButton = document.getElementById("chaptersCloseButton");
 const chapterList = document.getElementById("chapterList");
 const audioModal = document.getElementById("audioModal");
+const castModal = document.getElementById("castModal");
+const castPanelTitle = document.getElementById("castPanelTitle");
+const castList = document.getElementById("castList");
 const subtitleModal = document.getElementById("subtitleModal");
 const speedModal = document.getElementById("speedModal");
 const speedOptionList = document.getElementById("speedOptionList");
@@ -990,6 +993,7 @@ const rangePositionMs = () => {
 
 const modalByName = {
   audio: audioModal,
+  cast: castModal,
   subtitles: subtitleModal,
   speed: speedModal,
   sources: sourceModal,
@@ -1049,6 +1053,7 @@ const closePlayerModal = (notifyDismiss = false, animated = true) => {
   if (notifyDismiss && closingModal === "p2pConsent") {
     send("cancelP2pForPlayerControls", 0);
   }
+  if (closingModal === "cast") send("castClosed", 0);
   if (closingModal === "episodes") onEpisodesModalClosed();
   if (closingModal === "party") onPartyModalClosed();
   renderChrome();
@@ -1154,6 +1159,40 @@ const renderSpeedOptionList = () => {
     row.appendChild(labelElement);
     row.appendChild(buildCheckIcon());
     speedOptionList.appendChild(row);
+  });
+};
+
+const renderCastPanel = () => {
+  castPanelTitle.textContent = state.castPanelTitle || "Cast";
+  castList.textContent = "";
+  const addRow = (label, onClick, selected) => {
+    const row = document.createElement("button");
+    row.type = "button";
+    row.className = `track-row audio-track-row${selected ? " selected" : ""}`;
+    row.addEventListener("click", event => {
+      event.stopPropagation();
+      onClick();
+    });
+    const copy = document.createElement("span");
+    copy.className = "audio-track-copy";
+    const name = document.createElement("span");
+    name.className = "audio-track-name";
+    name.textContent = label;
+    copy.appendChild(name);
+    row.appendChild(copy);
+    castList.appendChild(row);
+  };
+  if (state.castActive) {
+    addRow(state.castPaused ? (state.castResumeLabel || "Resume") : (state.castPauseLabel || "Pause"),
+      () => send("castTogglePause", 0), false);
+    addRow(state.castStopLabel || "Stop", () => send("castStop", 0), false);
+  } else {
+    (Array.isArray(state.castDevices) ? state.castDevices : []).forEach((deviceName, index) => {
+      addRow(String(deviceName), () => send("castSelect", index), false);
+    });
+  }
+  [state.castStatus, state.castHint].forEach(text => {
+    if (text) appendEmptyTrackState(castList, String(text));
   });
 };
 
@@ -2305,6 +2344,7 @@ const renderChapterMarks = () => {
 
 const renderActiveModal = (modalOpened = false) => {
   if (activeModal === "audio") renderAudioTrackList();
+  if (activeModal === "cast") renderCastPanel();
   if (activeModal === "subtitles") renderSubtitleModal();
   if (activeModal === "speed") renderSpeedOptionList();
   if (activeModal === "sources") renderSourceModal(modalOpened);
@@ -3093,6 +3133,11 @@ document.querySelectorAll("[data-command]").forEach(button => {
     }
     if (command === "audio") {
       openPlayerModal("audio");
+      return;
+    }
+    if (command === "cast") {
+      openPlayerModal("cast");
+      send("cast", 0);
       return;
     }
     if (command === "subtitles") {

@@ -47,6 +47,39 @@ import org.jetbrains.compose.resources.stringResource
 object CastSession {
     var device by mutableStateOf<CastDevice?>(null)
         internal set
+    var paused by mutableStateOf(false)
+        internal set
+    var failed by mutableStateOf(false)
+        internal set
+    var busy by mutableStateOf(false)
+        internal set
+
+    suspend fun start(backend: CastBackend, target: CastDevice, url: String, title: String, positionMs: Long): Boolean {
+        busy = true
+        failed = false
+        val ok = backend.cast(target, url, title, positionMs).isSuccess
+        busy = false
+        if (ok) {
+            device = target
+            paused = false
+        } else {
+            failed = true
+        }
+        return ok
+    }
+
+    suspend fun togglePause(backend: CastBackend) {
+        val active = device ?: return
+        val result = if (paused) backend.resume(active) else backend.pause(active)
+        if (result.isSuccess) paused = !paused else failed = true
+    }
+
+    suspend fun stopCasting(backend: CastBackend) {
+        val active = device ?: return
+        backend.stop(active)
+        device = null
+        paused = false
+    }
 }
 
 fun isCastableUrl(url: String?): Boolean =
