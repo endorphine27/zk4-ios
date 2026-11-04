@@ -112,7 +112,10 @@ internal object DlnaCastBackend : CastBackend {
     override suspend fun cast(device: CastDevice, url: String, title: String, startPositionMs: Long): Result<Unit> =
         runCatching {
             val renderer = renderers[device.id] ?: error("Dispozitiv indisponibil")
-            val finalUrl = withContext(Dispatchers.IO) { resolveRedirects(url) }
+            val upstreamUrl = withContext(Dispatchers.IO) { resolveRedirects(url) }
+            // The TV fetches the stream from this app over plain local HTTP: many renderers cannot
+            // open https links, redirects or long signed URLs directly.
+            val finalUrl = withContext(Dispatchers.IO) { startProxy(upstreamUrl, renderer) }
             val didl = buildDidl(title, finalUrl)
             soap(
                 renderer,
@@ -133,7 +136,11 @@ internal object DlnaCastBackend : CastBackend {
 
     override suspend fun pause(device: CastDevice) = control(device, "Pause", "")
     override suspend fun resume(device: CastDevice) = control(device, "Play", "<Speed>1</Speed>")
-    override suspend fun stop(device: CastDevice) = control(device, "Stop", "")
+    override suspend fun stop(device: CastDevice): Result<Unit> {
+        val result = control(device, "Stop", "")
+        stopProxy()
+        return result
+    }
     override suspend fun seek(device: CastDevice, positionMs: Long) =
         control(device, "Seek", "<Unit>REL_TIME</Unit><Target>${formatTime(positionMs)}</Target>")
 
@@ -184,6 +191,68 @@ internal object DlnaCastBackend : CastBackend {
             connection.inputStream.bufferedReader().readText()
         } finally {
             connection.disconnect()
+        }
+    }
+
+    private var proxy: com.sun.net.httpserver.HttpServer? = null
+    @Volatile private var proxyUpstream: String = ""
+
+    private fun startProxy(upstream: String, renderer: Renderer): String {
+        proxyUpstream = upstream
+        val server = proxy ?: com.sun.net.httpserver.HttpServer.create(InetSocketAddress(0), 0).also { created ->
+            created.executor = java.util.concurrent.Executors.newCachedThreadPool()
+            created.createContext("/") { exchange -> serveProxy(exchange) }
+            created.start()
+            proxy = created
+        }
+        val host = URI(renderer.controlUrl).host
+        val localIp = java.net.DatagramSocket().use { socket ->
+            socket.connect(InetAddress.getByName(host), 9)
+            socket.localAddress.hostAddress
+        }
+        val ext = runCatching { URI(upstream).path.substringAfterLast('.', "mp4").lowercase() }
+            .getOrDefault("mp4").takeIf { it.length in 2..4 } ?: "mp4"
+        return "http://$localIp:${server.address.port}/video.$ext"
+    }
+
+    private fun stopProxy() {
+        proxy?.stop(0)
+        proxy = null
+    }
+
+    private fun serveProxy(exchange: com.sun.net.httpserver.HttpExchange) {
+        try {
+            val isHead = exchange.requestMethod.equals("HEAD", ignoreCase = true)
+            val upstream = URI(proxyUpstream).toURL().openConnection() as HttpURLConnection
+            upstream.instanceFollowRedirects = true
+            upstream.connectTimeout = 10_000
+            upstream.readTimeout = 30_000
+            val range = exchange.requestHeaders.getFirst("Range")
+            upstream.setRequestProperty("Range", if (isHead) "bytes=0-0" else range ?: "bytes=0-")
+            val code = upstream.responseCode
+            val contentRange = upstream.getHeaderField("Content-Range")
+            val total = contentRange?.substringAfter('/')?.toLongOrNull()
+            val headers = exchange.responseHeaders
+            headers.add("Content-Type", mimeFor("http://x/video.${exchange.requestURI.path.substringAfterLast('.', "mp4")}"))
+            headers.add("Accept-Ranges", "bytes")
+            headers.add("transferMode.dlna.org", "Streaming")
+            headers.add("contentFeatures.dlna.org", "DLNA.ORG_OP=01;DLNA.ORG_CI=0")
+            if (isHead) {
+                val length = total ?: upstream.contentLengthLong
+                if (length >= 0) headers.add("Content-Length", length.toString())
+                exchange.sendResponseHeaders(200, -1)
+                upstream.disconnect()
+                return
+            }
+            if (contentRange != null && range != null) headers.add("Content-Range", contentRange)
+            val status = if (code == 206 && range != null) 206 else 200
+            val length = upstream.contentLengthLong
+            exchange.sendResponseHeaders(status, if (length >= 0) length else 0)
+            upstream.inputStream.use { input -> exchange.responseBody.use { input.copyTo(it) } }
+        } catch (_: Exception) {
+            // The TV closing the connection (seeking, stopping) is normal.
+        } finally {
+            exchange.close()
         }
     }
 
