@@ -26,6 +26,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,6 +55,10 @@ import com.cinebox.app.features.mdblist.MdbListMetadataService.PROVIDER_TMDB
 import com.cinebox.app.features.mdblist.MdbListMetadataService.PROVIDER_TOMATOES
 import com.cinebox.app.features.mdblist.MdbListMetadataService.PROVIDER_TRAKT
 import com.cinebox.app.features.mdblist.RottenTomatoesStatus
+import com.cinebox.app.features.streams.StreamBadge
+import com.cinebox.app.features.streams.StreamBadgeImage
+import com.cinebox.app.features.streams.StreamBadgeSettingsRepository
+import com.cinebox.app.features.streams.StreamQualityProbe
 import com.cinebox.app.features.mdblist.rottenTomatoesStatus
 import cinebox.composeapp.generated.resources.*
 import cinebox.composeapp.generated.resources.rating_audience_score
@@ -134,6 +140,20 @@ fun DetailMetaInfo(
                             color = ImdbYellow,
                         )
                     }
+                }
+            }
+        }
+
+        if (meta.type.equals("movie", ignoreCase = true) && StreamBadgeSettingsRepository.snapshot().hasImport) {
+            val bestBadges by produceState(emptyList<StreamBadge>(), meta.id, meta.type) {
+                value = StreamQualityProbe.bestBadges(meta.type, meta.id)
+            }
+            if (bestBadges.isNotEmpty()) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    bestBadges.forEach { badge -> StreamBadgeImage(badge) }
                 }
             }
         }
