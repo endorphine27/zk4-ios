@@ -16,6 +16,10 @@ internal object StreamQuality {
     private val losslessAudio = Regex("""truehd|dts[ -]?(x|hd)""")
     private val dolbyDigitalPlus = Regex("""dd\+|e-?ac-?3|ddp""")
 
+    /** Orders streams best-picture first when the user has the setting on; keeps the addon order otherwise. */
+    fun applyPreferredOrder(streams: List<StreamItem>): List<StreamItem> =
+        if (StreamBadgeSettingsRepository.sortByVideoQualitySnapshot()) sortedByVideoQuality(streams) else streams
+
     fun score(stream: StreamItem): Int {
         val text = listOfNotNull(stream.name, stream.title, stream.description).joinToString(" ").lowercase()
         var score = when {

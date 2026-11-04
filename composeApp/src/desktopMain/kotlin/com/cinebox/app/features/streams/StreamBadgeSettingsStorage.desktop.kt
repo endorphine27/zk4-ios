@@ -13,13 +13,14 @@ import kotlinx.serialization.json.put
 internal actual object StreamBadgeSettingsStorage {
     private const val streamBadgeRulesKey = "stream_badge_rules"
     private const val showFileSizeBadgesKey = "show_file_size_badges"
+    private const val sortByVideoQualityKey = "sort_by_video_quality"
     private const val showAddonLogoKey = "show_addon_logo"
     private const val showInPlayerKey = "show_badges_in_player"
     private const val playerBadgeSourceKey = "player_badge_source"
     private const val streamBackgroundModeKey = "stream_background_mode"
     private const val streamBadgePlacementKey = "stream_badge_placement"
     private const val legacyDebridStreamBadgeRulesKey = "debrid_stream_badge_rules"
-    private val syncKeys = listOf(streamBadgeRulesKey, showFileSizeBadgesKey, showInPlayerKey, playerBadgeSourceKey, streamBadgePlacementKey, streamBackgroundModeKey)
+    private val syncKeys = listOf(streamBadgeRulesKey, showFileSizeBadgesKey, sortByVideoQualityKey, showInPlayerKey, playerBadgeSourceKey, streamBadgePlacementKey, streamBackgroundModeKey)
     private val store = DesktopStorage.store("cinebox_stream_badge_settings")
     private val legacyDebridStore = DesktopStorage.store("cinebox_debrid_settings")
 
@@ -27,6 +28,8 @@ internal actual object StreamBadgeSettingsStorage {
     actual fun saveStreamBadgeRules(rules: String) = saveString(streamBadgeRulesKey, rules)
     actual fun loadShowFileSizeBadges(): Boolean? = loadBoolean(showFileSizeBadgesKey)
     actual fun saveShowFileSizeBadges(enabled: Boolean) = saveBoolean(showFileSizeBadgesKey, enabled)
+    actual fun loadSortByVideoQuality(): Boolean? = loadBoolean(sortByVideoQualityKey)
+    actual fun saveSortByVideoQuality(enabled: Boolean) = saveBoolean(sortByVideoQualityKey, enabled)
     actual fun loadShowAddonLogo(): Boolean? = loadBoolean(showAddonLogoKey)
     actual fun saveShowAddonLogo(enabled: Boolean) = saveBoolean(showAddonLogoKey, enabled)
     actual fun loadShowInPlayer(): Boolean? = loadBoolean(showInPlayerKey)
@@ -53,6 +56,7 @@ internal actual object StreamBadgeSettingsStorage {
     actual fun exportToSyncPayload(): JsonObject = buildJsonObject {
         loadStreamBadgeRules()?.let { put(streamBadgeRulesKey, encodeSyncString(it)) }
         loadShowFileSizeBadges()?.let { put(showFileSizeBadgesKey, encodeSyncBoolean(it)) }
+        loadSortByVideoQuality()?.let { put(sortByVideoQualityKey, encodeSyncBoolean(it)) }
         loadShowInPlayer()?.let { put(showInPlayerKey, encodeSyncBoolean(it)) }
         loadPlayerBadgeSource()?.let { put(playerBadgeSourceKey, encodeSyncString(it)) }
         loadStreamBackgroundMode()?.let { put(streamBackgroundModeKey, encodeSyncString(it)) }
@@ -63,6 +67,7 @@ internal actual object StreamBadgeSettingsStorage {
         store.removeAll(syncKeys.map(ProfileScopedKey::of))
         payload.decodeSyncString(streamBadgeRulesKey)?.let(::saveStreamBadgeRules)
         payload.decodeSyncBoolean(showFileSizeBadgesKey)?.let(::saveShowFileSizeBadges)
+        payload.decodeSyncBoolean(sortByVideoQualityKey)?.let(::saveSortByVideoQuality)
         payload.decodeSyncBoolean(showInPlayerKey)?.let(::saveShowInPlayer)
         payload.decodeSyncString(playerBadgeSourceKey)?.let(::savePlayerBadgeSource)
         payload.decodeSyncString(streamBackgroundModeKey)?.let(::saveStreamBackgroundMode)

@@ -19,6 +19,7 @@ import kotlinx.serialization.json.Json
 data class StreamBadgeSettingsUiState(
     val rules: StreamBadgeRules = StreamBadgeRules(),
     val showFileSizeBadges: Boolean = true,
+    val sortByVideoQuality: Boolean = true,
     val showAddonLogo: Boolean = false,
     val showInPlayer: Boolean = false,
     val playerBadgeSource: String = "",
@@ -49,6 +50,7 @@ object StreamBadgeSettingsRepository {
     private var hasLoaded = false
     private var streamBadgeRules = StreamBadgeRules()
     private var showFileSizeBadges = true
+    private var sortByVideoQuality = true
     private var showAddonLogo = false
     private var showInPlayer = false
     private var playerBadgeSource = ""
@@ -68,6 +70,7 @@ object StreamBadgeSettingsRepository {
         hasLoaded = false
         streamBadgeRules = StreamBadgeRules()
         showFileSizeBadges = true
+        sortByVideoQuality = true
         showAddonLogo = false
         showInPlayer = false
         playerBadgeSource = ""
@@ -84,6 +87,11 @@ object StreamBadgeSettingsRepository {
     fun showFileSizeBadgesSnapshot(): Boolean {
         ensureLoaded()
         return _uiState.value.showFileSizeBadges
+    }
+
+    fun sortByVideoQualitySnapshot(): Boolean {
+        ensureLoaded()
+        return _uiState.value.sortByVideoQuality
     }
 
     fun badgePlacementSnapshot(): StreamBadgePlacement {
@@ -154,6 +162,14 @@ object StreamBadgeSettingsRepository {
         StreamBadgeSettingsStorage.saveShowFileSizeBadges(enabled)
     }
 
+    fun setSortByVideoQuality(enabled: Boolean) {
+        ensureLoaded()
+        if (sortByVideoQuality == enabled) return
+        sortByVideoQuality = enabled
+        publish()
+        StreamBadgeSettingsStorage.saveSortByVideoQuality(enabled)
+    }
+
     fun setShowAddonLogo(enabled: Boolean) {
         ensureLoaded()
         if (showAddonLogo == enabled) return
@@ -204,6 +220,7 @@ object StreamBadgeSettingsRepository {
         }
         streamBadgeRules = storedRules ?: legacyRules ?: StreamBadgeRules()
         showFileSizeBadges = StreamBadgeSettingsStorage.loadShowFileSizeBadges() ?: true
+        sortByVideoQuality = StreamBadgeSettingsStorage.loadSortByVideoQuality() ?: true
         showAddonLogo = StreamBadgeSettingsStorage.loadShowAddonLogo() ?: false
         showInPlayer = StreamBadgeSettingsStorage.loadShowInPlayer() ?: false
         playerBadgeSource = StreamBadgeSettingsStorage.loadPlayerBadgeSource().orEmpty()
@@ -228,6 +245,7 @@ object StreamBadgeSettingsRepository {
         _uiState.value = StreamBadgeSettingsUiState(
             rules = streamBadgeRules,
             showFileSizeBadges = showFileSizeBadges,
+            sortByVideoQuality = sortByVideoQuality,
             showAddonLogo = showAddonLogo,
             showInPlayer = showInPlayer,
             playerBadgeSource = playerBadgeSource,

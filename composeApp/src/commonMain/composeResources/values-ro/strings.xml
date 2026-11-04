@@ -718,6 +718,8 @@
     <string name="settings_debrid_formatter_reset_subtitle">Restaurează formatarea implicită a rezultatelor.</string>
     <string name="settings_stream_badges_section">STIL FUSION</string>
     <string name="settings_stream_size_badges_title">Insigne de dimensiune</string>
+    <string name="settings_stream_sort_quality_title">Sortează după calitatea video</string>
+    <string name="settings_stream_sort_quality_description">Cea mai bună imagine prima: rezoluție, Dolby Vision/HDR, apoi remux/BluRay. Dacă e oprit, rămâne ordinea dată de addon.</string>
     <string name="settings_stream_size_badges_description">Afișează insigne cu dimensiunea fișierului în rezultatele fluxului și în panourile cu surse ale playerului.</string>
     <string name="settings_stream_addon_logo_title">Siglă extensie</string>
     <string name="settings_stream_addon_logo_description">Afișează sigla și numele extensiei lângă sursele fluxului.</string>

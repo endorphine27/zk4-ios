@@ -423,7 +423,7 @@ object PlayerStreamsRepository {
                             addonName = displayName,
                             addonId = addon.addonId,
                             addonLogo = addon.manifest.logoUrl,
-                        ).let(StreamQuality::sortedByVideoQuality)
+                        ).let(StreamQuality::applyPreferredOrder)
                     }.fold(
                         onSuccess = { streams ->
                             log.d { "fetched $panelName request=$requestKey addon=$displayName streams=${streams.size}" }

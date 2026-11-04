@@ -955,6 +955,8 @@
     <string name="settings_debrid_formatter_reset_subtitle">Restore default result formatting.</string>
     <string name="settings_stream_badges_section">FUSION STYLE</string>
     <string name="settings_stream_size_badges_title">Size badges</string>
+    <string name="settings_stream_sort_quality_title">Sort by video quality</string>
+    <string name="settings_stream_sort_quality_description">Best picture first: resolution, Dolby Vision/HDR, then remux/BluRay. When off, the order given by the addon is kept.</string>
     <string name="settings_stream_size_badges_description">Show file size badges in stream results and player source panels.</string>
     <string name="settings_stream_badges_in_player_title">Show in player</string>
     <string name="settings_stream_badges_in_player_description">Show badges for the video and audio that is playing under the player title. Needs a badge pack that matches plain text, like 2160p or Atmos.</string>
