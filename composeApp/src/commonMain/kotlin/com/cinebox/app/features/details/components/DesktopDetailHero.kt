@@ -283,6 +283,7 @@ fun DesktopDetailHero(
                     modifier = Modifier.widthIn(max = 520.dp),
                 )
             }
+            BestStreamBadgesRow(meta, modifier = Modifier.padding(top = space.s12))
             if (meta.genres.isNotEmpty()) {
                 Spacer(modifier = Modifier.height(space.s12))
                 Text(
