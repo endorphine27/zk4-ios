@@ -1,5 +1,6 @@
 package com.cinebox.app.features.downloads
 
+import com.cinebox.app.features.player.SubtitleRequestExtras
 import com.cinebox.app.features.player.addonSubtitleRequests
 import com.cinebox.app.features.streams.StreamItem
 import kotlinx.coroutines.runBlocking
@@ -187,7 +188,11 @@ object DownloadsRepository {
             sourceUrl = sourceUrl,
             sourceHeaders = sanitizeRequestHeaders(stream.behaviorHints.proxyHeaders?.request),
             sourceResponseHeaders = sanitizeResponseHeaders(stream.behaviorHints.proxyHeaders?.response),
-            subtitleRequests = addonSubtitleRequests(contentType, videoId),
+            subtitleRequests = addonSubtitleRequests(
+                type = contentType,
+                videoId = videoId,
+                extras = SubtitleRequestExtras.from(stream.behaviorHints, sourceUrl),
+            ),
             sourceSubtitles = stream.externalSubtitles,
             localFileUri = null,
             fileName = fileName,
