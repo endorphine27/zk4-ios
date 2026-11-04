@@ -144,9 +144,17 @@ fun DetailMetaInfo(
             }
         }
 
-        if (meta.type.equals("movie", ignoreCase = true) && StreamBadgeSettingsRepository.snapshot().hasImport) {
-            val bestBadges by produceState(emptyList<StreamBadge>(), meta.id, meta.type) {
-                value = StreamQualityProbe.bestBadges(meta.type, meta.id)
+        if (StreamBadgeSettingsRepository.snapshot().hasImport) {
+            // Series have no streams of their own, so the first regular episode stands in for the show.
+            val probeVideoId = remember(meta.id, meta.videos) {
+                meta.videos
+                    .filter { (it.season ?: 0) > 0 && it.available }
+                    .minWithOrNull(compareBy({ it.season ?: 0 }, { it.episode ?: 0 }))
+                    ?.id
+                    ?: meta.id
+            }
+            val bestBadges by produceState(emptyList<StreamBadge>(), meta.type, probeVideoId) {
+                value = StreamQualityProbe.bestBadges(meta.type, probeVideoId)
             }
             if (bestBadges.isNotEmpty()) {
                 Row(
