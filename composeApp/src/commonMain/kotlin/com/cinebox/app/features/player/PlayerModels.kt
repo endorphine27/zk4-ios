@@ -48,6 +48,7 @@ data class PlayerLaunch(
     val contentLanguage: String? = null,
     val sourceFilename: String? = null,
     val stream: com.cinebox.app.features.streams.StreamItem? = null,
+    val subtitleExtras: SubtitleRequestExtras? = null,
 )
 
 object PlayerLaunchStore {

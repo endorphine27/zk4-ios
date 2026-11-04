@@ -15,6 +15,7 @@
 #include <mpv/render_gl.h>
 
 #include <atomic>
+#include <clocale>
 #include <cmath>
 #include <dlfcn.h>
 #include <mutex>
@@ -158,6 +159,7 @@ static constexpr double kMaxVolumePercent = 200.0;
 - (void)removeExternalSubtitles;
 - (void)removeExternalSubtitlesAndSelect:(int)trackId;
 - (void)setSubtitleDelayMs:(int)delayMs;
+- (void)setSubtitleVisible:(BOOL)visible;
 - (void)applySubtitleStyleWithTextColor:(NSString *)textColor
                         backgroundColor:(NSString *)backgroundColor
                             outlineColor:(NSString *)outlineColor
@@ -2520,6 +2522,11 @@ static void cineboxMpvWakeup(void *ctx) {
     }
 }
 
+- (void)setSubtitleVisible:(BOOL)visible {
+    if (!_mpv) return;
+    [self setStringProperty:"sub-visibility" value:visible ? @"yes" : @"no"];
+}
+
 - (void)setSubtitleDelayMs:(int)delayMs {
     if (!_mpv) return;
     int clamped = MAX(-60000, MIN(60000, delayMs));
@@ -3705,6 +3712,20 @@ Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_clearExternalSub
     MpvWebPlayer *player = (__bridge MpvWebPlayer *)(void *)(intptr_t)handle;
     runOnMainAsync(^{
         [player removeExternalSubtitlesAndSelect:(int)trackId];
+    });
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_cinebox_app_features_player_desktop_NativePlayerBridge_setSubtitleVisible(
+    JNIEnv * /* env */,
+    jobject /* bridge */,
+    jlong handle,
+    jboolean visible
+) {
+    if (handle == 0) return;
+    MpvWebPlayer *player = (__bridge MpvWebPlayer *)(void *)(intptr_t)handle;
+    runOnMainAsync(^{
+        [player setSubtitleVisible:visible == JNI_TRUE];
     });
 }
 

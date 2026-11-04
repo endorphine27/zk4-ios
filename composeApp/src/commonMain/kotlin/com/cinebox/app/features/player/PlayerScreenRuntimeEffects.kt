@@ -270,12 +270,17 @@ internal fun PlayerScreenRuntime.BindPlayerRuntimeEffects() {
 
     LaunchedEffect(
         activeSourceUrl,
+        p2pResolvedSourceUrl,
         addonSubtitleFetchKey,
     ) {
         if (activeSourceUrl.startsWith("file:") && externalSubtitles.isNotEmpty()) return@LaunchedEffect
         val fetchKey = addonSubtitleFetchKey ?: return@LaunchedEffect
-        if (autoFetchedAddonSubtitlesForKey == fetchKey) return@LaunchedEffect
-        autoFetchedAddonSubtitlesForKey = fetchKey
+        // For P2P streams, wait until the local engine URL is available before
+        // triggering the fetch so that hash computation can use the real HTTP URL.
+        if (activeTorrentInfoHash != null && p2pResolvedSourceUrl == null) return@LaunchedEffect
+        val effectiveFetchKey = if (p2pResolvedSourceUrl != null) "$fetchKey|p2p" else fetchKey
+        if (autoFetchedAddonSubtitlesForKey == effectiveFetchKey) return@LaunchedEffect
+        autoFetchedAddonSubtitlesForKey = effectiveFetchKey
         fetchAddonSubtitlesForActiveItem()
     }
 
@@ -920,6 +925,7 @@ internal fun PlayerScreenRuntime.tryRefreshCredentialedSourceAfterError(message:
             currentStreamBingeGroup = stream.behaviorHints.bingeGroup
             currentStreamFilename = stream.behaviorHints.filename
             currentStreamInfoHash = stream.infoHash
+            activeSubtitleExtras = SubtitleRequestExtras.from(stream.behaviorHints, refreshedUrl)
             activeInitialPositionMs = savedPositionMs
             activeInitialProgressFraction = null
             showSourcesPanel = false
