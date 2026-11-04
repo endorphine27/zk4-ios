@@ -1,3 +1,3 @@
 Ce se schimbă în această versiune:
-• Lista de surse: prima sursă este cea cu cea mai bună calitate video (rezoluție, Dolby Vision/HDR, remux/BluRay)
-• Setări → Fluxuri: nou comutator „Sortează după calitatea video”, pe care îl poți opri
+• Player: buton nou „Trimite pe TV” (iconița Cast) pentru a reda sursa pe televizoare DLNA, de exemplu LG, Samsung, Sony
+• TV-ul se găsește automat în rețea, iar din fereastra de Cast poți pune pauză, continua sau opri transmiterea

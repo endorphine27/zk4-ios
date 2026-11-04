@@ -768,6 +768,14 @@ private fun PlayerScreenRuntime.RenderPlayerControls(
             } else {
                 null
             },
+            onCastClick = if (com.cinebox.app.features.cast.platformCastBackend() != null) {
+                {
+                    showCastDialog = true
+                    controlsVisible = true
+                }
+            } else {
+                null
+            },
             onSourcesClick = if (activeVideoId != null) { { openSourcesPanel() } } else null,
             onEpisodesClick = if (isSeries) { { openEpisodesPanel() } } else null,
             chapters = chapters,
@@ -1826,6 +1834,18 @@ private fun PlayerScreenRuntime.RenderPlayerModals(displayedPositionMs: Long) {
             controlsVisible = true
         },
     )
+    if (showCastDialog) {
+        com.cinebox.app.features.cast.CastDialog(
+            url = activeSourceUrl,
+            title = title,
+            positionMs = playbackSnapshot.positionMs,
+            onCastStarted = {
+                playerController?.pause()
+                showCastDialog = false
+            },
+            onDismiss = { showCastDialog = false },
+        )
+    }
     PlayerScreenModalHosts(
         pendingP2pSwitch = pendingP2pSwitch,
         onPendingP2pSwitchChanged = { pendingP2pSwitch = it },
