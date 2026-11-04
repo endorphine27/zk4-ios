@@ -95,6 +95,8 @@ import cinebox.composeapp.generated.resources.settings_stream_player_badges_desc
 import cinebox.composeapp.generated.resources.settings_stream_player_badges_same
 import cinebox.composeapp.generated.resources.settings_stream_player_badges_title
 import cinebox.composeapp.generated.resources.settings_stream_size_badges_title
+import cinebox.composeapp.generated.resources.settings_stream_sort_quality_description
+import cinebox.composeapp.generated.resources.settings_stream_sort_quality_title
 import cinebox.composeapp.generated.resources.settings_stream_addon_logo_title
 import cinebox.composeapp.generated.resources.settings_stream_addon_logo_description
 import cinebox.composeapp.generated.resources.settings_stream_display_section
@@ -128,6 +130,13 @@ internal fun LazyListScope.streamsSettingsContent(isTablet: Boolean) {
                     checked = currentSettings.showFileSizeBadges,
                     isTablet = isTablet,
                     onCheckedChange = StreamBadgeSettingsRepository::setShowFileSizeBadges,
+                )
+                SettingsSwitchRow(
+                    title = stringResource(Res.string.settings_stream_sort_quality_title),
+                    description = stringResource(Res.string.settings_stream_sort_quality_description),
+                    checked = currentSettings.sortByVideoQuality,
+                    isTablet = isTablet,
+                    onCheckedChange = StreamBadgeSettingsRepository::setSortByVideoQuality,
                 )
                 SettingsNavigationRow(
                     title = stringResource(Res.string.settings_stream_badge_position_title),
