@@ -487,7 +487,7 @@ object StreamsRepository {
                             addonName = displayName,
                             addonId = addon.addonId,
                             addonLogo = addon.manifest.logoUrl,
-                        )
+                        ).let(StreamQuality::sortedByVideoQuality)
                     }.fold(
                         onSuccess = { streams ->
                             log.d { "Got ${streams.size} streams from ${displayName}" }
