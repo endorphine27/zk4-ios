@@ -109,14 +109,26 @@ internal object DlnaCastBackend : CastBackend {
         return Renderer(CastDevice(id = location, name = name.ifBlank { URI(location).host }, protocol = "DLNA"), controlUrl)
     }
 
-    override suspend fun cast(device: CastDevice, url: String, title: String, startPositionMs: Long): Result<Unit> =
+    override suspend fun cast(
+        device: CastDevice,
+        url: String,
+        title: String,
+        startPositionMs: Long,
+        subtitleUrl: String?,
+    ): Result<Unit> =
         runCatching {
             val renderer = renderers[device.id] ?: error("Dispozitiv indisponibil")
             val upstreamUrl = withContext(Dispatchers.IO) { resolveRedirects(url) }
             // The TV fetches the stream from this app over plain local HTTP: many renderers cannot
             // open https links, redirects or long signed URLs directly.
+            // The TV may still hold a previous session ("Transition not available"): stop it first.
+            runCatching { soap(renderer, "Stop", "") }
+            delay(400)
+            proxySubtitleUpstream = subtitleUrl.orEmpty()
             val finalUrl = withContext(Dispatchers.IO) { startProxy(upstreamUrl, renderer) }
-            val didl = buildDidl(title, finalUrl)
+            val subtitleProxyUrl = if (subtitleUrl.isNullOrBlank()) null else finalUrl.substringBeforeLast('/') + "/subtitle.srt"
+            proxySubtitlePublicUrl = subtitleProxyUrl.orEmpty()
+            val didl = buildDidl(title, finalUrl, subtitleProxyUrl)
             try {
                 soap(
                     renderer,
@@ -129,15 +141,30 @@ internal object DlnaCastBackend : CastBackend {
             }
             soap(renderer, "Play", "<Speed>1</Speed>")
             if (startPositionMs > 5_000L) {
-                // Many renderers only accept Seek after playback has begun.
-                repeat(6) {
-                    delay(1_000)
-                    if (runCatching { soap(renderer, "Seek", "<Unit>REL_TIME</Unit><Target>${formatTime(startPositionMs)}</Target>") }.isSuccess) {
-                        return@runCatching
-                    }
-                }
+                // The TV only accepts a seek once it is really playing, so do it in the background and
+                // check the reported position; retry with both REL_TIME and ABS_TIME.
+                scope.launch { seekWhenReady(renderer, startPositionMs) }
             }
         }
+
+    private suspend fun seekWhenReady(renderer: Renderer, targetMs: Long) {
+        val target = formatTime(targetMs)
+        for (attempt in 0 until 20) {
+            delay(1_500)
+            val state = runCatching {
+                Regex("<CurrentTransportState>(.*?)</CurrentTransportState>")
+                    .find(soap(renderer, "GetTransportInfo", ""))?.groupValues?.get(1)
+            }.getOrNull()
+            if (state != "PLAYING") continue
+            val unit = if (attempt % 2 == 0) "REL_TIME" else "ABS_TIME"
+            runCatching { soap(renderer, "Seek", "<Unit>$unit</Unit><Target>$target</Target>") }
+            delay(1_500)
+            val position = runCatching {
+                Regex("<RelTime>(.*?)</RelTime>").find(soap(renderer, "GetPositionInfo", ""))?.groupValues?.get(1)
+            }.getOrNull()?.let(::parseTime)
+            if (position != null && position >= targetMs - 15_000L) return
+        }
+    }
 
     override suspend fun pause(device: CastDevice) = control(device, "Pause", "")
     override suspend fun resume(device: CastDevice) = control(device, "Play", "<Speed>1</Speed>")
@@ -203,12 +230,15 @@ internal object DlnaCastBackend : CastBackend {
     @Volatile private var proxyUpstream: String = ""
     private val proxyHits = java.util.concurrent.atomic.AtomicInteger(0)
     @Volatile private var proxyPublicUrl: String = ""
+    @Volatile private var proxySubtitleUpstream: String = ""
+    @Volatile private var proxySubtitlePublicUrl: String = ""
 
     private fun startProxy(upstream: String, renderer: Renderer): String {
         proxyUpstream = upstream
         val server = proxy ?: com.sun.net.httpserver.HttpServer.create(InetSocketAddress(0), 0).also { created ->
             created.executor = java.util.concurrent.Executors.newCachedThreadPool()
             created.createContext("/") { exchange -> serveProxy(exchange) }
+            created.createContext("/subtitle.srt") { exchange -> serveSubtitle(exchange) }
             created.start()
             proxy = created
         }
@@ -229,6 +259,54 @@ internal object DlnaCastBackend : CastBackend {
         proxy = null
     }
 
+    /** Serves the chosen subtitle as UTF-8 SRT so renderers can load it as an external subtitle. */
+    private fun serveSubtitle(exchange: com.sun.net.httpserver.HttpExchange) {
+        try {
+            val upstream = URI(proxySubtitleUpstream).toURL().openConnection() as HttpURLConnection
+            upstream.instanceFollowRedirects = true
+            upstream.connectTimeout = 10_000
+            upstream.readTimeout = 20_000
+            val raw = upstream.inputStream.use { it.readBytes() }
+            upstream.disconnect()
+            val utf8 = runCatching {
+                Charsets.UTF_8.newDecoder()
+                    .onMalformedInput(java.nio.charset.CodingErrorAction.REPORT)
+                    .decode(java.nio.ByteBuffer.wrap(raw)).toString()
+            }.getOrElse { String(raw, charset("windows-1250")) }
+            val text = utf8.removePrefix("\uFEFF")
+            val body = if (text.trimStart().startsWith("WEBVTT")) vttToSrt(text).toByteArray() else text.toByteArray()
+            exchange.responseHeaders.add("Content-Type", "text/srt; charset=utf-8")
+            exchange.responseHeaders.add("Access-Control-Allow-Origin", "*")
+            if (exchange.requestMethod.equals("HEAD", ignoreCase = true)) {
+                exchange.responseHeaders.add("Content-Length", body.size.toString())
+                exchange.sendResponseHeaders(200, -1)
+            } else {
+                exchange.sendResponseHeaders(200, body.size.toLong())
+                exchange.responseBody.use { it.write(body) }
+            }
+        } catch (_: Exception) {
+            runCatching { exchange.sendResponseHeaders(404, -1) }
+        } finally {
+            exchange.close()
+        }
+    }
+
+    private fun vttToSrt(vtt: String): String {
+        var index = 0
+        val out = StringBuilder()
+        vtt.replace("\r\n", "\n").split("\n\n").forEach { block ->
+            val lines = block.lines().filter { it.isNotBlank() }
+            val timeIdx = lines.indexOfFirst { it.contains("-->") }
+            if (timeIdx < 0) return@forEach
+            index++
+            out.append(index).append('\n')
+                .append(lines[timeIdx].replace('.', ',').substringBefore(" align").substringBefore(" line").substringBefore(" position")).append('\n')
+            lines.drop(timeIdx + 1).forEach { out.append(it).append('\n') }
+            out.append('\n')
+        }
+        return out.toString()
+    }
+
     private fun serveProxy(exchange: com.sun.net.httpserver.HttpExchange) {
         proxyHits.incrementAndGet()
         try {
@@ -246,6 +324,7 @@ internal object DlnaCastBackend : CastBackend {
             headers.add("Content-Type", mimeFor("http://x/video.${exchange.requestURI.path.substringAfterLast('.', "mp4")}"))
             headers.add("Accept-Ranges", "bytes")
             headers.add("transferMode.dlna.org", "Streaming")
+            if (proxySubtitlePublicUrl.isNotBlank()) headers.add("CaptionInfo.sec", proxySubtitlePublicUrl)
             headers.add("contentFeatures.dlna.org", "DLNA.ORG_OP=01;DLNA.ORG_CI=0")
             if (isHead) {
                 val length = total ?: upstream.contentLengthLong
@@ -303,12 +382,24 @@ internal object DlnaCastBackend : CastBackend {
         }
     }
 
-    private fun buildDidl(title: String, url: String): String =
-        "<DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" " +
-            "xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\">" +
+    private fun buildDidl(title: String, url: String, subtitleUrl: String?): String {
+        val sub = subtitleUrl?.let { xmlEscape(it) }
+        return "<DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" " +
+            "xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" " +
+            "xmlns:sec=\"http://www.sec.co.kr/\" xmlns:pv=\"http://www.pv.com/pvns/\">" +
             "<item id=\"0\" parentID=\"-1\" restricted=\"1\"><dc:title>${xmlEscape(title)}</dc:title>" +
             "<upnp:class>object.item.videoItem</upnp:class>" +
-            "<res protocolInfo=\"http-get:*:${mimeFor(url)}:*\">${xmlEscape(url)}</res></item></DIDL-Lite>"
+            "<res protocolInfo=\"http-get:*:${mimeFor(url)}:*\">${xmlEscape(url)}</res>" +
+            (if (sub != null) {
+                "<res protocolInfo=\"http-get:*:text/srt:*\">$sub</res>" +
+                    "<sec:CaptionInfoEx sec:type=\"srt\">$sub</sec:CaptionInfoEx>" +
+                    "<sec:CaptionInfo sec:type=\"srt\">$sub</sec:CaptionInfo>" +
+                    "<pv:subtitleFileUri>$sub</pv:subtitleFileUri><pv:subtitleFileType>srt</pv:subtitleFileType>"
+            } else {
+                ""
+            }) +
+            "</item></DIDL-Lite>"
+    }
 
     private fun xmlEscape(value: String): String =
         value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;")

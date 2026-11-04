@@ -280,6 +280,14 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
         )
     }
     val castBackend = remember { com.cinebox.app.features.cast.platformCastBackend() }
+    androidx.compose.runtime.DisposableEffect(castBackend) {
+        onDispose {
+            castBackend?.let {
+                it.stopDiscovery()
+                com.cinebox.app.features.cast.CastSession.stopInBackground(it)
+            }
+        }
+    }
     val castDeviceList = castBackend?.devices?.collectAsStateWithLifecycle()?.value.orEmpty()
     val castActiveDevice = com.cinebox.app.features.cast.CastSession.device
     val castCanSend = com.cinebox.app.features.cast.isCastableUrl(activeSourceUrl)
@@ -1065,6 +1073,9 @@ internal fun PlayerScreenRuntime.handlePlayerControlsEvent(type: String, value: 
             val target = backend?.devices?.value?.getOrNull(value.toInt())
             if (backend != null && target != null && com.cinebox.app.features.cast.isCastableUrl(activeSourceUrl)) {
                 val url = activeSourceUrl.orEmpty()
+                val selectedSubtitleUrl = selectedAddonSubtitleId?.let { key ->
+                    addonSubtitles.firstOrNull { it.id == key || it.url == key }?.url
+                } ?: selectedAddonSubtitleId?.takeIf { it.startsWith("http") }
                 scope.launch {
                     val started = com.cinebox.app.features.cast.CastSession.start(
                         backend = backend,
@@ -1072,6 +1083,7 @@ internal fun PlayerScreenRuntime.handlePlayerControlsEvent(type: String, value: 
                         url = url,
                         title = title,
                         positionMs = playbackSnapshot.positionMs,
+                        subtitleUrl = selectedSubtitleUrl,
                     )
                     if (started) playerController?.pause()
                 }

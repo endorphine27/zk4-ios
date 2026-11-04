@@ -56,10 +56,20 @@ object CastSession {
     var errorDetail by mutableStateOf<String?>(null)
         internal set
 
-    suspend fun start(backend: CastBackend, target: CastDevice, url: String, title: String, positionMs: Long): Boolean {
+    suspend fun start(
+        backend: CastBackend,
+        target: CastDevice,
+        url: String,
+        title: String,
+        positionMs: Long,
+        subtitleUrl: String? = null,
+    ): Boolean {
         busy = true
         failed = false
-        val result = backend.cast(target, url, title, positionMs)
+        // A previous cast may still be playing on the TV; stop it before loading the new one.
+        device?.let { runCatching { backend.stop(it) } }
+        device = null
+        val result = backend.cast(target, url, title, positionMs, subtitleUrl)
         val ok = result.isSuccess
         errorDetail = result.exceptionOrNull()?.message
         busy = false
@@ -70,6 +80,18 @@ object CastSession {
             failed = true
         }
         return ok
+    }
+
+    /** Stops casting without suspending, for use when the player screen is left. */
+    fun stopInBackground(backend: CastBackend) {
+        val active = device ?: return
+        device = null
+        paused = false
+        failed = false
+        errorDetail = null
+        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.Default).launch {
+            runCatching { backend.stop(active) }
+        }
     }
 
     suspend fun togglePause(backend: CastBackend) {

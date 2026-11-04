@@ -13,7 +13,13 @@ interface CastBackend {
     val devices: StateFlow<List<CastDevice>>
     fun startDiscovery()
     fun stopDiscovery()
-    suspend fun cast(device: CastDevice, url: String, title: String, startPositionMs: Long): Result<Unit>
+    suspend fun cast(
+        device: CastDevice,
+        url: String,
+        title: String,
+        startPositionMs: Long,
+        subtitleUrl: String? = null,
+    ): Result<Unit>
     suspend fun pause(device: CastDevice): Result<Unit>
     suspend fun resume(device: CastDevice): Result<Unit>
     suspend fun seek(device: CastDevice, positionMs: Long): Result<Unit>
