@@ -112,11 +112,12 @@ internal object DlnaCastBackend : CastBackend {
     override suspend fun cast(device: CastDevice, url: String, title: String, startPositionMs: Long): Result<Unit> =
         runCatching {
             val renderer = renderers[device.id] ?: error("Dispozitiv indisponibil")
-            val didl = buildDidl(title, url)
+            val finalUrl = withContext(Dispatchers.IO) { resolveRedirects(url) }
+            val didl = buildDidl(title, finalUrl)
             soap(
                 renderer,
                 "SetAVTransportURI",
-                "<CurrentURI>${xmlEscape(url)}</CurrentURI><CurrentURIMetaData>${xmlEscape(didl)}</CurrentURIMetaData>",
+                "<CurrentURI>${xmlEscape(finalUrl)}</CurrentURI><CurrentURIMetaData>${xmlEscape(didl)}</CurrentURIMetaData>",
             )
             soap(renderer, "Play", "<Speed>1</Speed>")
             if (startPositionMs > 5_000L) {
@@ -165,7 +166,10 @@ internal object DlnaCastBackend : CastBackend {
             val code = connection.responseCode
             val text = (if (code in 200..299) connection.inputStream else connection.errorStream)
                 ?.bufferedReader()?.readText().orEmpty()
-            if (code !in 200..299) error("$action: HTTP $code")
+            if (code !in 200..299) {
+                val detail = Regex("<errorDescription>(.*?)</errorDescription>").find(text)?.groupValues?.get(1)
+                error("$action: HTTP $code${detail?.let { " ($it)" }.orEmpty()}")
+            }
             text
         } finally {
             connection.disconnect()
@@ -183,12 +187,49 @@ internal object DlnaCastBackend : CastBackend {
         }
     }
 
+    /** Follows HTTP redirects so the TV gets the final direct link (many renderers do not follow them). */
+    private fun resolveRedirects(url: String): String {
+        var current = url
+        repeat(6) {
+            val connection = URI(current).toURL().openConnection() as HttpURLConnection
+            try {
+                connection.instanceFollowRedirects = false
+                connection.connectTimeout = 6_000
+                connection.readTimeout = 8_000
+                connection.setRequestProperty("Range", "bytes=0-0")
+                val code = connection.responseCode
+                val location = connection.getHeaderField("Location")
+                if (code in 300..399 && !location.isNullOrBlank()) {
+                    current = URI(current).resolve(location).toString()
+                } else {
+                    return current
+                }
+            } catch (_: Exception) {
+                return current
+            } finally {
+                connection.disconnect()
+            }
+        }
+        return current
+    }
+
+    private fun mimeFor(url: String): String {
+        val path = runCatching { URI(url).path.lowercase() }.getOrDefault("")
+        return when {
+            path.endsWith(".mkv") -> "video/x-matroska"
+            path.endsWith(".avi") -> "video/x-msvideo"
+            path.endsWith(".ts") || path.endsWith(".m2ts") -> "video/mpeg"
+            path.endsWith(".webm") -> "video/webm"
+            else -> "video/mp4"
+        }
+    }
+
     private fun buildDidl(title: String, url: String): String =
         "<DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" " +
             "xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\">" +
             "<item id=\"0\" parentID=\"-1\" restricted=\"1\"><dc:title>${xmlEscape(title)}</dc:title>" +
             "<upnp:class>object.item.videoItem</upnp:class>" +
-            "<res protocolInfo=\"http-get:*:video/mp4:*\">${xmlEscape(url)}</res></item></DIDL-Lite>"
+            "<res protocolInfo=\"http-get:*:${mimeFor(url)}:*\">${xmlEscape(url)}</res></item></DIDL-Lite>"
 
     private fun xmlEscape(value: String): String =
         value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;")

@@ -53,11 +53,15 @@ object CastSession {
         internal set
     var busy by mutableStateOf(false)
         internal set
+    var errorDetail by mutableStateOf<String?>(null)
+        internal set
 
     suspend fun start(backend: CastBackend, target: CastDevice, url: String, title: String, positionMs: Long): Boolean {
         busy = true
         failed = false
-        val ok = backend.cast(target, url, title, positionMs).isSuccess
+        val result = backend.cast(target, url, title, positionMs)
+        val ok = result.isSuccess
+        errorDetail = result.exceptionOrNull()?.message
         busy = false
         if (ok) {
             device = target

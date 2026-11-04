@@ -288,10 +288,12 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
     } else {
         stringResource(Res.string.cast_dialog_title)
     }
+    val castErrorText = stringResource(Res.string.cast_error) +
+        (com.cinebox.app.features.cast.CastSession.errorDetail?.let { " ($it)" }.orEmpty())
     val castStatusText = when {
-        castActiveDevice != null -> if (com.cinebox.app.features.cast.CastSession.failed) stringResource(Res.string.cast_error) else ""
-        !castCanSend -> stringResource(Res.string.cast_unsupported_source)
-        com.cinebox.app.features.cast.CastSession.failed -> stringResource(Res.string.cast_error)
+        castActiveDevice != null -> if (com.cinebox.app.features.cast.CastSession.failed) castErrorText else ""
+        !castCanSend -> stringResource(Res.string.cast_unsupported_source) + " [" + (activeSourceUrl.orEmpty().take(40)) + "]"
+        com.cinebox.app.features.cast.CastSession.failed -> castErrorText
         castDeviceList.isEmpty() -> stringResource(Res.string.cast_searching)
         else -> ""
     }
