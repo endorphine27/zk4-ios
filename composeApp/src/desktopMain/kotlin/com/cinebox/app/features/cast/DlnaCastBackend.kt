@@ -117,11 +117,16 @@ internal object DlnaCastBackend : CastBackend {
             // open https links, redirects or long signed URLs directly.
             val finalUrl = withContext(Dispatchers.IO) { startProxy(upstreamUrl, renderer) }
             val didl = buildDidl(title, finalUrl)
-            soap(
-                renderer,
-                "SetAVTransportURI",
-                "<CurrentURI>${xmlEscape(finalUrl)}</CurrentURI><CurrentURIMetaData>${xmlEscape(didl)}</CurrentURIMetaData>",
-            )
+            try {
+                soap(
+                    renderer,
+                    "SetAVTransportURI",
+                    "<CurrentURI>${xmlEscape(finalUrl)}</CurrentURI><CurrentURIMetaData>${xmlEscape(didl)}</CurrentURIMetaData>",
+                    readTimeoutMs = 30_000,
+                )
+            } catch (e: Exception) {
+                error("${e.message} | $finalUrl | cereri de la TV: ${proxyHits.get()}")
+            }
             soap(renderer, "Play", "<Speed>1</Speed>")
             if (startPositionMs > 5_000L) {
                 // Many renderers only accept Seek after playback has begun.
@@ -156,7 +161,7 @@ internal object DlnaCastBackend : CastBackend {
         Unit
     }
 
-    private suspend fun soap(renderer: Renderer, action: String, args: String): String = withContext(Dispatchers.IO) {
+    private suspend fun soap(renderer: Renderer, action: String, args: String, readTimeoutMs: Int = 8_000): String = withContext(Dispatchers.IO) {
         val body = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
             "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
             "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><s:Body>" +
@@ -165,7 +170,7 @@ internal object DlnaCastBackend : CastBackend {
         try {
             connection.requestMethod = "POST"
             connection.connectTimeout = 4_000
-            connection.readTimeout = 8_000
+            connection.readTimeout = readTimeoutMs
             connection.doOutput = true
             connection.setRequestProperty("Content-Type", "text/xml; charset=\"utf-8\"")
             connection.setRequestProperty("SOAPACTION", "\"$AVTRANSPORT#$action\"")
@@ -196,6 +201,8 @@ internal object DlnaCastBackend : CastBackend {
 
     private var proxy: com.sun.net.httpserver.HttpServer? = null
     @Volatile private var proxyUpstream: String = ""
+    private val proxyHits = java.util.concurrent.atomic.AtomicInteger(0)
+    @Volatile private var proxyPublicUrl: String = ""
 
     private fun startProxy(upstream: String, renderer: Renderer): String {
         proxyUpstream = upstream
@@ -212,7 +219,9 @@ internal object DlnaCastBackend : CastBackend {
         }
         val ext = runCatching { URI(upstream).path.substringAfterLast('.', "mp4").lowercase() }
             .getOrDefault("mp4").takeIf { it.length in 2..4 } ?: "mp4"
-        return "http://$localIp:${server.address.port}/video.$ext"
+        proxyHits.set(0)
+        proxyPublicUrl = "http://$localIp:${server.address.port}/video.$ext"
+        return proxyPublicUrl
     }
 
     private fun stopProxy() {
@@ -221,6 +230,7 @@ internal object DlnaCastBackend : CastBackend {
     }
 
     private fun serveProxy(exchange: com.sun.net.httpserver.HttpExchange) {
+        proxyHits.incrementAndGet()
         try {
             val isHead = exchange.requestMethod.equals("HEAD", ignoreCase = true)
             val upstream = URI(proxyUpstream).toURL().openConnection() as HttpURLConnection
