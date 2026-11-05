@@ -1,5 +1,8 @@
 package com.cinebox.app.features.player
 
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.TimeSource
+
 internal val PlayerScreenRuntime.contentLanguage: String?
     get() {
         val metadata = listOfNotNull(metaUiState.meta, playerMeta).filter {
@@ -54,7 +57,18 @@ internal fun PlayerScreenRuntime.restorePersistedAudioPreference(preference: Per
 internal fun PlayerScreenRuntime.refreshAudioTracksIfChanged() {
     if (playbackSnapshot.isLoading) return
     val controller = playerController ?: return
-    if (!preferredAudioSelectionApplied || controller.getAudioTracks() != audioTracks) {
+    if (!preferredAudioSelectionApplied) {
+        refreshTracks()
+        return
+    }
+    // Snapshots arrive several times a second but the track list almost never changes, and reading it asks
+    // the native player for every track: compare it at most every couple of seconds.
+    val lastCheck = lastAudioTracksCheck
+    if (lastCheck != null && lastCheck.elapsedNow() < AudioTracksRecheckInterval) return
+    lastAudioTracksCheck = TimeSource.Monotonic.markNow()
+    if (controller.getAudioTracks() != audioTracks) {
         refreshTracks()
     }
 }
+
+private val AudioTracksRecheckInterval = 2.seconds

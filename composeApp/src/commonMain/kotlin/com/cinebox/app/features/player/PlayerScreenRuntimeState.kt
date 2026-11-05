@@ -290,6 +290,8 @@ internal class PlayerScreenRuntime(
     var selectedAddonSubtitleId by mutableStateOf<String?>(null)
     var useCustomSubtitles by mutableStateOf(false)
     var preferredAudioSelectionApplied by mutableStateOf(false)
+    // When the controller's audio track list was last compared (a native lookup that is not free).
+    var lastAudioTracksCheck: TimeMark? = null
     var appliedAudioPreferences: AppliedAudioPreferences? = null
     var preferredSubtitleSelectionApplied by mutableStateOf(false)
     var activeSubtitleTab by mutableStateOf(SubtitleTab.BuiltIn)
