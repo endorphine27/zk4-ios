@@ -11,6 +11,8 @@ data class CastDevice(
 /** Sends a stream link to a TV or speaker on the local network and controls it remotely. */
 interface CastBackend {
     val devices: StateFlow<List<CastDevice>>
+    /** Short live status of the current cast (what the TV requested, seek progress); null when unsupported. */
+    val diagnostics: StateFlow<String>? get() = null
     fun startDiscovery()
     fun stopDiscovery()
     suspend fun cast(

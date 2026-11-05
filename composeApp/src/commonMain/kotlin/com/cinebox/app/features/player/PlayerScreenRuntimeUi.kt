@@ -289,6 +289,7 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
         }
     }
     val castDeviceList = castBackend?.devices?.collectAsStateWithLifecycle()?.value.orEmpty()
+    val castDiagnostics = castBackend?.diagnostics?.collectAsStateWithLifecycle()?.value.orEmpty()
     val castActiveDevice = com.cinebox.app.features.cast.CastSession.device
     val castCanSend = com.cinebox.app.features.cast.isCastableUrl(activeSourceUrl)
     val castTitleText = if (castActiveDevice != null) {
@@ -299,7 +300,7 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
     val castErrorText = stringResource(Res.string.cast_error) +
         (com.cinebox.app.features.cast.CastSession.errorDetail?.let { " ($it)" }.orEmpty())
     val castStatusText = when {
-        castActiveDevice != null -> if (com.cinebox.app.features.cast.CastSession.failed) castErrorText else ""
+        castActiveDevice != null -> if (com.cinebox.app.features.cast.CastSession.failed) castErrorText else castDiagnostics
         !castCanSend -> stringResource(Res.string.cast_unsupported_source) + " [" + (activeSourceUrl.orEmpty().take(40)) + "]"
         com.cinebox.app.features.cast.CastSession.failed -> castErrorText
         castDeviceList.isEmpty() -> stringResource(Res.string.cast_searching)

@@ -43,6 +43,21 @@ internal object DlnaCastBackend : CastBackend {
 
     override val devices: StateFlow<List<CastDevice>> = deviceList.asStateFlow()
 
+    private val diag = MutableStateFlow("")
+    override val diagnostics: StateFlow<String> = diag.asStateFlow()
+    private val subtitleHits = java.util.concurrent.atomic.AtomicInteger(0)
+    @Volatile private var seekStatus = ""
+    @Volatile private var subtitleSent = false
+
+    private fun refreshDiag() {
+        diag.value = buildString {
+            append("Subtitrare: ")
+            append(if (subtitleSent) "trimisă, cerută de TV ${subtitleHits.get()}x" else "netrimisă (nu există în limba preferată)")
+            append(" · Video: ${proxyHits.get()} cereri")
+            if (seekStatus.isNotBlank()) append(" · ").append(seekStatus)
+        }
+    }
+
     override fun startDiscovery() {
         if (discoveryJob?.isActive == true) return
         discoveryJob = scope.launch {
@@ -144,6 +159,9 @@ internal object DlnaCastBackend : CastBackend {
             runCatching { soap(renderer, "Stop", "") }
             delay(400)
             proxySubtitleUpstream = subtitleUrl.orEmpty()
+            subtitleSent = !subtitleUrl.isNullOrBlank()
+            subtitleHits.set(0)
+            seekStatus = if (startPositionMs > 5_000L) "reluare la ${formatTime(startPositionMs)}: se așteaptă TV-ul" else ""
             val finalUrl = withContext(Dispatchers.IO) { startProxy(upstreamUrl, renderer) }
             val subtitleProxyUrl = if (subtitleUrl.isNullOrBlank()) null else finalUrl.substringBeforeLast('/') + "/subtitle.srt"
             proxySubtitlePublicUrl = subtitleProxyUrl.orEmpty()
@@ -159,6 +177,7 @@ internal object DlnaCastBackend : CastBackend {
                 error("${e.message} | $finalUrl | cereri de la TV: ${proxyHits.get()}")
             }
             soap(renderer, "Play", "<Speed>1</Speed>")
+            refreshDiag()
             if (startPositionMs > 5_000L) {
                 // The TV only accepts a seek once it is really playing, so do it in the background and
                 // check the reported position; retry with both REL_TIME and ABS_TIME.
@@ -168,21 +187,33 @@ internal object DlnaCastBackend : CastBackend {
 
     private suspend fun seekWhenReady(renderer: Renderer, targetMs: Long) {
         val target = formatTime(targetMs)
-        for (attempt in 0 until 20) {
+        for (attempt in 0 until 60) {
             delay(1_500)
+            refreshDiag()
             val state = runCatching {
                 Regex("<CurrentTransportState>(.*?)</CurrentTransportState>")
                     .find(soap(renderer, "GetTransportInfo", ""))?.groupValues?.get(1)
             }.getOrNull()
-            if (state != "PLAYING") continue
+            if (state != "PLAYING") {
+                seekStatus = "reluare la $target: TV în starea ${state ?: "necunoscută"}"
+                continue
+            }
             val unit = if (attempt % 2 == 0) "REL_TIME" else "ABS_TIME"
             runCatching { soap(renderer, "Seek", "<Unit>$unit</Unit><Target>$target</Target>") }
             delay(1_500)
             val position = runCatching {
                 Regex("<RelTime>(.*?)</RelTime>").find(soap(renderer, "GetPositionInfo", ""))?.groupValues?.get(1)
             }.getOrNull()?.let(::parseTime)
-            if (position != null && position >= targetMs - 15_000L) return
+            seekStatus = "reluare la $target: TV la ${position?.let(::formatTime) ?: "poziție necunoscută"}"
+            refreshDiag()
+            if (position != null && position >= targetMs - 15_000L) {
+                seekStatus = "reluare reușită la ${formatTime(position)}"
+                refreshDiag()
+                return
+            }
         }
+        seekStatus = "reluare eșuată: TV-ul nu a acceptat seek-ul"
+        refreshDiag()
     }
 
     override suspend fun pause(device: CastDevice) = control(device, "Pause", "")
@@ -298,6 +329,8 @@ internal object DlnaCastBackend : CastBackend {
 
     /** Serves the chosen subtitle as UTF-8 SRT so renderers can load it as an external subtitle. */
     private fun serveSubtitle(exchange: com.sun.net.httpserver.HttpExchange) {
+        subtitleHits.incrementAndGet()
+        refreshDiag()
         var upstream: HttpURLConnection? = null
         try {
             upstream = URI(proxySubtitleUpstream).toURL().openConnection() as HttpURLConnection
@@ -347,6 +380,7 @@ internal object DlnaCastBackend : CastBackend {
 
     private fun serveProxy(exchange: com.sun.net.httpserver.HttpExchange) {
         proxyHits.incrementAndGet()
+        if (proxyHits.get() % 5 == 1) refreshDiag()
         var upstream: HttpURLConnection? = null
         try {
             val isHead = exchange.requestMethod.equals("HEAD", ignoreCase = true)
