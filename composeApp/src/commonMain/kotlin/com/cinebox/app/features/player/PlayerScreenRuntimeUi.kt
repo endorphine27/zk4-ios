@@ -279,6 +279,40 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
             title = chapter.title ?: stringResource(Res.string.compose_player_chapter_number, index + 1),
         )
     }
+    val castBackend = remember { com.cinebox.app.features.cast.platformCastBackend() }
+    androidx.compose.runtime.DisposableEffect(castBackend) {
+        onDispose {
+            castBackend?.let {
+                it.stopDiscovery()
+                com.cinebox.app.features.cast.CastSession.stopInBackground(it)
+            }
+        }
+    }
+    val castDeviceList = castBackend?.devices?.collectAsStateWithLifecycle()?.value.orEmpty()
+    val castActiveDevice = com.cinebox.app.features.cast.CastSession.device
+    val castCanSend = com.cinebox.app.features.cast.isCastableUrl(activeSourceUrl)
+    val castTitleText = if (castActiveDevice != null) {
+        stringResource(Res.string.cast_playing_on, castActiveDevice.name)
+    } else {
+        stringResource(Res.string.cast_dialog_title)
+    }
+    val castErrorText = stringResource(Res.string.cast_error) +
+        (com.cinebox.app.features.cast.CastSession.errorDetail?.let { " ($it)" }.orEmpty())
+    val castStatusText = when {
+        castActiveDevice != null -> if (com.cinebox.app.features.cast.CastSession.failed) castErrorText else ""
+        !castCanSend -> stringResource(Res.string.cast_unsupported_source) + " [" + (activeSourceUrl.orEmpty().take(40)) + "]"
+        com.cinebox.app.features.cast.CastSession.failed -> castErrorText
+        castDeviceList.isEmpty() -> stringResource(Res.string.cast_searching)
+        else -> ""
+    }
+    val castHintText = if (castActiveDevice == null && castCanSend && castDeviceList.isEmpty()) {
+        stringResource(Res.string.cast_no_devices)
+    } else {
+        ""
+    }
+    val castPauseText = stringResource(Res.string.cast_pause)
+    val castResumeText = stringResource(Res.string.cast_resume)
+    val castStopText = stringResource(Res.string.cast_stop)
     val playerControlsState = PlayerControlsState(
         chapters = controlChapters,
         chaptersLabel = stringResource(Res.string.compose_player_chapters),
@@ -319,6 +353,7 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
         unlockLabel = stringResource(Res.string.compose_player_unlock_controls),
         submitIntroLabel = stringResource(Res.string.submit_intro_action),
         videoSettingsLabel = stringResource(Res.string.player_action_video_settings),
+        castLabel = stringResource(Res.string.cast_dialog_title),
         tapToUnlockLabel = stringResource(Res.string.compose_player_tap_to_unlock),
         pipLabel = stringResource(Res.string.compose_player_picture_in_picture),
         pipPlaceholderTitle = stringResource(Res.string.compose_player_pip_placeholder_title),
@@ -417,6 +452,16 @@ internal fun PlayerScreenRuntime.RenderPlayerRuntimeUi() {
             playerSettingsUiState.introDbApiKey.isNotBlank() &&
             !activeSubmitIntroImdbId().isNullOrBlank(),
         showVideoSettings = isIos,
+        showCast = castBackend != null,
+        castPanelTitle = castTitleText,
+        castDevices = if (castCanSend) castDeviceList.map { it.name } else emptyList(),
+        castActive = castActiveDevice != null,
+        castPaused = com.cinebox.app.features.cast.CastSession.paused,
+        castStatus = castStatusText,
+        castHint = castHintText,
+        castPauseLabel = castPauseText,
+        castResumeLabel = castResumeText,
+        castStopLabel = castStopText,
         showSources = activeVideoId != null,
         showEpisodes = isSeries,
         showExternalPlayer = args.onOpenInExternalPlayer != null,
@@ -768,6 +813,14 @@ private fun PlayerScreenRuntime.RenderPlayerControls(
             } else {
                 null
             },
+            onCastClick = if (com.cinebox.app.features.cast.platformCastBackend() != null) {
+                {
+                    showCastDialog = true
+                    controlsVisible = true
+                }
+            } else {
+                null
+            },
             onSourcesClick = if (activeVideoId != null) { { openSourcesPanel() } } else null,
             onEpisodesClick = if (isSeries) { { openEpisodesPanel() } } else null,
             chapters = chapters,
@@ -963,6 +1016,10 @@ private fun PlayerScreenRuntime.handlePlayerControlsAction(action: PlayerControl
         PlayerControlsAction.PictureInPicture -> {
             togglePlayerPictureInPicture()
         }
+        PlayerControlsAction.Cast -> {
+            controlsVisible = true
+            com.cinebox.app.features.cast.platformCastBackend()?.startDiscovery()
+        }
         PlayerControlsAction.DoubleTapSeekBack -> {
             prepareDoubleTapSeekForNativeFallback(PlayerSeekDirection.Backward)
             return false
@@ -1008,6 +1065,38 @@ internal fun PlayerScreenRuntime.handlePlayerControlsEvent(type: String, value: 
             com.cinebox.app.features.tv.ChannelZapController.zap(if (value >= 0.0) 1 else -1)
         }
         "streamInfo" -> refreshStreamInfo()
+        "castClosed" -> {
+            com.cinebox.app.features.cast.platformCastBackend()?.stopDiscovery()
+        }
+        "castSelect" -> {
+            val backend = com.cinebox.app.features.cast.platformCastBackend()
+            val target = backend?.devices?.value?.getOrNull(value.toInt())
+            if (backend != null && target != null && com.cinebox.app.features.cast.isCastableUrl(activeSourceUrl)) {
+                val url = activeSourceUrl.orEmpty()
+                val selectedSubtitleUrl = selectedAddonSubtitleId?.let { key ->
+                    addonSubtitles.firstOrNull { it.id == key || it.url == key }?.url
+                } ?: selectedAddonSubtitleId?.takeIf { it.startsWith("http") }
+                scope.launch {
+                    val started = com.cinebox.app.features.cast.CastSession.start(
+                        backend = backend,
+                        target = target,
+                        url = url,
+                        title = title,
+                        positionMs = playbackSnapshot.positionMs,
+                        subtitleUrl = selectedSubtitleUrl,
+                    )
+                    if (started) playerController?.pause()
+                }
+            }
+        }
+        "castTogglePause" -> {
+            val backend = com.cinebox.app.features.cast.platformCastBackend()
+            if (backend != null) scope.launch { com.cinebox.app.features.cast.CastSession.togglePause(backend) }
+        }
+        "castStop" -> {
+            val backend = com.cinebox.app.features.cast.platformCastBackend()
+            if (backend != null) scope.launch { com.cinebox.app.features.cast.CastSession.stopCasting(backend) }
+        }
         "selectChapter" -> {
             selectChapter(value.toInt())
         }
@@ -1826,6 +1915,18 @@ private fun PlayerScreenRuntime.RenderPlayerModals(displayedPositionMs: Long) {
             controlsVisible = true
         },
     )
+    if (showCastDialog) {
+        com.cinebox.app.features.cast.CastDialog(
+            url = activeSourceUrl,
+            title = title,
+            positionMs = playbackSnapshot.positionMs,
+            onCastStarted = {
+                playerController?.pause()
+                showCastDialog = false
+            },
+            onDismiss = { showCastDialog = false },
+        )
+    }
     PlayerScreenModalHosts(
         pendingP2pSwitch = pendingP2pSwitch,
         onPendingP2pSwitchChanged = { pendingP2pSwitch = it },

@@ -49,8 +49,8 @@ import platform.posix.fwrite
 
 private const val DOWNLOAD_REQUEST_TIMEOUT_SECONDS = 60.0
 private const val DOWNLOAD_RESOURCE_TIMEOUT_SECONDS = 24.0 * 60.0 * 60.0
-private const val PROGRESS_MIN_INTERVAL_SECONDS = 0.5
-private const val PROGRESS_MIN_BYTE_DELTA = 512L * 1024L
+// One progress update per second at most: each one rewrites the downloads file and the Live Activity.
+private const val PROGRESS_MIN_INTERVAL_SECONDS = 1.0
 
 private val backgroundSessionCompletionHandlers = mutableMapOf<String, () -> Unit>()
 
@@ -363,14 +363,12 @@ private class IosDownloadDelegate(
     ) {
         val normalizedDownloadedBytes = downloadedBytes.coerceAtLeast(0L)
         val now = NSDate().timeIntervalSince1970
-        val byteDelta = normalizedDownloadedBytes - lastProgressBytes
         val timeDelta = now - lastProgressTimestampSeconds
         val reachedEnd = totalBytes != null && normalizedDownloadedBytes >= totalBytes
 
         if (
             lastProgressBytes >= 0L &&
             !reachedEnd &&
-            byteDelta < PROGRESS_MIN_BYTE_DELTA &&
             timeDelta < PROGRESS_MIN_INTERVAL_SECONDS
         ) {
             return

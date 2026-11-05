@@ -1268,6 +1268,7 @@ private fun String.toPlayerControlsAction(): PlayerControlsAction? =
         "external" -> PlayerControlsAction.OpenExternalPlayer
         "submitIntro" -> PlayerControlsAction.SubmitIntro
         "videoSettings" -> PlayerControlsAction.VideoSettings
+        "cast" -> PlayerControlsAction.Cast
         else -> null
     }
 
@@ -1337,6 +1338,8 @@ private fun PlayerControlsState.toControlsJson(isFullscreen: Boolean, onImageRea
         appendJsonField("submitIntroLabel", submitIntroLabel)
         append(',')
         appendJsonField("videoSettingsLabel", videoSettingsLabel)
+        append(',')
+        appendJsonField("castLabel", castLabel)
         append(',')
         appendJsonField("playbackErrorTitle", playbackErrorTitle)
         append(',')
@@ -1562,6 +1565,26 @@ private fun PlayerControlsState.toControlsJson(isFullscreen: Boolean, onImageRea
         appendJsonField("showSubmitIntro", showSubmitIntro)
         append(',')
         appendJsonField("showVideoSettings", showVideoSettings)
+        append(',')
+        appendJsonField("showCast", showCast)
+        append(',')
+        appendJsonField("castPanelTitle", castPanelTitle)
+        append(',')
+        appendJsonArrayField("castDevices", castDevices) { append(it.toJsonString()) }
+        append(',')
+        appendJsonField("castActive", castActive)
+        append(',')
+        appendJsonField("castPaused", castPaused)
+        append(',')
+        appendJsonField("castStatus", castStatus)
+        append(',')
+        appendJsonField("castHint", castHint)
+        append(',')
+        appendJsonField("castPauseLabel", castPauseLabel)
+        append(',')
+        appendJsonField("castResumeLabel", castResumeLabel)
+        append(',')
+        appendJsonField("castStopLabel", castStopLabel)
         append(',')
         appendJsonField("showSources", showSources)
         append(',')

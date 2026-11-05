@@ -279,8 +279,14 @@ private fun NativePlayerSurface(
 
     LaunchedEffect(controller) {
         while (true) {
-            if (!controller.isReleasing) onSnapshot(controller.snapshot())
-            delay(250L)
+            var idle = false
+            if (!controller.isReleasing) {
+                val snapshot = controller.snapshot()
+                onSnapshot(snapshot)
+                idle = !snapshot.isPlaying && !snapshot.isLoading
+            }
+            // Paused/ended: nothing moves on screen, so wake up less often to save CPU and battery.
+            delay(if (idle) 750L else 250L)
         }
     }
 

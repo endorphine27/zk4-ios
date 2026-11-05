@@ -2531,4 +2531,14 @@
     <string name="settings_trakt_client_id_description">Creează o aplicație gratuită pe developer.trakt.tv și lipește aici Client ID-ul. Apoi Trakt apare la Urmărire.</string>
     <string name="settings_trakt_client_id_label">Client ID</string>
     <string name="settings_integrations_tracking_description">Conturi și surse Trakt, Simkl, MDBList</string>
+    <string name="cast_dialog_title">Trimite pe TV</string>
+    <string name="cast_playing_on">Se redă pe %1$s</string>
+    <string name="cast_searching">Se caută dispozitive…</string>
+    <string name="cast_no_devices">Verifică dacă TV-ul este pornit și conectat la aceeași rețea (DLNA / redare media activată).</string>
+    <string name="cast_pause">Pauză</string>
+    <string name="cast_resume">Continuă</string>
+    <string name="cast_stop">Oprește transmiterea</string>
+    <string name="cast_error">Nu s-a putut trimite către acest dispozitiv.</string>
+    <string name="cast_unsupported_source">Această sursă nu are link direct și nu poate fi trimisă pe TV.</string>
+    <string name="cast_close">Închide</string>
 </resources>
