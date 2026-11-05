@@ -1076,6 +1076,18 @@ internal fun PlayerScreenRuntime.handlePlayerControlsEvent(type: String, value: 
                 val selectedSubtitleUrl = selectedAddonSubtitleId?.let { key ->
                     addonSubtitles.firstOrNull { it.id == key || it.url == key }?.url
                 } ?: selectedAddonSubtitleId?.takeIf { it.startsWith("http") }
+                    ?: run {
+                        // Nothing explicit chosen (embedded track or auto pick): send the preferred-language
+                        // addon subtitle so the TV does not fall back to its default (English) track.
+                        val preferred = normalizeLanguageCode(playerSettingsUiState.preferredSubtitleLanguage)
+                        if (preferred == null || preferred == SubtitleLanguageOption.NONE || preferred == SubtitleLanguageOption.FORCED) {
+                            null
+                        } else {
+                            addonSubtitles.firstOrNull {
+                                it.url.isNotBlank() && SubtitleLanguageMatching.matchesLanguageCode(it.language, preferred)
+                            }?.url
+                        }
+                    }
                 scope.launch {
                     val started = com.cinebox.app.features.cast.CastSession.start(
                         backend = backend,
