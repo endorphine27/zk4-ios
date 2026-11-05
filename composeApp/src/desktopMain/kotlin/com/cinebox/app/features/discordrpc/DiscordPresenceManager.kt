@@ -48,8 +48,11 @@ internal object DiscordPresenceManager {
     private suspend fun startSync() {
         syncJob?.cancel()
         syncJob = scope.launch {
+            var failedAttempts = 0
             while (isActive) {
                 val connected = client.connect()
+                // Discord not running: back off instead of probing the IPC pipe every 15 s forever.
+                failedAttempts = if (connected) 0 else (failedAttempts + 1).coerceAtMost(4)
                 if (connected) {
                     lastActivity = null
                     try {
@@ -66,7 +69,7 @@ internal object DiscordPresenceManager {
                         log.d { "Discord IPC disconnected, retrying" }
                     }
                 }
-                delay(ReconnectDelayMs)
+                delay(ReconnectDelayMs * (1L shl failedAttempts))
             }
         }
     }

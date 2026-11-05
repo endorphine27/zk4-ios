@@ -78,7 +78,11 @@ object StreamQualityProbe {
             StreamBadgePresentation.apply(listOf(group), rules).firstOrNull()?.streams?.firstOrNull()?.badges.orEmpty()
         }
         log.d { "Best of ${streams.size} streams for $type/$videoId has ${badges.size} badges" }
-        cacheLock.withLock { cache[key] = CachedBadges(badges, TimeSource.Monotonic.markNow()) }
+        cacheLock.withLock {
+            // Drop expired entries so the cache cannot grow for as long as the app stays open.
+            cache.entries.removeAll { it.value.storedAt.elapsedNow().inWholeMilliseconds >= CACHE_TTL_MS }
+            cache[key] = CachedBadges(badges, TimeSource.Monotonic.markNow())
+        }
         return badges
     }
 

@@ -356,7 +356,8 @@ actual fun PlatformPlayerSurface(
                 lastReportedError = errorMessage
                 latestOnError.value(errorMessage)
             }
-            delay(250L)
+            // Paused/ended: nothing moves on screen, so wake up less often to save battery.
+            delay(if (!snapshot.isPlaying && !snapshot.isLoading) 750L else 250L)
         }
     }
 

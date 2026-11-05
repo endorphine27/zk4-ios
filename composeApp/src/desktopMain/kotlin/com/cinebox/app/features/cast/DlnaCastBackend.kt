@@ -28,13 +28,18 @@ internal object DlnaCastBackend : CastBackend {
     private const val AVTRANSPORT = "urn:schemas-upnp-org:service:AVTransport:1"
     private const val SSDP_ADDRESS = "239.255.255.250"
     private const val SSDP_PORT = 1900
+    private const val STALE_DEVICE_MS = 90_000L
 
     private class Renderer(val device: CastDevice, val controlUrl: String)
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-    private val renderers = mutableMapOf<String, Renderer>()
+    private val renderers = java.util.concurrent.ConcurrentHashMap<String, Renderer>()
+    private val seenAt = java.util.concurrent.ConcurrentHashMap<String, Long>()
+    @Volatile private var activeDeviceId: String? = null
     private val deviceList = MutableStateFlow<List<CastDevice>>(emptyList())
     private var discoveryJob: Job? = null
+    @Volatile private var seekJob: Job? = null
+    private var proxyExecutor: java.util.concurrent.ExecutorService? = null
 
     override val devices: StateFlow<List<CastDevice>> = deviceList.asStateFlow()
 
@@ -61,7 +66,11 @@ internal object DlnaCastBackend : CastBackend {
         val locations = linkedSetOf<String>()
         val group = InetAddress.getByName(SSDP_ADDRESS)
         val interfaces = runCatching {
-            NetworkInterface.getNetworkInterfaces().toList().filter { it.isUp && !it.isLoopback && it.supportsMulticast() }
+            NetworkInterface.getNetworkInterfaces().toList().filter { nic ->
+                // SSDP here is IPv4 only: skip VPN/virtual/IPv6-only interfaces, each would just add a timeout wait.
+                nic.isUp && !nic.isLoopback && nic.supportsMulticast() &&
+                    nic.interfaceAddresses.any { it.address is java.net.Inet4Address }
+            }
         }.getOrDefault(emptyList())
         for (nic in interfaces) {
             runCatching {
@@ -87,12 +96,19 @@ internal object DlnaCastBackend : CastBackend {
                 }
             }
         }
+        val now = System.currentTimeMillis()
         for (location in locations) {
-            if (renderers.values.any { it.device.id == location }) continue
+            seenAt[location] = now
+            if (renderers.containsKey(location)) continue
             runCatching { describe(location) }.getOrNull()?.let { renderer ->
                 renderers[renderer.device.id] = renderer
             }
         }
+        // A TV that was switched off must not stay in the list forever (casting to it only times out).
+        renderers.keys.removeAll { id ->
+            id != activeDeviceId && (seenAt[id] ?: 0L) < now - STALE_DEVICE_MS
+        }
+        seenAt.keys.removeAll { !renderers.containsKey(it) }
         deviceList.value = renderers.values.map { it.device }.sortedBy { it.name.lowercase() }
     }
 
@@ -118,9 +134,12 @@ internal object DlnaCastBackend : CastBackend {
     ): Result<Unit> =
         runCatching {
             val renderer = renderers[device.id] ?: error("Dispozitiv indisponibil")
+            activeDeviceId = device.id
             val upstreamUrl = withContext(Dispatchers.IO) { resolveRedirects(url) }
             // The TV fetches the stream from this app over plain local HTTP: many renderers cannot
             // open https links, redirects or long signed URLs directly.
+            // A resume-seek from an earlier cast must not move this new session.
+            seekJob?.cancel()
             // The TV may still hold a previous session ("Transition not available"): stop it first.
             runCatching { soap(renderer, "Stop", "") }
             delay(400)
@@ -143,7 +162,7 @@ internal object DlnaCastBackend : CastBackend {
             if (startPositionMs > 5_000L) {
                 // The TV only accepts a seek once it is really playing, so do it in the background and
                 // check the reported position; retry with both REL_TIME and ABS_TIME.
-                scope.launch { seekWhenReady(renderer, startPositionMs) }
+                seekJob = scope.launch { seekWhenReady(renderer, startPositionMs) }
             }
         }
 
@@ -169,6 +188,9 @@ internal object DlnaCastBackend : CastBackend {
     override suspend fun pause(device: CastDevice) = control(device, "Pause", "")
     override suspend fun resume(device: CastDevice) = control(device, "Play", "<Speed>1</Speed>")
     override suspend fun stop(device: CastDevice): Result<Unit> {
+        seekJob?.cancel()
+        seekJob = null
+        activeDeviceId = null
         val result = control(device, "Stop", "")
         stopProxy()
         return result
@@ -233,19 +255,32 @@ internal object DlnaCastBackend : CastBackend {
     @Volatile private var proxySubtitleUpstream: String = ""
     @Volatile private var proxySubtitlePublicUrl: String = ""
 
+    private var proxyBindIp: String? = null
+
     private fun startProxy(upstream: String, renderer: Renderer): String {
         proxyUpstream = upstream
-        val server = proxy ?: com.sun.net.httpserver.HttpServer.create(InetSocketAddress(0), 0).also { created ->
-            created.executor = java.util.concurrent.Executors.newCachedThreadPool()
-            created.createContext("/") { exchange -> serveProxy(exchange) }
-            created.createContext("/subtitle.srt") { exchange -> serveSubtitle(exchange) }
-            created.start()
-            proxy = created
-        }
         val host = URI(renderer.controlUrl).host
         val localIp = java.net.DatagramSocket().use { socket ->
             socket.connect(InetAddress.getByName(host), 9)
             socket.localAddress.hostAddress
+        }
+        // Listen only on the address facing the TV (not on every interface), and rebind if the network changed.
+        if (proxy != null && proxyBindIp != localIp) stopProxy()
+        val server = proxy ?: com.sun.net.httpserver.HttpServer.create(
+            InetSocketAddress(InetAddress.getByName(localIp), 0),
+            0,
+        ).also { created ->
+            // Daemon threads: they must never keep the app process alive after quit.
+            val pool = java.util.concurrent.Executors.newCachedThreadPool { runnable ->
+                Thread(runnable, "cast-proxy").apply { isDaemon = true }
+            }
+            proxyExecutor = pool
+            created.executor = pool
+            created.createContext("/") { exchange -> serveProxy(exchange) }
+            created.createContext("/subtitle.srt") { exchange -> serveSubtitle(exchange) }
+            created.start()
+            proxy = created
+            proxyBindIp = localIp
         }
         val ext = runCatching { URI(upstream).path.substringAfterLast('.', "mp4").lowercase() }
             .getOrDefault("mp4").takeIf { it.length in 2..4 } ?: "mp4"
@@ -257,17 +292,19 @@ internal object DlnaCastBackend : CastBackend {
     private fun stopProxy() {
         proxy?.stop(0)
         proxy = null
+        proxyExecutor?.shutdownNow()
+        proxyExecutor = null
     }
 
     /** Serves the chosen subtitle as UTF-8 SRT so renderers can load it as an external subtitle. */
     private fun serveSubtitle(exchange: com.sun.net.httpserver.HttpExchange) {
+        var upstream: HttpURLConnection? = null
         try {
-            val upstream = URI(proxySubtitleUpstream).toURL().openConnection() as HttpURLConnection
+            upstream = URI(proxySubtitleUpstream).toURL().openConnection() as HttpURLConnection
             upstream.instanceFollowRedirects = true
             upstream.connectTimeout = 10_000
             upstream.readTimeout = 20_000
             val raw = upstream.inputStream.use { it.readBytes() }
-            upstream.disconnect()
             val utf8 = runCatching {
                 Charsets.UTF_8.newDecoder()
                     .onMalformedInput(java.nio.charset.CodingErrorAction.REPORT)
@@ -287,6 +324,7 @@ internal object DlnaCastBackend : CastBackend {
         } catch (_: Exception) {
             runCatching { exchange.sendResponseHeaders(404, -1) }
         } finally {
+            runCatching { upstream?.disconnect() }
             exchange.close()
         }
     }
@@ -309,9 +347,10 @@ internal object DlnaCastBackend : CastBackend {
 
     private fun serveProxy(exchange: com.sun.net.httpserver.HttpExchange) {
         proxyHits.incrementAndGet()
+        var upstream: HttpURLConnection? = null
         try {
             val isHead = exchange.requestMethod.equals("HEAD", ignoreCase = true)
-            val upstream = URI(proxyUpstream).toURL().openConnection() as HttpURLConnection
+            upstream = URI(proxyUpstream).toURL().openConnection() as HttpURLConnection
             upstream.instanceFollowRedirects = true
             upstream.connectTimeout = 10_000
             upstream.readTimeout = 30_000
@@ -330,7 +369,6 @@ internal object DlnaCastBackend : CastBackend {
                 val length = total ?: upstream.contentLengthLong
                 if (length >= 0) headers.add("Content-Length", length.toString())
                 exchange.sendResponseHeaders(200, -1)
-                upstream.disconnect()
                 return
             }
             if (contentRange != null && range != null) headers.add("Content-Range", contentRange)
@@ -341,6 +379,7 @@ internal object DlnaCastBackend : CastBackend {
         } catch (_: Exception) {
             // The TV closing the connection (seeking, stopping) is normal.
         } finally {
+            runCatching { upstream?.disconnect() }
             exchange.close()
         }
     }

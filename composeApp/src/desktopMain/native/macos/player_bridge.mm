@@ -198,6 +198,7 @@ static constexpr double kMaxVolumePercent = 200.0;
 - (void)beginFullscreenTransitionWithReason:(NSString *)reason;
 - (void)finishFullscreenTransitionWithReason:(NSString *)reason;
 - (void)handleFullscreenTransitionTimer:(NSTimer *)timer;
+- (void)timerSyncControls;
 - (void)schedulePostResizeRefreshWithReason:(NSString *)reason;
 - (void)handleResizeSettleTimer:(NSTimer *)timer;
 - (void)scheduleControlsResizeEnded;
@@ -1133,6 +1134,8 @@ static void setMpvOptionString(mpv_handle *mpv, const char *name, const char *va
     NSString *_pendingControlsJson;
     double _initialStartSeconds;
     BOOL _controlsSyncInFlight;
+    BOOL _lastSyncIdle;
+    NSUInteger _idleSyncTicks;
     NSRect _lastAppliedNativeLayoutBounds;
     BOOL _lastAppliedNativeLayoutWasLiveResize;
     NSTimeInterval _lightweightResizeSettleUntil;
@@ -1270,7 +1273,7 @@ static void setMpvOptionString(mpv_handle *mpv, const char *name, const char *va
               decoderPriority:decoderPriority];
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5
                                              target:self
-                                           selector:@selector(syncControls)
+                                           selector:@selector(timerSyncControls)
                                            userInfo:nil
                                             repeats:YES];
     return self;
@@ -1811,6 +1814,15 @@ static void setMpvOptionString(mpv_handle *mpv, const char *name, const char *va
     [self setPaused:!playWhenReady];
 }
 
+/* Periodic tick. While playback is paused nothing on screen changes by itself, so poll
+ * every 4th tick (2 s) instead of every 500 ms; commands still call syncControls directly. */
+- (void)timerSyncControls {
+    if (_lastSyncIdle && (++_idleSyncTicks % 4) != 0) {
+        return;
+    }
+    [self syncControls];
+}
+
 - (void)syncControls {
     if (!_webView || !_mpv) {
         return;
@@ -1863,6 +1875,7 @@ static void setMpvOptionString(mpv_handle *mpv, const char *name, const char *va
                 if (!self->_webView || self->_mpv != mpv) {
                     return;
                 }
+                self->_lastSyncIdle = paused && !loading;
                 [self applyHdrForPolledGamma:gamma primaries:primaries reason:@"sync" force:NO];
                 [self updateNowPlayingWithTitle:mediaTitle
                                        duration:duration
