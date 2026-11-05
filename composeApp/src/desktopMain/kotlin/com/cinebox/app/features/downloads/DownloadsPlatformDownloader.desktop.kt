@@ -82,16 +82,24 @@ internal actual object DownloadsPlatformDownloader {
 
                 response.body().use { input ->
                     FileOutputStream(tempFile, appendToTemp).use { output ->
-                        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+                        val buffer = ByteArray(64 * 1024)
+                        // Every progress update republishes and rewrites the downloads file, so report at most
+                        // twice a second instead of after every buffer read.
+                        var lastReportNanos = System.nanoTime()
                         while (true) {
                             ensureActive()
                             val read = input.read(buffer)
                             if (read <= 0) break
                             output.write(buffer, 0, read)
                             downloadedBytes += read.toLong()
-                            onProgress(downloadedBytes, totalBytes)
+                            val nowNanos = System.nanoTime()
+                            if (nowNanos - lastReportNanos >= 500_000_000L) {
+                                lastReportNanos = nowNanos
+                                onProgress(downloadedBytes, totalBytes)
+                            }
                         }
                         output.flush()
+                        onProgress(downloadedBytes, totalBytes)
                     }
                 }
 

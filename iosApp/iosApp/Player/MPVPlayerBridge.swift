@@ -587,9 +587,14 @@ final class MPVPlayerViewController: UIViewController {
                                                name: UIApplication.willEnterForegroundNotification, object: nil)
     }
 
+    /// True only when this controller paused playback itself on entering the background,
+    /// so coming back must not start a video the user had paused.
+    private var resumeOnForeground = false
+
     @objc private func enterBackground() {
         guard mpv != nil else { return }
         if pictureInPictureController?.enteredBackground() == true { return }
+        resumeOnForeground = isPlayerPlaying
         pauseBackgroundPlayback()
     }
 
@@ -607,7 +612,10 @@ final class MPVPlayerViewController: UIViewController {
         let wasInPictureInPicture = pictureInPictureController?.enteredForeground() == true
         if wasInPictureInPicture { return }
         restoreBackgroundVideo()
-        playPlayback()
+        if resumeOnForeground {
+            resumeOnForeground = false
+            playPlayback()
+        }
     }
 
     // MARK: - Playback API
