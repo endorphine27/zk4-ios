@@ -2563,14 +2563,4 @@
     <string name="settings_trakt_client_id_description">Create a free app at trakt.tv/oauth/applications (or developer.trakt.tv) and paste its Client ID here. Trakt then appears under Tracking.</string>
     <string name="settings_trakt_client_id_label">Client ID</string>
     <string name="settings_integrations_tracking_description">Trakt, Simkl and MDBList accounts and sources</string>
-    <string name="cast_dialog_title">Cast to TV</string>
-    <string name="cast_playing_on">Playing on %1$s</string>
-    <string name="cast_searching">Searching for devices…</string>
-    <string name="cast_no_devices">Make sure your TV is on and connected to the same network (DLNA / media renderer enabled).</string>
-    <string name="cast_pause">Pause</string>
-    <string name="cast_resume">Resume</string>
-    <string name="cast_stop">Stop casting</string>
-    <string name="cast_error">Could not send to this device.</string>
-    <string name="cast_unsupported_source">This source has no direct link and cannot be sent to a TV.</string>
-    <string name="cast_close">Close</string>
 </resources>

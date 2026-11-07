@@ -3695,3 +3695,11 @@ svg {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* A hidden opening overlay (opacity 0 once playback has started) must not keep running its infinite
+   logo pulse and artwork drift for the whole movie. */
+.opening-overlay:not(.visible):not(.visible),
+.opening-overlay:not(.visible):not(.visible) *,
+.opening-overlay:not(.visible):not(.visible)::before {
+  animation-play-state: paused !important;
+}
