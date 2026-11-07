@@ -1,3 +1,3 @@
 package com.cinebox.app.features.cast
 
-actual fun platformCastBackend(): CastBackend? = DlnaCastBackend
+actual fun platformCastBackend(): CastBackend? = null
